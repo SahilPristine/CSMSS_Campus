@@ -2,7 +2,7 @@ report 50100 GenJournalReport
 {
     UsageCategory = Administration;
     ApplicationArea = All;
-    DefaultLayout = RDLC;
+    ProcessingOnly = true;
 
     dataset
     {

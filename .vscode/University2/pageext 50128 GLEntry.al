@@ -1,12 +1,12 @@
-pageextension 50126 GenJournalLine extends 39
+pageextension 50128 GLEntry extends 20
 {
     layout
     {
-        addafter("Account No.")
+        addafter("Entry No.")
         {
             field(ElementCode; rec.ElementCode)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
             }
             field(ElementDesc; rec.ElementDesc)
             {
@@ -22,12 +22,9 @@ pageextension 50126 GenJournalLine extends 39
 
     actions
     {
-
+        // Add changes to page actions here
     }
 
-
     var
-
         myInt: Integer;
-
 }

@@ -1,8 +1,8 @@
-tableextension 50126 CusstLedgEntry extends 21
+tableextension 50127 GLEntry extends 17
 {
     fields
     {
-        field(50000; ElementCode; Code[20])
+        field(50000; ElementCode; code[20])
         {
             DataClassification = ToBeClassified;
         }
@@ -19,7 +19,4 @@ tableextension 50126 CusstLedgEntry extends 21
 
     var
         myInt: Integer;
-
-
-
 }
