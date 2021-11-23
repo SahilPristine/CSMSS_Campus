@@ -43,6 +43,10 @@ table 50111 StudentFeeStructure
             // TableRelation = SemesterMasterTable.SemesterCode where(CourseCode = field(CourseCode));
 
         }
+        field(17; BatchCode; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(5; ElementCode; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -55,7 +59,7 @@ table 50111 StudentFeeStructure
                 if recFees.FindFirst() then begin
                     ElementDesc := recFees.Description;
                     ElementType := recFees.ElementType;
-                    Period := recFees.Period;
+
                     DebitAcc := recFees.DebitAcc;
                     CreditAcc := recFees.CreditAcc;
                 end;
@@ -73,11 +77,12 @@ table 50111 StudentFeeStructure
             OptionMembers = Earning,Dedution;
 
         }
-        field(8; Period; Option)
-        {
-            DataClassification = ToBeClassified;
-            OptionMembers = Monthly,Yearly;
-        }
+
+        // field(8; Period; Option)
+        // {
+        //     DataClassification = ToBeClassified;
+        //     OptionMembers = Monthly,Yearly;
+        // }
         field(9; CalculationOrder; Integer)
         {
             DataClassification = ToBeClassified;

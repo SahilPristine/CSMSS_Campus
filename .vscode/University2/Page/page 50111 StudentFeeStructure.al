@@ -47,11 +47,11 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
 
                 }
-                field(Period; rec.Period)
-                {
-                    ApplicationArea = All;
+                // field(Period; rec.Period)
+                // {
+                //     ApplicationArea = All;
 
-                }
+                // }
                 field(CalculationOrder; rec.CalculationOrder)
                 {
                     ApplicationArea = All;
