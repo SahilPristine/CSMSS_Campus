@@ -161,10 +161,85 @@ page 50117 StudentMaster
 
 
                 }
+                field(ConfirmEnroll; rec.ConfirmEnroll)
+                {
+                    ApplicationArea = All;
+                    // trigger OnValidate()
+                    // begin
+                    //     If rec.ConfirmEnroll then
+                    //         isVisible3 := true else
+                    //         isVisible3 := false;
+                    // end;
+                }
+                // group("HideGroup3")
+                // {
+                //     Visible = isVisible3;
+                //     ShowCaption = false;
                 field("Enrollment No"; rec."Enrollment No")
                 {
                     ApplicationArea = All;
 
+
+                }
+                // }
+            }
+            group(Hostel_Transport)
+            {
+                field(Hostel; rec.Hostel)
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        if rec.Hostel then
+                            isVisible := true
+                        else
+                            isVisible := false;
+
+                    end;
+                }
+                group("HideGroup")
+                {
+                    Visible = isVisible;
+                    ShowCaption = false;
+
+                    field(HostelCode; rec.HostelCode)
+                    {
+                        ApplicationArea = All;
+                    }
+                    field(HostelName; rec.HostelName)
+                    {
+                        ApplicationArea = All;
+                    }
+                    field(RoomNo; rec.RoomNo)
+                    {
+                        ApplicationArea = All;
+                    }
+                }
+                field(Transport; rec.Transport)
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        if rec.Transport then
+                            isVisible2 := true
+                        else
+                            isVisible2 := false;
+
+                    end;
+
+                }
+                group("HideGroup2")
+                {
+                    Visible = isVisible2;
+                    ShowCaption = false;
+                    field(RouteNo; rec.RouteNo)
+                    {
+                        ApplicationArea = All;
+                    }
+                    field(Charge; rec.Charge)
+                    {
+                        ApplicationArea = All;
+                    }
                 }
             }
             group(BankDetails)
@@ -245,5 +320,9 @@ page 50117 StudentMaster
     }
 
     var
-        myInt: Integer;
+        CustRec: Record Customer;
+        isVisible: boolean;
+        isVisible2: Boolean;
+        isVisible3: Boolean;
+
 }

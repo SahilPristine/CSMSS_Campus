@@ -37,6 +37,14 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
 
                 }
+                field(BatchCode; rec.BatchCode)
+                {
+                    ApplicationArea = All;
+                }
+                field(CategoryCode; rec.CategoryCode)
+                {
+                    ApplicationArea = All;
+                }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;

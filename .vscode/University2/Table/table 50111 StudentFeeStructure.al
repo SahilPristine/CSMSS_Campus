@@ -7,7 +7,7 @@ table 50111 StudentFeeStructure
         field(1; StudentID; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer."No.";
+            TableRelation = Customer."No." where("Enrollment No" = filter(<> 0));
             trigger OnValidate()
             begin
                 if StudentID <> '' then
@@ -17,7 +17,6 @@ table 50111 StudentFeeStructure
                 Stream := recStudent."Stream Code";
                 Semester := recStudent."Semester Code";
             end;
-
 
         }
         field(14; StudentName; Text[50])
@@ -47,6 +46,11 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
+        field(18; CategoryCode; Code[20])
+        {
+            DataClassification = ToBeClassified;
+
+        }
         field(5; ElementCode; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -59,7 +63,6 @@ table 50111 StudentFeeStructure
                 if recFees.FindFirst() then begin
                     ElementDesc := recFees.Description;
                     ElementType := recFees.ElementType;
-
                     DebitAcc := recFees.DebitAcc;
                     CreditAcc := recFees.CreditAcc;
                 end;

@@ -15,6 +15,13 @@ tableextension 50124 SalesSetup extends 311
             Description = 'SL-V.01';
         }
 
+        field(50002; EnrollmentNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+            Description = 'SL-V.01';
+        }
+
         // Add changes to table fields here
     }
 

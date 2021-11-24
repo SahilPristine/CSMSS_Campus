@@ -45,6 +45,14 @@ page 50128 CourseWiseFeeStructure
                     ApplicationArea = All;
 
                 }
+                field(BatchCode; rec.BatchCode)
+                {
+                    ApplicationArea = All;
+                }
+                field(CategoryCode; rec.CategoryCode)
+                {
+                    ApplicationArea = All;
+                }
                 field(DebitAcc; rec.DebitAcc)
                 {
                     ApplicationArea = All;
@@ -54,6 +62,10 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
 
+                }
+                field(DueDate; rec.DueDate)
+                {
+                    ApplicationArea = All;
                 }
             }
         }

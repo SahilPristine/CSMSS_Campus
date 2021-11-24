@@ -70,6 +70,10 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50127;
                     }
+                    action(RouteMaster)
+                    {
+                        RunObject = page 50129;
+                    }
                 }
                 group(Hostels)
                 {

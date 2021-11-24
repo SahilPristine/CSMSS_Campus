@@ -61,6 +61,23 @@ table 50128 CourseWiseFeeStructure
         {
             DataClassification = ToBeClassified;
         }
+        field(10; BatchCode; text[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable;
+        }
+        field(11; CategoryCode; text[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = AdmissionCategory;
+        }
+
+        field(12; DueDate; Date)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+
 
 
     }

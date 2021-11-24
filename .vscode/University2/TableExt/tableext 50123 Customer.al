@@ -151,6 +151,15 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            // Editable = false;
+            trigger OnValidate()
+            begin
+                if "Enrollment No" <> xRec."Enrollment No" then begin
+                    SalesSetup.Get();
+                    NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
+                    "No. Series" := '';
+                end;
+            end;
         }
         field(50150; "Bank Name"; Text[30])
         {
@@ -202,11 +211,69 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(50163; ConfirmEnroll; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50164; Hostel; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50165; Transport; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50166; HostelCode; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = HostelMaster;
+            trigger OnValidate()
+            begin
+                Hostel.Reset();
+                Hostel.SetRange(HostelCode, HostelCode);
+                if Hostel.FindFirst() then begin
+                    HostelName := Hostel.HostelName;
+                end;
+            end;
+        }
+        field(50167; HostelName; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50168; RoomNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = RoomMaster where(HostelCode = field(HostelCode));
+        }
+        field(50169; RouteNo; Code[50])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = RouteMaster;
+            trigger OnValidate()
+            begin
+                Route.Reset();
+                Route.SetRange(RouteNo, RouteNo);
+                if Route.FindFirst() then begin
+                    RouteName := Route.Description;
+                    Charge := Route.Charge;
+                end;
+            end;
+        }
+        field(50170; RouteName; text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50171; Charge; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit "NoSeriesManagement";
+        Hostel: Record HostelMaster;
+        Route: Record RouteMaster;
 
 }
