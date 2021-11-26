@@ -35,10 +35,9 @@ table 50128 CourseWiseFeeStructure
             end;
 
         }
-        field(5; ElementType; option)
+        field(5; ElementType; text[30])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Earning,Deduction;
         }
         field(6; Period; Option)
         {
@@ -77,14 +76,11 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
 
         }
-
-
-
     }
 
     keys
     {
-        key(Key1; CourseCode, StreamCode, SemesterCode)
+        key(Key1; CourseCode, StreamCode, SemesterCode, ElementCode)
         {
             Clustered = true;
         }

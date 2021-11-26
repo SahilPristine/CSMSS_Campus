@@ -1,37 +1,38 @@
-page 50118 StudentMasterList
+page 50131 PostedEntryLine
 {
-    PageType = List;
-    CardPageId = 50117;
+    PageType = ListPart;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = Customer;
+    SourceTable = PostedCustLedg;
 
     layout
     {
         area(Content)
         {
-            repeater(StudentList)
+            repeater(StudentFees)
             {
-                field(StudentCode; rec."No.")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Student Code';
-
-                }
-                field("First Name"; rec.Name)
+                field(DocumentNo; rec.DocumentNo)
                 {
                     ApplicationArea = All;
                 }
-                field("Last Name"; rec."Name 2")
-                {
-                    ApplicationArea = All;
-                }
-                field(AcademicYear; rec.AcademicYear)
+                field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
 
                 }
+                field(ElementDesc; rec.ElementDesc)
+                {
+                    ApplicationArea = All;
 
+                }
+                field(ElementType; rec.ElementType)
+                {
+                    ApplicationArea = All;
+                }
+                field(Amount; rec.Amount)
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

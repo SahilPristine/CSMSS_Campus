@@ -40,11 +40,11 @@ table 50115 HostelRegistration
             begin
                 if StudentCode <> '' then
                     if recStudent.Get(StudentCode) then begin
-                        StudentName := recStudent.FirstName + ' ' + recStudent.LastName;
-                        Address := recStudent."Permanent Address 1";
-                        Address2 := recStudent."Permanent Address 2";
+                        StudentName := recStudent.Name + ' ' + recStudent."Name 2";
+                        Address := recStudent.Address;
+                        Address2 := recStudent."Address 2";
                         Class := recStudent.Class;
-                        ContactNo := recStudent.ContactNo;
+                        ContactNo := recStudent."Phone No.";
 
                     end;
 

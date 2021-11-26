@@ -10,10 +10,9 @@ tableextension 50125 GenJournal extends 81
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; ElementType; option)
+        field(50001; ElementType; Text[30])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Earning,Deduction;
         }
         field(50002; ElementDesc; Text[50])
         {
@@ -23,6 +22,8 @@ tableextension 50125 GenJournal extends 81
 
     }
 
+
     var
         myInt: Integer;
+
 }

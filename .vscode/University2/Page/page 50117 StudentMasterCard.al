@@ -25,14 +25,18 @@ page 50117 StudentMaster
                     ApplicationArea = All;
 
                 }
-                field(FirstName; rec.FirstName)
+                field(FirstName; rec.Name)
                 {
                     ApplicationArea = All;
 
                 }
-                field(LastName; rec.LastName)
+                field(LastName; rec."Name 2")
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        CustRec.Name := rec.Name + '' + rec."Name 2";
+                    end;
 
                 }
                 field(Gender; rec.Gender)
@@ -48,9 +52,13 @@ page 50117 StudentMaster
             }
             group(PersonalDetails)
             {
-                field(ContactNo; rec.ContactNo)
+                field("Phone No."; rec."Phone No.")
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        CustRec."Phone No." := rec."Phone No.";
+                    end;
                 }
                 field("Father's First Name"; rec."Father's First Name")
                 {
@@ -72,7 +80,7 @@ page 50117 StudentMaster
                     ApplicationArea = All;
 
                 }
-                field(EmailID; rec.EmailID)
+                field("E-Mail"; rec."E-Mail")
                 {
                     ApplicationArea = All;
                 }
@@ -100,12 +108,12 @@ page 50117 StudentMaster
             group("Address Details")
             {
 
-                field("Permanent Address 1"; rec."Permanent Address 1")
+                field("Permanent Address 1"; rec.Address)
                 {
                     ApplicationArea = All;
 
                 }
-                field("Permanent Address 2"; rec."Permanent Address 2")
+                field("Permanent Address 2"; rec."Address 2")
                 {
                     ApplicationArea = All;
 
@@ -114,11 +122,11 @@ page 50117 StudentMaster
                 {
                     ApplicationArea = All;
                 }
-                field(PinCode; rec.PinCode)
+                field(PinCode; rec."Post Code")
                 {
                     ApplicationArea = All;
                 }
-                field(Country; rec.Country)
+                field("Country/Region Code"; rec."Country/Region Code")
                 {
                     ApplicationArea = All;
                 }
@@ -164,12 +172,17 @@ page 50117 StudentMaster
                 field(ConfirmEnroll; rec.ConfirmEnroll)
                 {
                     ApplicationArea = All;
-                    // trigger OnValidate()
-                    // begin
-                    //     If rec.ConfirmEnroll then
-                    //         isVisible3 := true else
-                    //         isVisible3 := false;
-                    // end;
+                    trigger OnValidate()
+                    begin
+                        Enroll := rec.ConfirmEnroll;
+                    end;
+
+                    //     trigger OnValidate()
+                    //     begin
+                    //         If rec.ConfirmEnroll then
+                    //             isVisible3 := true else
+                    //             isVisible3 := false;
+                    //     end;
                 }
                 // group("HideGroup3")
                 // {
@@ -178,10 +191,10 @@ page 50117 StudentMaster
                 field("Enrollment No"; rec."Enrollment No")
                 {
                     ApplicationArea = All;
-
+                    Editable = Enroll;
 
                 }
-                // }
+
             }
             group(Hostel_Transport)
             {
@@ -324,5 +337,7 @@ page 50117 StudentMaster
         isVisible: boolean;
         isVisible2: Boolean;
         isVisible3: Boolean;
+        Enroll: Boolean;
+
 
 }

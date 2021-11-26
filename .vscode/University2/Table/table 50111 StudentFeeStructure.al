@@ -12,7 +12,7 @@ table 50111 StudentFeeStructure
             begin
                 if StudentID <> '' then
                     if recStudent.get(StudentID) then
-                        StudentName := recStudent.FirstName + ' ' + recStudent.LastName;
+                        StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                 CourseCode := recStudent."Course Code";
                 Stream := recStudent."Stream Code";
                 Semester := recStudent."Semester Code";
@@ -45,10 +45,12 @@ table 50111 StudentFeeStructure
         field(17; BatchCode; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable;
         }
         field(18; CategoryCode; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = AdmissionCategory;
 
         }
         field(5; ElementCode; Code[20])
@@ -74,11 +76,9 @@ table 50111 StudentFeeStructure
             DataClassification = ToBeClassified;
 
         }
-        field(7; ElementType; Option)
+        field(7; ElementType; Text[30])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Earning,Dedution;
-
         }
 
         // field(8; Period; Option)

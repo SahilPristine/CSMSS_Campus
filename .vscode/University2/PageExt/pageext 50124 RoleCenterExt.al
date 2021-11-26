@@ -101,6 +101,13 @@ pageextension 50124 RoleCenterExt extends 9006
                         RunObject = page 50111;
                     }
                 }
+                group(Report)
+                {
+                    action(CustLedgReport)
+                    {
+                        RunObject = report 50101;
+                    }
+                }
             }
         }
     }

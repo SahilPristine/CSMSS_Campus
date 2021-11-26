@@ -10,10 +10,9 @@ tableextension 50127 GLEntry extends 17
         {
             DataClassification = ToBeClassified;
         }
-        field(50002; ElementType; option)
+        field(50002; ElementType; Text[30])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Earning,Deduction;
         }
         // Add changes to table fields here
     }

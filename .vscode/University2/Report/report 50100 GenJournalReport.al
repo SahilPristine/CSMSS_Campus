@@ -31,7 +31,6 @@ report 50100 GenJournalReport
                     repeat
                         LineNo := LineNo + 10000;
                         recGnJnl.Init();
-                        Message('Hello %1', LineNo);
                         recGnJnl."Posting Date" := PostingDate;
                         recGnJnl."Journal Template Name" := tamplate;
                         recGnJnl."Journal Batch Name" := Batch;
@@ -43,8 +42,9 @@ report 50100 GenJournalReport
                         recGnJnl.validate("Account No.", recStFees.StudentID);
                         recGnJnl.validate(ElementCode, recStFees.ElementCode);
                         recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
-                        recGnJnl.validate(ElementType, recStFees.ElementType);
+                        recGnJnl.validate(ElementType);
                         recGnJnl.validate(Amount, recStFees.Amount);
+                        recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
 
                         recGnJnl.Modify(true);
 

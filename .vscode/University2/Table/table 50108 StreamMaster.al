@@ -13,10 +13,10 @@ table 50108 StreamMasterTable
 
 
         }
-        field(2; StreamCode; Option)
+        field(2; StreamCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "CS","Mech","EC","Civil","EE";
+            // OptionMembers = "CS","Mech","EC","Civil","EE";
 
         }
         field(3; Description; Text[50])

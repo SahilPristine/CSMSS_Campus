@@ -19,16 +19,6 @@ tableextension 50123 CustomerExtension extends Customer
             TableRelation = AcademicYearMasterTable.CODE;
             Description = 'SL-V.01';
         }
-        field(50125; FirstName; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
-        field(50126; LastName; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
         field(50127; Gender; Option)
         {
             DataClassification = ToBeClassified;
@@ -92,30 +82,31 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
-        field(50140; "Permanent Address 1"; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
-        field(50141; "Permanent Address 2"; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
+        // field(50140; "Permanent Address 1"; Text[30])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Description = 'SL-V.01';
+        // }
+        // field(50141; "Permanent Address 2"; Text[30])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Description = 'SL-V.01';
+        // }
         field(50158; State; Text[30])
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            // TableRelation = 18547;
         }
-        field(50159; PinCode; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
-        field(50160; Country; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(50159; PinCode; Text[30])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Description = 'SL-V.01';
+        // }
+        // field(50160; Country; Text[30])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
         field(50142; "Course Code"; Code[10])
         {
             DataClassification = ToBeClassified;
@@ -138,7 +129,7 @@ tableextension 50123 CustomerExtension extends Customer
         field(50146; "Stream Code"; Text[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = StreamMasterTable.Description where(CourseCode = field("Course Code"));
+            TableRelation = StreamMasterTable.StreamCode where(CourseCode = field("Course Code"));
             Description = 'SL-V.01';
         }
         field(50147; Class; Code[20])
@@ -151,15 +142,14 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
-            // Editable = false;
-            trigger OnValidate()
-            begin
-                if "Enrollment No" <> xRec."Enrollment No" then begin
-                    SalesSetup.Get();
-                    NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
-                    "No. Series" := '';
-                end;
-            end;
+            // trigger OnValidate()
+            // begin
+            //     if "Enrollment No" <> xRec."Enrollment No" then begin
+            //         SalesSetup.Get();
+            //         NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
+            //         "No. Series" := '';
+            //     end;
+            // end;
         }
         field(50150; "Bank Name"; Text[30])
         {
@@ -203,14 +193,14 @@ tableextension 50123 CustomerExtension extends Customer
             OptionMembers = " ","New Admission","Continue","Terminated","Other";
             Description = 'SL-V.01';
         }
-        field(50161; "ContactNo"; Text[10])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(50162; EmailID; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(50161; "ContactNo"; Text[10])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
+        // field(50162; EmailID; Text[30])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
         field(50163; ConfirmEnroll; Boolean)
         {
             DataClassification = ToBeClassified;
