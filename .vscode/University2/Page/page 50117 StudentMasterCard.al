@@ -300,6 +300,10 @@ page 50117 StudentMaster
                     ApplicationArea = All;
 
                 }
+                field("Application Method"; rec."Application Method")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
         area(FactBoxes)

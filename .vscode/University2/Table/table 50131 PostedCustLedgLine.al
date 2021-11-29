@@ -1,58 +1,56 @@
-table 50130 PostedCustLedg
+table 50131 PostedCustLedgLine
 {
     DataClassification = ToBeClassified;
 
     fields
     {
-        field(1; CustomerNo; code[20])
+        field(1; DocumentNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(2; PostingDate; Date)
         {
             DataClassification = ToBeClassified;
 
         }
-        field(9; CustomerName; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(2; DocumentNo; code[20])
+        field(3; ElementCode; code[20])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(3; PostingDate; Date)
+        field(4; ElementDesc; text[50])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(4; ElementCode; code[20])
+        field(5; ElementType; Text[50])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(5; ElementDesc; text[50])
+        field(6; Amount; Decimal)
         {
             DataClassification = ToBeClassified;
 
         }
-        field(6; ElementType; Text[50])
+        field(7; DueDate; Date)
         {
             DataClassification = ToBeClassified;
 
         }
-        field(7; Amount; Decimal)
+        field(8; EntryDocNo; Code[20])
         {
             DataClassification = ToBeClassified;
-
         }
-        field(8; DueDate; Date)
+        field(9; LineNo; Integer)
         {
             DataClassification = ToBeClassified;
-
         }
     }
 
     keys
     {
-        key(Key1; CustomerNo, ElementCode)
+        key(Key1; ElementCode, DocumentNo)
         {
             Clustered = true;
         }

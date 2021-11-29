@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Your own server",
             "request": "launch",
@@ -18,6 +19,16 @@
             "tenant": "default",
             "port": 7049,
             "schemaUpdateMode":"ForceSync",
+        },
+        {
+            "name": "snapshotInitialize: Your own server",
+            "type": "al",
+            "request": "snapshotInitialize",
+            "environmentType": "OnPrem",
+            "server": "http://localhost",
+            "serverInstance": "BC190",
+            "authentication": "Windows",
+            "breakOnNext": "WebClient"
         }
     ]
 }

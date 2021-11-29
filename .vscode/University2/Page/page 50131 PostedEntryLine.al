@@ -3,7 +3,7 @@ page 50131 PostedEntryLine
     PageType = ListPart;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = PostedCustLedg;
+    SourceTable = PostedCustLedgLine;
 
     layout
     {
@@ -12,6 +12,14 @@ page 50131 PostedEntryLine
             repeater(StudentFees)
             {
                 field(DocumentNo; rec.DocumentNo)
+                {
+                    ApplicationArea = All;
+                }
+                field(LineNo; rec.LineNo)
+                {
+                    ApplicationArea = All;
+                }
+                field(EntryDocNo; rec.EntryDocNo)
                 {
                     ApplicationArea = All;
                 }

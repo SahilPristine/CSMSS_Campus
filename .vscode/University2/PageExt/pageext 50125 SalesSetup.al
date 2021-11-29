@@ -18,6 +18,10 @@ pageextension 50125 GenLedgerSetup extends 459
                 {
                     ApplicationArea = All;
                 }
+                field(FeesDocNo; rec.FeesDocNo)
+                {
+                    ApplicationArea = All;
+                }
             }
         }
         // Add changes to page layout here
