@@ -107,6 +107,10 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = report 50101;
                     }
+                    action(StudentFeesProcessing)
+                    {
+                        RunObject = report 50100;
+                    }
                 }
             }
         }

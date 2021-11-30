@@ -24,10 +24,9 @@ table 50113 RoomMaster
             DataClassification = ToBeClassified;
 
         }
-        field(3; Type; Option)
+        field(3; RoomType; Text[30])
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "","General","VIP","Staff","Guest";
 
         }
         field(4; Capacity; Integer)
@@ -35,7 +34,7 @@ table 50113 RoomMaster
             DataClassification = ToBeClassified;
 
         }
-        field(5; Beds; Integer)
+        field(5; Beds; Text[30])
         {
             DataClassification = ToBeClassified;
 
@@ -64,7 +63,7 @@ table 50113 RoomMaster
 
     keys
     {
-        key(Key1; HostelCode, RoomCode)
+        key(Key1; HostelCode, RoomCode, RoomType, Beds)
         {
             Clustered = true;
         }

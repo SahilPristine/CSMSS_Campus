@@ -28,7 +28,7 @@ page 50113 HostelRoomList
                     ApplicationArea = All;
 
                 }
-                field(Type; rec.Type)
+                field(RoomType; rec.RoomType)
                 {
                     ApplicationArea = All;
 

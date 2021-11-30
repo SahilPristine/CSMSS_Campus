@@ -7,7 +7,7 @@ table 50111 StudentFeeStructure
         field(1; StudentID; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer."No." where("Enrollment No" = filter(<> 0));
+            TableRelation = Customer."No." where("Enrollment No" = filter(<> ''));
             trigger OnValidate()
             begin
                 if StudentID <> '' then
@@ -16,6 +16,8 @@ table 50111 StudentFeeStructure
                 CourseCode := recStudent."Course Code";
                 Stream := recStudent."Stream Code";
                 Semester := recStudent."Semester Code";
+                BatchCode := recStudent."Batch Code";
+                CategoryCode := recStudent.Category;
             end;
 
         }

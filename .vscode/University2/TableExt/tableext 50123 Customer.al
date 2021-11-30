@@ -142,14 +142,14 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
-            // trigger OnValidate()
-            // begin
-            //     if "Enrollment No" <> xRec."Enrollment No" then begin
-            //         SalesSetup.Get();
-            //         NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
-            //         "No. Series" := '';
-            //     end;
-            // end;
+            trigger OnValidate()
+            begin
+                if "Enrollment No" <> xRec."Enrollment No" then begin
+                    SalesSetup.Get();
+                    NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
+                    "No. Series" := '';
+                end;
+            end;
         }
         field(50150; "Bank Name"; Text[30])
         {
@@ -201,10 +201,10 @@ tableextension 50123 CustomerExtension extends Customer
         // {
         //     DataClassification = ToBeClassified;
         // }
-        field(50163; ConfirmEnroll; Boolean)
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(50163; ConfirmEnroll; Boolean)
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
         field(50164; Hostel; Boolean)
         {
             DataClassification = ToBeClassified;
@@ -213,27 +213,33 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(50166; HostelCode; Code[50])
+        // field(50166; HostelCode; Code[50])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = HostelMaster;
+        //     trigger OnValidate()
+        //     begin
+        //         Hostel.Reset();
+        //         Hostel.SetRange(HostelCode, HostelCode);
+        //         if Hostel.FindFirst() then begin
+        //             HostelName := Hostel.HostelName;
+        //         end;
+        //     end;
+        // }
+        field(50167; RoomType; Text[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = HostelMaster;
+            TableRelation = RoomMaster.RoomType;
             trigger OnValidate()
             begin
-                Hostel.Reset();
-                Hostel.SetRange(HostelCode, HostelCode);
-                if Hostel.FindFirst() then begin
-                    HostelName := Hostel.HostelName;
-                end;
+                TestField(rec.Hostel, true);
             end;
         }
-        field(50167; HostelName; Text[50])
+
+        field(50168; BedType; Code[20])
         {
             DataClassification = ToBeClassified;
-        }
-        field(50168; RoomNo; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = RoomMaster where(HostelCode = field(HostelCode));
+            TableRelation = RoomMaster.Beds;
         }
         field(50169; RouteNo; Code[50])
         {
@@ -265,5 +271,16 @@ tableextension 50123 CustomerExtension extends Customer
         NoSeriesMgt: Codeunit "NoSeriesManagement";
         Hostel: Record HostelMaster;
         Route: Record RouteMaster;
+
+    // trigger OnInsert()
+
+    // begin
+    //     if "Enrollment No" = '' then begin
+    //         SalesSetup.Get();
+    //         SalesSetup.TestField(EnrollmentNo);
+    //         NoSeriesMgt.InitSeries(SalesSetup.EnrollmentNo, xRec."No. Series", 0D, "Enrollment No", "No. Series");
+    //     end;
+
+    // end;
 
 }

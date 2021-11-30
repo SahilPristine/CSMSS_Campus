@@ -12,12 +12,12 @@ report 50100 GenJournalReport
             trigger OnAfterGetRecord()
             begin
                 recBatch.reset;
-                recBatch.SetRange("Journal Template Name", tamplate);
+                recBatch.SetRange("Journal Template Name", template);
                 recBatch.SetRange(Name, Batch);
                 recBatch.FindFirst();
                 DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, true);
                 recGnJnl.reset;
-                recGnJnl.SetRange("Journal Template Name", tamplate);
+                recGnJnl.SetRange("Journal Template Name", template);
                 recGnJnl.SetRange("Journal Batch Name", Batch);
                 recGnJnl.DeleteAll;
 
@@ -32,7 +32,7 @@ report 50100 GenJournalReport
                         LineNo := LineNo + 10000;
                         recGnJnl.Init();
                         recGnJnl."Posting Date" := PostingDate;
-                        recGnJnl."Journal Template Name" := tamplate;
+                        recGnJnl."Journal Template Name" := template;
                         recGnJnl."Journal Batch Name" := Batch;
                         recGnJnl."Line No." := LineNo;
                         recGnJnl.Insert(true);
@@ -65,7 +65,7 @@ report 50100 GenJournalReport
                 group(General)
                 {
 
-                    field(Template; tamplate)
+                    field(Template; template)
                     {
                         ApplicationArea = All;
                         TableRelation = "Gen. Journal Template";
@@ -79,6 +79,11 @@ report 50100 GenJournalReport
                     field(PostingDate; PostingDate)
                     {
                         ApplicationArea = All;
+                    }
+                    field(CustomerNo; CustomerNo)
+                    {
+                        ApplicationArea = All;
+                        TableRelation = Customer;
                     }
                 }
             }
@@ -101,12 +106,13 @@ report 50100 GenJournalReport
         recStFees: Record StudentFeeStructure;
         recGnJnl: Record "Gen. Journal Line";
         Batch: Code[20];
-        tamplate: Code[20];
+        template: Code[20];
         LineNo: Integer;
         PostingDate: Date;
         recBatch: Record "Gen. Journal Batch";
         noseriesmgmt: Codeunit NoSeriesManagement;
         DocNum: Code[20];
+        CustomerNo: Code[20];
 
 
 }

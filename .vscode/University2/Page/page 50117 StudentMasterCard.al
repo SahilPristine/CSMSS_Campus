@@ -146,6 +146,7 @@ page 50117 StudentMaster
                 field("Course Code"; rec."Course Code")
                 {
                     ApplicationArea = All;
+                    LookupPageId = CourseList;
 
                 }
                 field("Batch Code"; rec."Batch Code")
@@ -161,29 +162,30 @@ page 50117 StudentMaster
                 field("Stream Code"; rec."Stream Code")
                 {
                     ApplicationArea = All;
+                    LookupPageId = 50108;
 
                 }
                 field(Class; rec.Class)
                 {
                     ApplicationArea = All;
-
+                    LookupPageId = 50124;
 
                 }
-                field(ConfirmEnroll; rec.ConfirmEnroll)
-                {
-                    ApplicationArea = All;
-                    trigger OnValidate()
-                    begin
-                        Enroll := rec.ConfirmEnroll;
-                    end;
+                // field(ConfirmEnroll; rec.ConfirmEnroll)
+                // {
+                //     ApplicationArea = All;
+                //     trigger OnValidate()
+                //     begin
+                //         Enroll := rec.ConfirmEnroll;
+                //     end;
 
-                    //     trigger OnValidate()
-                    //     begin
-                    //         If rec.ConfirmEnroll then
-                    //             isVisible3 := true else
-                    //             isVisible3 := false;
-                    //     end;
-                }
+                //     //     trigger OnValidate()
+                //     //     begin
+                //     //         If rec.ConfirmEnroll then
+                //     //             isVisible3 := true else
+                //     //             isVisible3 := false;
+                //     //     end;
+                // }
                 // group("HideGroup3")
                 // {
                 //     Visible = isVisible3;
@@ -191,7 +193,7 @@ page 50117 StudentMaster
                 field("Enrollment No"; rec."Enrollment No")
                 {
                     ApplicationArea = All;
-                    Editable = Enroll;
+                    Editable = False;
 
                 }
 
@@ -201,32 +203,19 @@ page 50117 StudentMaster
                 field(Hostel; rec.Hostel)
                 {
                     ApplicationArea = All;
-                    trigger OnValidate()
-                    begin
-                        if rec.Hostel then
-                            isVisible := true
-                        else
-                            isVisible := false;
 
-                    end;
                 }
-                group("HideGroup")
-                {
-                    Visible = isVisible;
-                    ShowCaption = false;
 
-                    field(HostelCode; rec.HostelCode)
-                    {
-                        ApplicationArea = All;
-                    }
-                    field(HostelName; rec.HostelName)
-                    {
-                        ApplicationArea = All;
-                    }
-                    field(RoomNo; rec.RoomNo)
-                    {
-                        ApplicationArea = All;
-                    }
+
+                field(RoomType; rec.RoomType)
+                {
+
+                    ApplicationArea = All;
+
+                }
+                field(BedType; rec.BedType)
+                {
+                    ApplicationArea = All;
                 }
                 field(Transport; rec.Transport)
                 {
@@ -333,6 +322,34 @@ page 50117 StudentMaster
 
                 end;
             }
+            action(ConfirmEnroll)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                trigger OnAction()
+                var
+                    Question: Text;
+                    Answer: Boolean;
+                    Text000: Label 'Do you want to confirm enrollment?';
+
+                begin
+                    Question := Text000;
+                    Answer := Dialog.Confirm(Question, true);
+                    if Answer = true then begin
+                        recSalesSetup.Get();
+                        rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup.EnrollmentNo, today, true);
+                    end;
+
+                    Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."No.");
+                    CurrPage.Update();
+
+                    // recSalesSetup.Get();
+                    // CustRec."Enrollment No" := recSalesSetup.EnrollmentNo;
+                    // Message('%1', CustRec."Enrollment No");
+                    // CurrPage.Update();
+                end;
+            }
         }
     }
 
@@ -342,6 +359,8 @@ page 50117 StudentMaster
         isVisible2: Boolean;
         isVisible3: Boolean;
         Enroll: Boolean;
-
+        recSalesSetup: Record "Sales & Receivables Setup";
+        NoSeriesMgt: Codeunit NoSeriesManagement;
+        editable: Boolean;
 
 }
