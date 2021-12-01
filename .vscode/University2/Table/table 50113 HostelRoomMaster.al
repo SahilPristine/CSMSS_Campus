@@ -61,11 +61,20 @@ table 50113 RoomMaster
         }
     }
 
+
     keys
     {
         key(Key1; HostelCode, RoomCode, RoomType, Beds)
         {
             Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+        fieldgroup(DropDown; RoomType, Beds)
+        {
+
         }
     }
 

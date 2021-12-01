@@ -20,11 +20,7 @@ page 50117 StudentMaster
 
 
                 }
-                field(AcademicYear; rec.AcademicYear)
-                {
-                    ApplicationArea = All;
 
-                }
                 field(FirstName; rec.Name)
                 {
                     ApplicationArea = All;
@@ -141,6 +137,12 @@ page 50117 StudentMaster
                 {
                     ApplicationArea = All;
 
+
+                }
+                field(AcademicYear; rec.AcademicYear)
+                {
+                    ApplicationArea = All;
+
                 }
 
                 field("Course Code"; rec."Course Code")
@@ -220,30 +222,18 @@ page 50117 StudentMaster
                 field(Transport; rec.Transport)
                 {
                     ApplicationArea = All;
-                    trigger OnValidate()
-                    begin
-                        if rec.Transport then
-                            isVisible2 := true
-                        else
-                            isVisible2 := false;
-
-                    end;
 
                 }
-                group("HideGroup2")
+                field(RouteNo; rec.RouteNo)
                 {
-                    Visible = isVisible2;
-                    ShowCaption = false;
-                    field(RouteNo; rec.RouteNo)
-                    {
-                        ApplicationArea = All;
-                    }
-                    field(Charge; rec.Charge)
-                    {
-                        ApplicationArea = All;
-                    }
+                    ApplicationArea = All;
+                }
+                field(Charge; rec.Charge)
+                {
+                    ApplicationArea = All;
                 }
             }
+
             group(BankDetails)
             {
                 field("Bank Name"; Rec."Bank Name")
@@ -319,6 +309,7 @@ page 50117 StudentMaster
 
                 trigger OnAction()
                 begin
+
 
                 end;
             }

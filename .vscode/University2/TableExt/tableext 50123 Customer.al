@@ -208,6 +208,12 @@ tableextension 50123 CustomerExtension extends Customer
         field(50164; Hostel; Boolean)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if rec.Hostel = false then
+                    TestField(rec.RoomType, ' ');
+                TestField(rec.BedType, ' ');
+            end;
         }
         field(50165; Transport; Boolean)
         {
@@ -239,7 +245,11 @@ tableextension 50123 CustomerExtension extends Customer
         field(50168; BedType; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = RoomMaster.Beds;
+            TableRelation = RoomMaster.Beds where(RoomType = field(RoomType));
+            trigger OnValidate()
+            begin
+                TestField(rec.Hostel, true);
+            end;
         }
         field(50169; RouteNo; Code[50])
         {
@@ -247,6 +257,7 @@ tableextension 50123 CustomerExtension extends Customer
             TableRelation = RouteMaster;
             trigger OnValidate()
             begin
+                TestField(rec.Transport, true);
                 Route.Reset();
                 Route.SetRange(RouteNo, RouteNo);
                 if Route.FindFirst() then begin

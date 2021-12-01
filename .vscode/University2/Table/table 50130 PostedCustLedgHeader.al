@@ -33,7 +33,7 @@ table 50130 PostedCustLedg
             begin
                 if CustomerNo <> '' then
                     if RecCustomer.Get(CustomerNo) then begin
-                        CustomerName := RecCustomer.Name;
+                        CustomerName := RecCustomer.Name + ' ' + RecCustomer."Name 2";
                         // RecPostedLine.EntryDocNo := DocumentNo;
                     end;
 
@@ -48,7 +48,6 @@ table 50130 PostedCustLedg
                 RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
                 if RecCustLedgEntry.FindSet() then begin
                     repeat
-
                         RecPostedLine.Reset();
                         RecPostedLine.SetRange(DocumentNo, DocumentNo);
                         If RecPostedLine.FindLast() then
@@ -73,7 +72,7 @@ table 50130 PostedCustLedg
             end;
 
         }
-        field(3; CustomerName; Text[50])
+        field(3; CustomerName; Text[100])
         {
             DataClassification = ToBeClassified;
         }

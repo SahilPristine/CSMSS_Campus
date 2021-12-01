@@ -14,6 +14,10 @@ tableextension 50126 CusstLedgEntry extends 21
         {
             DataClassification = ToBeClassified;
         }
+        field(50003; PaymentReceived; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
         // Add changes to table fields here
     }
 

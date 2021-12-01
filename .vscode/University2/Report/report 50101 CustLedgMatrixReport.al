@@ -37,6 +37,16 @@ report 50101 CustLedgMatrixReport
             {
 
             }
+            column(Desc; Desc)
+            {
+
+            }
+            trigger OnAfterGetRecord()
+            begin
+                if RecCust.Get("Customer No.") then
+                    Desc := RecCust.Name + ' ' + RecCust."Name 2"
+
+            end;
         }
     }
 
@@ -68,4 +78,8 @@ report 50101 CustLedgMatrixReport
 
     var
         myInt: Integer;
+        RecCust: Record Customer;
+        Desc: text;
+
+
 }

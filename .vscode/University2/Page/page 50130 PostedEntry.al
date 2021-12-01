@@ -63,9 +63,10 @@ page 50130 PostedEntry
     {
         area(Processing)
         {
-            action(ActionName)
+            action(Post)
             {
                 ApplicationArea = All;
+                Image = Post;
 
                 trigger OnAction()
                 begin

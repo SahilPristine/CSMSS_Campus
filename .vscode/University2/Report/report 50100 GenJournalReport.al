@@ -5,17 +5,23 @@ report 50100 GenJournalReport
     ApplicationArea = All;
     ProcessingOnly = true;
 
+
+
     dataset
     {
         dataitem(Customer; Customer)
+
         {
+            RequestFilterFields = "No.";
+
             trigger OnAfterGetRecord()
             begin
                 recBatch.reset;
                 recBatch.SetRange("Journal Template Name", template);
                 recBatch.SetRange(Name, Batch);
                 recBatch.FindFirst();
-                DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, true);
+                DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
+                Message(DocNum);
                 recGnJnl.reset;
                 recGnJnl.SetRange("Journal Template Name", template);
                 recGnJnl.SetRange("Journal Batch Name", Batch);
@@ -36,7 +42,7 @@ report 50100 GenJournalReport
                         recGnJnl."Journal Batch Name" := Batch;
                         recGnJnl."Line No." := LineNo;
                         recGnJnl.Insert(true);
-                        recGnJnl.Validate("Document Type", recGnJnl."Document Type"::Invoice);
+                        recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
                         recGnJnl.Validate("Document No.", DocNum);
                         recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
                         recGnJnl.validate("Account No.", recStFees.StudentID);
@@ -45,7 +51,6 @@ report 50100 GenJournalReport
                         recGnJnl.validate(ElementType);
                         recGnJnl.validate(Amount, recStFees.Amount);
                         recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
-
                         recGnJnl.Modify(true);
 
                     until recStFees.Next = 0;
@@ -58,6 +63,7 @@ report 50100 GenJournalReport
 
     requestpage
     {
+        SaveValues = true;
         layout
         {
             area(Content)
@@ -80,11 +86,11 @@ report 50100 GenJournalReport
                     {
                         ApplicationArea = All;
                     }
-                    field(CustomerNo; CustomerNo)
-                    {
-                        ApplicationArea = All;
-                        TableRelation = Customer;
-                    }
+                    /*  field(CustomerNo; CustomerNo)
+                     {
+                         ApplicationArea = All;
+                         TableRelation = Customer;
+                     } */
                 }
             }
         }
@@ -100,6 +106,7 @@ report 50100 GenJournalReport
                 }
             }
         }
+
     }
 
     var

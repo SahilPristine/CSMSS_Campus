@@ -28,8 +28,11 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Customer No </Value>
-                                <Style />
+                                <Value>Student ID</Value>
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -61,8 +64,11 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Description</Value>
-                                <Style />
+                                <Value>Name</Value>
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -95,7 +101,10 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>Due Date</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -124,10 +133,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.88542in</Width>
+                  <Width>0.76042in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.88542in</Width>
+                  <Width>0.94792in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -144,7 +153,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Remaining_Amount.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -177,7 +188,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Sum(Fields!Remaining_Amount.Value)</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
@@ -228,7 +241,10 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!ElementCode.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -264,7 +280,10 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>Total Amount</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -314,7 +333,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!Customer_No_.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>9pt</FontSize>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style>
@@ -340,17 +361,19 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>0.88542in</Size>
+                        <Size>1.36458in</Size>
                         <CellContents>
-                          <Textbox Name="Description">
+                          <Textbox Name="Desc">
                             <CanGrow>true</CanGrow>
                             <KeepTogether>true</KeepTogether>
                             <Paragraphs>
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>=Fields!Description.Value</Value>
-                                    <Style />
+                                    <Value>=Fields!Desc.Value</Value>
+                                    <Style>
+                                      <FontSize>9pt</FontSize>
+                                    </Style>
                                   </TextRun>
                                 </TextRuns>
                                 <Style>
@@ -358,7 +381,7 @@
                                 </Style>
                               </Paragraph>
                             </Paragraphs>
-                            <rd:DefaultName>Description</rd:DefaultName>
+                            <rd:DefaultName>Desc</rd:DefaultName>
                             <Style>
                               <Border>
                                 <Color>LightGrey</Color>
@@ -376,7 +399,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>0.88542in</Size>
+                            <Size>0.875in</Size>
                             <CellContents>
                               <Textbox Name="Due_Date">
                                 <CanGrow>true</CanGrow>
@@ -386,7 +409,9 @@
                                     <TextRuns>
                                       <TextRun>
                                         <Value>=Fields!Due_Date.Value</Value>
-                                        <Style />
+                                        <Style>
+                                          <FontSize>9pt</FontSize>
+                                        </Style>
                                       </TextRun>
                                     </TextRuns>
                                     <Style>
@@ -420,24 +445,93 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.57167in</Top>
-            <Left>0.51958in</Left>
+            <Top>0.97792in</Top>
+            <Left>0.19666in</Left>
             <Height>0.5in</Height>
-            <Width>4.42708in</Width>
+            <Width>4.83334in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CSMSS</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.12375in</Top>
+            <Left>3.73834in</Left>
+            <Height>0.20833in</Height>
+            <Width>1in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Student Fees</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.46354in</Top>
+            <Left>3.37375in</Left>
+            <Height>0.26041in</Height>
+            <Width>1.77083in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>2.32292in</Height>
+        <Height>2.34375in</Height>
         <Style />
       </Body>
-      <Width>6.51958in</Width>
+      <Width>8.58208in</Width>
       <Page>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>11in</PageWidth>
         <LeftMargin>0in</LeftMargin>
         <RightMargin>0in</RightMargin>
         <TopMargin>0in</TopMargin>
@@ -511,6 +605,9 @@ End Function
         </Field>
         <Field Name="Due_Date">
           <DataField>Due_Date</DataField>
+        </Field>
+        <Field Name="Desc">
+          <DataField>Desc</DataField>
         </Field>
       </Fields>
       <Query>

@@ -17,6 +17,13 @@ pageextension 50127 CustLedgEntry extends 25
                 ApplicationArea = All;
             }
         }
+        addlast(Control1)
+        {
+            field(PaymentReceived; rec.PaymentReceived)
+            {
+                ApplicationArea = All;
+            }
+        }
         // Add changes to page layout here
     }
 

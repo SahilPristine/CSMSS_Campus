@@ -100,12 +100,17 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50111;
                     }
+                    action("Student Fees Slip")
+                    {
+                        RunObject = page 50130;
+                    }
                 }
                 group(Report)
                 {
                     action(CustLedgReport)
                     {
                         RunObject = report 50101;
+                        Caption = 'Student Fees';
                     }
                     action(StudentFeesProcessing)
                     {
