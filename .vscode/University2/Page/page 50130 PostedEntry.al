@@ -4,7 +4,7 @@ page 50130 PostedEntry
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = PostedCustLedg;
-    Caption = 'Student Fees Slip';
+    Caption = 'Student Fees Receipt';
 
     layout
     {
@@ -55,6 +55,20 @@ page 50130 PostedEntry
                 SubPageLink = DocumentNo = field(DocumentNo);
                 //UpdatePropagation = Both;
             }
+            field("Total Remaining Amount"; rec."Total Remaining Amount")
+            {
+                ApplicationArea = All;
+            }
+            field("Amount Received"; rec."Amount Received")
+            {
+                ApplicationArea = All;
+            }
+            field("Mode Of Payment"; rec."Mode Of Payment")
+            {
+                ApplicationArea = All;
+
+            }
+
         }
 
     }
@@ -72,6 +86,7 @@ page 50130 PostedEntry
                 begin
 
                 end;
+
             }
         }
     }
@@ -80,4 +95,5 @@ page 50130 PostedEntry
         RecPosted: Record PostedCustLedg;
         RecCustomer: Record Customer;
         RecCustLedgEntry: Record "Cust. Ledger Entry";
+        RecPostedLine: record PostedCustLedgLine;
 }

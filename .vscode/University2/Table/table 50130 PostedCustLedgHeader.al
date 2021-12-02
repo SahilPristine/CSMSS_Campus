@@ -8,6 +8,8 @@ table 50130 PostedCustLedg
         {
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
+
+            // TableRelation = "Cust. Ledger Entry"."Customer No." where(PaymentReceived = const(false));
             // trigger OnValidate()
             // begin
             //     if rec.CustomerNo <> '' then
@@ -64,6 +66,7 @@ table 50130 PostedCustLedg
                         RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
                         RecCustLedgEntry.CalcFields(Amount);
                         RecPostedLine.Amount := RecCustLedgEntry.Amount;
+
                         RecPostedLine.Insert();
                     until
                     RecCustLedgEntry.Next() = 0;
@@ -92,6 +95,23 @@ table 50130 PostedCustLedg
         field(4; "No. Series"; code[20])
         {
             DataClassification = ToBeClassified;
+        }
+        field(5; "Total Remaining Amount"; decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(6; "Amount Received"; decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(7; "Mode Of Payment"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = Cash,Cheque,UPI,BankTransfer;
+            // trigger OnValidate()
+            //     begin
+            //         rec.TestField("Amount Received", true );
+            //     end;
         }
 
 
