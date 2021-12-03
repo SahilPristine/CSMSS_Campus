@@ -46,6 +46,15 @@ table 50131 PostedCustLedgLine
         {
             DataClassification = ToBeClassified;
         }
+        field(10; "Remaining amt to be adjsuted"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(11; PaymentReceived; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     keys

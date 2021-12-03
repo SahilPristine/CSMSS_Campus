@@ -6,7 +6,6 @@ report 50100 GenJournalReport
     ProcessingOnly = true;
 
 
-
     dataset
     {
         dataitem(Customer; Customer)
@@ -21,7 +20,7 @@ report 50100 GenJournalReport
                 recBatch.SetRange(Name, Batch);
                 recBatch.FindFirst();
                 DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
-                Message(DocNum);
+                // Message(DocNum);
                 recGnJnl.reset;
                 recGnJnl.SetRange("Journal Template Name", template);
                 recGnJnl.SetRange("Journal Batch Name", Batch);

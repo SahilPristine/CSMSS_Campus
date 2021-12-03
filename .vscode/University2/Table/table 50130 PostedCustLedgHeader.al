@@ -113,6 +113,18 @@ table 50130 PostedCustLedg
             //         rec.TestField("Amount Received", true );
             //     end;
         }
+        field(8; GLAccNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "G/L Account"."No.";
+
+        }
+        field(9; BankAccNo; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Bank Account"."No.";
+
+        }
 
 
     }
