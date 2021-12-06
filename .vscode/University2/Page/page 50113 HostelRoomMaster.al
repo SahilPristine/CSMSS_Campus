@@ -18,22 +18,16 @@ page 50113 HostelRoomList
                     TableRelation = HostelMaster;
 
                 }
-                field(HostelDesc; rec.HostelDesc)
-                {
-                    ApplicationArea = All;
-
-                }
                 field(RoomCode; rec.RoomCode)
                 {
                     ApplicationArea = All;
 
                 }
-                field(RoomType; rec.RoomType)
+                field(RoomDesc; rec.RoomDesc)
                 {
                     ApplicationArea = All;
-
                 }
-                field(Capacity; rec.Capacity)
+                field(RoomType; rec.RoomType)
                 {
                     ApplicationArea = All;
 
@@ -41,22 +35,13 @@ page 50113 HostelRoomList
                 field(Beds; rec.Beds)
                 {
                     ApplicationArea = All;
+                    Caption = 'No Of Beds';
 
                 }
-                field(PerBedFees; rec.PerBedFees)
-                {
-                    ApplicationArea = All;
-                }
-                field(Floor; rec.Floor)
-                {
-                    ApplicationArea = All;
-
-                }
-                field(Wings; rec.Wings)
-                {
-                    ApplicationArea = All;
-
-                }
+                // field(PerBedFees; rec.PerBedFees)
+                // {
+                //     ApplicationArea = All;
+                // }
             }
         }
     }

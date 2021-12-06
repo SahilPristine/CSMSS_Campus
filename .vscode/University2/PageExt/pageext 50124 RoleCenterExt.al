@@ -46,6 +46,10 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50124;
                     }
+                    action(Branch)
+                    {
+                        RunObject = page 50133;
+                    }
                     action(Hostel)
                     {
                         RunObject = page 50112;
@@ -62,7 +66,7 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50113;
                     }
-                    action(AcademicYear)
+                    action("Academic Year Master")
                     {
                         RunObject = page 50105;
                     }

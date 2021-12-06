@@ -19,16 +19,6 @@
             "tenant": "default",
             "port": 7049,
             "schemaUpdateMode":"ForceSync",
-        },
-        {
-            "name": "snapshotInitialize: Your own server",
-            "type": "al",
-            "request": "snapshotInitialize",
-            "environmentType": "OnPrem",
-            "server": "http://localhost",
-            "serverInstance": "BC190",
-            "authentication": "Windows",
-            "breakOnNext": "WebClient"
         }
     ]
 }

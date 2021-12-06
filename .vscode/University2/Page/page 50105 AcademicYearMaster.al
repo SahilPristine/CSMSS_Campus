@@ -4,9 +4,7 @@ page 50105 AcademicYearList
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = AcademicYearMasterTable;
-    SaveValues = true;
-    AccessByPermission = page AcademicYearList = X;
-    AdditionalSearchTerms = 'Sahil';
+    Caption = 'Academic Year Master';
 
     //   PageType = Card;
     // ApplicationArea = All;
@@ -31,6 +29,14 @@ page 50105 AcademicYearList
                 {
                     ApplicationArea = All;
 
+                }
+                field("From Date"; rec."From Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("To Date"; rec."To Date")
+                {
+                    ApplicationArea = All;
                 }
             }
         }

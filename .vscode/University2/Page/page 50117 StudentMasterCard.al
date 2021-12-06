@@ -207,8 +207,6 @@ page 50117 StudentMaster
                     ApplicationArea = All;
 
                 }
-
-
                 field(RoomType; rec.RoomType)
                 {
 
@@ -216,6 +214,14 @@ page 50117 StudentMaster
 
                 }
                 field(BedType; rec.BedType)
+                {
+                    ApplicationArea = All;
+                }
+                field(HostelCode; rec.HostelCode)
+                {
+                    ApplicationArea = All;
+                }
+                field(RoomNo; rec.RoomNo)
                 {
                     ApplicationArea = All;
                 }

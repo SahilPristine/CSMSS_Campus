@@ -92,6 +92,7 @@ table 50130 PostedCustLedg
             end;
 
         }
+
         field(4; "No. Series"; code[20])
         {
             DataClassification = ToBeClassified;
@@ -108,6 +109,18 @@ table 50130 PostedCustLedg
         {
             DataClassification = ToBeClassified;
             OptionMembers = Cash,Cheque,UPI,BankTransfer;
+            trigger OnValidate()
+            begin
+                if rec."Mode Of Payment" = rec."Mode Of Payment"::cash
+                then
+                    rec.GL := true;
+                if rec."Mode Of Payment" = rec."Mode Of Payment"::BankTransfer
+                then
+                    rec.Bank := true;
+
+            end;
+
+
             // trigger OnValidate()
             //     begin
             //         rec.TestField("Amount Received", true );
@@ -118,12 +131,29 @@ table 50130 PostedCustLedg
             DataClassification = ToBeClassified;
             TableRelation = "G/L Account"."No.";
 
+            trigger OnValidate()
+            begin
+                rec.TestField(GL, true);
+            end;
+
         }
         field(9; BankAccNo; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Bank Account"."No.";
+            trigger OnValidate()
+            begin
+                rec.TestField(Bank, true);
+            end;
 
+        }
+        field(10; GL; boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(11; Bank; Boolean)
+        {
+            DataClassification = ToBeClassified;
         }
 
 
@@ -146,6 +176,8 @@ table 50130 PostedCustLedg
         RecSalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         LineNo: Integer;
+        DefaultOption: Integer;
+        AccNo: boolean;
 
     trigger OnInsert()
     begin

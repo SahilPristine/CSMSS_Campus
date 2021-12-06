@@ -8,15 +8,13 @@ table 50113 RoomMaster
         {
             DataClassification = ToBeClassified;
             TableRelation = HostelMaster.HostelCode;
-            trigger OnValidate()
-            begin
-                if HostelCode <> '' then
-                    if recHostel.Get(HostelCode) then begin
-                        HostelDesc := recHostel.HostelName;
-                    end;
-            end;
-
-
+            // trigger OnValidate()
+            // begin
+            //     if HostelCode <> '' then
+            //         if recHostel.Get(HostelCode) then begin
+            //             HostelDesc := recHostel.HostelName;
+            //         end;
+            // end;
 
         }
         field(2; RoomCode; Code[20])
@@ -24,41 +22,28 @@ table 50113 RoomMaster
             DataClassification = ToBeClassified;
 
         }
-        field(3; RoomType; Text[30])
+        field(3; RoomType; Text[50])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(4; Capacity; Integer)
+        field(4; RoomDesc; Text[50])
         {
             DataClassification = ToBeClassified;
+        }
 
-        }
-        field(5; Beds; Text[30])
+        field(5; Beds; Integer)
         {
             DataClassification = ToBeClassified;
+            Caption = 'No Of Beds';
+        }
 
-        }
-        field(6; Floor; Code[20])
-        {
-            DataClassification = ToBeClassified;
+        // field(6; PerBedFees; Decimal)
+        // {
+        //     DataClassification = ToBeClassified;
 
-        }
-        field(7; Wings; Code[20])
-        {
-            DataClassification = ToBeClassified;
+        // }
 
-        }
-        field(8; PerBedFees; Decimal)
-        {
-            DataClassification = ToBeClassified;
-
-        }
-        field(9; HostelDesc; Text[50])
-        {
-            DataClassification = ToBeClassified;
-            // TableRelation = HostelMaster.HostelName where (HostelCode = field(HostelCode));
-        }
     }
 
 
@@ -70,13 +55,13 @@ table 50113 RoomMaster
         }
     }
 
-    fieldgroups
-    {
-        fieldgroup(DropDown; RoomType, Beds)
-        {
+    // fieldgroups
+    // {
+    //     fieldgroup(DropDown; RoomType, Beds)
+    //     {
 
-        }
-    }
+    //     }
+    // }
 
     var
         recHostel: Record HostelMaster;

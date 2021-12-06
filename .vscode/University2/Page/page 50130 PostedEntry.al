@@ -55,28 +55,36 @@ page 50130 PostedEntry
                 SubPageLink = DocumentNo = field(DocumentNo);
                 //UpdatePropagation = Both;
             }
-            field("Total Remaining Amount"; rec."Total Remaining Amount")
+            group("Fees Details")
             {
-                ApplicationArea = All;
-            }
+                ShowCaption = false;
+                field("Total Remaining Amount"; rec."Total Remaining Amount")
+                {
+                    ApplicationArea = All;
+                }
 
-            field("Amount Received"; rec."Amount Received")
-            {
-                ApplicationArea = All;
-            }
-            field("Mode Of Payment"; rec."Mode Of Payment")
-            {
-                ApplicationArea = All;
+                field("Amount Received"; rec."Amount Received")
+                {
+                    ApplicationArea = All;
+                }
+                field("Mode Of Payment"; rec."Mode Of Payment")
+                {
+                    ApplicationArea = All;
 
-            }
-            field(GLAccNo; rec.GLAccNo)
-            {
-                ApplicationArea = All;
 
+                }
             }
-            field(BankAccNo; rec.BankAccNo)
+            group(AccInfo)
             {
-                ApplicationArea = All;
+                ShowCaption = false;
+                field(GLAccNo; rec.GLAccNo)
+                {
+                    ApplicationArea = All;
+                }
+                field(BankAccNo; rec.BankAccNo)
+                {
+                    ApplicationArea = All;
+                }
             }
 
         }
@@ -141,8 +149,11 @@ page 50130 PostedEntry
         RecCustLedgEntry: Record "Cust. Ledger Entry";
         RecPostedLine: record PostedCustLedgLine;
         RecGenJoun: Record "Gen. Journal Line";
-
+        DefaultOption: Option;
+        AccNo: Boolean;
         lineno: Integer;
         GJL: Record "Gen. Journal Line";
+    // GL: boolean;
+    // Bank: boolean;
 
 }

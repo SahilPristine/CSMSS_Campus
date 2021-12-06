@@ -1,33 +1,24 @@
-table 50105 AcademicYearMasterTable
+table 50132 BranchMaster
 {
     DataClassification = ToBeClassified;
 
     fields
     {
-        field(1; CODE; Code[20])
+        field(1; "Branch Code"; Code[20])
         {
             DataClassification = ToBeClassified;
 
         }
-
-        field(2; Description; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(3; "From Date"; Date)
+        field(2; Description; Text[50])
         {
             DataClassification = ToBeClassified;
 
-        }
-        field(4; "To Date"; Date)
-        {
-            DataClassification = ToBeClassified;
         }
     }
 
     keys
     {
-        key(Key1; CODE)
+        key(Key1; "Branch Code")
         {
             Clustered = true;
         }

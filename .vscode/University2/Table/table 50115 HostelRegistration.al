@@ -105,6 +105,7 @@ table 50115 HostelRegistration
                     if recHostel.Get(HostelCode) then begin
                         HostelName := recHostel.HostelName;
                     end;
+
             end;
 
         }
@@ -116,18 +117,28 @@ table 50115 HostelRegistration
         field(12; RoomNo; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = RoomMaster;
-            trigger OnValidate()
-            begin
-                if RoomNo <> '' then
-                    if recRoom.get(RoomNo) then
-                        HostelFees := recRoom.PerBedFees;
-            end;
+            TableRelation = RoomMaster.RoomCode;
+            // trigger OnValidate()
+            // begin
+            //     if RoomNo <> '' then begin
+            //         if recRoom.get(RoomNo) then
+            //             HostelFees := recRoom.PerBedFees;
+            //     end;
+            //     // recStudent.Reset();
+            //     // recStudent.SetRange("No.", StudentCode);
+            //     // if recStudent.FindFirst() then begin
+            //     //     recStudent.HostelCode := HostelCode;
+            //     //     recStudent.RoomNo := RoomNo;
+            //     // end;
+            // end;
+
 
         }
         field(13; HostelFees; Decimal)
         {
             DataClassification = ToBeClassified;
+            // FieldClass = FlowField;
+            // CalcFormula = lookup(RoomMaster.PerBedFees where(RoomCode = field(RoomNo)));
             // TableRelation = RoomMaster.PerBedFees where(RoomCode = field(RoomNo));
 
         }

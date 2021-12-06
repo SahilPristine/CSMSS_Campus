@@ -30,7 +30,7 @@ page 50140 TestPage
 
                 trigger OnAction()
                 begin
-                    Codeunit.Run(Codeunit::TestFunction)
+                    // Codeunit.Run(Codeunit::TestFunction)
                 end;
             }
         }
