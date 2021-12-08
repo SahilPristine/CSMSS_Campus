@@ -15,10 +15,12 @@ page 50130 PostedEntry
                 field(DocumentNo; rec.DocumentNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Document No';
                 }
                 field(CustomerNo; rec.CustomerNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Student No';
                     // TableRelation = Customer."No.";
                     // trigger OnValidate()
                     // begin
@@ -45,12 +47,14 @@ page 50130 PostedEntry
                 field(CustomerName; rec.CustomerName)
                 {
                     ApplicationArea = All;
+                    Caption = 'Student Name';
                 }
 
             }
 
             part(PostedEntry; PostedEntryLine)
             {
+
                 ApplicationArea = All;
                 SubPageLink = DocumentNo = field(DocumentNo);
                 //UpdatePropagation = Both;

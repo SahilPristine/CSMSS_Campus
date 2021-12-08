@@ -5,6 +5,7 @@ page 50118 StudentMasterList
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = Customer;
+    Caption = 'Students';
 
     layout
     {
@@ -12,6 +13,7 @@ page 50118 StudentMasterList
         {
             repeater(StudentList)
             {
+                Caption = 'Students';
                 field(StudentCode; rec."No.")
                 {
                     ApplicationArea = All;
@@ -21,14 +23,17 @@ page 50118 StudentMasterList
                 field("First Name"; rec.Name)
                 {
                     ApplicationArea = All;
+                    Caption = 'First Name';
                 }
                 field("Last Name"; rec."Name 2")
                 {
                     ApplicationArea = All;
+                    Caption = 'Last Name';
                 }
                 field(AcademicYear; rec.AcademicYear)
                 {
                     ApplicationArea = All;
+                    Caption = 'Academic Year';
 
                 }
 

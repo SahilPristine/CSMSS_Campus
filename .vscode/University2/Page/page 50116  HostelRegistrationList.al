@@ -3,9 +3,10 @@ page 50116 HostelRegistrationList
     PageType = List;
     CardPageId = 50115;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     SourceTable = HostelRegistration;
     AccessByPermission = page HostelRegistrationList = X;
+    Caption = 'Hostel Registration';
 
     layout
     {
@@ -16,41 +17,49 @@ page 50116 HostelRegistrationList
                 field(RegistrationNo; Rec.RegistrationNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Registeration No';
 
                 }
                 field(StudentCode; Rec.StudentCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Student Code';
 
                 }
                 field(RegistrationDate; Rec.RegistrationDate)
                 {
                     ApplicationArea = All;
+                    Caption = 'Registeration Date';
 
                 }
                 field(CollegeName; Rec.CollegeName)
                 {
                     ApplicationArea = All;
+                    Caption = 'College Name';
 
                 }
                 field(StudentName; Rec.StudentName)
                 {
                     ApplicationArea = All;
+                    Caption = 'Student Name';
 
                 }
                 field(Address; Rec.Address)
                 {
                     ApplicationArea = All;
+                    Caption = 'Address';
 
                 }
                 field(Class; Rec.Class)
                 {
                     ApplicationArea = All;
+                    Caption = 'Class';
 
                 }
                 field(ContactNo; Rec.ContactNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Contact No';
 
                 }
             }

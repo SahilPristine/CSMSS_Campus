@@ -4,6 +4,7 @@ page 50128 CourseWiseFeeStructure
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = 50128;
+    Caption = 'Course Wise Fees Structure';
 
     layout
     {
@@ -11,24 +12,29 @@ page 50128 CourseWiseFeeStructure
         {
             repeater(FeeStructure)
             {
+                Caption = 'Fees Structure';
                 field(CourseCode; rec.CourseCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Course Code';
 
                 }
                 field(StreamCode; rec.StreamCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Stream Code';
 
                 }
                 field(SemesterCode; rec.SemesterCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Semester Code';
 
                 }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Code';
 
                 }
                 field(Description; rec.Description)
@@ -38,6 +44,7 @@ page 50128 CourseWiseFeeStructure
                 field(ElementType; rec.ElementType)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Type';
 
                 }
                 field(Period; rec.Period)
@@ -48,24 +55,29 @@ page 50128 CourseWiseFeeStructure
                 field(BatchCode; rec.BatchCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Batch Code';
                 }
                 field(CategoryCode; rec.CategoryCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Category Code';
                 }
                 field(DebitAcc; rec.DebitAcc)
                 {
                     ApplicationArea = All;
+                    Caption = 'Debit Account';
 
                 }
                 field(CreditAcc; rec.CreditAcc)
                 {
                     ApplicationArea = All;
+                    Caption = 'Credit Account';
 
                 }
                 field(DueDate; rec.DueDate)
                 {
                     ApplicationArea = All;
+                    Caption = 'Due Date';
                 }
             }
         }

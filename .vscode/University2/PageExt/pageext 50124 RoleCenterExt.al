@@ -16,53 +16,57 @@ pageextension 50124 RoleCenterExt extends 9006
                     action(StudentMaster)
                     {
                         RunObject = page 50118;
+                        Caption = 'Student Master';
                     }
 
                     action(StudentFees)
                     {
                         RunObject = page 50111;
+                        Caption = 'Student Fees Structure';
                     }
 
                     action(StudentRoomInfo)
                     {
                         RunObject = page 50114;
+                        Caption = 'Student Room Info';
                     }
                     action(StudentClassAllotment)
                     {
                         RunObject = page 50125;
+                        Caption = 'Student Promotion';
                     }
                 }
                 group(Masters)
                 {
-                    action(Batch)
+                    action("Batch Master")
                     {
                         RunObject = page 50104;
                     }
-                    action(Course)
+                    action("Course Master")
                     {
                         RunObject = page 50106;
                     }
-                    action(Class)
+                    action("Class Master")
                     {
                         RunObject = page 50124;
                     }
-                    action(Branch)
+                    action("Branch Master")
                     {
                         RunObject = page 50133;
                     }
-                    action(Hostel)
+                    action("Hostel Master")
                     {
                         RunObject = page 50112;
                     }
-                    action(Stream)
+                    action("Stream Master")
                     {
                         RunObject = page 50108;
                     }
-                    action(Semester)
+                    action("Semester Master")
                     {
                         RunObject = page 50107;
                     }
-                    action(Rooms)
+                    action("Room Master")
                     {
                         RunObject = page 50113;
                     }
@@ -70,41 +74,41 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50105;
                     }
-                    action(AdmissionCategory)
+                    action("Admission Category")
                     {
                         RunObject = page 50127;
                     }
-                    action(RouteMaster)
+                    action("Route Master")
                     {
                         RunObject = page 50129;
                     }
                 }
                 group(Hostels)
                 {
-                    action(HostelReg)
+                    action("Hostel Registeration")
                     {
                         RunObject = page 50116;
                     }
-                    action(StudentRoomShifting)
+                    action("Student Room Shifting")
                     {
                         RunObject = page 50126;
                     }
                 }
                 group(Fees)
                 {
-                    action(FeesStructureElements)
+                    action("Fees Structure Elements")
                     {
                         RunObject = page 50110;
                     }
-                    action(CourseWiseFeeStructure)
+                    action("Course Wise Fees Structure")
                     {
                         RunObject = page 50128;
                     }
-                    action(StudentFeeStructure)
+                    action("Student Fees Structure")
                     {
                         RunObject = page 50111;
                     }
-                    action("Student Fees Slip")
+                    action("Student Fees Receipt")
                     {
                         RunObject = page 50130;
                     }
@@ -116,7 +120,7 @@ pageextension 50124 RoleCenterExt extends 9006
                         RunObject = report 50101;
                         Caption = 'Student Fees';
                     }
-                    action(StudentFeesProcessing)
+                    action("Student Fees Processing")
                     {
                         RunObject = report 50100;
                     }

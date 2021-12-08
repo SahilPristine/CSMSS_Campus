@@ -35,7 +35,7 @@ table 50115 HostelRegistration
         field(2; StudentCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer."No.";
+            TableRelation = Customer."No." where(Hostel = const(true));
             trigger OnValidate()
             begin
                 if StudentCode <> '' then
@@ -118,6 +118,15 @@ table 50115 HostelRegistration
         {
             DataClassification = ToBeClassified;
             TableRelation = RoomMaster.RoomCode;
+            trigger OnValidate()
+            begin
+                recStudent.Reset();
+                recStudent.SetRange("No.", StudentCode);
+                if recStudent.FindFirst() then begin
+                    recStudent.HostelCode := HostelCode;
+                    recStudent.RoomNo := RoomNo;
+                end;
+            end;
             // trigger OnValidate()
             // begin
             //     if RoomNo <> '' then begin

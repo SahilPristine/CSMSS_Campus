@@ -59,7 +59,7 @@ table 50131 PostedCustLedgLine
 
     keys
     {
-        key(Key1; ElementCode, DocumentNo)
+        key(Key1; DocumentNo, LineNo)
         {
             Clustered = true;
         }

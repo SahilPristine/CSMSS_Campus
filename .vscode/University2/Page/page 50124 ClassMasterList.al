@@ -4,6 +4,7 @@ page 50124 ClassMasterList
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = 50124;
+    Caption = 'Class Master';
 
     layout
     {
@@ -11,6 +12,7 @@ page 50124 ClassMasterList
         {
             Repeater(ClassList)
             {
+                Caption = 'Class Master';
                 field(CODE; rec.CODE)
                 {
                     ApplicationArea = All;

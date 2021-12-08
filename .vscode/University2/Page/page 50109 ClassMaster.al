@@ -1,11 +1,12 @@
 page 50109 ClassMaster
 {
     PageType = Card;
-    Caption = 'Class';
+    Caption = 'Class Master';
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = ClassMasterTable;
     AccessByPermission = page ClassMaster = X;
+
 
     layout
     {
@@ -13,32 +14,38 @@ page 50109 ClassMaster
         {
             group(ClassMaster)
             {
+                Caption = 'Class Master';
                 field(CourseCode; rec.CourseCode)
                 {
                     ApplicationArea = All;
                     TableRelation = CourseMasterTable;
+                    Caption = 'Course Code';
 
                 }
                 field(Stream; rec.Stream)
                 {
                     ApplicationArea = All;
                     TableRelation = StreamMasterTable;
+                    Caption = 'Stream';
 
                 }
                 field(Semester; rec.Semester)
                 {
                     ApplicationArea = All;
                     TableRelation = SemesterMasterTable;
+                    Caption = 'Semester';
 
                 }
                 field(Class; rec.Class)
                 {
                     ApplicationArea = All;
+                    Caption = 'Class';
 
                 }
                 field(Description; rec.Description)
                 {
                     ApplicationArea = All;
+                    Caption = 'Description';
 
                 }
             }

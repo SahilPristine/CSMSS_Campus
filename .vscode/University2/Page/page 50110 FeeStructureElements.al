@@ -5,6 +5,7 @@ page 50110 FeeStructureElements
     UsageCategory = Administration;
     SourceTable = FeeStructureElements;
     AccessByPermission = page FeeStructureElements = X;
+    Caption = 'Fees Structure Elements';
 
     layout
     {
@@ -12,14 +13,17 @@ page 50110 FeeStructureElements
         {
             repeater(FeeStructure)
             {
+                Caption = 'Fees Structure';
                 field(Elements; rec.ElementCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Code';
 
                 }
                 field(Description; rec.Description)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Description';
                 }
 
             }

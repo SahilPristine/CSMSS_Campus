@@ -13,6 +13,7 @@ page 50106 CourseList
         {
             repeater(CourseMaster)
             {
+                Caption = 'Course Master';
                 field(CODE; Rec.CODE)
                 {
                     ApplicationArea = All;

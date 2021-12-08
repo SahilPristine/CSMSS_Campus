@@ -5,6 +5,7 @@ page 50107 SemesterList
     UsageCategory = Lists;
     SourceTable = SemesterMasterTable;
     AccessByPermission = page SemesterList = X;
+    Caption = 'Semester Master';
 
     layout
     {
@@ -12,24 +13,29 @@ page 50107 SemesterList
         {
             repeater(SemesterMaster)
             {
+                Caption = 'Semester Master';
                 field(CourseCode; Rec.CourseCode)
                 {
                     ApplicationArea = All;
+                    caption = 'Course Code';
 
                 }
                 field(StreamCode; Rec.StreamCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Stream Code';
 
                 }
                 field(SemesterCode; Rec.SemesterCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Semester Code';
 
                 }
                 field(Description; Rec.Description)
                 {
                     ApplicationArea = All;
+                    Caption = 'Description';
 
                 }
             }

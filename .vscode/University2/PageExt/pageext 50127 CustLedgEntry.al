@@ -7,14 +7,17 @@ pageextension 50127 CustLedgEntry extends 25
             field(ElementCode; rec.ElementCode)
             {
                 ApplicationArea = all;
+                Caption = 'Element Code';
             }
             field(ElementDesc; rec.ElementDesc)
             {
                 ApplicationArea = All;
+                Caption = 'Element Desc';
             }
             field(ElementType; rec.ElementType)
             {
                 ApplicationArea = All;
+                Caption = 'Element Type';
             }
         }
         addlast(Control1)
@@ -22,6 +25,7 @@ pageextension 50127 CustLedgEntry extends 25
             field(PaymentReceived; rec.PaymentReceived)
             {
                 ApplicationArea = All;
+                Caption = 'Payment Received';
             }
         }
         // Add changes to page layout here

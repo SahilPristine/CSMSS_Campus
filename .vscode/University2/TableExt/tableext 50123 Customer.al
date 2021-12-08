@@ -96,6 +96,9 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            TableRelation = State;
+
+
             // TableRelation = 18547;
         }
         // field(50159; PinCode; Text[30])

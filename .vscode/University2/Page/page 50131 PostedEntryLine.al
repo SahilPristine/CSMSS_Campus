@@ -4,6 +4,8 @@ page 50131 PostedEntryLine
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = PostedCustLedgLine;
+    AutoSplitKey = true;
+    Caption = 'Student Fees Receipt Line';
 
     layout
     {
@@ -14,28 +16,34 @@ page 50131 PostedEntryLine
                 field(DocumentNo; rec.DocumentNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Document No';
                 }
                 field(LineNo; rec.LineNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Line No';
                 }
                 field(EntryDocNo; rec.EntryDocNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Debit No';
                 }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Code';
 
                 }
                 field(ElementDesc; rec.ElementDesc)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Desc';
 
                 }
                 field(ElementType; rec.ElementType)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Type';
                 }
                 field(Amount; rec.Amount)
                 {

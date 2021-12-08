@@ -5,6 +5,7 @@ page 50112 HostelList
     UsageCategory = Administration;
     SourceTable = HostelMaster;
     AccessByPermission = page HostelList = X;
+    Caption = 'Hostel Master';
 
     layout
     {
@@ -12,14 +13,18 @@ page 50112 HostelList
         {
             repeater(HostelMaster)
             {
+                Caption = 'Hostel Master';
                 field(HostelCode; Rec.HostelCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Hostel Code';
 
                 }
                 field(HostelName; Rec.HostelName)
                 {
                     ApplicationArea = All;
+
+                    Caption = 'Hostel Name';
 
                 }
             }

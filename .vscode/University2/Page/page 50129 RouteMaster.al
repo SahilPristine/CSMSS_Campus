@@ -4,6 +4,7 @@ page 50129 RouteMaster
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = RouteMaster;
+    Caption = 'Route Master';
 
     layout
     {
@@ -11,9 +12,11 @@ page 50129 RouteMaster
         {
             repeater(GroupName)
             {
+                Caption = 'Route Master';
                 field(RouteNo; rec.RouteNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Route No';
 
                 }
                 field(Description; rec.Description)

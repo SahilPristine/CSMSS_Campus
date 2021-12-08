@@ -18,6 +18,7 @@ page 50105 AcademicYearList
         {
             repeater(AcademicYear)
             {
+                Caption = 'Academic Year';
                 field(CODE; Rec.CODE)
                 {
                     ApplicationArea = All;

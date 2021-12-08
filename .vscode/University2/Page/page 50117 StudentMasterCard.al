@@ -13,21 +13,22 @@ page 50117 StudentMaster
         {
             group(StudentDetails)
             {
-
+                Caption = 'Student Details';
                 field(StudentCode; rec."No.")
                 {
                     ApplicationArea = All;
-
-
+                    Caption = 'Student Code';
                 }
 
                 field(FirstName; rec.Name)
                 {
                     ApplicationArea = All;
+                    Caption = 'First Name';
 
                 }
                 field(LastName; rec."Name 2")
                 {
+                    Caption = 'Last Name';
                     ApplicationArea = All;
                     trigger OnValidate()
                     begin
@@ -121,10 +122,12 @@ page 50117 StudentMaster
                 field(PinCode; rec."Post Code")
                 {
                     ApplicationArea = All;
+                    Caption = 'Pin Code';
                 }
                 field("Country/Region Code"; rec."Country/Region Code")
                 {
                     ApplicationArea = All;
+                    Caption = 'Country Code';
                 }
             }
             group(AdmissionDetails)
@@ -142,6 +145,7 @@ page 50117 StudentMaster
                 field(AcademicYear; rec.AcademicYear)
                 {
                     ApplicationArea = All;
+                    CAption = 'Academic Year';
 
                 }
 
@@ -211,19 +215,23 @@ page 50117 StudentMaster
                 {
 
                     ApplicationArea = All;
+                    Caption = 'Room Type';
 
                 }
                 field(BedType; rec.BedType)
                 {
                     ApplicationArea = All;
+                    Caption = 'Bed Type';
                 }
                 field(HostelCode; rec.HostelCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Hostel Code';
                 }
                 field(RoomNo; rec.RoomNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Room No';
                 }
                 field(Transport; rec.Transport)
                 {
@@ -233,6 +241,7 @@ page 50117 StudentMaster
                 field(RouteNo; rec.RouteNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Route No';
                 }
                 field(Charge; rec.Charge)
                 {
@@ -242,6 +251,7 @@ page 50117 StudentMaster
 
             group(BankDetails)
             {
+                Caption = 'Bank Details';
                 field("Bank Name"; Rec."Bank Name")
                 {
                     ApplicationArea = All;
@@ -265,6 +275,7 @@ page 50117 StudentMaster
             }
             group(FeesDetails)
             {
+                Caption = 'Fees Details';
                 field("Fees Rate"; rec."Fees Rate")
                 {
                     ApplicationArea = All;
@@ -278,6 +289,7 @@ page 50117 StudentMaster
                 field(AdmissionType; rec.AdmissionType)
                 {
                     ApplicationArea = All;
+                    Caption = 'Admission Type';
 
                 }
                 field(Status; rec.Status)
@@ -293,9 +305,28 @@ page 50117 StudentMaster
         }
         area(FactBoxes)
         {
-            part(Image; "Customer Picture")
+            part(Picture; "Customer Picture")
             {
-
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "No." = FIELD("No.");
+                Caption = 'Student Image';
+            }
+            part(StudentStatisticsFactBox; "Customer Statistics FactBox")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Student Statistics';
+                SubPageLink = "No." = FIELD("No."),
+                  "Currency Filter" = FIELD("Currency Filter"),
+                  "Date Filter" = FIELD("Date Filter"),
+                  "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+                  "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+            }
+            part("Attached Documents"; "Document Attachment Factbox")
+            {
+                ApplicationArea = All;
+                Caption = 'Attachments';
+                SubPageLink = "Table ID" = CONST(18),
+                              "No." = FIELD("No.");
             }
         }
 
@@ -308,10 +339,12 @@ page 50117 StudentMaster
             action(FeesStructure)
             {
                 ApplicationArea = All;
+                Caption = 'Fees Structure';
                 RunObject = page 50111;
                 RunPageLink = StudentID = field("No.");
                 Promoted = true;
                 PromotedCategory = Process;
+                Image = CheckList;
 
                 trigger OnAction()
                 begin
@@ -322,8 +355,10 @@ page 50117 StudentMaster
             action(ConfirmEnroll)
             {
                 ApplicationArea = All;
+                Caption = 'Confirm Enrollment';
                 Promoted = true;
                 PromotedCategory = Process;
+                Image = Post;
                 trigger OnAction()
                 var
                     Question: Text;

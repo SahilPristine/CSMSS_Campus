@@ -5,6 +5,7 @@ page 50104 BatchList
     UsageCategory = Administration;
     SourceTable = BatchMasterTable;
     SaveValues = true;
+    Caption = 'Batch Master';
 
     layout
     {
@@ -12,6 +13,7 @@ page 50104 BatchList
         {
             Repeater(BatchList)
             {
+                Caption = 'Batch Master';
                 field("CODE"; Rec.CODE)
                 {
                     ApplicationArea = All;

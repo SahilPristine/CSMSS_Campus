@@ -1,6 +1,7 @@
 table 50127 AdmissionCategory
 {
     DataClassification = ToBeClassified;
+    LookupPageId = 50127;
 
     fields
     {

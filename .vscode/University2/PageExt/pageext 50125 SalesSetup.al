@@ -9,18 +9,22 @@ pageextension 50125 GenLedgerSetup extends 459
                 field(RegisterationNo; rec.RegisterationNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Registeration No';
                 }
                 field(RoomShistRegNo; rec.RoomShistRegNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Room Shifting Reg No';
                 }
                 field(EnrollmentNo; rec.EnrollmentNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Enrollment No';
                 }
                 field(FeesDocNo; rec.FeesDocNo)
                 {
                     ApplicationArea = All;
+                    Caption = 'Fees Receipt No';
                 }
                 field(FeesReceipt; rec.FeesReceipt)
                 {

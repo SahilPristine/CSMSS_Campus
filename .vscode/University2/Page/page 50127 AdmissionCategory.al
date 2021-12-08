@@ -4,6 +4,7 @@ page 50127 AdmissionCategory
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = 50127;
+    Caption = 'Admission Category';
 
     layout
     {
@@ -11,9 +12,11 @@ page 50127 AdmissionCategory
         {
             repeater(AdmissionCategory)
             {
+                Caption = 'Admission Category';
                 field(CategCode; rec.CategCode)
                 {
                     ApplicationArea = All;
+                    Caption = 'Category Code';
 
                 }
                 field(College; rec.College)
