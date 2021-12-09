@@ -18,11 +18,11 @@ tableextension 50126 CusstLedgEntry extends 21
         {
             DataClassification = ToBeClassified;
         }
+
         // Add changes to table fields here
     }
 
     var
-        myInt: Integer;
 
 
 

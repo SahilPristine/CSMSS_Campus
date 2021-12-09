@@ -110,7 +110,7 @@ pageextension 50124 RoleCenterExt extends 9006
                     }
                     action("Student Fees Receipt")
                     {
-                        RunObject = page 50130;
+                        RunObject = page 50132;
                     }
                 }
                 group(Report)

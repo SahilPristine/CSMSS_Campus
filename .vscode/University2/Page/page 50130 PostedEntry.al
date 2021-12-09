@@ -4,7 +4,10 @@ page 50130 PostedEntry
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = PostedCustLedg;
+    RefreshOnActivate = true;
     Caption = 'Student Fees Receipt';
+
+
 
     layout
     {
@@ -16,32 +19,26 @@ page 50130 PostedEntry
                 {
                     ApplicationArea = All;
                     Caption = 'Document No';
+
+                    trigger OnAssistEdit()
+                    begin
+                        if rec.AssistEdit(xRec) then
+                            CurrPage.Update();
+                    end;
                 }
                 field(CustomerNo; rec.CustomerNo)
                 {
                     ApplicationArea = All;
                     Caption = 'Student No';
-                    // TableRelation = Customer."No.";
-                    // trigger OnValidate()
-                    // begin
-                    //     if rec.CustomerNo <> '' then
-                    //         if RecCustomer.Get(rec.CustomerNo) then begin
-                    //             RecPosted.CustomerName := RecCustomer.Name;
-                    //         end;
-                    //     RecCustLedgEntry.SetRange("Customer No.", RecPosted.CustomerNo);
-                    //     if RecCustLedgEntry.FindFirst then begin
-                    //         Repeat
-                    //             RecPosted.Init();
-                    //             RecPosted.DocumentNo := RecCustLedgEntry."Document No.";
-                    //             RecPosted.PostingDate := RecCustLedgEntry."Posting Date";
-                    //             RecPosted.ElementCode := RecCustLedgEntry.ElementCode;
-                    //             RecPosted.ElementDesc := RecCustLedgEntry.ElementDesc;
-                    //             RecPosted.Insert();
-                    //         Until
-                    //         RecCustLedgEntry.Next = 0;
-
-                    //     end;
-                    // end;
+                    TableRelation = Customer."No.";
+                    trigger OnValidate()
+                    begin
+                        if RecCustomer.get(rec.CustomerNo) then begin
+                            RecCustomer.CalcFields("Balance (LCY)");
+                            rec."Total Remaining Amount" := RecCustomer."Balance (LCY)";
+                            Rec.Modify();
+                        end;
+                    end;
 
                 }
                 field(CustomerName; rec.CustomerName)
@@ -57,7 +54,6 @@ page 50130 PostedEntry
 
                 ApplicationArea = All;
                 SubPageLink = DocumentNo = field(DocumentNo);
-                //UpdatePropagation = Both;
             }
             group("Fees Details")
             {
@@ -74,6 +70,21 @@ page 50130 PostedEntry
                 field("Mode Of Payment"; rec."Mode Of Payment")
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                    begin
+                        IF rec."Mode Of Payment" = rec."Mode Of Payment"::Cash then
+                            cash := true
+                        else
+                            cash := false;
+
+                        if (Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cheque) or (Rec."Mode Of Payment" = rec."Mode Of Payment"::BankTransfer) then
+                            recBank := true
+                        else
+                            recBank := false;
+                        CurrPage.Update(true);
+                    end;
 
 
                 }
@@ -84,10 +95,20 @@ page 50130 PostedEntry
                 field(GLAccNo; rec.GLAccNo)
                 {
                     ApplicationArea = All;
+                    Editable = cash;
+                    trigger OnValidate()
+                    begin
+
+                    end;
                 }
                 field(BankAccNo; rec.BankAccNo)
                 {
                     ApplicationArea = All;
+                    Editable = recBank;
+                    trigger OnValidate()
+                    begin
+
+                    end;
                 }
             }
 
@@ -103,6 +124,7 @@ page 50130 PostedEntry
             {
                 ApplicationArea = All;
                 Image = Post;
+                Promoted = true;
 
                 trigger OnAction()
                 begin
@@ -154,10 +176,42 @@ page 50130 PostedEntry
         RecPostedLine: record PostedCustLedgLine;
         RecGenJoun: Record "Gen. Journal Line";
         DefaultOption: Option;
-        AccNo: Boolean;
+        [InDataSet]
+        cash: Boolean;
+        [InDataSet]
+        recBank: Boolean;
         lineno: Integer;
         GJL: Record "Gen. Journal Line";
-    // GL: boolean;
-    // Bank: boolean;
+        recPage: Page 50130;
+
+    trigger OnAfterGetRecord()
+    begin
+        IF rec."Mode Of Payment" = rec."Mode Of Payment"::Cash then
+            cash := true
+        else
+            cash := false;
+
+        if (Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cheque) or (Rec."Mode Of Payment" = rec."Mode Of Payment"::BankTransfer) then
+            recBank := true
+        else
+            recBank := false;
+        CurrPage.Update(true);
+
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+
+        IF rec."Mode Of Payment" = rec."Mode Of Payment"::Cash then
+            cash := true
+        else
+            cash := false;
+
+        if (Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cheque) or (Rec."Mode Of Payment" = rec."Mode Of Payment"::BankTransfer) then
+            recBank := true
+        else
+            recBank := false;
+        CurrPage.Update(true);
+    end;
 
 }
