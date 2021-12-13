@@ -19,6 +19,16 @@ page 50127 AdmissionCategory
                     Caption = 'Category Code';
 
                 }
+                field(Description; rec.Description)
+                {
+                    ApplicationArea = All;
+
+                }
+                field(Caste; rec.Caste)
+                {
+                    ApplicationArea = All;
+                    LookupPageId = 50134;
+                }
                 field(College; rec.College)
                 {
                     ApplicationArea = All;
@@ -34,16 +44,12 @@ page 50127 AdmissionCategory
                     ApplicationArea = All;
 
                 }
-                field(FeeWaivers; rec.FeeWaivers)
+                field(GovtCode; rec.GovtCode)
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Govt Code';
                 }
-                field(Description; rec.Description)
-                {
-                    ApplicationArea = All;
 
-                }
             }
         }
     }

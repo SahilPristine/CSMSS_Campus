@@ -54,34 +54,35 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
                     Caption = 'Category Code';
                 }
+                field(CasteCode; rec.CasteCode)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Caste Code';
+                }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Element Code';
 
                 }
-                field(ElementType; rec.ElementType)
+                field(GovtCode; rec.GovtCode)
                 {
                     ApplicationArea = All;
-                    Caption = 'Element Type';
-
-                }
-                // field(Period; rec.Period)
-                // {
-                //     ApplicationArea = All;
-
-                // }
-                field(CalculationOrder; rec.CalculationOrder)
-                {
-                    ApplicationArea = All;
+                    Caption = 'Govt Code';
                 }
                 field(Amount; rec.Amount)
                 {
                     ApplicationArea = All;
                 }
-                field(CalculationType; rec.CalculationType)
+                field(GovtAmount; rec.GovtAmount)
                 {
                     ApplicationArea = All;
+                    Caption = 'Govt Amount';
+                }
+                field(TotalAmount; rec.TotalAmount)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Total Amount';
                 }
                 field(DebitAcc; rec.DebitAcc)
                 {
@@ -98,12 +99,9 @@ page 50111 StudentFeeStructure
                 field(DebitCreated; rec.DebitCreated)
                 {
                     ApplicationArea = All;
+                    Caption = 'Debit Created';
                 }
-                field(DebitAmount; rec.DebitAmount)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Debit Amount';
-                }
+
 
             }
         }

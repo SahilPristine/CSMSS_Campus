@@ -35,10 +35,6 @@ table 50128 CourseWiseFeeStructure
             end;
 
         }
-        field(5; ElementType; text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
         field(6; Period; Option)
         {
             DataClassification = ToBeClassified;
@@ -70,8 +66,29 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             TableRelation = AdmissionCategory;
         }
-
-        field(12; DueDate; Date)
+        field(12; "Caste Code"; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = CasteMaster;
+            trigger OnValidate()
+            begin
+                recCategory.Reset();
+                recCategory.SetRange(CategCode, CategoryCode);
+                recCategory.SetRange(Caste, "Caste Code");
+                recCategory.SetRange(Batch, BatchCode);
+                recCategory.SetRange(Course, CourseCode);
+                if recCategory.FindFirst() then begin
+                    "Govt Code" := recCategory.GovtCode;
+                end;
+            end;
+        }
+        field(13; "Govt Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Customer;
+            Editable = false;
+        }
+        field(14; DueDate; Date)
         {
             DataClassification = ToBeClassified;
 
@@ -88,6 +105,7 @@ table 50128 CourseWiseFeeStructure
 
     var
         recElement: record FeeStructureElements;
+        recCategory: Record AdmissionCategory;
 
     trigger OnInsert()
     begin

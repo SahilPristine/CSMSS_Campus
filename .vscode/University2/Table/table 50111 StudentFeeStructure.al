@@ -18,6 +18,7 @@ table 50111 StudentFeeStructure
                 Semester := recStudent."Semester Code";
                 BatchCode := recStudent."Batch Code";
                 CategoryCode := recStudent.Category;
+                CasteCode := recStudent.Cast;
             end;
 
         }
@@ -35,25 +36,23 @@ table 50111 StudentFeeStructure
         field(3; Stream; Code[20])
         {
             DataClassification = ToBeClassified;
-            // TableRelation = StreamMasterTable.StreamCode where(CourseCode = field(CourseCode));
 
         }
         field(4; Semester; Code[20])
         {
             DataClassification = ToBeClassified;
-            // TableRelation = SemesterMasterTable.SemesterCode where(CourseCode = field(CourseCode));
-
         }
         field(17; BatchCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = BatchMasterTable;
         }
         field(18; CategoryCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = AdmissionCategory;
-
+        }
+        field(19; CasteCode; Code[20])
+        {
+            DataClassification = ToBeClassified;
         }
         field(5; ElementCode; Code[20])
         {
@@ -63,32 +62,21 @@ table 50111 StudentFeeStructure
             begin
                 recFees.reset;
                 recFees.SetRange(CourseCode, Rec.CourseCode);
+                recFees.SetRange(StreamCode, Rec.Stream);
+                recFees.SetRange(SemesterCode, rec.Semester);
+                recFees.SetRange(BatchCode, rec.BatchCode);
+                recFees.setrange(CategoryCode, Rec.CategoryCode);
+                recFees.SetRange("Caste Code", Rec.CasteCode);
                 recFees.SetRange(ElementCode, Rec.ElementCode);
                 if recFees.FindFirst() then begin
                     ElementDesc := recFees.Description;
-                    ElementType := recFees.ElementType;
+                    GovtCode := recFees."Govt Code";
                     DebitAcc := recFees.DebitAcc;
                     CreditAcc := recFees.CreditAcc;
                 end;
             end;
-
         }
         field(6; ElementDesc; Text[50])
-        {
-            DataClassification = ToBeClassified;
-
-        }
-        field(7; ElementType; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
-
-        // field(8; Period; Option)
-        // {
-        //     DataClassification = ToBeClassified;
-        //     OptionMembers = Monthly,Yearly;
-        // }
-        field(9; CalculationOrder; Integer)
         {
             DataClassification = ToBeClassified;
 
@@ -96,12 +84,21 @@ table 50111 StudentFeeStructure
         field(10; Amount; Decimal)
         {
             DataClassification = ToBeClassified;
+            Caption = 'Amount By Student';
 
         }
-        field(11; CalculationType; text[50])
+        field(20; GovtCode; code[20])
         {
             DataClassification = ToBeClassified;
-
+        }
+        field(21; GovtAmount; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Amount By Govt';
+            trigger OnValidate()
+            begin
+                TotalAmount := Amount + GovtAmount;
+            end;
         }
         field(12; DebitAcc; code[20])
         {
@@ -117,7 +114,7 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
-        field(16; DebitAmount; Decimal)
+        field(16; TotalAmount; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -127,7 +124,7 @@ table 50111 StudentFeeStructure
 
     keys
     {
-        key(Key1; StudentID, Stream, Semester, ElementCode)
+        key(Key1; StudentID, Stream, Semester, ElementCode, GovtCode)
         {
             Clustered = true;
         }

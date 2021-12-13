@@ -10,6 +10,17 @@ table 50127 AdmissionCategory
             DataClassification = ToBeClassified;
 
         }
+        field(6; Description; Text[30])
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(7; Caste; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = CasteMaster;
+        }
+
         field(2; College; Text[30])
         {
             DataClassification = ToBeClassified;
@@ -28,21 +39,17 @@ table 50127 AdmissionCategory
             TableRelation = CourseMasterTable.CODE;
 
         }
-        field(5; FeeWaivers; Text[30])
+        field(5; GovtCode; Code[20])
         {
             DataClassification = ToBeClassified;
-
-        }
-        field(6; Description; Text[30])
-        {
-            DataClassification = ToBeClassified;
+            TableRelation = Customer;
 
         }
     }
 
     keys
     {
-        key(Key1; CategCode, College, Course, Batch)
+        key(Key1; CategCode, College, Course, Batch, Caste)
         {
             Clustered = true;
         }

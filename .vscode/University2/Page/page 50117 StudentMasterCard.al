@@ -36,6 +36,14 @@ page 50117 StudentMaster
                     end;
 
                 }
+                field(DOB; rec.DOB)
+                {
+                    ApplicationArea = All;
+                }
+                field("Birth Place"; rec."Birth Place")
+                {
+                    ApplicationArea = All;
+                }
                 field(Gender; rec.Gender)
                 {
                     ApplicationArea = All;
@@ -44,9 +52,103 @@ page 50117 StudentMaster
                 field(Category; rec.Category)
                 {
                     ApplicationArea = All;
+                    Caption = 'Admission Category';
+                    Editable = confirm;
 
                 }
+                field(Cast; rec.Cast)
+                {
+                    ApplicationArea = All;
+                    LookupPageId = 50134;
+
+                }
+                field(Religion; rec.Religion)
+                {
+                    ApplicationArea = All;
+                }
+                field(Nationality; rec.Nationality)
+                {
+                    ApplicationArea = All;
+                }
+                field("Aadhar No"; rec."Aadhar No")
+                {
+                    ApplicationArea = All;
+                }
+                field("Admission Quota"; rec."Admission Quota")
+                {
+                    ApplicationArea = All;
+                }
+                field("Qualifying Exam Details"; rec."Qualifying Exam Details")
+                {
+                    ApplicationArea = All;
+                }
             }
+            group("Address Details")
+            {
+                group("Permanent Address")
+                {
+                    field("Permanent Address 1"; rec.Address)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Address Line 1';
+
+                    }
+                    field("Permanent Address 2"; rec."Address 2")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Address Line 2';
+
+
+                    }
+                    field(State; rec.State)
+                    {
+                        ApplicationArea = All;
+                    }
+                    field(PinCode; rec."Post Code")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Pin Code';
+                    }
+                    field("Country/Region Code"; rec."Country/Region Code")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Country Code';
+                    }
+                }
+                group("Local Address")
+                {
+                    field("Local Address 1"; rec."Local Address 1")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Address Line 1';
+
+                    }
+                    field("Local Address 2"; rec."Local Address 2")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Address Line 2';
+
+
+                    }
+                    field(State2; rec.State2)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'State';
+                    }
+                    field(PostCode; rec."Pin Code")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Pin Code';
+                    }
+                    field("Country Code"; rec."Country Code")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Country Code';
+                    }
+                }
+
+            }
+
             group(PersonalDetails)
             {
                 field("Phone No."; rec."Phone No.")
@@ -102,152 +204,61 @@ page 50117 StudentMaster
 
                 }
             }
-            group("Address Details")
-            {
 
-                field("Permanent Address 1"; rec.Address)
-                {
-                    ApplicationArea = All;
-
-                }
-                field("Permanent Address 2"; rec."Address 2")
-                {
-                    ApplicationArea = All;
-
-                }
-                field(State; rec.State)
-                {
-                    ApplicationArea = All;
-                }
-                field(PinCode; rec."Post Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Pin Code';
-                }
-                field("Country/Region Code"; rec."Country/Region Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Country Code';
-                }
-            }
             group(AdmissionDetails)
             {
-                field(LateralEntry; rec.LateralEntry)
+                // field(LateralEntry; rec.LateralEntry)
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field(UniversityTransferProgram; rec.UniversityTransferProgram)
+                // {
+                //     ApplicationArea = All;
+
+                // }
+                field("Batch Code"; rec."Batch Code")
                 {
                     ApplicationArea = All;
-                }
-                field(UniversityTransferProgram; rec.UniversityTransferProgram)
-                {
-                    ApplicationArea = All;
-
-
                 }
                 field(AcademicYear; rec.AcademicYear)
                 {
                     ApplicationArea = All;
                     CAption = 'Academic Year';
-
                 }
 
                 field("Course Code"; rec."Course Code")
                 {
                     ApplicationArea = All;
                     LookupPageId = CourseList;
-
                 }
-                field("Batch Code"; rec."Batch Code")
-                {
-                    ApplicationArea = All;
 
-                }
                 field("Semester Code"; rec."Semester Code")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Stream Code"; rec."Stream Code")
                 {
                     ApplicationArea = All;
                     LookupPageId = 50108;
-
                 }
                 field(Class; rec.Class)
                 {
                     ApplicationArea = All;
                     LookupPageId = 50124;
-
                 }
-                // field(ConfirmEnroll; rec.ConfirmEnroll)
-                // {
-                //     ApplicationArea = All;
-                //     trigger OnValidate()
-                //     begin
-                //         Enroll := rec.ConfirmEnroll;
-                //     end;
-
-                //     //     trigger OnValidate()
-                //     //     begin
-                //     //         If rec.ConfirmEnroll then
-                //     //             isVisible3 := true else
-                //     //             isVisible3 := false;
-                //     //     end;
-                // }
-                // group("HideGroup3")
-                // {
-                //     Visible = isVisible3;
-                //     ShowCaption = false;
                 field("Enrollment No"; rec."Enrollment No")
                 {
                     ApplicationArea = All;
                     Editable = False;
+                    trigger OnValidate()
+                    begin
+
+                    end;
 
                 }
 
             }
-            group(Hostel_Transport)
-            {
-                field(Hostel; rec.Hostel)
-                {
-                    ApplicationArea = All;
 
-                }
-                field(RoomType; rec.RoomType)
-                {
-
-                    ApplicationArea = All;
-                    Caption = 'Room Type';
-
-                }
-                field(BedType; rec.BedType)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Bed Type';
-                }
-                field(HostelCode; rec.HostelCode)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Hostel Code';
-                }
-                field(RoomNo; rec.RoomNo)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Room No';
-                }
-                field(Transport; rec.Transport)
-                {
-                    ApplicationArea = All;
-
-                }
-                field(RouteNo; rec.RouteNo)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Route No';
-                }
-                field(Charge; rec.Charge)
-                {
-                    ApplicationArea = All;
-                }
-            }
 
             group(BankDetails)
             {
@@ -273,33 +284,79 @@ page 50117 StudentMaster
 
                 }
             }
-            group(FeesDetails)
+            group(Hostel_Transport)
             {
-                Caption = 'Fees Details';
-                field("Fees Rate"; rec."Fees Rate")
+                Caption = 'Hostel & Transport Details';
+                group(Hostel)
                 {
-                    ApplicationArea = All;
+                    field(AvailHostel; rec.Hostel)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Hostel';
+                        trigger OnValidate()
+                        begin
+                            if rec.Hostel = true then
+                                editHostel := true
+                            else
+                                editHostel := false;
+                            CurrPage.Update(true);
+                        end;
 
-                }
-                field("Total Course Fees"; rec."Total Course Fees")
-                {
-                    ApplicationArea = All;
+                    }
+                    field(RoomType; rec.RoomType)
+                    {
 
-                }
-                field(AdmissionType; rec.AdmissionType)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Admission Type';
+                        ApplicationArea = All;
+                        Caption = 'Room Type';
+                        Enabled = editHostel;
 
+                    }
+                    field(BedType; rec.BedType)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Bed Type';
+                        Enabled = editHostel;
+                    }
+                    field(HostelCode; rec.HostelCode)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Hostel Code';
+                        Enabled = editHostel;
+                    }
+                    field(RoomNo; rec.RoomNo)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Room No';
+                        Enabled = editHostel;
+                    }
                 }
-                field(Status; rec.Status)
+                group(Transport)
                 {
-                    ApplicationArea = All;
+                    field(AvailTransport; rec.Transport)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Transport';
+                        trigger OnValidate()
+                        begin
+                            if rec.Transport = true then
+                                editTransport := true
+                            else
+                                editTransport := false;
+                            CurrPage.Update(true);
+                        end;
 
-                }
-                field("Application Method"; rec."Application Method")
-                {
-                    ApplicationArea = All;
+                    }
+                    field(RouteNo; rec.RouteNo)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Route No';
+                        Enabled = editTransport;
+                    }
+                    field(Charge; rec.Charge)
+                    {
+                        ApplicationArea = All;
+                        Enabled = editTransport;
+                    }
                 }
             }
         }
@@ -366,6 +423,13 @@ page 50117 StudentMaster
                     Text000: Label 'Do you want to confirm enrollment?';
 
                 begin
+
+                    // rec.TestField("Enrollment No", '');
+
+                    if rec."Enrollment No" <> ''
+                    then
+                        Error('Enrollment No %1 Already Generated', rec."Enrollment No");
+
                     Question := Text000;
                     Answer := Dialog.Confirm(Question, true);
                     if Answer = true then begin
@@ -374,25 +438,68 @@ page 50117 StudentMaster
                     end;
 
                     Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."No.");
-                    CurrPage.Update();
+
+                    CurrPage.Update(true);
 
                     // recSalesSetup.Get();
                     // CustRec."Enrollment No" := recSalesSetup.EnrollmentNo;
                     // Message('%1', CustRec."Enrollment No");
                     // CurrPage.Update();
                 end;
+
+
             }
         }
     }
 
     var
         CustRec: Record Customer;
-        isVisible: boolean;
-        isVisible2: Boolean;
-        isVisible3: Boolean;
         Enroll: Boolean;
         recSalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        editable: Boolean;
+        [InDataSet]
+        editHostel: Boolean;
+        [InDataSet]
+        editTransport: Boolean;
+        [InDataSet]
+        confirm: Boolean;
+
+
+    trigger OnAfterGetRecord()
+    begin
+        if rec.Hostel = true then
+            editHostel := true
+        else
+            editHostel := false;
+
+        if rec.Transport = true then
+            editTransport := true
+        else
+            editTransport := false;
+
+        if rec."Enrollment No" <> '' then
+            confirm := false
+        else
+            confirm := true;
+
+
+
+        // CurrPage.Update(true);
+
+    end;
+
+    trigger OnOpenPage()
+    begin
+
+    end;
+
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        if rec."Enrollment No" <> '' then
+            confirm := false
+        else
+            confirm := true;
+    end;
 
 }

@@ -82,34 +82,13 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
-        // field(50140; "Permanent Address 1"; Text[30])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     Description = 'SL-V.01';
-        // }
-        // field(50141; "Permanent Address 2"; Text[30])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     Description = 'SL-V.01';
-        // }
         field(50158; State; Text[30])
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
             TableRelation = State;
-
-
-            // TableRelation = 18547;
         }
-        // field(50159; PinCode; Text[30])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     Description = 'SL-V.01';
-        // }
-        // field(50160; Country; Text[30])
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
+
         field(50142; "Course Code"; Code[10])
         {
             DataClassification = ToBeClassified;
@@ -174,100 +153,32 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
-        field(50154; "Fees Rate"; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
-        field(50155; "Total Course Fees"; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
-        field(50156; "AdmissionType"; Option)
-        {
-            DataClassification = ToBeClassified;
-            OptionMembers = "";
-            Description = 'SL-V.01';
-        }
-        field(50157; "Status"; Option)
-        {
-            DataClassification = ToBeClassified;
-            OptionMembers = " ","New Admission","Continue","Terminated","Other";
-            Description = 'SL-V.01';
-        }
-        // field(50161; "ContactNo"; Text[10])
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
-        // field(50162; EmailID; Text[30])
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
-        // field(50163; ConfirmEnroll; Boolean)
-        // {
-        //     DataClassification = ToBeClassified;
-        // }
+
         field(50164; Hostel; Boolean)
         {
             DataClassification = ToBeClassified;
-            trigger OnValidate()
-            begin
-                if rec.Hostel = false then
-                    TestField(rec.RoomType, ' ');
-                TestField(rec.BedType, ' ');
-            end;
+
         }
         field(50165; Transport; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        // field(50166; HostelCode; Code[50])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     TableRelation = HostelMaster;
-        //     trigger OnValidate()
-        //     begin
-        //         Hostel.Reset();
-        //         Hostel.SetRange(HostelCode, HostelCode);
-        //         if Hostel.FindFirst() then begin
-        //             HostelName := Hostel.HostelName;
-        //         end;
-        //     end;
-        // }
+
         field(50167; RoomType; Text[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = RoomMaster.RoomType;
-            trigger OnValidate()
-            begin
-                TestField(rec.Hostel, true);
-            end;
         }
 
         field(50168; BedType; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = RoomMaster.Beds where(RoomType = field(RoomType));
-            trigger OnValidate()
-            begin
-                TestField(rec.Hostel, true);
-            end;
         }
         field(50169; RouteNo; Code[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = RouteMaster;
-            trigger OnValidate()
-            begin
-                TestField(rec.Transport, true);
-                Route.Reset();
-                Route.SetRange(RouteNo, RouteNo);
-                if Route.FindFirst() then begin
-                    RouteName := Route.Description;
-                    Charge := Route.Charge;
-                end;
-            end;
         }
         field(50170; RouteName; text[50])
         {
@@ -285,6 +196,66 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(50174; DOB; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50175; "Birth Place"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50176; "Local Address 1"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50177; "Local Address 2"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50178; State2; Text[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = State;
+        }
+        field(50179; "Pin Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Post Code";
+        }
+        field(50180; "Country Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "Country/Region";
+        }
+        field(50181; Cast; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = CasteMaster;
+        }
+        field(50182; Religion; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Hindu","Muslim","Sikh","Christian";
+        }
+        field(50183; Nationality; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Indian";
+        }
+        field(50184; "Aadhar No"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50185; "Admission Quota"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Regular","Institutional";
+        }
+        field(50186; "Qualifying Exam Details"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+
 
     }
 

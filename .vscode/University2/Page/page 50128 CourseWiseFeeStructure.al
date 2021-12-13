@@ -41,12 +41,7 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                 }
-                field(ElementType; rec.ElementType)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Element Type';
 
-                }
                 field(Period; rec.Period)
                 {
                     ApplicationArea = All;
@@ -61,6 +56,14 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Category Code';
+                }
+                field("Caste Code"; rec."Caste Code")
+                {
+                    ApplicationArea = All;
+                }
+                field("Govt Code"; rec."Govt Code")
+                {
+                    ApplicationArea = All;
                 }
                 field(DebitAcc; rec.DebitAcc)
                 {
