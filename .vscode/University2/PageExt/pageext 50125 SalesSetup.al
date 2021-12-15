@@ -16,7 +16,7 @@ pageextension 50125 GenLedgerSetup extends 459
                     ApplicationArea = All;
                     Caption = 'Room Shifting Reg No';
                 }
-                field(EnrollmentNo; rec.EnrollmentNo)
+                field(RegistrationNo; rec.RegistrationNo)
                 {
                     ApplicationArea = All;
                     Caption = 'Enrollment No';

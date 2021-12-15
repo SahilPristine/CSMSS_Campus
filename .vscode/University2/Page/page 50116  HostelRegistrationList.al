@@ -20,7 +20,7 @@ page 50116 HostelRegistrationList
                     Caption = 'Registeration No';
 
                 }
-                field(StudentCode; Rec.StudentCode)
+                field(StudentEnrollmentNo; rec.StudentEnrollmentNo)
                 {
                     ApplicationArea = All;
                     Caption = 'Student Code';

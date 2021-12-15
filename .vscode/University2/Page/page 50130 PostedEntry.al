@@ -29,7 +29,7 @@ page 50130 PostedEntry
                 field(CustomerNo; rec.CustomerNo)
                 {
                     ApplicationArea = All;
-                    Caption = 'Student No';
+                    Caption = 'Student Enrollment No';
                     TableRelation = Customer."No.";
                     trigger OnValidate()
                     begin
@@ -153,8 +153,13 @@ page 50130 PostedEntry
                     GJL.validate("Document Type", GJL."Document Type"::Payment);
                     IF Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cash then begin
                         GJL.validate("Account Type", GJL."Account Type"::"G/L Account");
-                        GJL.Validate("Account No.", Rec.GLAccNo);
+                        GJL.Validate("Account No.", Rec.GLAccNo)
                     end;
+                    if Rec."Mode Of Payment" = Rec."Mode Of Payment"::BankTransfer then begin
+                        GJL.validate("Account Type", gjl."Account Type"::"Bank Account");
+                        GJL.Validate("Account No.", rec.BankAccNo);
+                    end;
+
                     GJL.Validate(Amount, Rec."Amount Received");
                     GJL.validate("Bal. Account Type", GJL."Bal. Account Type"::Customer);
                     GJL.Validate("Bal. Account No.", Rec.CustomerNo);

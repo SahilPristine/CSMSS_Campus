@@ -13,6 +13,7 @@ tableextension 50123 CustomerExtension extends Customer
         //              "No. Series" := '';
         // END;
         //         }
+
         field(50124; AcademicYear; code[20])
         {
             DataClassification = ToBeClassified;
@@ -120,19 +121,19 @@ tableextension 50123 CustomerExtension extends Customer
             TableRelation = ClassMaster;
             Description = 'SL-V.01';
         }
-        field(50148; "Enrollment No"; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-            trigger OnValidate()
-            begin
-                if "Enrollment No" <> xRec."Enrollment No" then begin
-                    SalesSetup.Get();
-                    NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
-                    "No. Series" := '';
-                end;
-            end;
-        }
+        // field(50148; "Enrollment No"; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Description = 'SL-V.01';
+        //     trigger OnValidate()
+        //     begin
+        //         if "Enrollment No" <> xRec."Enrollment No" then begin
+        //             SalesSetup.Get();
+        //             NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
+        //             "No. Series" := '';
+        //         end;
+        //     end;
+        // }
         field(50150; "Bank Name"; Text[30])
         {
             DataClassification = ToBeClassified;
@@ -255,10 +256,19 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        // modify("No.")
+        // {
+        //     trigger OnBeforeValidate()
+        //     begin
+
+        //     end;
+        // }
 
 
     }
-
+    keys
+    {
+    }
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit "NoSeriesManagement";

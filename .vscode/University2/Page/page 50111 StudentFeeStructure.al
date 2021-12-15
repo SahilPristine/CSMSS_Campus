@@ -15,10 +15,10 @@ page 50111 StudentFeeStructure
             repeater(StudentFeesStructure)
             {
                 Caption = 'Student Fees Structure';
-                field(StudentID; Rec.StudentID)
+                field(StudentID; Rec.StudentEnrollmentNo)
                 {
                     ApplicationArea = All;
-                    Caption = 'Student Code';
+                    Caption = 'Student Enrollment No';
 
                 }
                 field(StudentName; rec.StudentName)
@@ -78,6 +78,8 @@ page 50111 StudentFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Govt Amount';
+                    Enabled = Enable;
+
                 }
                 field(TotalAmount; rec.TotalAmount)
                 {
@@ -124,5 +126,23 @@ page 50111 StudentFeeStructure
     }
 
     var
-        myInt: Integer;
+        [InDataSet]
+        Enable: boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        If rec.GovtCode <> '' then
+            Enable := true
+        else
+            Enable := false;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        If rec.GovtCode <> '' then
+            Enable := true
+        else
+            Enable := false;
+
+    end;
 }

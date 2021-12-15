@@ -20,10 +20,11 @@ page 50115 HostelRegistration
                     Caption = 'Registeration No';
 
                 }
-                field(StudentCode; Rec.StudentCode)
+                field(StudentEnrollmentNo; Rec.StudentEnrollmentNo)
                 {
                     ApplicationArea = All;
-                    Caption = 'Student Code';
+                    Caption = 'Student Enrollment No';
+                    LookupPageId = 50136;
 
                 }
                 field(RegistrationDate; Rec.RegistrationDate)

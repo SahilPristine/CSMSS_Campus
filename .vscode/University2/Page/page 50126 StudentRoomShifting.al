@@ -24,10 +24,10 @@ page 50126 StudentRoomShifting
                     ApplicationArea = All;
                     Caption = 'Shifting No';
                 }
-                field(StudentCode; Rec.StudentCode)
+                field(EnrollmentNo; rec.EnrollmentNo)
                 {
                     ApplicationArea = All;
-                    Caption = 'Student Code';
+                    Caption = 'Student Enrollment No';
 
                 }
                 field(RegistrationDate; Rec.RegistrationDate)

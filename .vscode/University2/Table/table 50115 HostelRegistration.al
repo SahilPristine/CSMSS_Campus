@@ -32,14 +32,14 @@ table 50115 HostelRegistration
             // AutoIncrement = true;
 
         }
-        field(2; StudentCode; Code[20])
+        field(2; StudentEnrollmentNo; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = Customer."No." where(Hostel = const(true));
             trigger OnValidate()
             begin
-                if StudentCode <> '' then
-                    if recStudent.Get(StudentCode) then begin
+                if StudentEnrollmentNo <> '' then
+                    if recStudent.Get(StudentEnrollmentNo) then begin
                         StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                         Address := recStudent.Address;
                         Address2 := recStudent."Address 2";
@@ -47,8 +47,6 @@ table 50115 HostelRegistration
                         ContactNo := recStudent."Phone No.";
 
                     end;
-
-
             end;
 
         }
@@ -121,7 +119,7 @@ table 50115 HostelRegistration
             trigger OnValidate()
             begin
                 recStudent.Reset();
-                recStudent.SetRange("No.", StudentCode);
+                recStudent.SetRange("No.", StudentEnrollmentNo);
                 if recStudent.FindFirst() then begin
                     recStudent.HostelCode := HostelCode;
                     recStudent.RoomNo := RoomNo;
@@ -176,7 +174,7 @@ table 50115 HostelRegistration
 
     keys
     {
-        key(Key1; RegistrationNo)
+        key(Key1; RegistrationNo, StudentEnrollmentNo)
         {
             Clustered = true;
         }

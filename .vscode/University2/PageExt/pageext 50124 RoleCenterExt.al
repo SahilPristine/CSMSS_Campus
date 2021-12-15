@@ -13,9 +13,14 @@ pageextension 50124 RoleCenterExt extends 9006
             {
                 group(Student)
                 {
-                    action(StudentMaster)
+                    action(StudentRegistration)
                     {
                         RunObject = page 50118;
+                        Caption = 'Student Registration';
+                    }
+                    action(StudentMaster)
+                    {
+                        RunObject = page 50136;
                         Caption = 'Student Master';
                     }
 

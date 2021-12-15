@@ -12,7 +12,7 @@ table 50126 StudentRoomShifting
             begin
                 if RegistrationNo <> '' then
                     if recHostel.Get(RegistrationNo) then begin
-                        StudentCode := recHostel.StudentCode;
+                        EnrollmentNo := recHostel.StudentEnrollmentNo;
                         StudentName := recHostel.StudentName;
                         RegistrationDate := recHostel.RegistrationDate;
                         CollegeName := recHostel.CollegeName;
@@ -38,7 +38,7 @@ table 50126 StudentRoomShifting
                 end;
             end;
         }
-        field(2; StudentCode; Code[20])
+        field(2; EnrollmentNo; Code[20])
         {
             DataClassification = ToBeClassified;
             Editable = false;

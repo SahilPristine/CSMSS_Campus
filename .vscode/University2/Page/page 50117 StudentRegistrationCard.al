@@ -1,10 +1,10 @@
-page 50117 StudentMaster
+page 50117 StudentRegistration
 {
     PageType = Card;
-    Caption = 'Student Master';
+    Caption = 'Student Registration Page';
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = Customer;
+    SourceTable = StudentRegistration;
     PopulateAllFields = true;
 
     layout
@@ -14,26 +14,23 @@ page 50117 StudentMaster
             group(StudentDetails)
             {
                 Caption = 'Student Details';
-                field(StudentCode; rec."No.")
+
+                field("Registration No"; rec."Registration No")
                 {
                     ApplicationArea = All;
-                    Caption = 'Student Code';
+                    Caption = 'Registration No';
                 }
 
-                field(FirstName; rec.Name)
+                field(FirstName; rec."First Name")
                 {
                     ApplicationArea = All;
                     Caption = 'First Name';
 
                 }
-                field(LastName; rec."Name 2")
+                field(LastName; rec."Last Name")
                 {
                     Caption = 'Last Name';
                     ApplicationArea = All;
-                    trigger OnValidate()
-                    begin
-                        CustRec.Name := rec.Name + '' + rec."Name 2";
-                    end;
 
                 }
                 field(DOB; rec.DOB)
@@ -87,13 +84,13 @@ page 50117 StudentMaster
             {
                 group("Permanent Address")
                 {
-                    field("Permanent Address 1"; rec.Address)
+                    field("Permanent Address 1"; rec."Permanent Address 1")
                     {
                         ApplicationArea = All;
                         Caption = 'Address Line 1';
 
                     }
-                    field("Permanent Address 2"; rec."Address 2")
+                    field("Permanent Address 2"; rec."Permanent Address 2")
                     {
                         ApplicationArea = All;
                         Caption = 'Address Line 2';
@@ -104,12 +101,12 @@ page 50117 StudentMaster
                     {
                         ApplicationArea = All;
                     }
-                    field(PinCode; rec."Post Code")
+                    field(PinCode; rec."Pin Code")
                     {
                         ApplicationArea = All;
                         Caption = 'Pin Code';
                     }
-                    field("Country/Region Code"; rec."Country/Region Code")
+                    field("Country/Region Code"; rec."Country Code")
                     {
                         ApplicationArea = All;
                         Caption = 'Country Code';
@@ -135,12 +132,12 @@ page 50117 StudentMaster
                         ApplicationArea = All;
                         Caption = 'State';
                     }
-                    field(PostCode; rec."Pin Code")
+                    field(PostCode; rec."Pin Code2")
                     {
                         ApplicationArea = All;
                         Caption = 'Pin Code';
                     }
-                    field("Country Code"; rec."Country Code")
+                    field("Country Code"; rec."Country Code2")
                     {
                         ApplicationArea = All;
                         Caption = 'Country Code';
@@ -151,13 +148,13 @@ page 50117 StudentMaster
 
             group(PersonalDetails)
             {
-                field("Phone No."; rec."Phone No.")
+                field("Phone No."; rec."Phone No")
                 {
                     ApplicationArea = All;
-                    trigger OnValidate()
-                    begin
-                        CustRec."Phone No." := rec."Phone No.";
-                    end;
+                    // trigger OnValidate()
+                    // begin
+                    //     CustRec."Phone No." := rec."Phone No.";
+                    // end;
                 }
                 field("Father's First Name"; rec."Father's First Name")
                 {
@@ -179,7 +176,7 @@ page 50117 StudentMaster
                     ApplicationArea = All;
 
                 }
-                field("E-Mail"; rec."E-Mail")
+                field("E-Mail"; rec."Email ID")
                 {
                     ApplicationArea = All;
                 }
@@ -250,6 +247,7 @@ page 50117 StudentMaster
                 {
                     ApplicationArea = All;
                     Editable = False;
+                    Caption = 'Enrollment No';
                     trigger OnValidate()
                     begin
 
@@ -362,30 +360,30 @@ page 50117 StudentMaster
         }
         area(FactBoxes)
         {
-            part(Picture; "Customer Picture")
-            {
-                ApplicationArea = Basic, Suite;
-                SubPageLink = "No." = FIELD("No.");
-                Caption = 'Student Image';
-            }
-            part(StudentStatisticsFactBox; "Customer Statistics FactBox")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Student Statistics';
-                SubPageLink = "No." = FIELD("No."),
-                  "Currency Filter" = FIELD("Currency Filter"),
-                  "Date Filter" = FIELD("Date Filter"),
-                  "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
-                  "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
-            }
-            part("Attached Documents"; "Document Attachment Factbox")
-            {
-                ApplicationArea = All;
-                Caption = 'Attachments';
-                SubPageLink = "Table ID" = CONST(18),
-                              "No." = FIELD("No.");
-            }
+            //     part(Picture; "Customer Picture")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         SubPageLink = "No." = FIELD("No.");
+            //         Caption = 'Student Image';
+            //     }
+            //     part(StudentStatisticsFactBox; "Customer Statistics FactBox")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Student Statistics';
+            //         SubPageLink = "No." = FIELD("No."),
+            //           "Currency Filter" = FIELD("Currency Filter"),
+            //           "Date Filter" = FIELD("Date Filter"),
+            //           "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
+            //           "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
+            //     }
+            //     part("Attached Documents"; "Document Attachment Factbox")
+            //     {
+            //         ApplicationArea = All;
+            //         Caption = 'Attachments';
+            //         SubPageLink = "Table ID" = CONST(18),
+            //                       "No." = FIELD("No.");
         }
+
 
     }
 
@@ -393,22 +391,22 @@ page 50117 StudentMaster
     {
         area(Processing)
         {
-            action(FeesStructure)
-            {
-                ApplicationArea = All;
-                Caption = 'Fees Structure';
-                RunObject = page 50111;
-                RunPageLink = StudentID = field("No.");
-                Promoted = true;
-                PromotedCategory = Process;
-                Image = CheckList;
+            // action(FeesStructure)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Fees Structure';
+            //     RunObject = page 50111;
+            //     RunPageLink = StudentEnrollmentNo = field("Enrollment No");
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     Image = CheckList;
 
-                trigger OnAction()
-                begin
+            //     trigger OnAction()
+            //     begin
 
 
-                end;
-            }
+            //     end;
+            // }
             action(ConfirmEnroll)
             {
                 ApplicationArea = All;
@@ -433,11 +431,77 @@ page 50117 StudentMaster
                     Question := Text000;
                     Answer := Dialog.Confirm(Question, true);
                     if Answer = true then begin
-                        recSalesSetup.Get();
-                        rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup.EnrollmentNo, today, true);
+                        // recSalesSetup.Get();
+                        // rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup.EnrollmentNo, today, true);
+                        recSalesSetup.get();
+                        rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup."Customer Nos.", Today, true);
                     end;
 
-                    Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."No.");
+                    Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."Registration No");
+
+                    CustRec.Init();
+                    CustRec."No." := rec."Enrollment No";
+                    CustRec.Name := rec."First Name";
+                    CustRec."Name 2" := rec."Last Name";
+                    CustRec.DOB := rec.DOB;
+                    CustRec."Birth Place" := rec."Birth Place";
+                    CustRec.Gender := rec.Gender;
+                    CustRec.Category := rec.Category;
+                    CustRec.Cast := rec.Cast;
+                    CustRec.Religion := rec.Religion;
+                    CustRec.Nationality := rec.Nationality;
+                    CustRec."Aadhar No" := rec."Aadhar No";
+                    CustRec."Admission Quota" := rec."Admission Quota";
+                    CustRec."Qualifying Exam Details" := rec."Qualifying Exam Details";
+                    CustRec.Address := rec."Permanent Address 1";
+                    CustRec."Address 2" := rec."Permanent Address 2";
+                    CustRec.State := rec.State;
+                    CustRec."Pin Code" := rec."Pin Code";
+                    CustRec."Country/Region Code" := rec."Country Code";
+                    CustRec."Local Address 1" := rec."Local Address 1";
+                    CustRec."Local Address 2" := rec."Local Address 2";
+                    CustRec.State2 := rec.State2;
+                    CustRec."Post Code" := rec."Pin Code2";
+                    CustRec."Country Code" := rec."Country Code2";
+                    CustRec."Phone No." := rec."Phone No";
+                    CustRec."E-Mail" := rec."Email ID";
+                    CustRec."Father's First Name" := rec."Father's First Name";
+                    CustRec."Father's Last Name" := rec."Father's Last Name";
+                    CustRec."Father's Contact No" := rec."Father's Contact No";
+                    CustRec."Father's Email ID" := rec."Father's Email ID";
+                    CustRec."Mother's First Name" := rec."Mother's First Name";
+                    CustRec."Mother's Last Name" := rec."Mother's Last Name";
+                    CustRec."Mother's Contact No" := rec."Mother's Contact No";
+                    CustRec."Mother's Email ID" := rec."Mother's Email ID";
+                    CustRec."Batch Code" := rec."Batch Code";
+                    Custrec.AcademicYear := rec.AcademicYear;
+                    CustRec."Course Code" := rec."Course Code";
+                    CustRec."Semester Code" := rec."Semester Code";
+                    CustRec."Stream Code" := rec."Stream Code";
+                    CustRec.Class := rec.Class;
+                    CustRec."Bank Name" := rec."Bank Name";
+                    CustRec."Branch Name" := rec."Branch Name";
+                    CustRec."IFSC Code" := rec."IFSC Code";
+                    CustRec."Bank Account No" := rec."Bank Account No";
+                    CustRec.Hostel := rec.Hostel;
+                    CustRec.RoomType := rec.RoomType;
+                    CustRec.BedType := rec.BedType;
+                    CustRec.HostelCode := rec.HostelCode;
+                    CustRec.RoomNo := rec.RoomNo;
+                    CustRec.Transport := rec.Transport;
+                    CustRec.RouteNo := rec.RoomNo;
+                    CustRec.Charge := rec.Charge;
+
+                    CustRec.Insert(true);
+
+                    // if CustRec."No." <> ' ' then begin
+                    //     CustRec.get(rec."Enrollment No");
+                    //     CustRec.SetRange("No.", rec."Enrollment No");
+                    //     if CustRec.FindFirst() then begin
+                    //         CustRec.Name := StudentReg."First Name";
+
+                    //     end
+                    // end;
 
                     CurrPage.Update(true);
 
@@ -454,6 +518,7 @@ page 50117 StudentMaster
 
     var
         CustRec: Record Customer;
+        StudentReg: Record StudentRegistration;
         Enroll: Boolean;
         recSalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;

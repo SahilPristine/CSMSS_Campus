@@ -4,14 +4,14 @@ table 50111 StudentFeeStructure
 
     fields
     {
-        field(1; StudentID; Code[20])
+        field(1; StudentEnrollmentNo; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer."No." where("Enrollment No" = filter(<> ''));
+            TableRelation = Customer."No.";
             trigger OnValidate()
             begin
-                if StudentID <> '' then
-                    if recStudent.get(StudentID) then
+                if StudentEnrollmentNo <> '' then
+                    if recStudent.get(StudentEnrollmentNo) then
                         StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                 CourseCode := recStudent."Course Code";
                 Stream := recStudent."Stream Code";
@@ -85,6 +85,10 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
             Caption = 'Amount By Student';
+            trigger OnValidate()
+            begin
+                TotalAmount := Amount + GovtAmount;
+            end;
 
         }
         field(20; GovtCode; code[20])
@@ -95,10 +99,7 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
             Caption = 'Amount By Govt';
-            trigger OnValidate()
-            begin
-                TotalAmount := Amount + GovtAmount;
-            end;
+
         }
         field(12; DebitAcc; code[20])
         {
@@ -124,7 +125,7 @@ table 50111 StudentFeeStructure
 
     keys
     {
-        key(Key1; StudentID, Stream, Semester, ElementCode, GovtCode)
+        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, GovtCode)
         {
             Clustered = true;
         }

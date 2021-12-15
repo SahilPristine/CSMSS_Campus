@@ -27,7 +27,7 @@ report 50100 GenJournalReport
                 recGnJnl.DeleteAll;
 
                 recStFees.Reset();
-                recStFees.SetRange(StudentID, "No.");
+                recStFees.SetRange(StudentEnrollmentNo, "No.");
                 recStFees.SetRange(CourseCode, "Course Code");
                 // recStFees.SetRange(Semester, "Semester Code");
                 recStFees.SetRange(Stream, "Stream Code");
@@ -44,13 +44,33 @@ report 50100 GenJournalReport
                         recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
                         recGnJnl.Validate("Document No.", DocNum);
                         recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
-                        recGnJnl.validate("Account No.", recStFees.StudentID);
+                        recGnJnl.validate("Account No.", recStFees.StudentEnrollmentNo);
                         recGnJnl.validate(ElementCode, recStFees.ElementCode);
                         recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
                         recGnJnl.validate(ElementType);
                         recGnJnl.validate(Amount, recStFees.Amount);
                         recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
                         recGnJnl.Modify(true);
+
+                        if recStFees.GovtCode <> ' ' then begin
+                            LineNo := LineNo + 10000;
+                            recGnJnl.Init();
+                            recGnJnl."Posting Date" := PostingDate;
+                            recGnJnl."Journal Template Name" := template;
+                            recGnJnl."Journal Batch Name" := Batch;
+                            recGnJnl."Line No." := LineNo;
+                            recGnJnl.Insert(true);
+                            recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
+                            recGnJnl.Validate("Document No.", DocNum);
+                            recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
+                            recGnJnl.validate("Account No.", recStFees.GovtCode);
+                            recGnJnl.validate(ElementCode, recStFees.ElementCode);
+                            recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                            recGnJnl.validate(ElementType);
+                            recGnJnl.validate(Amount, recStFees.GovtAmount);
+                            recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
+                            recGnJnl.Modify(true);
+                        end;
 
                     until recStFees.Next = 0;
 

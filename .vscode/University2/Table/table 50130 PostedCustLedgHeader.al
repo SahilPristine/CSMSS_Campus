@@ -55,7 +55,6 @@ table 50130 PostedCustLedg
         {
             DataClassification = ToBeClassified;
 
-
             trigger OnValidate()
             begin
                 if DocumentNo <> xRec.DocumentNo then begin
