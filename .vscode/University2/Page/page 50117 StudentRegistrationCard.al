@@ -281,6 +281,10 @@ page 50117 StudentRegistration
                     ApplicationArea = All;
 
                 }
+                field("Application Method"; rec."Application Method")
+                {
+                    ApplicationArea = All;
+                }
             }
             group(Hostel_Transport)
             {
@@ -483,6 +487,7 @@ page 50117 StudentRegistration
                     CustRec."Branch Name" := rec."Branch Name";
                     CustRec."IFSC Code" := rec."IFSC Code";
                     CustRec."Bank Account No" := rec."Bank Account No";
+                    CustRec."Application Method" := rec."Application Method";
                     CustRec.Hostel := rec.Hostel;
                     CustRec.RoomType := rec.RoomType;
                     CustRec.BedType := rec.BedType;

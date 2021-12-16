@@ -280,6 +280,11 @@ page 50135 StudentMaster
                 {
                     ApplicationArea = All;
 
+
+                }
+                field("Application Method"; rec."Application Method")
+                {
+                    ApplicationArea = All;
                 }
             }
             group(Hostel_Transport)

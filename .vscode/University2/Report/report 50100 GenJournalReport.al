@@ -15,44 +15,39 @@ report 50100 GenJournalReport
 
             trigger OnAfterGetRecord()
             begin
-                recBatch.reset;
-                recBatch.SetRange("Journal Template Name", template);
-                recBatch.SetRange(Name, Batch);
-                recBatch.FindFirst();
-                DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
-                // Message(DocNum);
-                recGnJnl.reset;
-                recGnJnl.SetRange("Journal Template Name", template);
-                recGnJnl.SetRange("Journal Batch Name", Batch);
-                recGnJnl.DeleteAll;
+                recCustLedg.Reset();
+                recCustLedg.SetRange("Customer No.", recStFees.StudentEnrollmentNo);
+                recCustLedg.SetRange(ElementCode, recStFees.ElementCode);
+                // recCustLedg.Setfilter(Amount, '>%1', 0);
+                // recCustLedg.SetRange(Amount, recStFees.Amount);
+                // recCustLedg.SetRange(Amount, recStFees.GovtAmount);
+                if recCustLedg.FindFirst()
+                then begin
+                    // recCustLedg.CalcFields(Amount);
+                    // if recCustLedg.Amount > 0 then
+                    Error('Entry Created')
+                end
+                else begin
 
-                recStFees.Reset();
-                recStFees.SetRange(StudentEnrollmentNo, "No.");
-                recStFees.SetRange(CourseCode, "Course Code");
-                // recStFees.SetRange(Semester, "Semester Code");
-                recStFees.SetRange(Stream, "Stream Code");
-                // recStFees.SetRange(BatchCode, "Batch Code");
-                if recStFees.FindFirst() then begin
-                    repeat
-                        LineNo := LineNo + 10000;
-                        recGnJnl.Init();
-                        recGnJnl."Posting Date" := PostingDate;
-                        recGnJnl."Journal Template Name" := template;
-                        recGnJnl."Journal Batch Name" := Batch;
-                        recGnJnl."Line No." := LineNo;
-                        recGnJnl.Insert(true);
-                        recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
-                        recGnJnl.Validate("Document No.", DocNum);
-                        recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
-                        recGnJnl.validate("Account No.", recStFees.StudentEnrollmentNo);
-                        recGnJnl.validate(ElementCode, recStFees.ElementCode);
-                        recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
-                        recGnJnl.validate(ElementType);
-                        recGnJnl.validate(Amount, recStFees.Amount);
-                        recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
-                        recGnJnl.Modify(true);
+                    recBatch.reset;
+                    recBatch.SetRange("Journal Template Name", template);
+                    recBatch.SetRange(Name, Batch);
+                    recBatch.FindFirst();
+                    DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
+                    // Message(DocNum);
+                    recGnJnl.reset;
+                    recGnJnl.SetRange("Journal Template Name", template);
+                    recGnJnl.SetRange("Journal Batch Name", Batch);
+                    recGnJnl.DeleteAll;
 
-                        if recStFees.GovtCode <> ' ' then begin
+                    recStFees.Reset();
+                    recStFees.SetRange(StudentEnrollmentNo, "No.");
+                    recStFees.SetRange(CourseCode, "Course Code");
+                    // recStFees.SetRange(Semester, "Semester Code");
+                    recStFees.SetRange(Stream, "Stream Code");
+                    // recStFees.SetRange(BatchCode, "Batch Code");
+                    if recStFees.FindFirst() then begin
+                        repeat
                             LineNo := LineNo + 10000;
                             recGnJnl.Init();
                             recGnJnl."Posting Date" := PostingDate;
@@ -63,16 +58,36 @@ report 50100 GenJournalReport
                             recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
                             recGnJnl.Validate("Document No.", DocNum);
                             recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
-                            recGnJnl.validate("Account No.", recStFees.GovtCode);
+                            recGnJnl.validate("Account No.", recStFees.StudentEnrollmentNo);
                             recGnJnl.validate(ElementCode, recStFees.ElementCode);
                             recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
                             recGnJnl.validate(ElementType);
-                            recGnJnl.validate(Amount, recStFees.GovtAmount);
+                            recGnJnl.validate(Amount, recStFees.Amount);
                             recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
                             recGnJnl.Modify(true);
-                        end;
 
-                    until recStFees.Next = 0;
+                            if recStFees.GovtCode <> ' ' then begin
+                                LineNo := LineNo + 10000;
+                                recGnJnl.Init();
+                                recGnJnl."Posting Date" := PostingDate;
+                                recGnJnl."Journal Template Name" := template;
+                                recGnJnl."Journal Batch Name" := Batch;
+                                recGnJnl."Line No." := LineNo;
+                                recGnJnl.Insert(true);
+                                recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
+                                recGnJnl.Validate("Document No.", DocNum);
+                                recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
+                                recGnJnl.validate("Account No.", recStFees.GovtCode);
+                                recGnJnl.validate(ElementCode, recStFees.ElementCode);
+                                recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                                recGnJnl.validate(ElementType);
+                                recGnJnl.validate(Amount, recStFees.GovtAmount);
+                                recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
+                                recGnJnl.Modify(true);
+                            end;
+
+                        until recStFees.Next = 0;
+                    end;
 
                 end;
 
@@ -139,6 +154,7 @@ report 50100 GenJournalReport
         noseriesmgmt: Codeunit NoSeriesManagement;
         DocNum: Code[20];
         CustomerNo: Code[20];
+        recCustLedg: Record "Cust. Ledger Entry";
 
 
 }

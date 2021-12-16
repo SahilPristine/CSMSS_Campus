@@ -1,4 +1,4 @@
-table 50130 PostedCustLedg
+table 50130 StudentFeeReceiptHeader
 {
     DataClassification = ToBeClassified;
 
@@ -18,29 +18,33 @@ table 50130 PostedCustLedg
 
                     end;
 
-                RecCustLedgEntry.Reset();
-                RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
-                if RecCustLedgEntry.FindSet() then begin
-                    repeat
-                        RecPostedLine.Reset();
-                        RecPostedLine.SetRange(DocumentNo, DocumentNo);
-                        If RecPostedLine.FindLast() then
-                            LineNo := RecPostedLine.LineNo + 10000
-                        else
-                            LineNo := 10000;
+                if RecCustLedgEntry.Open = false then begin
 
-                        RecPostedLine.init();
-                        RecPostedLine.LineNo := LineNo;
-                        RecPostedLine.DocumentNo := DocumentNo;
-                        RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
-                        RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
-                        RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
-                        RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
-                        RecCustLedgEntry.CalcFields(Amount);
-                        RecPostedLine.Amount := RecCustLedgEntry.Amount;
-                        RecPostedLine.Insert();
-                    until
-                    RecCustLedgEntry.Next() = 0;
+                    RecCustLedgEntry.Reset();
+                    RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
+                    RecCustLedgEntry.SetRange(Open, true);
+                    if RecCustLedgEntry.FindSet() then begin
+                        repeat
+                            RecPostedLine.Reset();
+                            RecPostedLine.SetRange(DocumentNo, DocumentNo);
+                            If RecPostedLine.FindLast() then
+                                LineNo := RecPostedLine.LineNo + 10000
+                            else
+                                LineNo := 10000;
+
+                            RecPostedLine.init();
+                            RecPostedLine.LineNo := LineNo;
+                            RecPostedLine.DocumentNo := DocumentNo;
+                            RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
+                            RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
+                            RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
+                            RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                            RecCustLedgEntry.CalcFields(Amount);
+                            RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                            RecPostedLine.Insert();
+                        until
+                        RecCustLedgEntry.Next() = 0;
+                    end;
                 end;
 
 
@@ -113,9 +117,9 @@ table 50130 PostedCustLedg
     var
         RecCustomer: Record Customer;
         RecCustLedgEntry: Record "Cust. Ledger Entry";
-        RecPosted: Record PostedCustLedg;
-        RecPostedLine: Record PostedCustLedgLine;
-        RecPostedLine2: record PostedCustLedgLine;
+        RecPosted: Record StudentFeeReceiptHeader;
+        RecPostedLine: Record StudentFeeReceiptLine;
+        RecPostedLine2: record StudentFeeReceiptLine;
         RecSalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         LineNo: Integer;
@@ -130,11 +134,11 @@ table 50130 PostedCustLedg
         end;
     end;
 
-    procedure AssistEdit(OldFeeRecHeader: Record PostedCustLedg) Result: Boolean
+    procedure AssistEdit(OldFeeRecHeader: Record StudentFeeReceiptHeader) Result: Boolean
     var
-        OldFeeRecHeader2: Record PostedCustLedg;
+        OldFeeRecHeader2: Record StudentFeeReceiptHeader;
         IsHandled: Boolean;
-        FeeRecptHeader: Record PostedCustLedg;
+        FeeRecptHeader: Record StudentFeeReceiptHeader;
         SalesSetUp: Record "Sales & Receivables Setup";
     begin
         IsHandled := false;

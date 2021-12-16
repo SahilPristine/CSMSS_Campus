@@ -250,6 +250,10 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
+        field(50056; "Application Method"; Enum "Application Method")
+        {
+            DataClassification = ToBeClassified;
+        }
 
         field(50044; Hostel; Boolean)
         {

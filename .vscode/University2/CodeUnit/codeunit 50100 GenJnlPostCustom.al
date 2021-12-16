@@ -8,6 +8,12 @@ codeunit 50100 GenJnlPostCustom
         CustLedgerEntry.ElementCode := GenJournalLine.ElementCode;
         CustLedgerEntry.ElementDesc := GenJournalLine.ElementDesc;
         CustLedgerEntry.ElementType := GenJournalLine.ElementType;
+
+        // if CustLedgerEntry.Open = true then
+        //     CustLedgerEntry.PaymentReceived := true
+        // else
+        //     CustLedgerEntry.PaymentReceived := false;
+
         // OnAfterInitCustLedgEntry(CustLedgerEntry, GenJournalLine);
 
     end;
@@ -26,4 +32,7 @@ codeunit 50100 GenJnlPostCustom
         GLEntry.ElementDesc := GenJournalLine.ElementDesc;
         GLEntry.ElementType := GenJournalLine.ElementType;
     end;
+
+    var
+        StudentFees: Record StudentFeeReceiptHeader;
 }

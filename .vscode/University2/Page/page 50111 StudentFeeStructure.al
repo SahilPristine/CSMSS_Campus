@@ -69,6 +69,14 @@ page 50111 StudentFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Govt Code';
+                    trigger OnValidate()
+                    begin
+                        If rec.GovtCode <> '' then
+                            Enable := true
+                        else
+                            Enable := false;
+                        CurrPage.Update(true);
+                    end;
                 }
                 field(Amount; rec.Amount)
                 {

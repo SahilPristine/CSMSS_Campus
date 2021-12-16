@@ -94,11 +94,16 @@ table 50111 StudentFeeStructure
         field(20; GovtCode; code[20])
         {
             DataClassification = ToBeClassified;
+
         }
         field(21; GovtAmount; Decimal)
         {
             DataClassification = ToBeClassified;
             Caption = 'Amount By Govt';
+            trigger OnValidate()
+            begin
+                TotalAmount := Amount + GovtAmount;
+            end;
 
         }
         field(12; DebitAcc; code[20])

@@ -1,9 +1,9 @@
-page 50130 PostedEntry
+page 50130 StudentFeeReceiptHeader
 {
     PageType = Document;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = PostedCustLedg;
+    SourceTable = StudentFeeReceiptHeader;
     RefreshOnActivate = true;
     Caption = 'Student Fees Receipt';
 
@@ -49,7 +49,7 @@ page 50130 PostedEntry
 
             }
 
-            part(PostedEntry; PostedEntryLine)
+            part(PostedEntry; StudentFeeReceiptLine)
             {
 
                 ApplicationArea = All;
@@ -167,6 +167,7 @@ page 50130 PostedEntry
                     gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
+
                 end;
 
 
@@ -175,10 +176,10 @@ page 50130 PostedEntry
     }
 
     var
-        RecPosted: Record PostedCustLedg;
+        RecPosted: Record StudentFeeReceiptHeader;
         RecCustomer: Record Customer;
         RecCustLedgEntry: Record "Cust. Ledger Entry";
-        RecPostedLine: record PostedCustLedgLine;
+        RecPostedLine: record StudentFeeReceiptLine;
         RecGenJoun: Record "Gen. Journal Line";
         DefaultOption: Option;
         [InDataSet]

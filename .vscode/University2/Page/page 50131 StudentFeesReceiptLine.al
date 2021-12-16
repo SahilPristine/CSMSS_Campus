@@ -1,9 +1,9 @@
-page 50131 PostedEntryLine
+page 50131 StudentFeeReceiptLine
 {
     PageType = ListPart;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = PostedCustLedgLine;
+    SourceTable = StudentFeeReceiptLine;
     AutoSplitKey = true;
     Caption = 'Student Fees Receipt Line';
 

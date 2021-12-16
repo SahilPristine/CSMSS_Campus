@@ -1,4 +1,4 @@
-table 50131 PostedCustLedgLine
+table 50131 StudentFeeReceiptLine
 {
     DataClassification = ToBeClassified;
 
