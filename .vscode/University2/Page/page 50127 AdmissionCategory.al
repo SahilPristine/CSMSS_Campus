@@ -29,11 +29,7 @@ page 50127 AdmissionCategory
                     ApplicationArea = All;
                     LookupPageId = 50134;
                 }
-                field(College; rec.College)
-                {
-                    ApplicationArea = All;
 
-                }
                 field(Batch; rec.Batch)
                 {
                     ApplicationArea = All;

@@ -35,7 +35,7 @@ page 50130 StudentFeeReceiptHeader
                     begin
                         if RecCustomer.get(rec.CustomerNo) then begin
                             RecCustomer.CalcFields("Balance (LCY)");
-                            rec."Total Remaining Amount" := RecCustomer."Balance (LCY)";
+                            rec."Total Remaining Amount" := RecCustomer."Balance (LCY)" + rec.LateFees;
                             Rec.Modify();
                         end;
                     end;
@@ -58,6 +58,16 @@ page 50130 StudentFeeReceiptHeader
             group("Fees Details")
             {
                 ShowCaption = false;
+
+                field(LateFees; rec.LateFees)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Late Fees';
+                    trigger OnValidate()
+                    begin
+                        rec."Total Remaining Amount" := RecCustomer."Balance (LCY)" + rec.LateFees;
+                    end;
+                }
                 field("Total Remaining Amount"; rec."Total Remaining Amount")
                 {
                     ApplicationArea = All;

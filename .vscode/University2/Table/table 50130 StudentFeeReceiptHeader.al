@@ -104,6 +104,10 @@ table 50130 StudentFeeReceiptHeader
             TableRelation = "Bank Account"."No.";
 
         }
+        field(10; LateFees; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

@@ -20,13 +20,6 @@ table 50127 AdmissionCategory
             DataClassification = ToBeClassified;
             TableRelation = CasteMaster;
         }
-
-        field(2; College; Text[30])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Company.Name;
-
-        }
         field(3; Batch; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -49,7 +42,7 @@ table 50127 AdmissionCategory
 
     keys
     {
-        key(Key1; CategCode, College, Course, Batch, Caste)
+        key(Key1; CategCode, Course, Batch, Caste)
         {
             Clustered = true;
         }

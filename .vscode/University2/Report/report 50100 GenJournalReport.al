@@ -16,16 +16,26 @@ report 50100 GenJournalReport
             trigger OnAfterGetRecord()
             begin
                 recCustLedg.Reset();
-                recCustLedg.SetRange("Customer No.", recStFees.StudentEnrollmentNo);
-                recCustLedg.SetRange(ElementCode, recStFees.ElementCode);
-                // recCustLedg.Setfilter(Amount, '>%1', 0);
-                // recCustLedg.SetRange(Amount, recStFees.Amount);
-                // recCustLedg.SetRange(Amount, recStFees.GovtAmount);
+                recCustLedg.SetAutoCalcFields(Amount); //PBS SAG
+                recCustLedg.SetRange("Customer No.", "No.");
+                if recCustLedg.FindFirst() then
+                    Message('Hello1');
+                recStFees.Reset();
+                recStFees.SetRange(StudentEnrollmentNo, recCustLedg."Customer No.");
+                recStFees.SetRange(ElementCode, recCustLedg.ElementCode);
+                recStFees.SetRange(DebitCreated, true);
+                if recStFees.FindFirst() then
+                    Message('Hello2');
+                // recCustLedg.SetRange(ElementCode, recStFees.ElementCode);
+                // recStFees.SetRange(StudentEnrollmentNo, "No.");
+                // if recStFees.FindFirst() then
+                // recCustLedg.SetRange(ElementCode, recStFees.ElementCode);
+                // Message('Hello');
+                recCustLedg.Setfilter(Amount, '>%1', 0);  //PBS SAG
+                Message('hello3');
                 if recCustLedg.FindFirst()
                 then begin
-                    // recCustLedg.CalcFields(Amount);
-                    // if recCustLedg.Amount > 0 then
-                    Error('Entry Created')
+                    Error('Entry Already Created')
                 end
                 else begin
 

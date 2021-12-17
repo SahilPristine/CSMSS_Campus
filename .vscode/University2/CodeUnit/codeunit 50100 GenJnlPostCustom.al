@@ -8,6 +8,10 @@ codeunit 50100 GenJnlPostCustom
         CustLedgerEntry.ElementCode := GenJournalLine.ElementCode;
         CustLedgerEntry.ElementDesc := GenJournalLine.ElementDesc;
         CustLedgerEntry.ElementType := GenJournalLine.ElementType;
+        CustLedgerEntry.AcademicYear := GenJournalLine.AcademicYear;
+        CustLedgerEntry."Course Code" := GenJournalLine."Course Code";
+        CustLedgerEntry."Semester Code" := GenJournalLine."Semester Code";
+        CustLedgerEntry."Stream Code" := GenJournalLine.Class;
 
         // if CustLedgerEntry.Open = true then
         //     CustLedgerEntry.PaymentReceived := true
@@ -31,6 +35,10 @@ codeunit 50100 GenJnlPostCustom
         GLEntry.ElementCode := GenJournalLine.ElementCode;
         GLEntry.ElementDesc := GenJournalLine.ElementDesc;
         GLEntry.ElementType := GenJournalLine.ElementType;
+        GLEntry.AcademicYear := GenJournalLine.AcademicYear;
+        GLEntry."Course Code" := GenJournalLine."Course Code";
+        GLEntry."Semester Code" := GenJournalLine."Semester Code";
+        GLEntry."Stream Code" := GenJournalLine.Class;
     end;
 
     var
