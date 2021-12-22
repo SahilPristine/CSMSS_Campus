@@ -25,10 +25,6 @@ report 50101 CustLedgMatrixReport
             {
 
             }
-            column(ElementType; ElementType)
-            {
-
-            }
             column(Remaining_Amount; "Remaining Amount")
             {
 

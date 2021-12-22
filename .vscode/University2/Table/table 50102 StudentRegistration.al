@@ -19,10 +19,13 @@ table 50102 StudentRegistration
         field(50001; "First Name"; Text[30])
         {
             DataClassification = ToBeClassified;
+            NotBlank = true;
+
         }
         field(50002; "Last Name"; Text[30])
         {
             DataClassification = ToBeClassified;
+            NotBlank = true;
         }
         field(50003; DOB; Date)
         {
@@ -43,21 +46,23 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             TableRelation = AdmissionCategory.CategCode;
             Description = 'SL-V.01';
+            NotBlank = true;
         }
         field(50007; Cast; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = CasteMaster;
+            NotBlank = true;
         }
         field(50008; Religion; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Hindu","Muslim","Sikh","Christian";
+            OptionMembers = "","Hindu","Muslim","Sikh","Christian";
         }
         field(50009; Nationality; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Indian";
+            OptionMembers = "","Indian";
         }
         field(50010; "Aadhar No"; Code[20])
         {
@@ -66,7 +71,7 @@ table 50102 StudentRegistration
         field(50011; "Admission Quota"; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Regular","Institutional";
+            OptionMembers = "","Regular","Institutional";
         }
         field(50012; "Qualifying Exam Details"; Text[50])
         {
@@ -123,18 +128,21 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             TableRelation = BatchMasterTable;
             Description = 'SL-V.01';
+            NotBlank = true;
         }
         field(50024; AcademicYear; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = AcademicYearMasterTable.CODE;
             Description = 'SL-V.01';
+            NotBlank = true;
         }
         field(50025; "Course Code"; Code[10])
         {
             DataClassification = ToBeClassified;
             TableRelation = CourseMasterTable;
             Description = 'SL-V.01';
+            NotBlank = true;
         }
 
         field(50026; "Semester Code"; Code[10])
@@ -143,18 +151,21 @@ table 50102 StudentRegistration
             TableRelation = SemesterMasterTable.SemesterCode;
             Description = 'SL-V.01';
             ValidateTableRelation = true;
+            NotBlank = true;
         }
         field(50027; "Stream Code"; Text[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = StreamMasterTable.StreamCode where(CourseCode = field("Course Code"));
             Description = 'SL-V.01';
+            NotBlank = true;
         }
         field(50028; Class; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = ClassMaster;
             Description = 'SL-V.01';
+            NotBlank = true;
         }
         field(50029; "Enrollment No"; Code[20])
         {
@@ -323,6 +334,8 @@ table 50102 StudentRegistration
             SalesSetup.TestField(RegistrationNo);
             NoSeriesMgt.InitSeries(SalesSetup.RegistrationNo, xRec."No. Series", 0D, "Registration No", "No. Series");
         end;
+
+
     end;
 
     trigger OnModify()

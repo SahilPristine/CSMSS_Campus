@@ -10,7 +10,8 @@ tableextension 50126 CusstLedgEntry extends 21
         {
             DataClassification = ToBeClassified;
         }
-        field(50002; ElementType; Text[30])
+
+        field(50009; StudentCode; Code[20])
         {
             DataClassification = ToBeClassified;
         }
@@ -49,6 +50,12 @@ tableextension 50126 CusstLedgEntry extends 21
         field(50008; PaymentReceived; Boolean)
         {
             DataClassification = ToBeClassified;
+        }
+        field(50010; Batch; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable.CODE;
+            Description = 'SL-V.01';
         }
 
         // Add changes to table fields here

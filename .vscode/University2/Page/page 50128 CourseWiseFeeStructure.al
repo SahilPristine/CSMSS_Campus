@@ -13,6 +13,16 @@ page 50128 CourseWiseFeeStructure
             repeater(FeeStructure)
             {
                 Caption = 'Fees Structure';
+
+                field(BatchCode; rec.BatchCode)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Batch Code';
+                }
+                field(AcademicYear; rec.AcademicYear)
+                {
+                    ApplicationArea = All;
+                }
                 field(CourseCode; rec.CourseCode)
                 {
                     ApplicationArea = All;
@@ -40,6 +50,7 @@ page 50128 CourseWiseFeeStructure
                 field(Description; rec.Description)
                 {
                     ApplicationArea = All;
+                    Caption = 'Element Desc';
                 }
 
                 field(Period; rec.Period)
@@ -47,11 +58,7 @@ page 50128 CourseWiseFeeStructure
                     ApplicationArea = All;
 
                 }
-                field(BatchCode; rec.BatchCode)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Batch Code';
-                }
+
                 field(CategoryCode; rec.CategoryCode)
                 {
                     ApplicationArea = All;
@@ -64,6 +71,36 @@ page 50128 CourseWiseFeeStructure
                 field("Govt Code"; rec."Govt Code")
                 {
                     ApplicationArea = All;
+                    Caption = 'Govt Code';
+                    trigger OnValidate()
+                    begin
+                        If rec."Govt Code" <> '' then
+                            Enable := true
+                        else
+                            Enable := false;
+                        CurrPage.Update(true);
+                    end;
+                }
+                field(AmountByStudent; rec.AmountByStudent)
+                {
+                    ApplicationArea = All;
+                }
+                field(AmountByGovt; rec.AmountByGovt)
+                {
+                    ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+                        If rec."Govt Code" <> '' then
+                            Enable := true
+                        else
+                            Enable := false;
+                        CurrPage.Update(true);
+                    end;
+                }
+                field(TotalAmount; rec.TotalAmount)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Total Amount';
                 }
                 field(DebitAcc; rec.DebitAcc)
                 {
@@ -105,4 +142,23 @@ page 50128 CourseWiseFeeStructure
             }
         }
     }
+    var
+        Enable: Boolean;
+
+    trigger OnAfterGetRecord()
+    begin
+        If rec."Govt Code" <> '' then
+            Enable := true
+        else
+            Enable := false;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        If rec."Govt Code" <> '' then
+            Enable := true
+        else
+            Enable := false;
+
+    end;
 }

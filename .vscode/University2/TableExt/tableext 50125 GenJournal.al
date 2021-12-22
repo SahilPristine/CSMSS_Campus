@@ -9,14 +9,13 @@ tableextension 50125 GenJournal extends 81
         field(50000; ElementCode; Code[20])
         {
             DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
         }
-        field(50001; ElementType; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
+
         field(50002; ElementDesc; Text[50])
         {
             DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
         }
         field(50003; AcademicYear; code[20])
         {
@@ -50,10 +49,22 @@ tableextension 50125 GenJournal extends 81
             TableRelation = ClassMaster;
             Description = 'SL-V.01';
         }
-
+        field(50008; Batch; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable.CODE;
+            Description = 'SL-V.01';
+        }
 
     }
 
+    keys
+    {
+        key(key10; "Document Type", "Document No.", "Account No.")
+        {
+
+        }
+    }
 
     var
         myInt: Integer;

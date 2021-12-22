@@ -63,7 +63,6 @@ page 50111 StudentFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Element Code';
-
                 }
                 field(GovtCode; rec.GovtCode)
                 {
@@ -78,7 +77,7 @@ page 50111 StudentFeeStructure
                         CurrPage.Update(true);
                     end;
                 }
-                field(Amount; rec.Amount)
+                field(Amount; rec.AmountByStudent)
                 {
                     ApplicationArea = All;
                 }
@@ -87,6 +86,15 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
                     Caption = 'Govt Amount';
                     Enabled = Enable;
+                    trigger OnValidate()
+                    begin
+                        If rec.GovtCode <> '' then
+                            Enable := true
+                        else
+                            Enable := false;
+                        CurrPage.Update(true);
+                    end;
+
 
                 }
                 field(TotalAmount; rec.TotalAmount)
@@ -110,6 +118,11 @@ page 50111 StudentFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Debit Created';
+                }
+                field(PostedEntryNo; rec.PostedEntryNo)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Posted Entry No.';
                 }
 
 
@@ -136,6 +149,8 @@ page 50111 StudentFeeStructure
     var
         [InDataSet]
         Enable: boolean;
+        custledgentry: Record "Cust. Ledger Entry";
+        stfees: Record StudentFeeStructure;
 
     trigger OnAfterGetRecord()
     begin
@@ -152,5 +167,27 @@ page 50111 StudentFeeStructure
         else
             Enable := false;
 
+    end;
+
+    trigger OnOpenPage()
+    begin
+        // CopyEntryNo(custledgentry, stfees)
+    end;
+
+    local procedure CopyEntryNo(var CustLedgerEntry: Record "Cust. Ledger Entry"; recStFees: Record StudentFeeStructure)
+    begin
+        CustLedgerEntry.Reset();
+        CustLedgerEntry.SetRange("Customer No.", recStFees.StudentEnrollmentNo);
+        CustLedgerEntry.SetRange(ElementCode, recStFees.ElementCode);
+        CustLedgerEntry.SetRange(AcademicYear, recStFees.AcademicYear);
+        CustLedgerEntry.SetRange("Course Code", recStFees.CourseCode);
+        CustLedgerEntry.SetRange("Semester Code", recStFees.Semester);
+        CustLedgerEntry.SetRange("Stream Code", recStFees.Stream);
+        CustLedgerEntry.SetRange(Class, recStFees.Class);
+        if CustLedgerEntry.FindFirst() then begin
+            repeat
+                recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
+            until CustLedgerEntry.Next() = 0;
+        end;
     end;
 }

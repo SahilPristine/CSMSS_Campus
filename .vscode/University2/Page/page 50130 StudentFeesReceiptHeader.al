@@ -177,7 +177,6 @@ page 50130 StudentFeeReceiptHeader
                     gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
-
                 end;
 
 

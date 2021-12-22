@@ -17,6 +17,8 @@ table 50111 StudentFeeStructure
                 Stream := recStudent."Stream Code";
                 Semester := recStudent."Semester Code";
                 BatchCode := recStudent."Batch Code";
+                AcademicYear := recStudent.AcademicYear;
+                Class := recStudent.Class;
                 CategoryCode := recStudent.Category;
                 CasteCode := recStudent.Cast;
             end;
@@ -46,6 +48,14 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
+        field(22; AcademicYear; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(23; Class; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
         field(18; CategoryCode; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -71,6 +81,8 @@ table 50111 StudentFeeStructure
                 if recFees.FindFirst() then begin
                     ElementDesc := recFees.Description;
                     GovtCode := recFees."Govt Code";
+                    AmountByStudent := recFees.AmountByStudent;
+                    GovtAmount := recFees.AmountByGovt;
                     DebitAcc := recFees.DebitAcc;
                     CreditAcc := recFees.CreditAcc;
                 end;
@@ -81,13 +93,13 @@ table 50111 StudentFeeStructure
             DataClassification = ToBeClassified;
 
         }
-        field(10; Amount; Decimal)
+        field(10; AmountByStudent; Decimal)
         {
             DataClassification = ToBeClassified;
             Caption = 'Amount By Student';
             trigger OnValidate()
             begin
-                TotalAmount := Amount + GovtAmount;
+                TotalAmount := AmountByStudent + GovtAmount;
             end;
 
         }
@@ -102,7 +114,7 @@ table 50111 StudentFeeStructure
             Caption = 'Amount By Govt';
             trigger OnValidate()
             begin
-                TotalAmount := Amount + GovtAmount;
+                TotalAmount := AmountByStudent + GovtAmount;
             end;
 
         }
@@ -121,6 +133,10 @@ table 50111 StudentFeeStructure
             DataClassification = ToBeClassified;
         }
         field(16; TotalAmount; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(24; PostedEntryNo; Integer)
         {
             DataClassification = ToBeClassified;
         }

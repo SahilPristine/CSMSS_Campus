@@ -14,11 +14,6 @@ pageextension 50128 GLEntry extends 20
                 ApplicationArea = All;
                 Caption = 'Element Desc';
             }
-            field(ElementType; rec.ElementType)
-            {
-                ApplicationArea = All;
-                Caption = 'Element Type';
-            }
             field(AcademicYear; rec.AcademicYear)
             {
                 ApplicationArea = All;

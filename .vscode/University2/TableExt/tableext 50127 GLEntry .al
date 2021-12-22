@@ -10,10 +10,7 @@ tableextension 50127 GLEntry extends 17
         {
             DataClassification = ToBeClassified;
         }
-        field(50002; ElementType; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
+
         field(50003; AcademicYear; code[20])
         {
             DataClassification = ToBeClassified;
@@ -44,6 +41,12 @@ tableextension 50127 GLEntry extends 17
         {
             DataClassification = ToBeClassified;
             TableRelation = ClassMaster;
+            Description = 'SL-V.01';
+        }
+        field(50008; Btach; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable.CODE;
             Description = 'SL-V.01';
         }
         // Add changes to table fields here

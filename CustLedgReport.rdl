@@ -444,6 +444,7 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.97792in</Top>
             <Left>0.19666in</Left>
@@ -593,9 +594,6 @@ End Function
         </Field>
         <Field Name="ElementDesc">
           <DataField>ElementDesc</DataField>
-        </Field>
-        <Field Name="ElementType">
-          <DataField>ElementType</DataField>
         </Field>
         <Field Name="Remaining_Amount">
           <DataField>Remaining_Amount</DataField>

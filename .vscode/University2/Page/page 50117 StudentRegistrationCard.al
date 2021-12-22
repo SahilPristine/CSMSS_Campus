@@ -364,28 +364,7 @@ page 50117 StudentRegistration
         }
         area(FactBoxes)
         {
-            //     part(Picture; "Customer Picture")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         SubPageLink = "No." = FIELD("No.");
-            //         Caption = 'Student Image';
-            //     }
-            //     part(StudentStatisticsFactBox; "Customer Statistics FactBox")
-            //     {
-            //         ApplicationArea = Basic, Suite;
-            //         Caption = 'Student Statistics';
-            //         SubPageLink = "No." = FIELD("No."),
-            //           "Currency Filter" = FIELD("Currency Filter"),
-            //           "Date Filter" = FIELD("Date Filter"),
-            //           "Global Dimension 1 Filter" = FIELD("Global Dimension 1 Filter"),
-            //           "Global Dimension 2 Filter" = FIELD("Global Dimension 2 Filter");
-            //     }
-            //     part("Attached Documents"; "Document Attachment Factbox")
-            //     {
-            //         ApplicationArea = All;
-            //         Caption = 'Attachments';
-            //         SubPageLink = "Table ID" = CONST(18),
-            //                       "No." = FIELD("No.");
+
         }
 
 
@@ -395,22 +374,6 @@ page 50117 StudentRegistration
     {
         area(Processing)
         {
-            // action(FeesStructure)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Fees Structure';
-            //     RunObject = page 50111;
-            //     RunPageLink = StudentEnrollmentNo = field("Enrollment No");
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     Image = CheckList;
-
-            //     trigger OnAction()
-            //     begin
-
-
-            //     end;
-            // }
             action(ConfirmEnroll)
             {
                 ApplicationArea = All;
@@ -425,7 +388,9 @@ page 50117 StudentRegistration
                     Text000: Label 'Do you want to confirm enrollment?';
 
                 begin
-
+                    rec.TestField("Batch Code");
+                    rec.TestField(Class);
+                    rec.TestField("Course Code");
                     // rec.TestField("Enrollment No", '');
 
                     if rec."Enrollment No" <> ''
@@ -498,22 +463,11 @@ page 50117 StudentRegistration
                     CustRec.Charge := rec.Charge;
 
                     CustRec.Insert(true);
-
-                    // if CustRec."No." <> ' ' then begin
-                    //     CustRec.get(rec."Enrollment No");
-                    //     CustRec.SetRange("No.", rec."Enrollment No");
-                    //     if CustRec.FindFirst() then begin
-                    //         CustRec.Name := StudentReg."First Name";
-
-                    //     end
-                    // end;
-
                     CurrPage.Update(true);
 
-                    // recSalesSetup.Get();
-                    // CustRec."Enrollment No" := recSalesSetup.EnrollmentNo;
-                    // Message('%1', CustRec."Enrollment No");
-                    // CurrPage.Update();
+                    CreateFeesStructure(recStFees, recFees, recStudent);
+                    Message('Fees Structure Created');
+
                 end;
 
 
@@ -533,6 +487,9 @@ page 50117 StudentRegistration
         editTransport: Boolean;
         [InDataSet]
         confirm: Boolean;
+        recStFees: Record StudentFeeStructure;
+        recFees: Record CourseWiseFeeStructure;
+        recStudent: record Customer;
 
 
     trigger OnAfterGetRecord()
@@ -570,6 +527,46 @@ page 50117 StudentRegistration
             confirm := false
         else
             confirm := true;
+    end;
+
+    local procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
+    begin
+        recStudent.Reset();
+        recStudent.SetRange("No.", rec."Enrollment No");
+        if recStudent.FindFirst() then begin
+            recFees.Reset();
+            recFees.Setrange(BatchCode, recStudent."Batch Code");
+            recFees.SetRange(AcademicYear, recStudent.AcademicYear);
+            recFees.SetRange(CourseCode, recStudent."Course Code");
+            recFees.SetRange(StreamCode, recStudent."Stream Code");
+            recFees.SetRange(SemesterCode, recStudent."Semester Code");
+            recFees.SetRange(CategoryCode, recStudent.Category);
+            recFees.SetRange("Caste Code", recStudent.Cast);
+            if recFees.FindFirst() then begin
+                repeat
+                    recStFees.Init();
+                    recStFees.StudentEnrollmentNo := recStudent."No.";
+                    recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
+                    recStFees.CourseCode := recStudent."Course Code";
+                    recStFees.Stream := recStudent."Stream Code";
+                    recStFees.Semester := recStudent."Semester Code";
+                    recStFees.BatchCode := recStudent."Batch Code";
+                    recStFees.CategoryCode := recStudent.Category;
+                    recStFees.CasteCode := recStudent.Cast;
+                    recStFees.ElementCode := recFees.ElementCode;
+                    recStFees.GovtCode := recFees."Govt Code";
+                    recStFees.AmountByStudent := recFees.AmountByStudent;
+                    recStFees.GovtAmount := recFees.AmountByGovt;
+                    recStFees.TotalAmount := recFees.TotalAmount;
+                    recStFees.DebitAcc := recFees.DebitAcc;
+                    recStFees.CreditAcc := recFees.CreditAcc;
+                    recStFees.Insert(true);
+                until
+                recFees.Next() = 0;
+            end;
+        end;
+
+
     end;
 
 }

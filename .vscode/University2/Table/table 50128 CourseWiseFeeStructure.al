@@ -4,25 +4,35 @@ table 50128 CourseWiseFeeStructure
 
     fields
     {
-        field(1; CourseCode; code[20])
+        field(1; BatchCode; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = BatchMasterTable.CODE;
+        }
+        field(2; AcademicYear; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = AcademicYearMasterTable.CODE;
+        }
+        field(3; CourseCode; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = CourseMasterTable.CODE;
 
         }
-        field(2; StreamCode; code[20])
+        field(4; StreamCode; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = StreamMasterTable.StreamCode;
 
         }
-        field(3; SemesterCode; code[20])
+        field(5; SemesterCode; code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = SemesterMasterTable.StreamCode;
+            TableRelation = SemesterMasterTable.SemesterCode;
 
         }
-        field(4; ElementCode; code[20])
+        field(6; ElementCode; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = FeeStructureElements.ElementCode;
@@ -35,32 +45,28 @@ table 50128 CourseWiseFeeStructure
             end;
 
         }
-        field(6; Period; Option)
+        field(7; Description; text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(8; Period; Option)
         {
             DataClassification = ToBeClassified;
             OptionMembers = Monthly,Quarterly,Yearly;
 
         }
-        field(7; DebitAcc; code[20])
+        field(9; DebitAcc; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "G/L Account";
 
         }
-        field(8; CreditAcc; code[20])
+        field(10; CreditAcc; code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "G/L Account";
         }
-        field(9; Description; text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(10; BatchCode; text[50])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = BatchMasterTable;
-        }
+
         field(11; CategoryCode; text[50])
         {
             DataClassification = ToBeClassified;
@@ -87,8 +93,26 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             TableRelation = Customer;
             Editable = false;
+            trigger OnValidate()
+            begin
+
+            end;
         }
-        field(14; DueDate; Date)
+        field(14; AmountByStudent; Decimal)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(15; AmountByGovt; Decimal)
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(16; TotalAmount; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(17; DueDate; Date)
         {
             DataClassification = ToBeClassified;
 

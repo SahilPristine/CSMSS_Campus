@@ -15,11 +15,6 @@ pageextension 50127 CustLedgEntry extends 25
                 ApplicationArea = All;
                 Caption = 'Element Desc';
             }
-            field(ElementType; rec.ElementType)
-            {
-                ApplicationArea = All;
-                Caption = 'Element Type';
-            }
             field(AcademicYear; rec.AcademicYear)
             {
                 ApplicationArea = All;
