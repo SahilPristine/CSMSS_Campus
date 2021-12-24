@@ -78,6 +78,7 @@ report 50100 GenJournalReport
                             recGnJnl.validate("Account No.", recStFees.GovtCode);
                             recGnJnl.validate(ElementCode, recStFees.ElementCode);
                             recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                            recGnJnl.Validate(StudentNo, recStFees.StudentEnrollmentNo);
                             recGnJnl.Validate(Batch, recStFees.BatchCode);
                             recGnJnl.Validate(AcademicYear, recStFees.AcademicYear);
                             recGnJnl.Validate(Class, recStFees.Class);
@@ -165,6 +166,5 @@ report 50100 GenJournalReport
         recStFees2: Record StudentFeeStructure;
         pendingLinestoberun: Integer;
         runlines: Integer;
-
 
 }

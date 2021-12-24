@@ -55,6 +55,11 @@ tableextension 50125 GenJournal extends 81
             TableRelation = BatchMasterTable.CODE;
             Description = 'SL-V.01';
         }
+        field(50009; StudentNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
+        }
 
     }
 

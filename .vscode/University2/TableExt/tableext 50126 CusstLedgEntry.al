@@ -57,6 +57,10 @@ tableextension 50126 CusstLedgEntry extends 21
             TableRelation = BatchMasterTable.CODE;
             Description = 'SL-V.01';
         }
+        // field(50011; StudentNo; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
 
         // Add changes to table fields here
     }

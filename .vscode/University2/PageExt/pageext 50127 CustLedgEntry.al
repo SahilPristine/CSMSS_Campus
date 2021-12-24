@@ -35,6 +35,10 @@ pageextension 50127 CustLedgEntry extends 25
             {
                 ApplicationArea = All;
             }
+            field(StudentCode; rec.StudentCode)
+            {
+                ApplicationArea = All;
+            }
 
         }
         addlast(Control1)
@@ -44,6 +48,10 @@ pageextension 50127 CustLedgEntry extends 25
                 ApplicationArea = All;
                 Caption = 'Payment Received';
             }
+        }
+        modify(Reversed)
+        {
+            Visible = true;
         }
         // Add changes to page layout here
     }

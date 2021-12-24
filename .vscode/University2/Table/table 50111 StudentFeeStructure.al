@@ -140,6 +140,14 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
+        field(25; GovtEntryNo; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(26; EntryReversed; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
     }

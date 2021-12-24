@@ -13,44 +13,37 @@ codeunit 50100 GenJnlPostCustom
         CustLedgerEntry."Course Code" := GenJournalLine."Course Code";
         CustLedgerEntry."Semester Code" := GenJournalLine."Semester Code";
         CustLedgerEntry."Stream Code" := GenJournalLine."Stream Code";
+        CustLedgerEntry.StudentCode := GenJournalLine.StudentNo;
 
-        // recStFees.Reset();
-        // recStFees.SetRange(StudentEnrollmentNo, CustLedgerEntry."Customer No.");
-        // recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
-        // recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
-        // recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
-        // recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
-        // recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
-        // recStFees.SetRange(Class, CustLedgerEntry.Class);
-        // if recStFees.FindSet() then begin
-        //     repeat
-        //         // recStFees.Init();
-        //         recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
-        //         recStFees.Insert(true);
-        //     until CustLedgerEntry.Next() = 0;
-        // end;
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, CustLedgerEntry."Customer No.");
+        // recStFees.SetRange(GovtCode, CustLedgerEntry."Customer No.");
+        recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
+        recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
+        recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
+        recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
+        recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
+        recStFees.SetRange(Class, CustLedgerEntry.Class);
+        if recStFees.FindFirst() then begin
+            recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
+            recStFees.Modify();
+        end;
+
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, CustLedgerEntry.StudentCode);
+        recStFees.SetRange(GovtCode, CustLedgerEntry."Customer No.");
+        recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
+        recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
+        recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
+        recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
+        recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
+        recStFees.SetRange(Class, CustLedgerEntry.Class);
+        if recStFees.FindFirst() then begin
+            recStFees.GovtEntryNo := CustLedgerEntry."Entry No.";
+            recStFees.Modify();
+        end;
 
     end;
-
-    // [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterInitCustLedgEntry', '', true, true)]
-    // local procedure InsertEntryNoToStudentFeesStructure(CustLedgerEntry: Record "Cust. Ledger Entry"; recStFees: Record StudentFeeStructure; recGJL: Record "Gen. Journal Line")
-    // begin
-    // recStFees.Reset();
-    // recStFees.SetRange(StudentEnrollmentNo, CustLedgerEntry."Customer No.");
-    // recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
-    // recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
-    // recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
-    // recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
-    // recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
-    // recStFees.SetRange(Class, CustLedgerEntry.Class);
-    // if recStFees.FindFirst() then begin
-    //     repeat
-    //         // recStFees.Init();
-    //         recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
-    //         recStFees.Insert(true);
-    //     until CustLedgerEntry.Next() = 0;
-    // end;
-    // end;
 
 
 
@@ -67,35 +60,6 @@ codeunit 50100 GenJnlPostCustom
         GLEntry."Semester Code" := GenJournalLine."Semester Code";
         GLEntry."Stream Code" := GenJournalLine."Stream Code";
     end;
-
-
-    // [EventSubscriber(ObjectType::Table, 21, 'OnAfterCopyCustLedgerEntryFromGenJnlLine', '', true, true)]
-    // local procedure OnAfterCopyCustLedgerEntryFromGenJnlLine(var CustLedgerEntry: Record "Cust. Ledger Entry"; GenJournalLine: Record "Gen. Journal Line")
-    // begin
-    //     CustLedgerEntry.Reset();
-    //     CustLedgerEntry.SetRange("Customer No.", recStFees.StudentEnrollmentNo);
-    //     CustLedgerEntry.SetRange(ElementCode, recStFees.ElementCode);
-    //     CustLedgerEntry.SetRange(AcademicYear, recStFees.AcademicYear);
-    //     CustLedgerEntry.SetRange("Course Code", recStFees.CourseCode);
-    //     CustLedgerEntry.SetRange("Semester Code", recStFees.Semester);
-    //     CustLedgerEntry.SetRange("Stream Code", recStFees.Stream);
-    //     CustLedgerEntry.SetRange(Class, recStFees.Class);
-    //     if CustLedgerEntry.FindFirst() then begin
-    //         Message('Hello2');
-    //         repeat
-    //             recStFees.Init();
-    //             recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
-    //             recStFees.Insert(true);
-    //         until CustLedgerEntry.Next() = 0;
-    //         Message('Hello3');
-    //     end;
-    // end;
-
-    // [EventSubscriber(ObjectType::Table, 21,'OnAfterCopyCustLedgerEntryFromGenJnlLine', '', true, true)]
-    // local procedure OnAfterCopyCustLedgerEntryFromGenJnlLine(var CustLedgerEntry: Record "Cust. Ledger Entry"; GenJournalLine: Record "Gen. Journal Line")
-    // begin
-
-    // end;
 
     var
         StudentFees: Record StudentFeeReceiptHeader;

@@ -385,6 +385,19 @@ page 50135 StudentMaster
                     // CreateFeesStructure(recStFees, recFees, recStudent);
                 end;
             }
+
+            action(ChangeCateg)
+            {
+                ApplicationArea = All;
+                Caption = 'Change Category';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Change;
+                trigger OnAction()
+                begin
+                    OnBeforeChangeCategory(recStFees, recStudent)
+                end;
+            }
         }
     }
 
@@ -393,51 +406,33 @@ page 50135 StudentMaster
         recStFees: Record StudentFeeStructure;
         recFees: Record CourseWiseFeeStructure;
         recStudent: Record Customer;
+        recCLE: Record "Cust. Ledger Entry";
 
-    trigger OnOpenPage()
+    local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
+    var
+        Answer: Boolean;
     begin
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        // recStFees.SetRange(AcademicYear, rec.AcademicYear);
+        // recStFees.SetRange(CourseCode, rec."Course Code");
+        // recStFees.SetRange(Semester, rec."Semester Code");
+        // recStFees.SetRange(Stream, rec."Stream Code");
+        // recStFees.SetRange(CategoryCode, rec.Category);
+        // recStFees.SetRange(BatchCode, rec."Batch Code");
+        // recStFees.SetRange(CasteCode, rec.Cast);
+        // recStFees.SetRange(Class, rec.Class);
+        // recStFees.SetRange(DebitCreated, true);
+        // if recStFees.FindFirst() then
+        recStFees.SetRange(DebitCreated, true);
+        if recStFees.FindFirst() then begin
+            Message('Sorry!!! Category can not be changed. Please reverse all the open transactions for %1', rec."No.");
+            repeat
+                Message('Reverse Transactions %1 and %2', recStFees.PostedEntryNo, recStFees.GovtEntryNo);
+            until recStFees.Next() = 0
+        end
+        // else
 
     end;
-
-    // local procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
-    // begin
-    //     recStudent.Reset();
-    //     recStudent.SetRange("No.", rec."No.");
-    //     if recStudent.FindFirst() then begin
-    //         recFees.Reset();
-    //         recFees.Setrange(BatchCode, recStudent."Batch Code");
-    //         recFees.SetRange(AcademicYear, recStudent.AcademicYear);
-    //         recFees.SetRange(CourseCode, recStudent."Course Code");
-    //         recFees.SetRange(StreamCode, recStudent."Stream Code");
-    //         recFees.SetRange(SemesterCode, recStudent."Semester Code");
-    //         recFees.SetRange(CategoryCode, recStudent.Category);
-    //         recFees.SetRange("Caste Code", recStudent.Cast);
-    //         if recFees.FindFirst() then begin
-    //             repeat
-    //                 recStFees.Init();
-    //                 recStFees.StudentEnrollmentNo := recStudent."No.";
-    //                 recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
-    //                 recStFees.CourseCode := recStudent."Course Code";
-    //                 recStFees.Stream := recStudent."Stream Code";
-    //                 recStFees.Semester := recStudent."Semester Code";
-    //                 recStFees.BatchCode := recStudent."Batch Code";
-    //                 recStFees.CategoryCode := recStudent.Category;
-    //                 recStFees.CasteCode := recStudent.Cast;
-    //                 recStFees.ElementCode := recFees.ElementCode;
-    //                 recStFees.GovtCode := recFees."Govt Code";
-    //                 recStFees.AmountByStudent := recFees.AmountByStudent;
-    //                 recStFees.GovtAmount := recFees.AmountByGovt;
-    //                 recStFees.TotalAmount := recFees.TotalAmount;
-    //                 recStFees.DebitAcc := recFees.DebitAcc;
-    //                 recStFees.CreditAcc := recFees.CreditAcc;
-    //                 recStFees.Insert(true);
-    //             until
-    //             recFees.Next() = 0;
-    //         end;
-    //     end;
-
-
-    // end;
-
 
 }

@@ -123,6 +123,17 @@ page 50111 StudentFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Posted Entry No.';
+
+                }
+                field(GovtEntryNo; rec.GovtEntryNo)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Govt Entry No.';
+                }
+                field(EntryReversed; rec.EntryReversed)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Entries Reversed';
                 }
 
 
@@ -169,25 +180,5 @@ page 50111 StudentFeeStructure
 
     end;
 
-    trigger OnOpenPage()
-    begin
-        // CopyEntryNo(custledgentry, stfees)
-    end;
 
-    local procedure CopyEntryNo(var CustLedgerEntry: Record "Cust. Ledger Entry"; recStFees: Record StudentFeeStructure)
-    begin
-        CustLedgerEntry.Reset();
-        CustLedgerEntry.SetRange("Customer No.", recStFees.StudentEnrollmentNo);
-        CustLedgerEntry.SetRange(ElementCode, recStFees.ElementCode);
-        CustLedgerEntry.SetRange(AcademicYear, recStFees.AcademicYear);
-        CustLedgerEntry.SetRange("Course Code", recStFees.CourseCode);
-        CustLedgerEntry.SetRange("Semester Code", recStFees.Semester);
-        CustLedgerEntry.SetRange("Stream Code", recStFees.Stream);
-        CustLedgerEntry.SetRange(Class, recStFees.Class);
-        if CustLedgerEntry.FindFirst() then begin
-            repeat
-                recStFees.PostedEntryNo := CustLedgerEntry."Entry No.";
-            until CustLedgerEntry.Next() = 0;
-        end;
-    end;
 }
