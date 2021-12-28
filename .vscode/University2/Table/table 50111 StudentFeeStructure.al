@@ -144,11 +144,18 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
-        field(26; EntryReversed; Boolean)
+        field(26; StudentEntryReversed; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-
+        field(27; GovtEntryReversed; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(28; Blocked; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 

@@ -389,14 +389,19 @@ page 50135 StudentMaster
             action(ChangeCateg)
             {
                 ApplicationArea = All;
-                Caption = 'Change Category';
+                Caption = 'Change Category/Cast';
                 Promoted = true;
                 PromotedCategory = Process;
                 Image = Change;
+                // RunObject = page ChangeCategory;
+                // RunPageLink = EnrollmentNo = field("No.");
+                // RunPageMode = Create;
                 trigger OnAction()
                 begin
-                    OnBeforeChangeCategory(recStFees, recStudent)
+                    OnBeforeChangeCategory(recStFees, recStudent);
+                    CurrPage.Close();
                 end;
+
             }
         }
     }
@@ -407,6 +412,7 @@ page 50135 StudentMaster
         recFees: Record CourseWiseFeeStructure;
         recStudent: Record Customer;
         recCLE: Record "Cust. Ledger Entry";
+        recChangeCat: Record Change_Category_Cast;
 
     local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
     var
@@ -414,25 +420,38 @@ page 50135 StudentMaster
     begin
         recStFees.Reset();
         recStFees.SetRange(StudentEnrollmentNo, rec."No.");
-        // recStFees.SetRange(AcademicYear, rec.AcademicYear);
-        // recStFees.SetRange(CourseCode, rec."Course Code");
-        // recStFees.SetRange(Semester, rec."Semester Code");
-        // recStFees.SetRange(Stream, rec."Stream Code");
-        // recStFees.SetRange(CategoryCode, rec.Category);
-        // recStFees.SetRange(BatchCode, rec."Batch Code");
-        // recStFees.SetRange(CasteCode, rec.Cast);
-        // recStFees.SetRange(Class, rec.Class);
-        // recStFees.SetRange(DebitCreated, true);
-        // if recStFees.FindFirst() then
         recStFees.SetRange(DebitCreated, true);
         if recStFees.FindFirst() then begin
             Message('Sorry!!! Category can not be changed. Please reverse all the open transactions for %1', rec."No.");
             repeat
                 Message('Reverse Transactions %1 and %2', recStFees.PostedEntryNo, recStFees.GovtEntryNo);
-            until recStFees.Next() = 0
-        end
-        // else
+            until recStFees.Next() = 0;
+        end;
 
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        recStFees.SetRange(DebitCreated, false);
+        if recStFees.FindFirst() then begin
+            //  begin
+            //     Page.RunModal(50137, recChangeCat);
+            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
+            // end;
+            recChangeCat.Reset();
+            recChangeCat.SetFilter(EnrollmentNo, Rec."No.");
+            if not recChangeCat.FindFirst() then begin
+                recChangeCat.Init();
+                recChangeCat.Validate(EnrollmentNo, Rec."No.");
+                recChangeCat.Insert();
+            end;
+            Page.Run(50137, recChangeCat);
+            // recChangeCat.FilterGroup(0);
+            // if Page.RunModal(50137, recChangeCat) = Action::RunSystem then
+            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
+            // CurrPage.Editable;
+            //     Page.RunModal(50137, recChangeCat);
+            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
+
+        end;
     end;
 
 }

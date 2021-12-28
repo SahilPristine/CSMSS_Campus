@@ -130,12 +130,20 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
                     Caption = 'Govt Entry No.';
                 }
-                field(EntryReversed; rec.EntryReversed)
+                field(StudentEntryReversed; rec.StudentEntryReversed)
                 {
                     ApplicationArea = All;
-                    Caption = 'Entries Reversed';
+                }
+                field(GovtEntryReversed; rec.GovtEntryReversed)
+                {
+                    ApplicationArea = All;
+                    Enabled = Enable;
                 }
 
+                field(Blocked; rec.Blocked)
+                {
+                    ApplicationArea = All;
+                }
 
             }
         }
@@ -178,6 +186,10 @@ page 50111 StudentFeeStructure
         else
             Enable := false;
 
+    end;
+
+    trigger OnOpenPage()
+    begin
     end;
 
 
