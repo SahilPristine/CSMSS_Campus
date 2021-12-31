@@ -6,6 +6,7 @@ page 50111 StudentFeeStructure
     SourceTable = StudentFeeStructure;
     AccessByPermission = page StudentFeeStructure = X;
     Caption = 'Student Fees Sructure';
+    AutoSplitKey = true;
 
     layout
     {

@@ -236,12 +236,12 @@ tableextension 50123 CustomerExtension extends Customer
         field(50182; Religion; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Hindu","Muslim","Sikh","Christian";
+            OptionMembers = " ","Hindu","Muslim","Sikh","Christian";
         }
         field(50183; Nationality; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "Indian";
+            OptionMembers = " ","Indian";
         }
         field(50184; "Aadhar No"; Code[20])
         {
@@ -255,6 +255,16 @@ tableextension 50123 CustomerExtension extends Customer
         field(50186; "Qualifying Exam Details"; Text[50])
         {
             DataClassification = ToBeClassified;
+        }
+        field(50187; NewCategory; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = AdmissionCategory;
+        }
+        field(50188; NewCast; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = CasteMaster."Caste Code";
         }
         // modify("No.")
         // {

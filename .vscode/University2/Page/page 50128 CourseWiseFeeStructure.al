@@ -88,6 +88,7 @@ page 50128 CourseWiseFeeStructure
                 field(AmountByGovt; rec.AmountByGovt)
                 {
                     ApplicationArea = All;
+                    Enabled = Enable;
                     trigger OnValidate()
                     begin
                         If rec."Govt Code" <> '' then
@@ -160,5 +161,6 @@ page 50128 CourseWiseFeeStructure
         else
             Enable := false;
 
+        CurrPage.Update(true);
     end;
 }

@@ -156,12 +156,16 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
+        field(29; LineNo; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
     keys
     {
-        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, GovtCode)
+        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, GovtCode, CategoryCode, CasteCode, LineNo)
         {
             Clustered = true;
         }

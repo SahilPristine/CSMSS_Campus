@@ -2,9 +2,9 @@ page 50136 StudentMasterList
 {
     PageType = List;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     SourceTable = Customer;
-    Caption = 'Students';
+    Caption = 'Student Master';
     CardPageId = 50135;
     // Editable = false;
     // SourceTableView = where("Enrollment No" = filter(<> ' '));

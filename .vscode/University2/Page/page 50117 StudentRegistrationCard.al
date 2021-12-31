@@ -383,90 +383,26 @@ page 50117 StudentRegistration
                 Image = Post;
                 trigger OnAction()
                 var
-                    Question: Text;
-                    Answer: Boolean;
-                    Text000: Label 'Do you want to confirm enrollment?';
 
                 begin
-                    rec.TestField("Batch Code");
+                    // rec.TestField("Batch Code");
+                    // rec.TestField(Class);
+                    // rec.TestField("Course Code");
+
+                    if rec."Enrollment No" <> '' then
+                        Error('Enrollment No %1 Already Generated', rec."Enrollment No")
+                    else
+                        rec.TestField("Batch Code");
                     rec.TestField(Class);
                     rec.TestField("Course Code");
-                    // rec.TestField("Enrollment No", '');
-
-                    if rec."Enrollment No" <> ''
-                    then
-                        Error('Enrollment No %1 Already Generated', rec."Enrollment No");
-
-                    Question := Text000;
-                    Answer := Dialog.Confirm(Question, true);
-                    if Answer = true then begin
-                        // recSalesSetup.Get();
-                        // rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup.EnrollmentNo, today, true);
-                        recSalesSetup.get();
-                        rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup."Customer Nos.", Today, true);
-                    end;
-
-                    Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."Registration No");
-
-                    CustRec.Init();
-                    CustRec."No." := rec."Enrollment No";
-                    CustRec.Name := rec."First Name";
-                    CustRec."Name 2" := rec."Last Name";
-                    CustRec.DOB := rec.DOB;
-                    CustRec."Birth Place" := rec."Birth Place";
-                    CustRec.Gender := rec.Gender;
-                    CustRec.Category := rec.Category;
-                    CustRec.Cast := rec.Cast;
-                    CustRec.Religion := rec.Religion;
-                    CustRec.Nationality := rec.Nationality;
-                    CustRec."Aadhar No" := rec."Aadhar No";
-                    CustRec."Admission Quota" := rec."Admission Quota";
-                    CustRec."Qualifying Exam Details" := rec."Qualifying Exam Details";
-                    CustRec.Address := rec."Permanent Address 1";
-                    CustRec."Address 2" := rec."Permanent Address 2";
-                    CustRec.State := rec.State;
-                    CustRec."Pin Code" := rec."Pin Code";
-                    CustRec."Country/Region Code" := rec."Country Code";
-                    CustRec."Local Address 1" := rec."Local Address 1";
-                    CustRec."Local Address 2" := rec."Local Address 2";
-                    CustRec.State2 := rec.State2;
-                    CustRec."Post Code" := rec."Pin Code2";
-                    CustRec."Country Code" := rec."Country Code2";
-                    CustRec."Phone No." := rec."Phone No";
-                    CustRec."E-Mail" := rec."Email ID";
-                    CustRec."Father's First Name" := rec."Father's First Name";
-                    CustRec."Father's Last Name" := rec."Father's Last Name";
-                    CustRec."Father's Contact No" := rec."Father's Contact No";
-                    CustRec."Father's Email ID" := rec."Father's Email ID";
-                    CustRec."Mother's First Name" := rec."Mother's First Name";
-                    CustRec."Mother's Last Name" := rec."Mother's Last Name";
-                    CustRec."Mother's Contact No" := rec."Mother's Contact No";
-                    CustRec."Mother's Email ID" := rec."Mother's Email ID";
-                    CustRec."Batch Code" := rec."Batch Code";
-                    Custrec.AcademicYear := rec.AcademicYear;
-                    CustRec."Course Code" := rec."Course Code";
-                    CustRec."Semester Code" := rec."Semester Code";
-                    CustRec."Stream Code" := rec."Stream Code";
-                    CustRec.Class := rec.Class;
-                    CustRec."Bank Name" := rec."Bank Name";
-                    CustRec."Branch Name" := rec."Branch Name";
-                    CustRec."IFSC Code" := rec."IFSC Code";
-                    CustRec."Bank Account No" := rec."Bank Account No";
-                    CustRec."Application Method" := rec."Application Method";
-                    CustRec.Hostel := rec.Hostel;
-                    CustRec.RoomType := rec.RoomType;
-                    CustRec.BedType := rec.BedType;
-                    CustRec.HostelCode := rec.HostelCode;
-                    CustRec.RoomNo := rec.RoomNo;
-                    CustRec.Transport := rec.Transport;
-                    CustRec.RouteNo := rec.RoomNo;
-                    CustRec.Charge := rec.Charge;
-
-                    CustRec.Insert(true);
+                    CreateStudentMaster(RecReg, recFees, CustRec);
+                    CreateFeesStructure(recStFees, recFees, recStudent);
+                    // Codeunit.Run(50102, Rec);
                     CurrPage.Update(true);
 
-                    CreateFeesStructure(recStFees, recFees, recStudent);
-                    Message('Fees Structure Created');
+                    // CreateStudentMaster(RecReg, recFees, CustRec);
+
+                    // CreateFeesStructure(recStFees, recFees, recStudent);
 
                 end;
 
@@ -490,6 +426,7 @@ page 50117 StudentRegistration
         recStFees: Record StudentFeeStructure;
         recFees: Record CourseWiseFeeStructure;
         recStudent: record Customer;
+        RecReg: Record StudentRegistration;
 
 
     trigger OnAfterGetRecord()
@@ -509,8 +446,6 @@ page 50117 StudentRegistration
         else
             confirm := true;
 
-
-
         // CurrPage.Update(true);
 
     end;
@@ -529,7 +464,7 @@ page 50117 StudentRegistration
             confirm := true;
     end;
 
-    local procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
+    procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
     begin
         recStudent.Reset();
         recStudent.SetRange("No.", rec."Enrollment No");
@@ -564,9 +499,93 @@ page 50117 StudentRegistration
                 until
                 recFees.Next() = 0;
             end;
+            Message('Fees Structure Created');
         end;
+    end;
 
+    procedure CreateStudentMaster(RecReg: Record StudentRegistration; recFees: Record CourseWiseFeeStructure; CustRec: Record Customer)
+    var
+        Question: Text;
+        Answer: Boolean;
+        Text000: Label 'Do you want to confirm enrollment?';
+    begin
+        recFees.Reset();
+        recFees.Setrange(BatchCode, rec."Batch Code");
+        recFees.SetRange(AcademicYear, Rec.AcademicYear);
+        recFees.SetRange(CourseCode, Rec."Course Code");
+        recFees.SetRange(StreamCode, Rec."Stream Code");
+        recFees.SetRange(SemesterCode, Rec."Semester Code");
+        recFees.SetRange(CategoryCode, Rec.Category);
+        recFees.SetRange("Caste Code", Rec.Cast);
+        if recFees.FindFirst() then begin
+            Question := Text000;
+            Answer := Dialog.Confirm(Question, true);
+            if Answer = true then begin
+                recSalesSetup.get();
+                rec."Enrollment No" := NoSeriesMgt.GetNextNo(recSalesSetup."Customer Nos.", Today, true);
 
+                Message('%1 Enrollment alloted to %2', rec."Enrollment No", rec."Registration No");
+
+                CustRec.Init();
+                CustRec."No." := rec."Enrollment No";
+                CustRec.Name := rec."First Name";
+                CustRec."Name 2" := rec."Last Name";
+                CustRec.DOB := rec.DOB;
+                CustRec."Birth Place" := rec."Birth Place";
+                CustRec.Gender := rec.Gender;
+                CustRec.Category := rec.Category;
+                CustRec.Cast := rec.Cast;
+                CustRec.Religion := rec.Religion;
+                CustRec.Nationality := rec.Nationality;
+                CustRec."Aadhar No" := rec."Aadhar No";
+                CustRec."Admission Quota" := rec."Admission Quota";
+                CustRec."Qualifying Exam Details" := rec."Qualifying Exam Details";
+                CustRec.Address := rec."Permanent Address 1";
+                CustRec."Address 2" := rec."Permanent Address 2";
+                CustRec.State := rec.State;
+                CustRec."Pin Code" := rec."Pin Code";
+                CustRec."Country/Region Code" := rec."Country Code";
+                CustRec."Local Address 1" := rec."Local Address 1";
+                CustRec."Local Address 2" := rec."Local Address 2";
+                CustRec.State2 := rec.State2;
+                CustRec."Post Code" := rec."Pin Code2";
+                CustRec."Country Code" := rec."Country Code2";
+                CustRec."Phone No." := rec."Phone No";
+                CustRec."E-Mail" := rec."Email ID";
+                CustRec."Father's First Name" := rec."Father's First Name";
+                CustRec."Father's Last Name" := rec."Father's Last Name";
+                CustRec."Father's Contact No" := rec."Father's Contact No";
+                CustRec."Father's Email ID" := rec."Father's Email ID";
+                CustRec."Mother's First Name" := rec."Mother's First Name";
+                CustRec."Mother's Last Name" := rec."Mother's Last Name";
+                CustRec."Mother's Contact No" := rec."Mother's Contact No";
+                CustRec."Mother's Email ID" := rec."Mother's Email ID";
+                CustRec."Batch Code" := rec."Batch Code";
+                Custrec.AcademicYear := rec.AcademicYear;
+                CustRec."Course Code" := rec."Course Code";
+                CustRec."Semester Code" := rec."Semester Code";
+                CustRec."Stream Code" := rec."Stream Code";
+                CustRec.Class := rec.Class;
+                CustRec."Bank Name" := rec."Bank Name";
+                CustRec."Branch Name" := rec."Branch Name";
+                CustRec."IFSC Code" := rec."IFSC Code";
+                CustRec."Bank Account No" := rec."Bank Account No";
+                CustRec."Application Method" := rec."Application Method"::"Apply to Oldest";
+                CustRec.Hostel := rec.Hostel;
+                CustRec.RoomType := rec.RoomType;
+                CustRec.BedType := rec.BedType;
+                CustRec.HostelCode := rec.HostelCode;
+                CustRec.RoomNo := rec.RoomNo;
+                CustRec.Transport := rec.Transport;
+                CustRec.RouteNo := rec.RoomNo;
+                CustRec.Charge := rec.Charge;
+
+                CustRec.Insert(true);
+                CurrPage.Update(true);
+            end;
+        end
+        else
+            Message('Create Fees Structure First');
     end;
 
 }

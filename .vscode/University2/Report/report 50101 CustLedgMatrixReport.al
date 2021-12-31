@@ -34,6 +34,8 @@ report 50101 CustLedgMatrixReport
 
             }
             column(Desc; Desc)
+
+
             {
 
             }
@@ -66,6 +68,7 @@ report 50101 CustLedgMatrixReport
                 action(ActionName)
                 {
                     ApplicationArea = All;
+
 
                 }
             }

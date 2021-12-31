@@ -20,6 +20,7 @@ report 50100 GenJournalReport
                 recStFees2.SetRange(CourseCode, "Course Code");
                 recStFees2.SetRange(Stream, "Stream Code");
                 recStFees2.SetRange(DebitCreated, false);
+                recStFees2.SetRange(Blocked, false);
                 pendingLinestoberun := recStFees2.Count;
 
                 recBatch.reset;

@@ -1,11 +1,11 @@
 page 50135 StudentMaster
 {
     PageType = Card;
-    ApplicationArea = All;
-    UsageCategory = Administration;
+    // ApplicationArea = All;
+    // UsageCategory = Administration;
     SourceTable = Customer;
     Caption = 'Student Master';
-    Editable = false;
+    // Editable = false;
     // SourceTableView = where("Enrollment No" = filter(<> ' '));
 
     layout
@@ -60,6 +60,7 @@ page 50135 StudentMaster
                 {
                     ApplicationArea = All;
                     Caption = 'Admission Category';
+                    Editable = false;
                     // Editable = confirm;
 
                 }
@@ -67,6 +68,7 @@ page 50135 StudentMaster
                 {
                     ApplicationArea = All;
                     LookupPageId = 50134;
+                    Editable = false;
 
                 }
                 field(Religion; rec.Religion)
@@ -217,32 +219,38 @@ page 50135 StudentMaster
                 field("Batch Code"; rec."Batch Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field(AcademicYear; rec.AcademicYear)
                 {
                     ApplicationArea = All;
                     CAption = 'Academic Year';
+                    Editable = false;
                 }
 
                 field("Course Code"; rec."Course Code")
                 {
                     ApplicationArea = All;
                     LookupPageId = CourseList;
+                    Editable = false;
                 }
 
                 field("Semester Code"; rec."Semester Code")
                 {
                     ApplicationArea = All;
+                    Editable = false;
                 }
                 field("Stream Code"; rec."Stream Code")
                 {
                     ApplicationArea = All;
                     LookupPageId = 50108;
+                    Editable = false;
                 }
                 field(Class; rec.Class)
                 {
                     ApplicationArea = All;
                     LookupPageId = 50124;
+                    Editable = false;
                 }
 
 
@@ -412,7 +420,7 @@ page 50135 StudentMaster
         recFees: Record CourseWiseFeeStructure;
         recStudent: Record Customer;
         recCLE: Record "Cust. Ledger Entry";
-        recChangeCat: Record Change_Category_Cast;
+        recChangeCat: Record Customer;
 
     local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
     var
@@ -421,6 +429,9 @@ page 50135 StudentMaster
         recStFees.Reset();
         recStFees.SetRange(StudentEnrollmentNo, rec."No.");
         recStFees.SetRange(DebitCreated, true);
+        recStFees.SetRange(StudentEntryReversed, false);
+        recStFees.SetRange(GovtEntryReversed, false);
+        recStFees.SetRange(Blocked, false);
         if recStFees.FindFirst() then begin
             Message('Sorry!!! Category can not be changed. Please reverse all the open transactions for %1', rec."No.");
             repeat
@@ -430,17 +441,53 @@ page 50135 StudentMaster
 
         recStFees.Reset();
         recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        recStFees.SetRange(DebitCreated, true);
+        recStFees.SetRange(StudentEntryReversed, true);
+        recStFees.SetRange(GovtEntryReversed, true);
+        recStFees.SetRange(Blocked, false);
+        if recStFees.FindFirst() then begin
+            recChangeCat.Reset();
+            recChangeCat.SetFilter("No.", Rec."No.");
+            if not recChangeCat.FindFirst() then begin
+                recChangeCat.Init();
+                recChangeCat.Validate("No.", Rec."No.");
+                recChangeCat.Insert();
+            end;
+            Page.Run(50137, recChangeCat);
+        end;
+
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        recStFees.SetRange(DebitCreated, true);
+        recStFees.SetRange(StudentEntryReversed, true);
+        recStFees.SetRange(GovtEntryReversed, true);
+        recStFees.SetRange(Blocked, true);
+        if recStFees.FindFirst() then begin
+            recChangeCat.Reset();
+            recChangeCat.SetFilter("No.", Rec."No.");
+            if recChangeCat.FindFirst() then begin
+                recChangeCat.Init();
+                recChangeCat.Validate("No.", Rec."No.");
+                recChangeCat.Insert();
+            end;
+            Page.Run(50137, recChangeCat);
+        end;
+
+
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
         recStFees.SetRange(DebitCreated, false);
+        recStFees.SetRange(Blocked, false);
         if recStFees.FindFirst() then begin
             //  begin
             //     Page.RunModal(50137, recChangeCat);
             //     recChangeCat.Validate(EnrollmentNo, rec."No.");
             // end;
             recChangeCat.Reset();
-            recChangeCat.SetFilter(EnrollmentNo, Rec."No.");
+            recChangeCat.SetFilter("No.", Rec."No.");
             if not recChangeCat.FindFirst() then begin
                 recChangeCat.Init();
-                recChangeCat.Validate(EnrollmentNo, Rec."No.");
+                recChangeCat.Validate("No.", Rec."No.");
                 recChangeCat.Insert();
             end;
             Page.Run(50137, recChangeCat);

@@ -3,7 +3,7 @@ page 50137 ChangeCategory
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = 50134;
+    SourceTable = Customer;
     AutoSplitKey = true;
 
     layout
@@ -12,7 +12,7 @@ page 50137 ChangeCategory
         {
             group(GroupName)
             {
-                field(EnrollmentNo; rec.EnrollmentNo)
+                field(EnrollmentNo; rec."No.")
                 {
                     ApplicationArea = All;
                     Caption = 'Enrollment No';
@@ -26,7 +26,7 @@ page 50137 ChangeCategory
             }
             group(Category)
             {
-                field(OldCategory; rec.OldCategory)
+                field(OldCategory; rec.Category)
                 {
                     ApplicationArea = All;
                     Caption = 'Old Category';
@@ -41,7 +41,7 @@ page 50137 ChangeCategory
             }
             group(Cast)
             {
-                field(OldCast; rec.OldCast)
+                field(OldCast; rec.Cast)
                 {
                     ApplicationArea = All;
                     Caption = 'Old Cast';
@@ -72,16 +72,25 @@ page 50137 ChangeCategory
                 trigger OnAction()
                 begin
                     recStudent.Reset();
-                    recStudent.SetRange("No.", rec.EnrollmentNo);
-                    recStudent.SetRange(Category, rec.OldCategory);
-                    recStudent.SetRange(Cast, rec.OldCast);
+                    recStudent.SetRange("No.", rec."No.");
+                    recStudent.SetRange(Category, rec.Category);
+                    recStudent.SetRange(Cast, rec.Cast);
                     if recStudent.FindFirst() then begin
                         Message('Student found');
-                        recStudent.Category := rec.NewCategory;
-                        recStudent.Cast := rec.NewCast;
-                        recStudent.Modify(true);
-                        Message('Category changed Successfully');
-                    end;
+                        recFees.Reset();
+                        recFees.SetRange(CategoryCode, rec.NewCategory);
+                        recFees.SetRange("Caste Code", rec.NewCast);
+                        if recFees.FindFirst() then begin
+                            recStudent.Category := rec.NewCategory;
+                            recStudent.Cast := rec.NewCast;
+                            recStudent.Modify(true);
+                            Message('Category changed Successfully');
+                        end
+                        else
+                            Message('Create Fees Structure for new category first');
+                    end
+                    else
+                        Message('Create Fees Structure');
 
                     CreateNewFeesStructure(recStFees, recFees, recChangeCat)
 
@@ -99,9 +108,9 @@ page 50137 ChangeCategory
     procedure CreateNewFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recChangeCat: Record Change_Category_Cast)
     begin
         recStFees.Reset();
-        recStFees.SetRange(StudentEnrollmentNo, rec.EnrollmentNo);
-        recStFees.SetRange(CategoryCode, rec.OldCategory);
-        recStFees.SetRange(CasteCode, rec.OldCast);
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        recStFees.SetRange(CategoryCode, rec.Category);
+        recStFees.SetRange(CasteCode, rec.Cast);
         if recStFees.FindFirst() then begin
             repeat
                 recStFees.Blocked := true;
@@ -115,7 +124,7 @@ page 50137 ChangeCategory
         CurrPage.Update(true);
 
         recStudent.Reset();
-        recStudent.SetRange("No.", rec.EnrollmentNo);
+        recStudent.SetRange("No.", rec."No.");
         if recStudent.FindFirst() then begin
             recFees.Reset();
             recFees.Setrange(BatchCode, recStudent."Batch Code");
@@ -125,6 +134,8 @@ page 50137 ChangeCategory
             recFees.SetRange(SemesterCode, recStudent."Semester Code");
             recFees.SetRange(CategoryCode, recStudent.Category);
             recFees.SetRange("Caste Code", recStudent.Cast);
+
+
             if recFees.FindFirst() then begin
                 repeat
                     recStFees.Init();

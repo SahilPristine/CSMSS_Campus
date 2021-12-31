@@ -101,11 +101,19 @@ table 50128 CourseWiseFeeStructure
         field(14; AmountByStudent; Decimal)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                TotalAmount := AmountByGovt + AmountByStudent;
+            end;
 
         }
         field(15; AmountByGovt; Decimal)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                TotalAmount := AmountByGovt + AmountByStudent;
+            end;
 
         }
         field(16; TotalAmount; Decimal)
@@ -121,7 +129,7 @@ table 50128 CourseWiseFeeStructure
 
     keys
     {
-        key(Key1; CourseCode, StreamCode, SemesterCode, ElementCode)
+        key(Key1; CourseCode, StreamCode, SemesterCode, ElementCode, CategoryCode, "Caste Code")
         {
             Clustered = true;
         }
