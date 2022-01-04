@@ -29,6 +29,12 @@ pageextension 50125 GenLedgerSetup extends 459
                 field(FeesReceipt; rec.FeesReceipt)
                 {
                     ApplicationArea = All;
+                    Caption = 'Fees Receipt';
+                }
+                field(GovtCode; rec.GovtCode)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Government Code';
                 }
             }
         }

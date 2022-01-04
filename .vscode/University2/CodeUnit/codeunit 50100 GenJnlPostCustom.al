@@ -5,7 +5,7 @@ codeunit 50100 GenJnlPostCustom
     local procedure SubscribeToOnAfterInitCustLedgEntry(var CustLedgerEntry: Record "Cust. Ledger Entry"; GenJournalLine: Record "Gen. Journal Line")
     begin
         CustLedgerEntry.ElementCode := GenJournalLine.ElementCode;
-        CustLedgerEntry.ElementDesc := GenJournalLine.ElementDesc;
+        // CustLedgerEntry.ElementDesc := GenJournalLine.ElementDesc;
         CustLedgerEntry.Batch := GenJournalLine.Batch;
         CustLedgerEntry.AcademicYear := GenJournalLine.AcademicYear;
         CustLedgerEntry.Class := GenJournalLine.Class;
@@ -52,7 +52,7 @@ codeunit 50100 GenJnlPostCustom
     local procedure SubscribeToOnAfterInitGLEntry(var GLEntry: Record "G/L Entry"; GenJournalLine: Record "Gen. Journal Line")
     begin
         GLEntry.ElementCode := GenJournalLine.ElementCode;
-        GLEntry.ElementDesc := GenJournalLine.ElementDesc;
+        // GLEntry.ElementDesc := GenJournalLine.ElementDesc;
         GLEntry.Btach := GenJournalLine.Batch;
         GLEntry.AcademicYear := GenJournalLine.AcademicYear;
         GLEntry.Class := GenJournalLine.Class;

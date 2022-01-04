@@ -2,17 +2,6 @@ tableextension 50123 CustomerExtension extends Customer
 {
     fields
     {
-        //         field(50158; StudentCode; code[20])
-        //         {
-        //             DataClassification = ToBeClassified;
-        //             Description = 'SL-V.01';
-        //             trigger OnValidate()
-        //             IF "StudentCode" <> xRec."No." THEN BEGIN
-        //             SalesSetup.GET;
-        //             NoSeriesMgt.TestManual(SalesSetup."Customer Nos.");
-        //              "No. Series" := '';
-        // END;
-        //         }
 
         field(50124; AcademicYear; code[20])
         {
@@ -121,19 +110,6 @@ tableextension 50123 CustomerExtension extends Customer
             TableRelation = ClassMaster;
             Description = 'SL-V.01';
         }
-        // field(50148; "Enrollment No"; Code[20])
-        // {
-        //     DataClassification = ToBeClassified;
-        //     Description = 'SL-V.01';
-        //     trigger OnValidate()
-        //     begin
-        //         if "Enrollment No" <> xRec."Enrollment No" then begin
-        //             SalesSetup.Get();
-        //             NoSeriesMgt.TestManual(SalesSetup.EnrollmentNo);
-        //             "No. Series" := '';
-        //         end;
-        //     end;
-        // }
         field(50150; "Bank Name"; Text[30])
         {
             DataClassification = ToBeClassified;
@@ -266,34 +242,38 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             TableRelation = CasteMaster."Caste Code";
         }
-        // modify("No.")
-        // {
-        //     trigger OnBeforeValidate()
-        //     begin
-
-        //     end;
-        // }
-
+        field(50189; Type; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ","Student","Others";
+        }
 
     }
     keys
     {
+        key(key22; "No.")
+        {
+        }
     }
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit "NoSeriesManagement";
         Hostel: Record HostelMaster;
         Route: Record RouteMaster;
+        recStudent: Record Customer;
 
-    // trigger OnInsert()
+    trigger OnInsert()
+    begin
+        recStudent.ChangeCompany('mithilesh');
+        recStudent.TransferFields(Rec);
+        recStudent.Insert();
+    end;
 
+    // trigger OnModify()
     // begin
-    //     if "Enrollment No" = '' then begin
-    //         SalesSetup.Get();
-    //         SalesSetup.TestField(EnrollmentNo);
-    //         NoSeriesMgt.InitSeries(SalesSetup.EnrollmentNo, xRec."No. Series", 0D, "Enrollment No", "No. Series");
-    //     end;
-
+    //     recStudent.ChangeCompany('mithilesh');
+    //     recStudent.TransferFields(Rec);
+    //     recStudent.Insert();
     // end;
 
 }

@@ -174,7 +174,7 @@ page 50130 StudentFeeReceiptHeader
                     GJL.validate("Bal. Account Type", GJL."Bal. Account Type"::Customer);
                     GJL.Validate("Bal. Account No.", Rec.CustomerNo);
                     GJL.Validate(ElementCode, RecPostedLine.ElementCode);
-                    gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
+                    // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
                 end;

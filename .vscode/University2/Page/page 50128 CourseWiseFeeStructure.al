@@ -33,18 +33,21 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Stream Code';
+                    LookupPageId = StreamList;
 
                 }
                 field(SemesterCode; rec.SemesterCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Semester Code';
+                    LookupPageId = SemesterList;
 
                 }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Element Code';
+                    LookupPageId = FeeStructureElements;
 
                 }
                 field(Description; rec.Description)
@@ -75,26 +78,9 @@ page 50128 CourseWiseFeeStructure
                     trigger OnValidate()
                     begin
                         If rec."Govt Code" <> '' then
-                            Enable := true
+                            Enable := false
                         else
-                            Enable := false;
-                        CurrPage.Update(true);
-                    end;
-                }
-                field(AmountByStudent; rec.AmountByStudent)
-                {
-                    ApplicationArea = All;
-                }
-                field(AmountByGovt; rec.AmountByGovt)
-                {
-                    ApplicationArea = All;
-                    Enabled = Enable;
-                    trigger OnValidate()
-                    begin
-                        If rec."Govt Code" <> '' then
-                            Enable := true
-                        else
-                            Enable := false;
+                            Enable := true;
                         CurrPage.Update(true);
                     end;
                 }
@@ -102,7 +88,34 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Total Amount';
+                    // trigger OnValidate()
+                    // var
+                    //     recCategory: Record AdmissionCategory;
+                    // begin
+                    //     recCategory.Reset();
+                    //     recCategory.SetRange(CategCode, rec.CategoryCode);
+                    //     recCategory.SetRange(Caste, rec."Caste Code");
+                    //     recCategory.SetRange(Batch, rec.BatchCode);
+                    //     recCategory.SetRange(Course, rec.CourseCode);
+                    //     recCategory.SetRange(GovtCode, rec."Govt Code");
+                    //     if recCategory.FindFirst() then begin
+                    //         rec.Validate(AmountByStudent, (rec.TotalAmount * recCategory.StudentPercent) / 100);
+                    //         rec.Validate(AmountByGovt, (rec.TotalAmount * recCategory.GovtPercent) / 100);
+                    //     end;
+                    // end;
                 }
+                field(AmountByStudent; rec.AmountByStudent)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Amount By Student';
+                }
+                field(AmountByGovt; rec.AmountByGovt)
+                {
+                    ApplicationArea = All;
+                    Enabled = Enable;
+                    Caption = 'Amount By Govt';
+                }
+
                 field(DebitAcc; rec.DebitAcc)
                 {
                     ApplicationArea = All;
@@ -161,6 +174,6 @@ page 50128 CourseWiseFeeStructure
         else
             Enable := false;
 
-        CurrPage.Update(true);
+        // CurrPage.Update(true);
     end;
 }

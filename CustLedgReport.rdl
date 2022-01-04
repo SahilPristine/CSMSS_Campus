@@ -592,9 +592,6 @@ End Function
         <Field Name="ElementCode">
           <DataField>ElementCode</DataField>
         </Field>
-        <Field Name="ElementDesc">
-          <DataField>ElementDesc</DataField>
-        </Field>
         <Field Name="Remaining_Amount">
           <DataField>Remaining_Amount</DataField>
         </Field>

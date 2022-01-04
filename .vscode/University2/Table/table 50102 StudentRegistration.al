@@ -312,6 +312,33 @@ table 50102 StudentRegistration
         {
             DataClassification = ToBeClassified;
         }
+        field(50057; SameAddress; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                // if SameAddress = true then begin
+                //     rec.SetRange("Registration No", "Registration No");
+                //     if rec.FindFirst() then begin
+                //         "Local Address 1" := "Permanent Address 1";
+                //         "Local Address 2" := "Permanent Address 2";
+                //         State2 := State;
+                //         "Pin Code2" := "Pin Code";
+                //         "Country Code2" := "Country Code";
+                //         Insert();
+                //     end;
+                // end;
+            end;
+        }
+        field(50058; Type; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ","Student","Others";
+            trigger OnValidate()
+            begin
+                Type := Type::Student;
+            end;
+        }
 
     }
 
@@ -327,6 +354,8 @@ table 50102 StudentRegistration
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
+
+
     trigger OnInsert()
     begin
         if "Registration No" = '' then begin
@@ -335,12 +364,10 @@ table 50102 StudentRegistration
             NoSeriesMgt.InitSeries(SalesSetup.RegistrationNo, xRec."No. Series", 0D, "Registration No", "No. Series");
         end;
 
-
     end;
 
     trigger OnModify()
     begin
-
     end;
 
     trigger OnDelete()

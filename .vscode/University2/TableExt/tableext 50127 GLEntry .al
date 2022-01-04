@@ -6,10 +6,10 @@ tableextension 50127 GLEntry extends 17
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; ElementDesc; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(50001; ElementDesc; Text[50])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
 
         field(50003; AcademicYear; code[20])
         {

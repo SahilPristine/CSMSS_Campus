@@ -9,11 +9,11 @@ pageextension 50126 GenJournalLine extends 39
                 ApplicationArea = all;
                 Caption = 'Element Code';
             }
-            field(ElementDesc; rec.ElementDesc)
-            {
-                ApplicationArea = All;
-                Caption = 'Element Desc';
-            }
+            // field(ElementDesc; rec.ElementDesc)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Element Desc';
+            // }
         }
         // Add changes to page layout here
     }

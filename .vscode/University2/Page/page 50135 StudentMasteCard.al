@@ -4,6 +4,7 @@ page 50135 StudentMaster
     // ApplicationArea = All;
     // UsageCategory = Administration;
     SourceTable = Customer;
+    SourceTableView = where(Type = filter(Student));
     Caption = 'Student Master';
     // Editable = false;
     // SourceTableView = where("Enrollment No" = filter(<> ' '));
@@ -24,6 +25,21 @@ page 50135 StudentMaster
                 {
                     ApplicationArea = All;
                     Editable = False;
+
+                }
+                field(Type; rec.Type)
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    // trigger OnValidate()
+                    // var
+                    //     NoSeries: Record "No. Series";
+                    //     SalesSetup: Record "Sales & Receivables Setup";
+                    // begin
+                    //     if rec."No." = SalesSetup."Customer Nos." then begin
+                    //         rec.Type := Rec.Type::Student;
+                    //     end;
+                    // end;
 
                 }
 
@@ -421,6 +437,11 @@ page 50135 StudentMaster
         recStudent: Record Customer;
         recCLE: Record "Cust. Ledger Entry";
         recChangeCat: Record Customer;
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        rec.Type := rec.Type::Student;
+    end;
 
     local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
     var

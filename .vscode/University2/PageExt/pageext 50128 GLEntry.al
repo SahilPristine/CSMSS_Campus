@@ -9,11 +9,11 @@ pageextension 50128 GLEntry extends 20
                 ApplicationArea = All;
                 Caption = 'Element Code';
             }
-            field(ElementDesc; rec.ElementDesc)
-            {
-                ApplicationArea = All;
-                Caption = 'Element Desc';
-            }
+            // field(ElementDesc; rec.ElementDesc)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Element Desc';
+            // }
             field(AcademicYear; rec.AcademicYear)
             {
                 ApplicationArea = All;

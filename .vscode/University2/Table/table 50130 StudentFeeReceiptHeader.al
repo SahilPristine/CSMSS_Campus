@@ -38,7 +38,7 @@ table 50130 StudentFeeReceiptHeader
                             RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
                             RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
                             RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
-                            RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                            // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
                             RecCustLedgEntry.CalcFields(Amount);
                             RecPostedLine.Amount := RecCustLedgEntry.Amount;
                             RecPostedLine.Insert();

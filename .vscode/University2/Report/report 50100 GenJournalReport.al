@@ -22,7 +22,7 @@ report 50100 GenJournalReport
                 recStFees2.SetRange(DebitCreated, false);
                 recStFees2.SetRange(Blocked, false);
                 pendingLinestoberun := recStFees2.Count;
-
+                Message('%1', pendingLinestoberun); //////
                 recBatch.reset;
                 recBatch.SetRange("Journal Template Name", template);
                 recBatch.SetRange(Name, Batch);
@@ -36,8 +36,11 @@ report 50100 GenJournalReport
 
                 recStFees.Reset();
                 recStFees.SetRange(StudentEnrollmentNo, "No.");
+                recStFees.SetRange(AcademicYear, AcademicYear);
                 recStFees.SetRange(CourseCode, "Course Code");
+                recStFees.SetRange(Semester, "Semester Code");
                 recStFees.SetRange(Stream, "Stream Code");
+                // recStFees.SetRange(Class, Class);
                 recStFees.SetRange(DebitCreated, false);
                 if recStFees.FindSet() then begin
                     runlines := 0;
@@ -54,7 +57,7 @@ report 50100 GenJournalReport
                         recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
                         recGnJnl.validate("Account No.", recStFees.StudentEnrollmentNo);
                         recGnJnl.validate(ElementCode, recStFees.ElementCode);
-                        recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                        // recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
                         recGnJnl.Validate(Batch, recStFees.BatchCode);
                         recGnJnl.Validate(AcademicYear, recStFees.AcademicYear);
                         recGnJnl.Validate(Class, recStFees.Class);
@@ -78,7 +81,7 @@ report 50100 GenJournalReport
                             recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
                             recGnJnl.validate("Account No.", recStFees.GovtCode);
                             recGnJnl.validate(ElementCode, recStFees.ElementCode);
-                            recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                            // recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
                             recGnJnl.Validate(StudentNo, recStFees.StudentEnrollmentNo);
                             recGnJnl.Validate(Batch, recStFees.BatchCode);
                             recGnJnl.Validate(AcademicYear, recStFees.AcademicYear);
@@ -107,6 +110,7 @@ report 50100 GenJournalReport
     requestpage
     {
         SaveValues = true;
+
         layout
         {
             area(Content)

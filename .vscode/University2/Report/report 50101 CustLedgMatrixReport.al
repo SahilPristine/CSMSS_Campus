@@ -21,10 +21,10 @@ report 50101 CustLedgMatrixReport
             {
 
             }
-            column(ElementDesc; ElementDesc)
-            {
+            // column(ElementDesc; ElementDesc)
+            // {
 
-            }
+            // }
             column(Remaining_Amount; "Remaining Amount")
             {
 

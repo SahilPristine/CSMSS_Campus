@@ -5,7 +5,6 @@ codeunit 50102 CreateStudentMaster
     TableNo = StudentRegistration;
     trigger OnRun()
     begin
-
         CreateStudentMaster(recReg, recFees, CustRec);
         CreateFeesStructure(recStFees, recFees, recStudent, Rec);
     end;

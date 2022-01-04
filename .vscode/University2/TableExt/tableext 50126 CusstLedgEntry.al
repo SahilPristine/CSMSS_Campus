@@ -6,10 +6,10 @@ tableextension 50126 CusstLedgEntry extends 21
         {
             DataClassification = ToBeClassified;
         }
-        field(50001; ElementDesc; Text[50])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(50001; ElementDesc; Text[50])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
 
         field(50009; StudentCode; Code[20])
         {

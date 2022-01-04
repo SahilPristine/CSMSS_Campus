@@ -10,10 +10,14 @@ pageextension 50127 CustLedgEntry extends 25
                 ApplicationArea = all;
                 Caption = 'Element Code';
             }
-            field(ElementDesc; rec.ElementDesc)
+            // field(ElementDesc; rec.ElementDesc)
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Element Desc';
+            // }
+            field(Batch; rec.Batch)
             {
                 ApplicationArea = All;
-                Caption = 'Element Desc';
             }
             field(AcademicYear; rec.AcademicYear)
             {

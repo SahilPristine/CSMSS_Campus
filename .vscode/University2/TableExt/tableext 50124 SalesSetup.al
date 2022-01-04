@@ -33,8 +33,12 @@ tableextension 50124 SalesSetup extends 311
             TableRelation = "No. Series";
             Description = 'SL-V.01';
         }
-
-        // Add changes to table fields here
+        field(5005; GovtCode; code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+            Description = 'SL-V.01';
+        }
     }
 
     var

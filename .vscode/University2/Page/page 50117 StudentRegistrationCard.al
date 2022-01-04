@@ -111,6 +111,36 @@ page 50117 StudentRegistration
                         ApplicationArea = All;
                         Caption = 'Country Code';
                     }
+
+                    field(SameAddress; rec.SameAddress)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Copy Address';
+                        ToolTip = 'Whether Local Address same as Permanent Address?';
+                        trigger OnValidate()
+                        begin
+                            if rec.SameAddress = true then begin
+                                // rec.SetRange("Registration No", rec."Registration No");
+                                // if rec.FindFirst() then begin
+                                Rec."Local Address 1" := Rec."Permanent Address 1";
+                                Rec."Local Address 2" := Rec."Permanent Address 2";
+                                Rec.State2 := Rec.State;
+                                Rec."Pin Code2" := Rec."Pin Code";
+                                Rec."Country Code2" := Rec."Country Code";
+                                Rec.Modify(true);
+                                // end;
+                            end;
+                            if rec.SameAddress = false then begin
+                                Rec."Local Address 1" := '';
+                                Rec."Local Address 2" := '';
+                                Rec.State2 := '';
+                                Rec."Pin Code2" := '';
+                                Rec."Country Code2" := '';
+                                Rec.Modify(true)
+                            end;
+                            CurrPage.Update(true);
+                        end;
+                    }
                 }
                 group("Local Address")
                 {
@@ -385,9 +415,6 @@ page 50117 StudentRegistration
                 var
 
                 begin
-                    // rec.TestField("Batch Code");
-                    // rec.TestField(Class);
-                    // rec.TestField("Course Code");
 
                     if rec."Enrollment No" <> '' then
                         Error('Enrollment No %1 Already Generated', rec."Enrollment No")
@@ -397,12 +424,7 @@ page 50117 StudentRegistration
                     rec.TestField("Course Code");
                     CreateStudentMaster(RecReg, recFees, CustRec);
                     CreateFeesStructure(recStFees, recFees, recStudent);
-                    // Codeunit.Run(50102, Rec);
                     CurrPage.Update(true);
-
-                    // CreateStudentMaster(RecReg, recFees, CustRec);
-
-                    // CreateFeesStructure(recStFees, recFees, recStudent);
 
                 end;
 
@@ -429,6 +451,7 @@ page 50117 StudentRegistration
         RecReg: Record StudentRegistration;
 
 
+
     trigger OnAfterGetRecord()
     begin
         if rec.Hostel = true then
@@ -446,7 +469,23 @@ page 50117 StudentRegistration
         else
             confirm := true;
 
-        // CurrPage.Update(true);
+        if rec.SameAddress = true then begin
+            Rec."Local Address 1" := Rec."Permanent Address 1";
+            Rec."Local Address 2" := Rec."Permanent Address 2";
+            Rec.State2 := Rec.State;
+            Rec."Pin Code2" := Rec."Pin Code";
+            Rec."Country Code2" := Rec."Country Code";
+            Rec.Modify();
+        end;
+
+        if rec.SameAddress = false then begin
+            Rec."Local Address 1" := '';
+            Rec."Local Address 2" := '';
+            Rec.State2 := '';
+            Rec."Pin Code2" := '';
+            Rec."Country Code2" := '';
+            Rec.Modify();
+        end;
 
     end;
 
@@ -498,6 +537,7 @@ page 50117 StudentRegistration
                     recStFees.Insert(true);
                 until
                 recFees.Next() = 0;
+
             end;
             Message('Fees Structure Created');
         end;
@@ -571,6 +611,7 @@ page 50117 StudentRegistration
                 CustRec."IFSC Code" := rec."IFSC Code";
                 CustRec."Bank Account No" := rec."Bank Account No";
                 CustRec."Application Method" := rec."Application Method"::"Apply to Oldest";
+                CustRec.Type := rec.Type::Student;
                 CustRec.Hostel := rec.Hostel;
                 CustRec.RoomType := rec.RoomType;
                 CustRec.BedType := rec.BedType;

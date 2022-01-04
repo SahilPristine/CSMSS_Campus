@@ -4,6 +4,7 @@ page 50136 StudentMasterList
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = Customer;
+    SourceTableView = where(Type = filter(Student));
     Caption = 'Student Master';
     CardPageId = 50135;
     // Editable = false;

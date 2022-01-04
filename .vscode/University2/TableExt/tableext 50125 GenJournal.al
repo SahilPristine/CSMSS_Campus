@@ -12,11 +12,11 @@ tableextension 50125 GenJournal extends 81
             Description = 'SL-V.01';
         }
 
-        field(50002; ElementDesc; Text[50])
-        {
-            DataClassification = ToBeClassified;
-            Description = 'SL-V.01';
-        }
+        // field(50002; ElementDesc; Text[50])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Description = 'SL-V.01';
+        // }
         field(50003; AcademicYear; code[20])
         {
             DataClassification = ToBeClassified;

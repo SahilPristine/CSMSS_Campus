@@ -35,8 +35,15 @@ table 50127 AdmissionCategory
         field(5; GovtCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer;
-
+            TableRelation = Customer where(Type = const(Others));
+        }
+        field(8; GovtPercent; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(9; StudentPercent; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

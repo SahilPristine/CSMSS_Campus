@@ -98,12 +98,38 @@ table 50128 CourseWiseFeeStructure
 
             end;
         }
+        field(16; TotalAmount; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                // TotalAmount := AmountByGovt + AmountByStudent;
+            end;
+        }
         field(14; AmountByStudent; Decimal)
         {
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                TotalAmount := AmountByGovt + AmountByStudent;
+                if AmountByStudent < TotalAmount then begin
+                    TotalAmount := AmountByStudent + AmountByGovt;
+                end;
+                if AmountByStudent = TotalAmount then begin
+                    TotalAmount := AmountByStudent;
+                end;
+                if AmountByStudent > TotalAmount then
+                    Error('Amount is greater than total amount');
+                // TotalAmount := AmountByGovt + AmountByStudent;
+                //     recCategory.Reset();
+                //     recCategory.SetRange(CategCode, CategoryCode);
+                //     recCategory.SetRange(Caste, "Caste Code");
+                //     recCategory.SetRange(Batch, BatchCode);
+                //     recCategory.SetRange(Course, CourseCode);
+                //     recCategory.SetRange(GovtCode, "Govt Code");
+                //     if recCategory.FindFirst() then begin
+                //         Validate(AmountByStudent, (TotalAmount * recCategory.StudentPercent) / 100); //AmountByStudent := (TotalAmount * recCategory.StudentPercent) / 100;
+                //     end;
+
             end;
 
         }
@@ -112,14 +138,22 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                TotalAmount := AmountByGovt + AmountByStudent;
+                if AmountByGovt < TotalAmount then begin
+                    TotalAmount := AmountByStudent + AmountByGovt;
+                end;
+                //     recCategory.Reset();
+                //     recCategory.SetRange(CategCode, CategoryCode);
+                //     recCategory.SetRange(Caste, "Caste Code");
+                //     recCategory.SetRange(Batch, BatchCode);
+                //     recCategory.SetRange(Course, CourseCode);
+                //     recCategory.SetRange(GovtCode, "Govt Code");
+                //     if recCategory.FindFirst() then begin
+                //         Validate(AmountByStudent, (TotalAmount * recCategory.GovtPercent) / 100); //AmountByStudent := (TotalAmount * recCategory.StudentPercent) / 100;
+                //     end;
             end;
 
         }
-        field(16; TotalAmount; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
+
         field(17; DueDate; Date)
         {
             DataClassification = ToBeClassified;
@@ -129,7 +163,7 @@ table 50128 CourseWiseFeeStructure
 
     keys
     {
-        key(Key1; CourseCode, StreamCode, SemesterCode, ElementCode, CategoryCode, "Caste Code")
+        key(Key1; BatchCode, CourseCode, StreamCode, SemesterCode, ElementCode, CategoryCode, "Caste Code")
         {
             Clustered = true;
         }

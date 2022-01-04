@@ -25,11 +25,10 @@ table 50104 BatchMasterTable
     }
 
     var
-        myInt: Integer;
+        batch: Record BatchMasterTable;
 
     trigger OnInsert()
     begin
-
     end;
 
     trigger OnModify()
