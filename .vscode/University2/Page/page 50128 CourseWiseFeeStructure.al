@@ -18,16 +18,26 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Batch Code';
+                    LookupPageId = BatchList;
                 }
                 field(AcademicYear; rec.AcademicYear)
                 {
                     ApplicationArea = All;
+                    Caption = 'Academic Year';
+                    LookupPageId = AcademicYearList;
                 }
                 field(CourseCode; rec.CourseCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Course Code';
+                    LookupPageId = CourseList;
 
+                }
+                field(Class; rec.Class)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Class';
+                    LookupPageId = ClassMaster;
                 }
                 field(StreamCode; rec.StreamCode)
                 {
@@ -66,10 +76,12 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Category Code';
+                    LookupPageId = AdmissionCategory;
                 }
                 field("Caste Code"; rec."Caste Code")
                 {
                     ApplicationArea = All;
+                    LookupPageId = CasteMaster;
                 }
                 field("Govt Code"; rec."Govt Code")
                 {
@@ -120,12 +132,14 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Debit Account';
+                    LookupPageId = "Chart of Accounts";
 
                 }
                 field(CreditAcc; rec.CreditAcc)
                 {
                     ApplicationArea = All;
                     Caption = 'Credit Account';
+                    LookupPageId = "Chart of Accounts";
 
                 }
                 field(DueDate; rec.DueDate)

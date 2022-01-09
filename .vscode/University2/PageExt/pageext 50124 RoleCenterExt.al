@@ -132,6 +132,13 @@ pageextension 50124 RoleCenterExt extends 9006
                     action("Student Fees Processing")
                     {
                         RunObject = report 50100;
+                        // trigger OnAction()
+                        // begin
+                        //     CurrPage.SetSelectionFilter(Rec);
+                        //     FeesReport.SetTableView(Rec);
+                        //     FeesReport.Run();
+
+                        // end;
                     }
                 }
             }
@@ -139,5 +146,6 @@ pageextension 50124 RoleCenterExt extends 9006
     }
 
     var
-        myInt: Integer;
+        FeesReport: Report GenJournalReport;
+        Rec: Record Customer;
 }

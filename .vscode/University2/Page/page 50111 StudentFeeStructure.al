@@ -50,6 +50,16 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
                     Caption = 'Batch Code';
                 }
+                field(AcademicYear; rec.AcademicYear)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Academic Year';
+                }
+                field(Class; rec.Class)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Class';
+                }
                 field(CategoryCode; rec.CategoryCode)
                 {
                     ApplicationArea = All;

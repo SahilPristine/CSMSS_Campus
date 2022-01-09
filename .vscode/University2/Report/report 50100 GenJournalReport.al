@@ -11,9 +11,11 @@ report 50100 GenJournalReport
 
         {
             RequestFilterFields = "No.";
+            DataItemTableView = sorting("No.") where(Type = filter(Student));
 
             trigger OnAfterGetRecord()
             begin
+
                 pendingLinestoberun := 0;
                 recStFees2.Reset();
                 recStFees2.SetRange(StudentEnrollmentNo, "No.");
@@ -22,21 +24,22 @@ report 50100 GenJournalReport
                 recStFees2.SetRange(DebitCreated, false);
                 recStFees2.SetRange(Blocked, false);
                 pendingLinestoberun := recStFees2.Count;
-                Message('%1', pendingLinestoberun); //////
+
                 recBatch.reset;
                 recBatch.SetRange("Journal Template Name", template);
                 recBatch.SetRange(Name, Batch);
                 recBatch.FindFirst();
                 DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
 
-                recGnJnl.reset;
-                recGnJnl.SetRange("Journal Template Name", template);
-                recGnJnl.SetRange("Journal Batch Name", Batch);
-                recGnJnl.DeleteAll;
+                // recGnJnl.reset;
+                // recGnJnl.SetRange("Journal Template Name", template);
+                // recGnJnl.SetRange("Journal Batch Name", Batch);
+                // recGnJnl.DeleteAll;
 
                 recStFees.Reset();
                 recStFees.SetRange(StudentEnrollmentNo, "No.");
-                recStFees.SetRange(AcademicYear, AcademicYear);
+                // recStFees.SetRange(AcademicYear, AcademicYear);
+                recStFees.SetRange(BatchCode, "Batch Code");
                 recStFees.SetRange(CourseCode, "Course Code");
                 recStFees.SetRange(Semester, "Semester Code");
                 recStFees.SetRange(Stream, "Stream Code");
@@ -68,7 +71,7 @@ report 50100 GenJournalReport
                         recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
                         recGnJnl.Modify(true);
 
-                        if recStFees.GovtCode <> '' then begin
+                        if recStFees.GovtAmount <> 0 then begin
                             LineNo := LineNo + 10000;
                             recGnJnl.Init();
                             recGnJnl."Posting Date" := PostingDate;
@@ -98,10 +101,10 @@ report 50100 GenJournalReport
                         recStFees.Modify();
                     until recStFees.Next = 0;
                 end;
-                if runlines = 0 then
-                    Message('Entries already posted')
-                else
-                    Message('%1 entries created successfully', runlines);
+                // if runlines = 0 then
+                //     Message('Entries already created')
+                // else
+                //     Message('%1 entries created successfully', runlines);
             end;
 
         }

@@ -14,6 +14,7 @@ tableextension 50126 CusstLedgEntry extends 21
         field(50009; StudentCode; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = Customer."No." where(Type = filter('Student'));
         }
         field(50003; AcademicYear; code[20])
         {

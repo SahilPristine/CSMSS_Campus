@@ -48,12 +48,16 @@ page 50136 StudentMasterList
     {
         area(Processing)
         {
-            action(ActionName)
+            action(StudentFeesProcessing)
             {
                 ApplicationArea = All;
+                Caption = 'StudentFeesProcessing';
 
                 trigger OnAction()
                 begin
+                    CurrPage.SetSelectionFilter(Rec);
+                    FeesReport.SetTableView(Rec);
+                    FeesReport.Run();
 
                 end;
             }
@@ -61,5 +65,6 @@ page 50136 StudentMasterList
     }
 
     var
-        myInt: Integer;
+        FeesReport: Report GenJournalReport;
+        recStudent: Record Customer;
 }

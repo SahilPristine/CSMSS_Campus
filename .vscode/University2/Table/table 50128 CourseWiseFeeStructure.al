@@ -111,14 +111,17 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                if AmountByStudent < TotalAmount then begin
-                    TotalAmount := AmountByStudent + AmountByGovt;
-                end;
-                if AmountByStudent = TotalAmount then begin
-                    TotalAmount := AmountByStudent;
-                end;
-                if AmountByStudent > TotalAmount then
-                    Error('Amount is greater than total amount');
+                AmountByStudent := TotalAmount - AmountByGovt;
+                // if AmountByStudent < TotalAmount then begin
+                //     TotalAmount := AmountByStudent + AmountByGovt;
+                // end;
+                // if AmountByStudent = TotalAmount then begin
+                //     TotalAmount := AmountByStudent;
+                // end;
+                // if AmountByStudent > TotalAmount then
+                //     Error('Amount is greater than total amount');
+
+
                 // TotalAmount := AmountByGovt + AmountByStudent;
                 //     recCategory.Reset();
                 //     recCategory.SetRange(CategCode, CategoryCode);
@@ -138,9 +141,12 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                if AmountByGovt < TotalAmount then begin
-                    TotalAmount := AmountByStudent + AmountByGovt;
-                end;
+                AmountByGovt := TotalAmount - AmountByStudent
+
+                // if AmountByGovt < TotalAmount then begin
+                //     TotalAmount := AmountByStudent + AmountByGovt;
+                // end;
+
                 //     recCategory.Reset();
                 //     recCategory.SetRange(CategCode, CategoryCode);
                 //     recCategory.SetRange(Caste, "Caste Code");
@@ -158,6 +164,11 @@ table 50128 CourseWiseFeeStructure
         {
             DataClassification = ToBeClassified;
 
+        }
+        field(18; Class; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = ClassMaster;
         }
     }
 

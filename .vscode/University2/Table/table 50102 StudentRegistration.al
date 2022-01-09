@@ -4,6 +4,7 @@ table 50102 StudentRegistration
 
     fields
     {
+
         field(50000; "Registration No"; code[20])
         {
             DataClassification = ToBeClassified;
@@ -338,6 +339,11 @@ table 50102 StudentRegistration
             begin
                 Type := Type::Student;
             end;
+        }
+        field(50059; EnrollStudent; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Editable = true;
         }
 
     }

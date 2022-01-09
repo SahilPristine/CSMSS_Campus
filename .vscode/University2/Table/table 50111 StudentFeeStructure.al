@@ -75,6 +75,8 @@ table 50111 StudentFeeStructure
                 recFees.SetRange(StreamCode, Rec.Stream);
                 recFees.SetRange(SemesterCode, rec.Semester);
                 recFees.SetRange(BatchCode, rec.BatchCode);
+                recFees.SetRange(AcademicYear, rec.AcademicYear);
+                recFees.SetRange(Class, rec.Class);
                 recFees.setrange(CategoryCode, Rec.CategoryCode);
                 recFees.SetRange("Caste Code", Rec.CasteCode);
                 recFees.SetRange(ElementCode, Rec.ElementCode);
