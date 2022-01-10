@@ -44,10 +44,6 @@ page 50113 HostelRoomList
                     Caption = 'No Of Beds';
 
                 }
-                // field(PerBedFees; rec.PerBedFees)
-                // {
-                //     ApplicationArea = All;
-                // }
             }
         }
     }

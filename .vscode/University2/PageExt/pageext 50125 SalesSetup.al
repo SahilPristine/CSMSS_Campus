@@ -38,12 +38,10 @@ pageextension 50125 GenLedgerSetup extends 459
                 }
             }
         }
-        // Add changes to page layout here
     }
 
     actions
     {
-        // Add changes to page actions here
     }
 
     var

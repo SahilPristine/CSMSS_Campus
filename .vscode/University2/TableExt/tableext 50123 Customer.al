@@ -262,6 +262,8 @@ tableextension 50123 CustomerExtension extends Customer
         Route: Record RouteMaster;
         recStudent: Record Customer;
 
+    // PBS-SL Copy data from one company to another on insert or on modify
+
     trigger OnInsert()
     begin
         recStudent.ChangeCompany('mithilesh');
@@ -275,5 +277,7 @@ tableextension 50123 CustomerExtension extends Customer
     //     recStudent.TransferFields(Rec);
     //     recStudent.Insert();
     // end;
+
+    // PBS-SL Copy data from one company to another on insert or on modify
 
 }

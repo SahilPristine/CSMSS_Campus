@@ -51,8 +51,4 @@ page 50138 Government
         }
     }
 
-    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    // begin
-    //     rec.Type := rec.Type::Others;
-    // end;
 }

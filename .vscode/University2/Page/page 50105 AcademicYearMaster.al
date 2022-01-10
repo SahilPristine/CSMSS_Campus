@@ -6,12 +6,6 @@ page 50105 AcademicYearList
     SourceTable = AcademicYearMasterTable;
     Caption = 'Academic Year Master';
 
-    //   PageType = Card;
-    // ApplicationArea = All;
-    // UsageCategory = Administration;
-    // SourceTable = BatchMasterTable;
-    // AccessByPermission = page BatchMasterPage = X;
-
     layout
     {
         area(Content)

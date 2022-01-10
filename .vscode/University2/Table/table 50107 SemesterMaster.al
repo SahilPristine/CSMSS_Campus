@@ -8,15 +8,12 @@ table 50107 SemesterMasterTable
         field(1; CourseCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            // OptionMembers = "B.A.M.S","MD/MS(AYURVED)","PHD","BDS","B.SC","DIPLOMA","B.TECH","M.Tech";
             TableRelation = CourseMasterTable.CODE;
 
         }
         field(2; StreamCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            // OptionMembers = "CS","Mech","EC","Civil","EE";
-            // TableRelation = StreamMasterTable.StreamCode where(CourseCode = field(CourseCode));
 
         }
         field(3; SemesterCode; Code[20])

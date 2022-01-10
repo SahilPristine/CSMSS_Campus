@@ -7,8 +7,6 @@ page 50136 StudentMasterList
     SourceTableView = where(Type = filter(Student));
     Caption = 'Student Master';
     CardPageId = 50135;
-    // Editable = false;
-    // SourceTableView = where("Enrollment No" = filter(<> ' '));
 
     layout
     {

@@ -34,12 +34,16 @@ page 50104 BatchList
     {
         area(Processing)
         {
-            action(ActionName)
+            action(ImportBatch)
             {
                 ApplicationArea = All;
+                Caption = 'Import Batch';
+                Promoted = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
+                    Xmlport.Run(50100, true, false);
 
                 end;
             }

@@ -91,10 +91,6 @@ page 50139 GovernmentCard
                     // StyleExpr = StyleTxt;
                     ToolTip = 'Specifies the maximum amount you allow the customer to exceed the payment balance before warnings are issued.';
 
-                    // trigger OnValidate()
-                    // begin
-                    //     SetCreditLimitStyle();
-                    // end;
                 }
                 field(Blocked; rec.Blocked)
                 {

@@ -30,10 +30,7 @@ table 50111 StudentFeeStructure
         }
         field(2; CourseCode; Code[20])
         {
-            // TableRelation = StudentMaster where(StudentCode = field(StudentID));
-            // FieldClass = FlowField;
-            // CalcFormula = lookup(FeesStructure.CourseCode where(CourseCode = field(CourseCode)));
-
+            DataClassification = ToBeClassified;
         }
         field(3; Stream; Code[20])
         {

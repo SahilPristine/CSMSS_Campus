@@ -60,19 +60,11 @@ page 50118 StudentRegistrationList
 
                 trigger OnAction()
                 begin
-                    // Rec.Reset();
-                    // Rec.SetRange(EnrollStudent, true);
-                    // Rec.SetRange("Enrollment No", ' ');
-                    // if recStudReg.FindSet() then begin
-                    //     repeat
                     // rec.TestField("Batch Code");
                     // rec.TestField(Class);
                     // rec.TestField("Course Code");
                     CreateStudentMaster();
                     CreateFeesStructure();
-                    CurrPage.Update(true);
-                    //     until Rec.Next() = 0;
-                    // end;
                 end;
 
             }
@@ -88,7 +80,7 @@ page 50118 StudentRegistrationList
         recStFees: Record StudentFeeStructure;
         CustRec: Record Customer;
 
-
+    // PBS-SL Create Student Master And Fees Structure of Enrolled Students for multiple Students
     procedure CreateFeesStructure()
     begin
         Rec.Reset();
@@ -146,29 +138,20 @@ page 50118 StudentRegistrationList
         Answer: Boolean;
         Text000: Label 'Do you want to confirm enrollment?';
     begin
-        // recFees.Reset();
-        // recFees.Setrange(BatchCode, recStudReg."Batch Code");
-        // recFees.SetRange(AcademicYear, recStudReg.AcademicYear);
-        // recFees.SetRange(CourseCode, recStudReg."Course Code");
-        // recFees.SetRange(StreamCode, recStudReg."Stream Code");
-        // recFees.SetRange(SemesterCode, recStudReg."Semester Code");
-        // recFees.SetRange(CategoryCode, recStudReg.Category);
-        // recFees.SetRange("Caste Code", recStudReg.Cast);
-        // if recFees.FindFirst() then begin
         Rec.Reset();
         Rec.SetRange(EnrollStudent, true);
         if Rec.FindFirst() then begin
             repeat
                 // Message('Hello');
-                recStudReg.SetRange("Batch Code", recFees.BatchCode);
-                recStudReg.SetRange(AcademicYear, recFees.AcademicYear);
-                recStudReg.SetRange("Course Code", recFees.CourseCode);
-                recStudReg.SetRange("Stream Code", recFees.StreamCode);
-                recStudReg.SetRange("Semester Code", recFees.SemesterCode);
-                recStudReg.SetRange(Category, recFees.CategoryCode);
-                recStudReg.SetRange(Cast, recFees."Caste Code");
-                if recStudReg.FindFirst() then begin
-                    // Message('Hello2');
+                recFees.Reset();
+                recFees.Setrange(BatchCode, Rec."Batch Code");
+                recFees.SetRange(AcademicYear, Rec.AcademicYear);
+                recFees.SetRange(CourseCode, Rec."Course Code");
+                recFees.SetRange(StreamCode, Rec."Stream Code");
+                recFees.SetRange(SemesterCode, Rec."Semester Code");
+                recFees.SetRange(CategoryCode, Rec.Category);
+                recFees.SetRange("Caste Code", Rec.Cast);
+                if recFees.FindFirst() then begin
                     Question := Text000;
                     Answer := Dialog.Confirm(Question, true);
                     if Answer = true then begin
@@ -240,5 +223,7 @@ page 50118 StudentRegistrationList
             until Rec.Next() = 0;
         end;
     end;
+
+    // PBS-SL Create Student Master And Fees Structure of Enrolled Students for multiple Students
 
 }

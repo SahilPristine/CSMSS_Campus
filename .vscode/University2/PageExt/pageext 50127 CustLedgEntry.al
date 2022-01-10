@@ -10,11 +10,6 @@ pageextension 50127 CustLedgEntry extends 25
                 ApplicationArea = all;
                 Caption = 'Element Code';
             }
-            // field(ElementDesc; rec.ElementDesc)
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Element Desc';
-            // }
             field(Batch; rec.Batch)
             {
                 ApplicationArea = All;
@@ -81,15 +76,5 @@ pageextension 50127 CustLedgEntry extends 25
 
         }
     }
-    // trigger OnAfterGetRecord()
-    // begin
-    //     if CustLedgerEntry.Open = true then
-    //         CustLedgerEntry.PaymentReceived := true
-    //     else
-    //         CustLedgerEntry.PaymentReceived := false;
-    // end;
-
-    // var
-    //     CustLedgerEntry: Record "Cust. Ledger Entry";
 
 }

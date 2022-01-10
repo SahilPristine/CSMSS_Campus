@@ -36,6 +36,11 @@ page 50117 StudentRegistration
                 field(DOB; rec.DOB)
                 {
                     ApplicationArea = All;
+                    trigger OnValidate()
+                    begin
+
+                    end;
+
                 }
                 field("Birth Place"; rec."Birth Place")
                 {
@@ -120,15 +125,12 @@ page 50117 StudentRegistration
                         trigger OnValidate()
                         begin
                             if rec.SameAddress = true then begin
-                                // rec.SetRange("Registration No", rec."Registration No");
-                                // if rec.FindFirst() then begin
                                 Rec."Local Address 1" := Rec."Permanent Address 1";
                                 Rec."Local Address 2" := Rec."Permanent Address 2";
                                 Rec.State2 := Rec.State;
                                 Rec."Pin Code2" := Rec."Pin Code";
                                 Rec."Country Code2" := Rec."Country Code";
                                 Rec.Modify(true);
-                                // end;
                             end;
                             if rec.SameAddress = false then begin
                                 Rec."Local Address 1" := '';
@@ -181,10 +183,7 @@ page 50117 StudentRegistration
                 field("Phone No."; rec."Phone No")
                 {
                     ApplicationArea = All;
-                    // trigger OnValidate()
-                    // begin
-                    //     CustRec."Phone No." := rec."Phone No.";
-                    // end;
+                    ExtendedDatatype = PhoneNo;
                 }
                 field("Father's First Name"; rec."Father's First Name")
                 {
@@ -199,16 +198,19 @@ page 50117 StudentRegistration
                 field("Father's Contact No"; rec."Father's Contact No")
                 {
                     ApplicationArea = All;
+                    ExtendedDatatype = PhoneNo;
 
                 }
                 field("Father's Email ID"; rec."Father's Email ID")
                 {
                     ApplicationArea = All;
+                    ExtendedDatatype = EMail;
 
                 }
                 field("E-Mail"; rec."Email ID")
                 {
                     ApplicationArea = All;
+                    ExtendedDatatype = EMail;
                 }
                 field("Mother's First Name"; rec."Mother's First Name")
                 {
@@ -223,26 +225,19 @@ page 50117 StudentRegistration
                 field("Mother's Contact No"; rec."Mother's Contact No")
                 {
                     ApplicationArea = All;
+                    ExtendedDatatype = PhoneNo;
 
                 }
                 field("Mother's Email ID"; rec."Mother's Email ID")
                 {
                     ApplicationArea = All;
+                    ExtendedDatatype = EMail;
 
                 }
             }
 
             group(AdmissionDetails)
             {
-                // field(LateralEntry; rec.LateralEntry)
-                // {
-                //     ApplicationArea = All;
-                // }
-                // field(UniversityTransferProgram; rec.UniversityTransferProgram)
-                // {
-                //     ApplicationArea = All;
-
-                // }
                 field("Batch Code"; rec."Batch Code")
                 {
                     ApplicationArea = All;
@@ -449,6 +444,7 @@ page 50117 StudentRegistration
         recFees: Record CourseWiseFeeStructure;
         recStudent: record Customer;
         RecReg: Record StudentRegistration;
+        date: Date;
 
 
 
@@ -469,6 +465,8 @@ page 50117 StudentRegistration
         else
             confirm := true;
 
+        // PBS-SL Copy Permanent Address to Local Address    
+
         if rec.SameAddress = true then begin
             Rec."Local Address 1" := Rec."Permanent Address 1";
             Rec."Local Address 2" := Rec."Permanent Address 2";
@@ -487,6 +485,8 @@ page 50117 StudentRegistration
             Rec.Modify();
         end;
 
+        // PBS-SL Copy Permanent Address to Local Address 
+
     end;
 
     trigger OnOpenPage()
@@ -503,6 +503,7 @@ page 50117 StudentRegistration
             confirm := true;
     end;
 
+    // PBS-SL Create Fees Structure for enrolled Student
     procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
     begin
         recStudent.Reset();
@@ -544,6 +545,11 @@ page 50117 StudentRegistration
             Message('Fees Structure Created');
         end;
     end;
+
+    // PBS-SL Create Fees Structure for enrolled Student
+
+
+    // PBS-SL Create Student Master 
 
     procedure CreateStudentMaster(RecReg: Record StudentRegistration; recFees: Record CourseWiseFeeStructure; CustRec: Record Customer)
     var
@@ -630,5 +636,7 @@ page 50117 StudentRegistration
         else
             Message('Create Fees Structure First');
     end;
+
+    // PBS-SL Create Student Master
 
 }

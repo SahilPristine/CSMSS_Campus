@@ -37,7 +37,7 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Class';
-                    LookupPageId = ClassMaster;
+                    LookupPageId = ClassMasterList;
                 }
                 field(StreamCode; rec.StreamCode)
                 {
@@ -100,21 +100,6 @@ page 50128 CourseWiseFeeStructure
                 {
                     ApplicationArea = All;
                     Caption = 'Total Amount';
-                    // trigger OnValidate()
-                    // var
-                    //     recCategory: Record AdmissionCategory;
-                    // begin
-                    //     recCategory.Reset();
-                    //     recCategory.SetRange(CategCode, rec.CategoryCode);
-                    //     recCategory.SetRange(Caste, rec."Caste Code");
-                    //     recCategory.SetRange(Batch, rec.BatchCode);
-                    //     recCategory.SetRange(Course, rec.CourseCode);
-                    //     recCategory.SetRange(GovtCode, rec."Govt Code");
-                    //     if recCategory.FindFirst() then begin
-                    //         rec.Validate(AmountByStudent, (rec.TotalAmount * recCategory.StudentPercent) / 100);
-                    //         rec.Validate(AmountByGovt, (rec.TotalAmount * recCategory.GovtPercent) / 100);
-                    //     end;
-                    // end;
                 }
                 field(AmountByStudent; rec.AmountByStudent)
                 {

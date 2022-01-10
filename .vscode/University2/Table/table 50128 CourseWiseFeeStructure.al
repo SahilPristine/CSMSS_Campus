@@ -111,27 +111,6 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                AmountByStudent := TotalAmount - AmountByGovt;
-                // if AmountByStudent < TotalAmount then begin
-                //     TotalAmount := AmountByStudent + AmountByGovt;
-                // end;
-                // if AmountByStudent = TotalAmount then begin
-                //     TotalAmount := AmountByStudent;
-                // end;
-                // if AmountByStudent > TotalAmount then
-                //     Error('Amount is greater than total amount');
-
-
-                // TotalAmount := AmountByGovt + AmountByStudent;
-                //     recCategory.Reset();
-                //     recCategory.SetRange(CategCode, CategoryCode);
-                //     recCategory.SetRange(Caste, "Caste Code");
-                //     recCategory.SetRange(Batch, BatchCode);
-                //     recCategory.SetRange(Course, CourseCode);
-                //     recCategory.SetRange(GovtCode, "Govt Code");
-                //     if recCategory.FindFirst() then begin
-                //         Validate(AmountByStudent, (TotalAmount * recCategory.StudentPercent) / 100); //AmountByStudent := (TotalAmount * recCategory.StudentPercent) / 100;
-                //     end;
 
             end;
 
@@ -141,21 +120,6 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                AmountByGovt := TotalAmount - AmountByStudent
-
-                // if AmountByGovt < TotalAmount then begin
-                //     TotalAmount := AmountByStudent + AmountByGovt;
-                // end;
-
-                //     recCategory.Reset();
-                //     recCategory.SetRange(CategCode, CategoryCode);
-                //     recCategory.SetRange(Caste, "Caste Code");
-                //     recCategory.SetRange(Batch, BatchCode);
-                //     recCategory.SetRange(Course, CourseCode);
-                //     recCategory.SetRange(GovtCode, "Govt Code");
-                //     if recCategory.FindFirst() then begin
-                //         Validate(AmountByStudent, (TotalAmount * recCategory.GovtPercent) / 100); //AmountByStudent := (TotalAmount * recCategory.StudentPercent) / 100;
-                //     end;
             end;
 
         }
@@ -168,7 +132,7 @@ table 50128 CourseWiseFeeStructure
         field(18; Class; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = ClassMaster;
+            TableRelation = ClassMaster.CODE;
         }
     }
 

@@ -417,9 +417,6 @@ page 50135 StudentMaster
                 Promoted = true;
                 PromotedCategory = Process;
                 Image = Change;
-                // RunObject = page ChangeCategory;
-                // RunPageLink = EnrollmentNo = field("No.");
-                // RunPageMode = Create;
                 trigger OnAction()
                 begin
                     OnBeforeChangeCategory(recStFees, recStudent);
@@ -500,10 +497,6 @@ page 50135 StudentMaster
         recStFees.SetRange(DebitCreated, false);
         recStFees.SetRange(Blocked, false);
         if recStFees.FindFirst() then begin
-            //  begin
-            //     Page.RunModal(50137, recChangeCat);
-            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
-            // end;
             recChangeCat.Reset();
             recChangeCat.SetFilter("No.", Rec."No.");
             if not recChangeCat.FindFirst() then begin
@@ -512,12 +505,6 @@ page 50135 StudentMaster
                 recChangeCat.Insert();
             end;
             Page.Run(50137, recChangeCat);
-            // recChangeCat.FilterGroup(0);
-            // if Page.RunModal(50137, recChangeCat) = Action::RunSystem then
-            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
-            // CurrPage.Editable;
-            //     Page.RunModal(50137, recChangeCat);
-            //     recChangeCat.Validate(EnrollmentNo, rec."No.");
 
         end;
     end;

@@ -45,16 +45,6 @@ page 50127 AdmissionCategory
                     ApplicationArea = All;
                     Caption = 'Govt Code';
                 }
-                // field(StudentPercent; rec.StudentPercent)
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Student Percent';
-                // }
-                // field(GovtPercent; rec.GovtPercent)
-                // {
-                //     ApplicationArea = All;
-                //     Caption = 'Govt Percent';
-                // }
 
             }
         }

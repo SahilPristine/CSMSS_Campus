@@ -31,6 +31,8 @@ table 50102 StudentRegistration
         field(50003; DOB; Date)
         {
             DataClassification = ToBeClassified;
+            AutoFormatType = 7;
+            AutoFormatExpression = 'dd/mm/yy';
         }
         field(50004; "Birth Place"; Text[30])
         {
@@ -197,10 +199,12 @@ table 50102 StudentRegistration
         field(50053; "Phone No"; Text[10])
         {
             DataClassification = ToBeClassified;
+            ExtendedDatatype = PhoneNo;
         }
         field(50054; "Email ID"; Text[30])
         {
             DataClassification = ToBeClassified;
+            ExtendedDatatype = EMail;
         }
         field(50032; "Father's First Name"; Text[30])
         {
@@ -216,11 +220,13 @@ table 50102 StudentRegistration
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            ExtendedDatatype = PhoneNo;
         }
         field(50035; "Father's Email ID"; Text[30])
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            ExtendedDatatype = EMail;
         }
         field(50036; "Mother's First Name"; Text[30])
         {
@@ -236,11 +242,13 @@ table 50102 StudentRegistration
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            ExtendedDatatype = PhoneNo;
         }
         field(50039; "Mother's Email ID"; Text[30])
         {
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
+            ExtendedDatatype = EMail;
         }
         field(50040; "Bank Name"; Text[30])
         {
@@ -318,17 +326,6 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             trigger OnValidate()
             begin
-                // if SameAddress = true then begin
-                //     rec.SetRange("Registration No", "Registration No");
-                //     if rec.FindFirst() then begin
-                //         "Local Address 1" := "Permanent Address 1";
-                //         "Local Address 2" := "Permanent Address 2";
-                //         State2 := State;
-                //         "Pin Code2" := "Pin Code";
-                //         "Country Code2" := "Country Code";
-                //         Insert();
-                //     end;
-                // end;
             end;
         }
         field(50058; Type; Option)
@@ -359,6 +356,9 @@ table 50102 StudentRegistration
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
+        Position: Integer;
+        arraylen: Integer;
+        email: Text[30];
 
 
 
@@ -385,5 +385,6 @@ table 50102 StudentRegistration
     begin
 
     end;
+
 
 }
