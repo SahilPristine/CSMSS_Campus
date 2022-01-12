@@ -123,4 +123,9 @@ page 50126 StudentRoomShifting
 
     var
         myInt: Integer;
+
+    trigger OnModifyRecord(): Boolean
+    begin
+        CurrPage.Update(true);
+    end;
 }

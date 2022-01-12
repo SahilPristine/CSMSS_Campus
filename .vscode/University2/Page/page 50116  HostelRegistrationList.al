@@ -26,6 +26,11 @@ page 50116 HostelRegistrationList
                     Caption = 'Student Code';
 
                 }
+                field(VisitorNo; rec.VisitorNo)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Visitor Reg No';
+                }
                 field(RegistrationDate; Rec.RegistrationDate)
                 {
                     ApplicationArea = All;
@@ -38,10 +43,10 @@ page 50116 HostelRegistrationList
                     Caption = 'College Name';
 
                 }
-                field(StudentName; Rec.StudentName)
+                field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
-                    Caption = 'Student Name';
+                    Caption = 'Name';
 
                 }
                 field(Address; Rec.Address)

@@ -64,7 +64,7 @@ table 50111 StudentFeeStructure
         field(5; ElementCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = FeeStructureElements;
+            // TableRelation = FeeStructureElements;
             trigger OnValidate()
             begin
                 recFees.reset;
@@ -164,7 +164,7 @@ table 50111 StudentFeeStructure
 
     keys
     {
-        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, GovtCode, CategoryCode, CasteCode, LineNo)
+        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, CategoryCode, CasteCode, LineNo)
         {
             Clustered = true;
         }

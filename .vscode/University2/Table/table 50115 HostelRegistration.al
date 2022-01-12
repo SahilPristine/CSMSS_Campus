@@ -15,21 +15,6 @@ table 50115 HostelRegistration
                     "No. Series" := '';
                 end;
             end;
-            // trigger OnValidate()
-            // begin
-            // if RegistrationNo <> xRec.RegistrationNo then
-            // begin
-            //     recGLSetup.Get();
-            //     NoSeriesMgt.TestManual(recGLSetup.RegisterationNo);
-            //     No. Series"
-            // end;
-            // end;
-            // trigger OnValidate()
-            // begin
-            //     RegistrationNo := recGLSetup.RegisterationNo
-            // end;
-
-            // AutoIncrement = true;
 
         }
         field(2; StudentEnrollmentNo; Code[20])
@@ -40,12 +25,12 @@ table 50115 HostelRegistration
             begin
                 if StudentEnrollmentNo <> '' then
                     if recStudent.Get(StudentEnrollmentNo) then begin
-                        StudentName := recStudent.Name + ' ' + recStudent."Name 2";
+                        Name := recStudent.Name + ' ' + recStudent."Name 2";
                         Address := recStudent.Address;
                         Address2 := recStudent."Address 2";
                         Class := recStudent.Class;
                         ContactNo := recStudent."Phone No.";
-
+                        // CollegeName := recStudent.CurrentCompany;
                     end;
             end;
 
@@ -61,7 +46,7 @@ table 50115 HostelRegistration
             TableRelation = Company;
 
         }
-        field(5; StudentName; Text[100])
+        field(5; Name; Text[100])
         {
             DataClassification = ToBeClassified;
             Editable = false;
@@ -118,38 +103,22 @@ table 50115 HostelRegistration
             TableRelation = RoomMaster.RoomCode;
             trigger OnValidate()
             begin
-                recStudent.Reset();
-                recStudent.SetRange("No.", StudentEnrollmentNo);
-                if recStudent.FindFirst() then begin
-                    recStudent.HostelCode := HostelCode;
-                    recStudent.RoomNo := RoomNo;
+                recRoom.Reset();
+                recRoom.SetRange(RoomCode, Rec.RoomNo);
+                if recRoom.FindFirst() then begin
+                    HostelFees := recRoom.PerBedFees;
+                    DepositFees := recRoom.DepositFees;
                 end;
             end;
-            // trigger OnValidate()
-            // begin
-            //     if RoomNo <> '' then begin
-            //         if recRoom.get(RoomNo) then
-            //             HostelFees := recRoom.PerBedFees;
-            //     end;
-            //     // recStudent.Reset();
-            //     // recStudent.SetRange("No.", StudentCode);
-            //     // if recStudent.FindFirst() then begin
-            //     //     recStudent.HostelCode := HostelCode;
-            //     //     recStudent.RoomNo := RoomNo;
-            //     // end;
-            // end;
 
 
         }
         field(13; HostelFees; Decimal)
         {
             DataClassification = ToBeClassified;
-            // FieldClass = FlowField;
-            // CalcFormula = lookup(RoomMaster.PerBedFees where(RoomCode = field(RoomNo)));
-            // TableRelation = RoomMaster.PerBedFees where(RoomCode = field(RoomNo));
 
         }
-        field(14; DepositFees; Code[20])
+        field(14; DepositFees; Decimal)
         {
             DataClassification = ToBeClassified;
 
@@ -169,6 +138,41 @@ table 50115 HostelRegistration
         {
             DataClassification = ToBeClassified;
         }
+        field(19; RegType; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "","Others","Student";
+            trigger OnValidate()
+            begin
+                if rec.RegType = rec.RegType::Student then
+                    EditStudent := true
+                else
+                    EditStudent := false;
+                if rec.RegType = rec.RegType::Others then
+                    EditVisitor := true
+                else
+                    EditVisitor := false;
+                Rec.Modify(true);
+            end;
+
+        }
+        field(20; VisitorNo; Code[30])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Customer where(Type = filter('Others'));
+            trigger OnValidate()
+            begin
+                if VisitorNo <> '' then
+                    if recStudent.Get(VisitorNo) then begin
+                        Name := recStudent.Name + ' ' + recStudent."Name 2";
+                        Address := recStudent.Address;
+                        Address2 := recStudent."Address 2";
+                        Class := recStudent.Class;
+                        ContactNo := recStudent."Phone No.";
+                        // CollegeName := recStudent.CurrentCompany;
+                    end;
+            end;
+        }
 
     }
 
@@ -187,6 +191,8 @@ table 50115 HostelRegistration
         NoSeriesMgt: Codeunit NoSeriesManagement;
         recRoom: Record 50113;
         recHostel: Record HostelMaster;
+        EditStudent: Boolean;
+        EditVisitor: Boolean;
 
     trigger OnInsert()
     begin

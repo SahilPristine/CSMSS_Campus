@@ -7,7 +7,7 @@ table 50113 RoomMaster
         field(1; HostelCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = HostelMaster.HostelCode;
+            TableRelation = HostelMaster;
             // trigger OnValidate()
             // begin
             //     if HostelCode <> '' then
@@ -38,18 +38,22 @@ table 50113 RoomMaster
             Caption = 'No Of Beds';
         }
 
-        // field(6; PerBedFees; Decimal)
-        // {
-        //     DataClassification = ToBeClassified;
+        field(6; PerBedFees; Decimal)
+        {
+            DataClassification = ToBeClassified;
 
-        // }
+        }
+        field(7; DepositFees; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
 
     keys
     {
-        key(Key1; HostelCode, RoomCode, RoomType, Beds)
+        key(Key1; RoomCode)
         {
             Clustered = true;
         }

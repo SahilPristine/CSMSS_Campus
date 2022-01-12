@@ -125,6 +125,7 @@ report 50100 GenJournalReport
                     {
                         ApplicationArea = All;
                         TableRelation = "Gen. Journal Template";
+                        LookupPageId = 101;
 
                     }
                     field(Batch; Batch)

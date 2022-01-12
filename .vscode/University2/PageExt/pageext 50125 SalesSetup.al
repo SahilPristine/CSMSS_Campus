@@ -36,6 +36,23 @@ pageextension 50125 GenLedgerSetup extends 459
                     ApplicationArea = All;
                     Caption = 'Government Code';
                 }
+                field(VisitorNo; rec.VisitorNo)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Visitor No';
+                }
+                field(DefaultHostelElement; rec.DefaultHostelElement)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Default Hostel Elements';
+
+                }
+                field(DefaultDepositElement; rec.DefaultDepositElement)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Default Deposit Elements';
+                }
+
             }
         }
     }

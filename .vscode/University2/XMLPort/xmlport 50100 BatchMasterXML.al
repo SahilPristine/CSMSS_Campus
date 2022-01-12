@@ -2,6 +2,7 @@ xmlport 50100 BatchMasterXML
 {
     Format = VariableText;
     TextEncoding = UTF8;
+    Direction = Export;
     UseRequestPage = true;
     TableSeparator = ' ';
 

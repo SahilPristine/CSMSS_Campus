@@ -13,7 +13,7 @@ table 50126 StudentRoomShifting
                 if RegistrationNo <> '' then
                     if recHostel.Get(RegistrationNo) then begin
                         EnrollmentNo := recHostel.StudentEnrollmentNo;
-                        StudentName := recHostel.StudentName;
+                        StudentName := recHostel.Name;
                         RegistrationDate := recHostel.RegistrationDate;
                         CollegeName := recHostel.CollegeName;
                         Address := recHostel.Address;
@@ -119,7 +119,7 @@ table 50126 StudentRoomShifting
 
     keys
     {
-        key(Key1; RegistrationNo, ShiftingNo)
+        key(Key1; ShiftingNo)
         {
             Clustered = true;
         }
@@ -135,7 +135,7 @@ table 50126 StudentRoomShifting
     begin
         if ShiftingNo = '' then begin
             recSalesSetup.Get();
-            recSalesSetup.TestField(RegisterationNo);
+            recSalesSetup.TestField(RoomShistRegNo);
             NoSeriesMgt.InitSeries(recSalesSetup.RoomShistRegNo, xRec."No. Series", 0D, ShiftingNo, "No. Series");
         end;
     end;

@@ -4,7 +4,7 @@ page 50113 HostelRoomList
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = RoomMaster;
-    AccessByPermission = page HostelRoomList = X;
+    // AccessByPermission = page HostelRoomList = X;
     Caption = 'Room Master';
 
     layout
@@ -43,6 +43,16 @@ page 50113 HostelRoomList
                     ApplicationArea = All;
                     Caption = 'No Of Beds';
 
+                }
+                field(PerBedFees; rec.PerBedFees)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Per Bed Fees';
+                }
+                field(DepositFees; rec.DepositFees)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Deposit Fees';
                 }
             }
         }
