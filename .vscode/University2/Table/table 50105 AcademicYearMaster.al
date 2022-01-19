@@ -34,15 +34,21 @@ table 50105 AcademicYearMasterTable
     }
 
     var
-        myInt: Integer;
+        recAcademic: Record AcademicYearMasterTable;
 
     trigger OnInsert()
     begin
+        recAcademic.ChangeCompany('mithilesh');
+        recAcademic.TransferFields(Rec);
+        recAcademic.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recAcademic.ChangeCompany('mithilesh');
+        recAcademic.TransferFields(Rec);
+        recAcademic.Modify();
 
     end;
 

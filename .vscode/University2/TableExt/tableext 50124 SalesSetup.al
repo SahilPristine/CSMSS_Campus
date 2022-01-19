@@ -55,6 +55,23 @@ tableextension 50124 SalesSetup extends 311
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
+        field(50009; TransportSlipNO; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = "No. Series";
+            Description = 'SL-V.01';
+        }
+        field(50010; DefaultTransportElement; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
+        }
+        field(50011; TransportBalAccType; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
+            TableRelation = "G/L Account";
+        }
     }
 
     var

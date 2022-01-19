@@ -45,6 +45,7 @@ report 50100 GenJournalReport
                 recStFees.SetRange(Stream, "Stream Code");
                 // recStFees.SetRange(Class, Class);
                 recStFees.SetRange(DebitCreated, false);
+                recStFees.SetRange(Blocked, false);
                 if recStFees.FindSet() then begin
                     runlines := 0;
                     repeat

@@ -41,6 +41,8 @@ table 50130 StudentFeeReceiptHeader
                             // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
                             RecCustLedgEntry.CalcFields(Amount);
                             RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                            RecCustLedgEntry.CalcFields("Remaining Amount");
+                            RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
                             RecPostedLine.Insert();
                         until
                         RecCustLedgEntry.Next() = 0;
@@ -107,6 +109,11 @@ table 50130 StudentFeeReceiptHeader
         field(10; LateFees; Decimal)
         {
             DataClassification = ToBeClassified;
+        }
+        field(11; Status; option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Open","Closed";
         }
     }
 

@@ -26,13 +26,20 @@ table 50104 BatchMasterTable
 
     var
         batch: Record BatchMasterTable;
+        recBatch: Record BatchMasterTable;
 
     trigger OnInsert()
     begin
+        recBatch.ChangeCompany('mithilesh');
+        recBatch.TransferFields(Rec);
+        recBatch.Insert();
     end;
 
     trigger OnModify()
     begin
+        recBatch.ChangeCompany('mithilesh');
+        recBatch.TransferFields(Rec);
+        recBatch.Modify();
 
     end;
 

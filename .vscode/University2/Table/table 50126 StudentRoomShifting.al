@@ -20,8 +20,10 @@ table 50126 StudentRoomShifting
                         Address2 := recHostel.Address2;
                         Class := recHostel.Class;
                         ContactNo := recHostel.ContactNo;
+                        HostelCode := recHostel.HostelCode;
                         HostelName := recHostel.HostelName;
                         RoomNo := recHostel.RoomNo;
+                        HostelFees := recHostel.HostelFees;
                     end;
             end;
 
@@ -107,6 +109,16 @@ table 50126 StudentRoomShifting
         field(13; NewRoomNo; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = RoomMaster.RoomCode;
+            trigger OnValidate()
+            begin
+                recRoom.Reset();
+                recRoom.SetRange(RoomCode, NewRoomNo);
+                if recRoom.FindFirst() then begin
+                    NewHostelFees := recRoom.PerBedFees;
+                    StudentBalance := NewHostelFees - HostelFees;
+                end;
+            end;
         }
         field(15; "No. Series"; Code[20])
         {
@@ -114,12 +126,59 @@ table 50126 StudentRoomShifting
             Editable = false;
             TableRelation = "No. Series";
         }
+        field(16; NewHostelCode; Code[20])
+        {
+            Caption = 'New Hostel Code';
+            TableRelation = HostelMaster.HostelCode;
+            trigger OnValidate()
+            begin
+                if NewHostelCode <> '' then
+                    if recHostelMaster.Get(NewHostelCode) then begin
+                        NewHostelName := recHostelMaster.HostelName;
+                    end;
+
+            end;
+        }
+        field(17; RoomShiftingDate; Date)
+        {
+            Caption = 'Room Shifting Date';
+            trigger OnValidate()
+            begin
+
+            end;
+            // trigger OnValidate()
+            // begin
+            //     recHostel.Reset();
+            //     recHostel.SetRange(RegistrationNo, RegistrationNo);
+            //     if recHostel.FindFirst() then begin
+            //         // recHostel.Left := true;
+            //         recHostel.LeftDate := RoomShiftingDate;
+            //         recHostel.Modify(true);
+            //     end;
+            // end;
+        }
+        field(18; NewHostelFees; Decimal)
+        {
+            Caption = 'New Hostel Charges';
+        }
+        field(20; HostelCode; Code[20])
+        {
+            Caption = 'Hostel Code';
+        }
+        field(21; HostelFees; Decimal)
+        {
+            Caption = 'Hostel Fees';
+        }
+        field(22; StudentBalance; Decimal)
+        {
+            Caption = 'Student Balance';
+        }
 
     }
 
     keys
     {
-        key(Key1; ShiftingNo)
+        key(Key1; ShiftingNo, RegistrationNo)
         {
             Clustered = true;
         }
@@ -130,6 +189,7 @@ table 50126 StudentRoomShifting
         recSalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         recRoom: Record RoomMaster;
+        recHostelMaster: Record HostelMaster;
 
     trigger OnInsert()
     begin

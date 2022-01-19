@@ -108,6 +108,7 @@ table 50115 HostelRegistration
                 if recRoom.FindFirst() then begin
                     HostelFees := recRoom.PerBedFees;
                     DepositFees := recRoom.DepositFees;
+                    PerMonthFees := HostelFees / 12;
                 end;
             end;
 
@@ -126,6 +127,13 @@ table 50115 HostelRegistration
         field(15; LeftDate; Date)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                fromMonth := Date2DMY(RegistrationDate, 2);
+                toMonth := Date2DMY(LeftDate, 2);
+                Diff := toMonth - fromMonth;
+                Balance := PerMonthFees * Diff;
+            end;
 
         }
         field(16; "No. Series"; Code[20])
@@ -173,12 +181,24 @@ table 50115 HostelRegistration
                     end;
             end;
         }
+        field(21; Balance; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(22; PerMonthFees; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(23; TotalBalance; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 
     keys
     {
-        key(Key1; RegistrationNo, StudentEnrollmentNo)
+        key(Key1; RegistrationNo)
         {
             Clustered = true;
         }
@@ -193,6 +213,9 @@ table 50115 HostelRegistration
         recHostel: Record HostelMaster;
         EditStudent: Boolean;
         EditVisitor: Boolean;
+        fromMonth: Integer;
+        toMonth: Integer;
+        Diff: Integer;
 
     trigger OnInsert()
     begin

@@ -100,7 +100,14 @@ pageextension 50124 RoleCenterExt extends 9006
                     }
                     action("Student Room Shifting")
                     {
-                        RunObject = page 50126;
+                        RunObject = page 50141;
+                    }
+                }
+                group(Trasport)
+                {
+                    action("Transport registration")
+                    {
+                        RunObject = page TransportationList;
                     }
                 }
                 group(Fees)
@@ -120,6 +127,10 @@ pageextension 50124 RoleCenterExt extends 9006
                     action("Student Fees Receipt")
                     {
                         RunObject = page 50132;
+                    }
+                    action("Posted fees Receipt")
+                    {
+                        RunObject = page PostedFeesReceiptList;
                     }
                 }
                 group(Report)

@@ -271,12 +271,12 @@ tableextension 50123 CustomerExtension extends Customer
         recStudent.Insert();
     end;
 
-    // trigger OnModify()
-    // begin
-    //     recStudent.ChangeCompany('mithilesh');
-    //     recStudent.TransferFields(Rec);
-    //     recStudent.Insert();
-    // end;
+    trigger OnModify()
+    begin
+        recStudent.ChangeCompany('mithilesh');
+        recStudent.TransferFields(Rec);
+        recStudent.Modify();
+    end;
 
     // PBS-SL Copy data from one company to another on insert or on modify
 

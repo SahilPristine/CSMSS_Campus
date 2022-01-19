@@ -46,7 +46,7 @@ table 50131 StudentFeeReceiptLine
         {
             DataClassification = ToBeClassified;
         }
-        field(10; "Remaining amt to be adjsuted"; Decimal)
+        field(10; "Remaining Amount"; Decimal)
         {
             DataClassification = ToBeClassified;
         }

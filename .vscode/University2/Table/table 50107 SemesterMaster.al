@@ -50,15 +50,21 @@ table 50107 SemesterMasterTable
     }
 
     var
-        myInt: Integer;
+        recSem: Record SemesterMasterTable;
 
     trigger OnInsert()
     begin
+        recSem.ChangeCompany('mithilesh');
+        recSem.TransferFields(Rec);
+        recSem.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recSem.ChangeCompany('mithilesh');
+        recSem.TransferFields(Rec);
+        recSem.Modify();
 
     end;
 

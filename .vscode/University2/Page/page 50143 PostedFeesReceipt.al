@@ -1,4 +1,4 @@
-page 50130 StudentFeeReceiptHeader
+page 50143 PostedFeesReceipt
 {
     PageType = Document;
     ApplicationArea = All;
@@ -6,7 +6,7 @@ page 50130 StudentFeeReceiptHeader
     SourceTable = StudentFeeReceiptHeader;
     RefreshOnActivate = true;
     Caption = 'Student Fees Receipt';
-    // Editable = editable;
+    Editable = false;
 
     layout
     {
@@ -151,11 +151,11 @@ page 50130 StudentFeeReceiptHeader
                     RecGenJoun.SetRange("Journal Batch Name", 'FEES');
                     RecGenJoun.DeleteAll();
 
-                    recBatch.reset;
-                    recBatch.SetRange("Journal Template Name", 'GENERAL');
-                    recBatch.SetRange(Name, 'FEES');
-                    recBatch.FindFirst();
-                    DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
+                    // recBatch.reset;
+                    // recBatch.SetRange("Journal Template Name", 'GENERAL');
+                    // recBatch.SetRange(Name, 'FEES');
+                    // recBatch.FindFirst();
+                    // DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
 
                     RecGenJoun.Reset();
                     RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
@@ -188,30 +188,12 @@ page 50130 StudentFeeReceiptHeader
                     GJL.Validate(ElementCode, RecPostedLine.ElementCode);
                     // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
-                    CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
+                    // CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
 
                     rec.Status := rec.Status::Closed;
 
                     CurrPage.Update(true);
 
-
-
-
-                    // Message('Hi');
-
-                    // RecCustLedgEntry.Reset();
-                    // RecCustLedgEntry.SetRange("Customer No.", rec.CustomerNo);
-                    // RecCustLedgEntry.SetRange(ElementCode, RecPostedLine.ElementCode);
-                    // if RecCustLedgEntry.FindFirst() then begin
-                    //     Message('Hello');
-                    //     repeat
-                    //         Message('Hello2');
-                    //         RecCustLedgEntry.CalcFields("Remaining Amount");
-                    //         RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
-                    //         RecPostedLine.Modify(true)
-                    //     until RecCustLedgEntry.Next() = 0;
-                    //     // CurrPage.Update(true);
-                    // end;
                 end;
 
 
@@ -291,12 +273,6 @@ page 50130 StudentFeeReceiptHeader
             Rec.Modify();
             CurrPage.Update(true);
         end;
-
-        if rec.Status = Rec.Status::Closed then
-            editable := false
-        else
-            editable := true;
-        CurrPage.Update(true);
 
     end;
 

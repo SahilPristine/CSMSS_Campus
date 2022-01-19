@@ -56,15 +56,21 @@ table 50127 AdmissionCategory
     }
 
     var
-        myInt: Integer;
+        recCategory: Record AdmissionCategory;
 
     trigger OnInsert()
     begin
+        recCategory.ChangeCompany('mithilesh');
+        recCategory.TransferFields(Rec);
+        recCategory.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recCategory.ChangeCompany('mithilesh');
+        recCategory.TransferFields(Rec);
+        recCategory.Modify();
 
     end;
 

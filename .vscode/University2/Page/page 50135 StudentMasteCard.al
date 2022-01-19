@@ -359,6 +359,19 @@ page 50135 StudentMaster
                         // Enabled = editTransport;
                     }
                 }
+                group(PostingGroup)
+                {
+                    field("Customer Posting Group"; rec."Customer Posting Group")
+                    {
+                        ApplicationArea = All;
+                        LookupPageId = "Customer Posting Groups";
+                    }
+                    field("Gen. Bus. Posting Group"; rec."Gen. Bus. Posting Group")
+                    {
+                        ApplicationArea = All;
+                        LookupPageId = "Gen. Business Posting Groups";
+                    }
+                }
             }
         }
         area(FactBoxes)
@@ -434,11 +447,56 @@ page 50135 StudentMaster
         recStudent: Record Customer;
         recCLE: Record "Cust. Ledger Entry";
         recChangeCat: Record Customer;
+        recHostel: Record HostelRegistration;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         rec.Type := rec.Type::Student;
     end;
+
+    // trigger OnOpenPage()
+    // begin
+    //     recHostel.Reset();
+    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
+    //     if recHostel.FindFirst() then begin
+    //         // recStudent.Init();
+    //         rec.HostelCode := recHostel.HostelCode;
+    //         rec.RoomNo := recHostel.RoomNo;
+    //         rec.Modify(true);
+    //         // CurrPage.Update(true);
+    //     end;
+    // end;
+
+    // trigger OnModifyRecord(): Boolean
+    // begin
+
+    // end;
+
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     recHostel.Reset();
+    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
+    //     if recHostel.FindFirst() then begin
+    //         recStudent.Init();
+    //         rec.HostelCode := recHostel.HostelCode;
+    //         rec.RoomNo := recHostel.RoomNo;
+    //         rec.Modify(true);
+    //         // CurrPage.Update(true);
+    //     end;
+    // end;
+
+    // trigger OnAfterGetRecord()
+    // begin
+    //     recHostel.Reset();
+    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
+    //     if recHostel.FindFirst() then begin
+    //         recStudent.Init();
+    //         rec.HostelCode := recHostel.HostelCode;
+    //         rec.RoomNo := recHostel.RoomNo;
+    //         rec.Modify(true);
+    //         // CurrPage.Update(true);
+    //     end;
+    // end;
 
     local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
     var

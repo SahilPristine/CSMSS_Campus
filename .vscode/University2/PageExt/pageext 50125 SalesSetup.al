@@ -41,6 +41,11 @@ pageextension 50125 GenLedgerSetup extends 459
                     ApplicationArea = All;
                     Caption = 'Visitor No';
                 }
+                field(TransportSlipNO; rec.TransportSlipNO)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Transport Slip No';
+                }
                 field(DefaultHostelElement; rec.DefaultHostelElement)
                 {
                     ApplicationArea = All;
@@ -52,6 +57,17 @@ pageextension 50125 GenLedgerSetup extends 459
                     ApplicationArea = All;
                     Caption = 'Default Deposit Elements';
                 }
+                field(DefaultTransportElement; rec.DefaultTransportElement)
+                {
+                    ApplicationArea = All;
+                    Caption = ' Default Transport Element';
+                }
+                field(TransportBalAccType; rec.TransportBalAccType)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Transport Bal Acc Type';
+                }
+
 
             }
         }

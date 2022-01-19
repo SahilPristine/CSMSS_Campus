@@ -136,25 +136,39 @@ page 50115 HostelRegistration
                     Caption = 'Hostel Fees';
 
                 }
+                field(PerMonthFees; rec.PerMonthFees)
+                {
+                    ApplicationArea = All;
+                }
                 field(DepositFees; Rec.DepositFees)
                 {
                     ApplicationArea = All;
                     Caption = 'Deposit Fees';
 
                 }
-                field(Left; rec.Left)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Left';
-                }
+            }
+            group(LeftHostel)
+            {
+                Caption = 'Left Hostel';
+                // field(Left; rec.Left)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Left';
+                // }
                 field(LeftDate; Rec.LeftDate)
                 {
                     ApplicationArea = All;
                     Caption = 'Left Date';
 
                 }
-
+                field(Balance; rec.Balance)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Balance';
+                }
             }
+
+
         }
     }
 
@@ -172,8 +186,69 @@ page 50115 HostelRegistration
 
                 trigger OnAction()
                 begin
+                    if rec.RegType = rec.RegType::Student then
+                        CreateHostelFees(recRoom, recStFees, recStudent)
+                    else
+                        CreateVisitorHostelFees(recRoom, recStFees, recStudent);
 
-                    CreateHostelFees(recRoom, recStFees, recStudent);
+                    recStudent.Reset();
+                    recStudent.SetRange("No.", rec.StudentEnrollmentNo);
+                    if recStudent.FindFirst() then
+                        recStudent.Init();
+                    recStudent.HostelCode := Rec.HostelCode;
+                    recStudent.RoomNo := Rec.RoomNo;
+                    recStudent.Modify(true);
+                end;
+
+            }
+            action(Left)
+            {
+                ApplicationArea = All;
+                Caption = 'Left Hostel';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = RemoveLine;
+
+                trigger OnAction()
+                begin
+
+                    Clear(lineno);
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
+                    RecGenJoun.DeleteAll();
+
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
+                    if RecGenJoun.FindLast() then
+                        lineno := RecGenJoun."Line No."
+                    else
+                        lineno := 10000;
+
+                    GJL.Init();
+                    GJL.Validate("Journal Template Name", 'GENERAL');
+                    GJL.Validate("Journal Batch Name", 'HOSTElFEE');
+                    GJL."Line No." := lineno + 10000;
+                    GJL.Insert(true);
+                    GJL.Validate("Posting Date", today);
+                    GJL.validate("Document No.", Rec.RegistrationNo);
+                    GJL.validate("Document Type", GJL."Document Type"::" ");
+                    // IF Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cash then begin
+                    //     GJL.validate("Account Type", GJL."Account Type"::"G/L Account");
+                    //     GJL.Validate("Account No.", Rec.GLAccNo)
+                    // end;
+                    // if Rec."Mode Of Payment" = Rec."Mode Of Payment"::BankTransfer then begin
+                    //     GJL.validate("Account Type", gjl."Account Type"::"Bank Account");
+                    //     GJL.Validate("Account No.", rec.BankAccNo);
+                    // end;
+
+                    GJL.Validate(Amount, Rec.Balance);
+                    GJL.validate("Account Type", GJL."Account Type"::Customer);
+                    GJL.Validate("Account No.", Rec.StudentEnrollmentNo);
+                    GJL.Validate(ElementCode, SalesSetup.DefaultHostelElement);
+                    // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
+                    GJL.Modify(true);
                 end;
             }
         }
@@ -189,6 +264,9 @@ page 50115 HostelRegistration
         recFees: Record CourseWiseFeeStructure;
         recStudent: record Customer;
         SalesSetup: Record "Sales & Receivables Setup";
+        GJL: Record "Gen. Journal Line";
+        RecGenJoun: record "Gen. Journal Line";
+        lineno: Integer;
 
 
     trigger OnAfterGetRecord()
@@ -203,86 +281,6 @@ page 50115 HostelRegistration
             EditVisitor := false;
     end;
 
-    // procedure CreateFeesStructure(recStFees: Record StudentFeeStructure; recFees: Record CourseWiseFeeStructure; recStudent: record Customer)
-    // begin
-    //     recStudent.Reset();
-    //     recStudent.SetRange("No.", rec.StudentEnrollmentNo);
-    //     if recStudent.FindFirst() then begin
-    //         recFees.Reset();
-    //         recFees.Setrange(BatchCode, recStudent."Batch Code");
-    //         recFees.SetRange(AcademicYear, recStudent.AcademicYear);
-    //         recFees.SetRange(CourseCode, recStudent."Course Code");
-    //         recFees.SetRange(StreamCode, recStudent."Stream Code");
-    //         // recFees.SetRange(SemesterCode, recStudent."Semester Code");
-    //         // recFees.SetRange(CategoryCode, recStudent.Category);
-    //         // recFees.SetRange("Caste Code", recStudent.Cast);
-    //         if recFees.FindFirst() then begin
-    //             repeat
-    //                 recStFees.Init();
-    //                 recStFees.StudentEnrollmentNo := recStudent."No.";
-    // recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
-    // recStFees.CourseCode := recStudent."Course Code";
-    // recStFees.Stream := recStudent."Stream Code";
-    // recStFees.Semester := recStudent."Semester Code";
-    // recStFees.BatchCode := recStudent."Batch Code";
-    // recStFees.AcademicYear := recStudent.AcademicYear;
-    // recStFees.Class := recStudent.Class;
-    // recStFees.CategoryCode := recStudent.Category;
-    // recStFees.CasteCode := recStudent.Cast;
-    //                 recStFees.ElementCode := recFees.ElementCode;
-    //                 // recStFees.GovtCode := recFees."Govt Code";
-    //                 recStFees.AmountByStudent := recFees.AmountByStudent;
-    //                 // recStFees.GovtAmount := recFees.AmountByGovt;
-    //                 recStFees.TotalAmount := recFees.TotalAmount;
-    //                 recStFees.DebitAcc := recFees.DebitAcc;
-    //                 recStFees.CreditAcc := recFees.CreditAcc;
-    //                 recStFees.Insert(true);
-    //             until
-    //             recFees.Next() = 0;
-
-    //         end;
-    //         Message('Fees Structure Created');
-    //     end;
-
-    //     recStudent.Reset();
-    //     recStudent.SetRange("No.", rec.VisitorNo);
-    //     if recStudent.FindFirst() then begin
-    //         recFees.Reset();
-    //         recFees.Setrange(BatchCode, recStudent."Batch Code");
-    //         recFees.SetRange(AcademicYear, recStudent.AcademicYear);
-    //         recFees.SetRange(CourseCode, recStudent."Course Code");
-    //         recFees.SetRange(StreamCode, recStudent."Stream Code");
-    //         recFees.SetRange(SemesterCode, recStudent."Semester Code");
-    //         recFees.SetRange(CategoryCode, recStudent.Category);
-    //         recFees.SetRange("Caste Code", recStudent.Cast);
-    //         if recFees.FindFirst() then begin
-    //             repeat
-    //                 recStFees.Init();
-    //                 recStFees.StudentEnrollmentNo := recStudent."No.";
-    //                 recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
-    //                 recStFees.CourseCode := recStudent."Course Code";
-    //                 recStFees.Stream := recStudent."Stream Code";
-    //                 recStFees.Semester := recStudent."Semester Code";
-    //                 recStFees.BatchCode := recStudent."Batch Code";
-    //                 recStFees.AcademicYear := recStudent.AcademicYear;
-    //                 recStFees.Class := recStudent.Class;
-    //                 recStFees.CategoryCode := recStudent.Category;
-    //                 recStFees.CasteCode := recStudent.Cast;
-    //                 recStFees.ElementCode := recFees.ElementCode;
-    //                 recStFees.GovtCode := recFees."Govt Code";
-    //                 recStFees.AmountByStudent := recFees.AmountByStudent;
-    //                 recStFees.GovtAmount := recFees.AmountByGovt;
-    //                 recStFees.TotalAmount := recFees.TotalAmount;
-    //                 recStFees.DebitAcc := recFees.DebitAcc;
-    //                 recStFees.CreditAcc := recFees.CreditAcc;
-    //                 recStFees.Insert(true);
-    //             until
-    //             recFees.Next() = 0;
-
-    //         end;
-    //         Message('Fees Structure Created');
-    //     end;
-    // end;
 
     procedure CreateHostelFees(recRoom: Record RoomMaster; recStFees: Record StudentFeeStructure; recStudent: record Customer)
     begin
@@ -291,8 +289,9 @@ page 50115 HostelRegistration
         recRoom.SetRange(RoomCode, Rec.RoomNo);
         if recRoom.FindFirst() then begin
             recStudent.SetRange("No.", Rec.StudentEnrollmentNo);
+            recStudent.SetFilter(HostelCode, ' ');
             if recStudent.FindFirst() then begin
-                Message('Hello');
+                // Message('Hello');
                 recStFees.Init();
                 recStFees.StudentEnrollmentNo := Rec.StudentEnrollmentNo;
                 recStFees.StudentName := Rec.Name;
@@ -309,7 +308,13 @@ page 50115 HostelRegistration
                 recStFees.AmountByStudent := rec.HostelFees;
                 recStFees.TotalAmount := recStFees.AmountByStudent;
                 recStFees.Insert(true);
-            end;
+                recStudent.HostelCode := rec.HostelCode;
+                recStudent.RoomNo := rec.RoomNo;
+                recStudent.Modify(true);
+                Message('Student registered in Hostel %1 and fees structure created', rec.HostelCode);
+            end
+            else
+                Error('Student already registered in Hostel');
         end;
 
         recRoom.Reset();
@@ -335,7 +340,61 @@ page 50115 HostelRegistration
                 recStFees.Insert(true);
             end;
         end;
+
+
     end;
 
+    procedure CreateVisitorHostelFees(recRoom: Record RoomMaster; recStFees: Record StudentFeeStructure; recStudent: record Customer)
+    begin
+
+        recRoom.Reset();
+        recRoom.SetRange(RoomCode, Rec.RoomNo);
+        if recRoom.FindFirst() then begin
+            recStudent.SetRange("No.", Rec.VisitorNo);
+            if recStudent.FindFirst() then begin
+                Message('Hello');
+                recStFees.Init();
+                recStFees.StudentEnrollmentNo := Rec.VisitorNo;
+                recStFees.StudentName := Rec.Name;
+                recStFees.CourseCode := recStudent."Course Code";
+                recStFees.Stream := recStudent."Stream Code";
+                recStFees.Semester := recStudent."Semester Code";
+                recStFees.BatchCode := recStudent."Batch Code";
+                recStFees.AcademicYear := recStudent.AcademicYear;
+                recStFees.Class := recStudent.Class;
+                recStFees.CategoryCode := recStudent.Category;
+                recStFees.CasteCode := recStudent.Cast;
+                SalesSetup.Get();
+                recStFees.ElementCode := SalesSetup.DefaultHostelElement;
+                recStFees.AmountByStudent := rec.HostelFees;
+                recStFees.TotalAmount := recStFees.AmountByStudent;
+                recStFees.Insert(true);
+            end;
+        end;
+
+        recRoom.Reset();
+        recRoom.SetRange(RoomCode, Rec.RoomNo);
+        if recRoom.FindFirst() then begin
+            recStudent.SetRange("No.", Rec.StudentEnrollmentNo);
+            if recStudent.FindFirst() then begin
+                recStFees.Init();
+                recStFees.StudentEnrollmentNo := Rec.VisitorNo;
+                recStFees.CourseCode := recStudent."Course Code";
+                recStFees.Stream := recStudent."Stream Code";
+                recStFees.Semester := recStudent."Semester Code";
+                recStFees.BatchCode := recStudent."Batch Code";
+                recStFees.AcademicYear := recStudent.AcademicYear;
+                recStFees.Class := recStudent.Class;
+                recStFees.CategoryCode := recStudent.Category;
+                recStFees.CasteCode := recStudent.Cast;
+                SalesSetup.Get();
+                recStFees.ElementCode := SalesSetup.DefaultDepositElement;
+                recStFees.StudentName := Rec.Name;
+                recStFees.AmountByStudent := rec.DepositFees;
+                recStFees.TotalAmount := recStFees.AmountByStudent;
+                recStFees.Insert(true);
+            end;
+        end;
+    end;
 
 }

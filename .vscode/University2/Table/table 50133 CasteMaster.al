@@ -24,15 +24,21 @@ table 50133 CasteMaster
     }
 
     var
-        myInt: Integer;
+        recCaste: Record CasteMaster;
 
     trigger OnInsert()
     begin
+        recCaste.ChangeCompany('mithilesh');
+        recCaste.TransferFields(Rec);
+        recCaste.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recCaste.ChangeCompany('mithilesh');
+        recCaste.TransferFields(Rec);
+        recCaste.Insert();
 
     end;
 

@@ -35,15 +35,21 @@ table 50108 StreamMasterTable
     }
 
     var
-    // CourseRec: Record 50106;
+        recStream: Record StreamMasterTable;
 
     trigger OnInsert()
     begin
+        recStream.ChangeCompany('mithilesh');
+        recStream.TransferFields(Rec);
+        recStream.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recStream.ChangeCompany('mithilesh');
+        recStream.TransferFields(Rec);
+        recStream.Insert();
 
     end;
 

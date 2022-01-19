@@ -40,15 +40,21 @@ table 50109 ClassMasterTable
     }
 
     var
-        myInt: Integer;
+        recClass: Record ClassMasterTable;
 
     trigger OnInsert()
     begin
+        recClass.ChangeCompany('mithilesh');
+        recClass.TransferFields(Rec);
+        recClass.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recClass.ChangeCompany('mithilesh');
+        recClass.TransferFields(Rec);
+        recClass.Insert();
 
     end;
 

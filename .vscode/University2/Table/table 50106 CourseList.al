@@ -41,15 +41,21 @@ table 50106 CourseMasterTable
     }
 
     var
-        myInt: Integer;
+        recCourse: record CourseMasterTable;
 
     trigger OnInsert()
     begin
+        recCourse.ChangeCompany('mithilesh');
+        recCourse.TransferFields(Rec);
+        recCourse.Insert();
 
     end;
 
     trigger OnModify()
     begin
+        recCourse.ChangeCompany('mithilesh');
+        recCourse.TransferFields(Rec);
+        recCourse.Modify();
 
     end;
 

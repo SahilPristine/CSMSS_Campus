@@ -49,6 +49,10 @@ page 50131 StudentFeeReceiptLine
                 {
                     ApplicationArea = All;
                 }
+                field("Remaining Amount"; rec."Remaining Amount")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

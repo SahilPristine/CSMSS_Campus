@@ -145,6 +145,8 @@ page 50137 ChangeCategory
                     recStFees.Stream := recStudent."Stream Code";
                     recStFees.Semester := recStudent."Semester Code";
                     recStFees.BatchCode := recStudent."Batch Code";
+                    recStFees.AcademicYear := recStudent.AcademicYear;
+                    recStFees.Class := recStudent.Class;
                     recStFees.CategoryCode := recStudent.Category;
                     recStFees.CasteCode := recStudent.Cast;
                     recStFees.ElementCode := recFees.ElementCode;

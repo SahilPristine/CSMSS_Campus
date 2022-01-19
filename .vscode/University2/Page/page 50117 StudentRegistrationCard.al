@@ -628,6 +628,8 @@ page 50117 StudentRegistration
                 CustRec.Transport := rec.Transport;
                 CustRec.RouteNo := rec.RoomNo;
                 CustRec.Charge := rec.Charge;
+                CustRec."Customer Posting Group" := 'DOMESTIC';
+                CustRec."Gen. Bus. Posting Group" := 'DOMESTIC';
 
                 CustRec.Insert(true);
                 CurrPage.Update(true);

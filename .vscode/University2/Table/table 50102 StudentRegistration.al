@@ -5,6 +5,7 @@ table 50102 StudentRegistration
     fields
     {
 
+
         field(50000; "Registration No"; code[20])
         {
             DataClassification = ToBeClassified;
@@ -16,6 +17,7 @@ table 50102 StudentRegistration
                     "No. Series" := '';
                 end;
             end;
+
         }
         field(50001; "First Name"; Text[30])
         {
