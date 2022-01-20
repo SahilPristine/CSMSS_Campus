@@ -326,13 +326,13 @@ page 50135 StudentMaster
                         Caption = 'Bed Type';
                         // Enabled = editHostel;
                     }
-                    field(HostelCode; rec.HostelCode)
+                    field(HostelCode; Rec.HostelCode)
                     {
                         ApplicationArea = All;
                         Caption = 'Hostel Code';
                         // Enabled = editHostel;
                     }
-                    field(RoomNo; rec.RoomNo)
+                    field(RoomNo; Rec.RoomNo)
                     {
                         ApplicationArea = All;
                         Caption = 'Room No';
@@ -448,6 +448,9 @@ page 50135 StudentMaster
         recCLE: Record "Cust. Ledger Entry";
         recChangeCat: Record Customer;
         recHostel: Record HostelRegistration;
+        Company: Text;
+        HostelCode1: Code[20];
+        RoomCode1: Code[20];
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
@@ -459,10 +462,12 @@ page 50135 StudentMaster
     //     recHostel.Reset();
     //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
     //     if recHostel.FindFirst() then begin
-    //         // recStudent.Init();
-    //         rec.HostelCode := recHostel.HostelCode;
-    //         rec.RoomNo := recHostel.RoomNo;
-    //         rec.Modify(true);
+    //         HostelCode1 := recHostel.HostelCode;
+    //         RoomCode1 := recHostel.RoomNo;
+    //         // rec.Init();
+    //         // rec.HostelCode := HostelCode1;
+    //         // rec.RoomNo := RoomCode1;
+    //         // rec.Modify(true);
     //         // CurrPage.Update(true);
     //     end;
     // end;
@@ -520,6 +525,24 @@ page 50135 StudentMaster
         recStFees.SetRange(DebitCreated, true);
         recStFees.SetRange(StudentEntryReversed, true);
         recStFees.SetRange(GovtEntryReversed, true);
+        recStFees.SetRange(Blocked, false);
+        if recStFees.FindFirst() then begin
+            recChangeCat.Reset();
+            recChangeCat.SetFilter("No.", Rec."No.");
+            if not recChangeCat.FindFirst() then begin
+                recChangeCat.Init();
+                recChangeCat.Validate("No.", Rec."No.");
+                recChangeCat.Insert();
+            end;
+            Page.Run(50137, recChangeCat);
+        end;
+
+        recStFees.Reset();
+        recStFees.SetRange(StudentEnrollmentNo, rec."No.");
+        recStFees.SetRange(DebitCreated, true);
+        recStFees.SetRange(StudentEntryReversed, true);
+        recStFees.SetFilter(GovtCode, '');
+        recStFees.SetRange(GovtEntryReversed, false);
         recStFees.SetRange(Blocked, false);
         if recStFees.FindFirst() then begin
             recChangeCat.Reset();

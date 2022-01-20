@@ -28,15 +28,25 @@ table 50129 RouteMaster
     }
 
     var
-        myInt: Integer;
+        recRoute: Record RouteMaster;
 
     trigger OnInsert()
     begin
+        if CompanyName <> 'mithilesh' then begin
+            recRoute.ChangeCompany('mithilesh');
+            recRoute.TransferFields(Rec);
+            recRoute.Insert();
+        end;
 
     end;
 
     trigger OnModify()
     begin
+        if CompanyName <> 'mithilesh' then begin
+            recRoute.ChangeCompany('mithilesh');
+            recRoute.TransferFields(Rec);
+            recRoute.Insert();
+        end;
 
     end;
 

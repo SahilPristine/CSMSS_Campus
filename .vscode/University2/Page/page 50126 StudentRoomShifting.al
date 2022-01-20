@@ -205,7 +205,7 @@ page 50126 StudentRoomShifting
                         recStudent.HostelCode := rec.NewHostelCode;
                         recStudent.RoomNo := rec.NewRoomNo;
                         recStudent.Modify(true);
-                        CurrPage.Update(true);
+                        // CurrPage.Update(true);
                     end;
                     Codeunit.Run(Codeunit::"Gen. Jnl.-Post");
 

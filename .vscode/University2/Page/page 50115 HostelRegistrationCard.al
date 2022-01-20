@@ -191,13 +191,14 @@ page 50115 HostelRegistration
                     else
                         CreateVisitorHostelFees(recRoom, recStFees, recStudent);
 
-                    recStudent.Reset();
-                    recStudent.SetRange("No.", rec.StudentEnrollmentNo);
-                    if recStudent.FindFirst() then
-                        recStudent.Init();
-                    recStudent.HostelCode := Rec.HostelCode;
-                    recStudent.RoomNo := Rec.RoomNo;
-                    recStudent.Modify(true);
+                    // CurrentCompany;
+                    // recStudent.Reset();
+                    // recStudent.SetRange("No.", rec.StudentEnrollmentNo);
+                    // if recStudent.FindFirst() then
+                    //     // recStudent.Init();
+                    // recStudent.HostelCode := Rec.HostelCode;
+                    // recStudent.RoomNo := Rec.RoomNo;
+                    // recStudent.Modify(true);
                 end;
 
             }
@@ -214,12 +215,12 @@ page 50115 HostelRegistration
 
                     Clear(lineno);
                     RecGenJoun.Reset();
-                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
                     RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
                     RecGenJoun.DeleteAll();
 
                     RecGenJoun.Reset();
-                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
                     RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
                     if RecGenJoun.FindLast() then
                         lineno := RecGenJoun."Line No."
@@ -227,7 +228,7 @@ page 50115 HostelRegistration
                         lineno := 10000;
 
                     GJL.Init();
-                    GJL.Validate("Journal Template Name", 'GENERAL');
+                    GJL.Validate("Journal Template Name", 'GENERAL1');
                     GJL.Validate("Journal Batch Name", 'HOSTElFEE');
                     GJL."Line No." := lineno + 10000;
                     GJL.Insert(true);
@@ -246,6 +247,7 @@ page 50115 HostelRegistration
                     GJL.Validate(Amount, Rec.Balance);
                     GJL.validate("Account Type", GJL."Account Type"::Customer);
                     GJL.Validate("Account No.", Rec.StudentEnrollmentNo);
+                    GJl.Validate("Bal. Account No.", 'HOSTEL');
                     GJL.Validate(ElementCode, SalesSetup.DefaultHostelElement);
                     // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
@@ -267,6 +269,9 @@ page 50115 HostelRegistration
         GJL: Record "Gen. Journal Line";
         RecGenJoun: record "Gen. Journal Line";
         lineno: Integer;
+        Company: Text;
+        HostelCode: Code[20];
+        RoomCode: Code[20];
 
 
     trigger OnAfterGetRecord()
@@ -289,7 +294,7 @@ page 50115 HostelRegistration
         recRoom.SetRange(RoomCode, Rec.RoomNo);
         if recRoom.FindFirst() then begin
             recStudent.SetRange("No.", Rec.StudentEnrollmentNo);
-            recStudent.SetFilter(HostelCode, ' ');
+            // recStudent.SetFilter(HostelCode, ' ');
             if recStudent.FindFirst() then begin
                 // Message('Hello');
                 recStFees.Init();
@@ -315,6 +320,21 @@ page 50115 HostelRegistration
             end
             else
                 Error('Student already registered in Hostel');
+
+            // Company := Rec.CurrentCompany();
+            // Message('%1', Company);
+            // HostelCode.
+            // recStudent.Reset();
+            // recStudent.SetRange("No.", rec.StudentEnrollmentNo);
+            // if recStudent.FindFirst() then begin
+            //     Message('Hi');
+            //     // recStudent.Init();
+            //     recStudent.Validate(HostelCode, rec.HostelCode);
+            //     recStudent.Validate(RoomNo, rec.RoomNo);
+            //     Message('Hello');
+            //     recStudent.Modify(true);
+            //     // CurrPage.Update(true);
+            // end;
         end;
 
         recRoom.Reset();

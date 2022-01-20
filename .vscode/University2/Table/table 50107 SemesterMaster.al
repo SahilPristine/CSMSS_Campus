@@ -54,17 +54,22 @@ table 50107 SemesterMasterTable
 
     trigger OnInsert()
     begin
-        recSem.ChangeCompany('mithilesh');
-        recSem.TransferFields(Rec);
-        recSem.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recSem.ChangeCompany('mithilesh');
+            recSem.TransferFields(Rec);
+            recSem.Insert();
+        end;
+
 
     end;
 
     trigger OnModify()
     begin
-        recSem.ChangeCompany('mithilesh');
-        recSem.TransferFields(Rec);
-        recSem.Modify();
+        if CompanyName <> 'mithilesh' then begin
+            recSem.ChangeCompany('mithilesh');
+            recSem.TransferFields(Rec);
+            recSem.modify();
+        end;
 
     end;
 

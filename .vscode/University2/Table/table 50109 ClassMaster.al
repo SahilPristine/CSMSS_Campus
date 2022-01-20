@@ -44,17 +44,20 @@ table 50109 ClassMasterTable
 
     trigger OnInsert()
     begin
-        recClass.ChangeCompany('mithilesh');
-        recClass.TransferFields(Rec);
-        recClass.Insert();
-
+        if CompanyName <> 'mithilesh' then begin
+            recClass.ChangeCompany('mithilesh');
+            recClass.TransferFields(Rec);
+            recClass.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recClass.ChangeCompany('mithilesh');
-        recClass.TransferFields(Rec);
-        recClass.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recClass.ChangeCompany('mithilesh');
+            recClass.TransferFields(Rec);
+            recClass.modify();
+        end;
 
     end;
 

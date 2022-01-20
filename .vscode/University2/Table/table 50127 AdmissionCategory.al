@@ -60,17 +60,20 @@ table 50127 AdmissionCategory
 
     trigger OnInsert()
     begin
-        recCategory.ChangeCompany('mithilesh');
-        recCategory.TransferFields(Rec);
-        recCategory.Insert();
-
+        if CompanyName <> 'mithilesh' then begin
+            recCategory.ChangeCompany('mithilesh');
+            recCategory.TransferFields(Rec);
+            recCategory.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recCategory.ChangeCompany('mithilesh');
-        recCategory.TransferFields(Rec);
-        recCategory.Modify();
+        if CompanyName <> 'mithilesh' then begin
+            recCategory.ChangeCompany('mithilesh');
+            recCategory.TransferFields(Rec);
+            recCategory.Insert();
+        end;
 
     end;
 

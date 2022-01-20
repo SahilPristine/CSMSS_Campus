@@ -26,15 +26,24 @@ table 50110 FeeStructureElements
     }
 
     var
-        myInt: Integer;
+        recElement: record FeeStructureElements;
 
     trigger OnInsert()
     begin
-
+        if CompanyName <> 'mithilesh' then begin
+            recElement.ChangeCompany('mithilesh');
+            recElement.TransferFields(Rec);
+            recElement.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
+        if CompanyName <> 'mithilesh' then begin
+            recElement.ChangeCompany('mithilesh');
+            recElement.TransferFields(Rec);
+            recElement.Insert();
+        end;
 
     end;
 

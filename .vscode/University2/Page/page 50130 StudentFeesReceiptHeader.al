@@ -18,6 +18,7 @@ page 50130 StudentFeeReceiptHeader
                 {
                     ApplicationArea = All;
                     Caption = 'Document No';
+                    // Editable = editable;
 
                     trigger OnAssistEdit()
                     begin
@@ -30,6 +31,7 @@ page 50130 StudentFeeReceiptHeader
                     ApplicationArea = All;
                     Caption = 'Student Enrollment No';
                     TableRelation = Customer."No.";
+                    // Editable = editable;
                     trigger OnValidate()
                     begin
                         if RecCustomer.get(rec.CustomerNo) then begin
@@ -46,11 +48,13 @@ page 50130 StudentFeeReceiptHeader
                 {
                     ApplicationArea = All;
                     Caption = 'Student Name';
+                    // Editable = editable;
                 }
                 field(Status; rec.Status)
                 {
                     ApplicationArea = All;
                     Caption = 'Status';
+                    // Editable = editable;
                 }
 
             }
@@ -60,10 +64,12 @@ page 50130 StudentFeeReceiptHeader
 
                 ApplicationArea = All;
                 SubPageLink = DocumentNo = field(DocumentNo);
+                // Editable = editable;
             }
             group("Fees Details")
             {
                 ShowCaption = false;
+                // Editable = editable;
 
                 field(LateFees; rec.LateFees)
                 {
@@ -108,6 +114,7 @@ page 50130 StudentFeeReceiptHeader
             group(AccInfo)
             {
                 ShowCaption = false;
+                // Editable = editable;
                 field(GLAccNo; rec.GLAccNo)
                 {
                     ApplicationArea = All;
@@ -151,11 +158,11 @@ page 50130 StudentFeeReceiptHeader
                     RecGenJoun.SetRange("Journal Batch Name", 'FEES');
                     RecGenJoun.DeleteAll();
 
-                    recBatch.reset;
-                    recBatch.SetRange("Journal Template Name", 'GENERAL');
-                    recBatch.SetRange(Name, 'FEES');
-                    recBatch.FindFirst();
-                    DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
+                    // recBatch.reset;
+                    // recBatch.SetRange("Journal Template Name", 'GENERAL');
+                    // recBatch.SetRange(Name, 'FEES');
+                    // recBatch.FindFirst();
+                    // DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
 
                     RecGenJoun.Reset();
                     RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
@@ -191,10 +198,9 @@ page 50130 StudentFeeReceiptHeader
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
 
                     rec.Status := rec.Status::Closed;
+                    // editable := false;
 
-                    CurrPage.Update(true);
-
-
+                    // CurrPage.Update(true);
 
 
                     // Message('Hi');
@@ -292,11 +298,11 @@ page 50130 StudentFeeReceiptHeader
             CurrPage.Update(true);
         end;
 
-        if rec.Status = Rec.Status::Closed then
-            editable := false
-        else
-            editable := true;
-        CurrPage.Update(true);
+        // if rec.Status = Rec.Status::Closed then
+        //     editable := false
+        // else
+        //     editable := true;
+        // CurrPage.Update(true);
 
     end;
 
@@ -312,6 +318,12 @@ page 50130 StudentFeeReceiptHeader
             recBank := true
         else
             recBank := false;
+
+        // if rec.Status = Rec.Status::Closed then
+        //     editable := false
+        // else
+        //     editable := true;
+
         CurrPage.Update(true);
     end;
 }

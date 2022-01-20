@@ -30,16 +30,20 @@ table 50104 BatchMasterTable
 
     trigger OnInsert()
     begin
-        recBatch.ChangeCompany('mithilesh');
-        recBatch.TransferFields(Rec);
-        recBatch.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recBatch.ChangeCompany('mithilesh');
+            recBatch.TransferFields(Rec);
+            recBatch.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recBatch.ChangeCompany('mithilesh');
-        recBatch.TransferFields(Rec);
-        recBatch.Modify();
+        if CompanyName <> 'mithilesh' then begin
+            recBatch.ChangeCompany('mithilesh');
+            recBatch.TransferFields(Rec);
+            recBatch.Modify();
+        end;
 
     end;
 

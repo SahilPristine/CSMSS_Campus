@@ -39,17 +39,21 @@ table 50108 StreamMasterTable
 
     trigger OnInsert()
     begin
-        recStream.ChangeCompany('mithilesh');
-        recStream.TransferFields(Rec);
-        recStream.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recStream.ChangeCompany('mithilesh');
+            recStream.TransferFields(Rec);
+            recStream.Insert();
+        end;
 
     end;
 
     trigger OnModify()
     begin
-        recStream.ChangeCompany('mithilesh');
-        recStream.TransferFields(Rec);
-        recStream.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recStream.ChangeCompany('mithilesh');
+            recStream.TransferFields(Rec);
+            recStream.Modify();
+        end;
 
     end;
 

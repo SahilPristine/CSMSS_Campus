@@ -28,18 +28,20 @@ table 50133 CasteMaster
 
     trigger OnInsert()
     begin
-        recCaste.ChangeCompany('mithilesh');
-        recCaste.TransferFields(Rec);
-        recCaste.Insert();
-
+        if CompanyName <> 'mithilesh' then begin
+            recCaste.ChangeCompany('mithilesh');
+            recCaste.TransferFields(Rec);
+            recCaste.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recCaste.ChangeCompany('mithilesh');
-        recCaste.TransferFields(Rec);
-        recCaste.Insert();
-
+        if CompanyName <> 'mithilesh' then begin
+            recCaste.ChangeCompany('mithilesh');
+            recCaste.TransferFields(Rec);
+            recCaste.Insert();
+        end;
     end;
 
     trigger OnDelete()

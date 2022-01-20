@@ -38,18 +38,20 @@ table 50105 AcademicYearMasterTable
 
     trigger OnInsert()
     begin
-        recAcademic.ChangeCompany('mithilesh');
-        recAcademic.TransferFields(Rec);
-        recAcademic.Insert();
-
+        if CompanyName <> 'mithilesh' then begin
+            recAcademic.ChangeCompany('mithilesh');
+            recAcademic.TransferFields(Rec);
+            recAcademic.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recAcademic.ChangeCompany('mithilesh');
-        recAcademic.TransferFields(Rec);
-        recAcademic.Modify();
-
+        if CompanyName <> 'mithilesh' then begin
+            recAcademic.ChangeCompany('mithilesh');
+            recAcademic.TransferFields(Rec);
+            recAcademic.Modify();
+        end;
     end;
 
     trigger OnDelete()

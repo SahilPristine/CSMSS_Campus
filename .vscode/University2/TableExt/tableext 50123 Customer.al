@@ -258,7 +258,7 @@ tableextension 50123 CustomerExtension extends Customer
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit "NoSeriesManagement";
-        Hostel: Record HostelMaster;
+        Hostel: Record HostelRegistration;
         Route: Record RouteMaster;
         recStudent: Record Customer;
 
@@ -266,17 +266,33 @@ tableextension 50123 CustomerExtension extends Customer
 
     trigger OnInsert()
     begin
-        recStudent.ChangeCompany('mithilesh');
-        recStudent.TransferFields(Rec);
-        recStudent.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recStudent.ChangeCompany('mithilesh');
+            recStudent.TransferFields(Rec);
+            recStudent.Insert();
+        end;
     end;
 
     trigger OnModify()
     begin
-        recStudent.ChangeCompany('mithilesh');
-        recStudent.TransferFields(Rec);
-        recStudent.Modify();
+        if CompanyName <> 'mithilesh' then begin
+            recStudent.ChangeCompany('mithilesh');
+            recStudent.TransferFields(Rec);
+            recStudent.Modify();
+        end;
     end;
+
+    // trigger OnAfterModify()
+    // begin
+    //     Hostel.Reset();
+    //     Hostel.SetRange(StudentEnrollmentNo, rec."No.");
+    //     if Hostel.FindFirst() then begin
+    //         Rec.HostelCode := Hostel.HostelCode;
+    //         rec.RoomNo := Hostel.RoomNo;
+    //         Rec.Modify(true);
+    //     end;
+
+    // end;
 
     // PBS-SL Copy data from one company to another on insert or on modify
 

@@ -45,17 +45,22 @@ table 50106 CourseMasterTable
 
     trigger OnInsert()
     begin
-        recCourse.ChangeCompany('mithilesh');
-        recCourse.TransferFields(Rec);
-        recCourse.Insert();
+        if CompanyName <> 'mithilesh' then begin
+            recCourse.ChangeCompany('mithilesh');
+            recCourse.TransferFields(Rec);
+            recCourse.Insert();
+        end;
 
     end;
 
     trigger OnModify()
     begin
-        recCourse.ChangeCompany('mithilesh');
-        recCourse.TransferFields(Rec);
-        recCourse.Modify();
+        if CompanyName <> 'mithilesh' then begin
+            recCourse.ChangeCompany('mithilesh');
+            recCourse.TransferFields(Rec);
+            recCourse.Modify();
+        end;
+
 
     end;
 
