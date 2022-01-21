@@ -162,12 +162,12 @@ page 50126 StudentRoomShifting
 
                     Clear(lineno);
                     RecGenJoun.Reset();
-                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
                     RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
                     RecGenJoun.DeleteAll();
 
                     RecGenJoun.Reset();
-                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL');
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
                     RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
                     if RecGenJoun.FindLast() then
                         lineno := RecGenJoun."Line No."
@@ -175,13 +175,17 @@ page 50126 StudentRoomShifting
                         lineno := 10000;
 
                     GJL.Init();
-                    GJL.Validate("Journal Template Name", 'GENERAL');
-                    GJL.Validate("Journal Batch Name", 'HOSTELFEE');
+                    GJL."Journal Template Name" := 'GENERAL1';
+                    GJL."Journal Batch Name" := 'HOSTELFEE';
                     GJL."Line No." := lineno + 10000;
-                    GJL.Insert(true);
-                    GJL.Validate("Posting Date", today);
-                    GJL.validate("Document No.", Rec.ShiftingNo);
-                    GJL.validate("Document Type", GJL."Document Type"::Payment);
+                    SalesSetup.get();
+                    GJL.ElementCode := SalesSetup.DefaultHostelElement;
+                    GJL."Bal. Account No." := SalesSetup.HostelFeesCreditAcc;
+
+                    GJL."Posting Date" := rec.RoomShiftingDate;
+                    GJL."Document No." := Rec.ShiftingNo;
+                    GJL."Document Type" := GJL."Document Type"::" ";
+                    GJL."Bal. Account Type" := GJl."Bal. Account Type"::"G/L Account";
                     // IF Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cash then begin
                     //     GJL.validate("Account Type", GJL."Account Type"::"G/L Account");
                     //     GJL.Validate("Account No.", Rec.GLAccNo)
@@ -191,12 +195,11 @@ page 50126 StudentRoomShifting
                     //     GJL.Validate("Account No.", rec.BankAccNo);
                     // end;
 
-                    GJL.Validate(Amount, Rec.StudentBalance);
-                    GJL.validate("Account Type", GJL."Account Type"::Customer);
-                    GJL.Validate("Account No.", Rec.EnrollmentNo);
-                    GJL.Validate(ElementCode, SalesSetup.DefaultHostelElement);
-                    // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
-                    GJL.Modify(true);
+                    GJL.Amount := Rec.StudentBalance;
+                    GJL."Amount (LCY)" := Rec.StudentBalance;
+                    GJL."Account Type" := GJL."Account Type"::Customer;
+                    GJL."Account No." := Rec.EnrollmentNo;
+                    GJL.Insert(true);
 
                     recStudent.Reset();
                     recStudent.SetRange("No.", rec.EnrollmentNo);
@@ -207,7 +210,8 @@ page 50126 StudentRoomShifting
                         recStudent.Modify(true);
                         // CurrPage.Update(true);
                     end;
-                    Codeunit.Run(Codeunit::"Gen. Jnl.-Post");
+                    Message('Student shifted to room %1', rec.NewRoomNo);
+                    // Codeunit.Run(Codeunit::"Gen. Jnl.-Post");
 
 
                 end;

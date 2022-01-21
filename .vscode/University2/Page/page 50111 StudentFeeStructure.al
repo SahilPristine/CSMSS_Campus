@@ -182,12 +182,28 @@ page 50111 StudentFeeStructure
         custledgentry: Record "Cust. Ledger Entry";
         stfees: Record StudentFeeStructure;
 
+
     trigger OnAfterGetRecord()
     begin
         If rec.GovtCode <> '' then
             Enable := true
         else
             Enable := false;
+
+        custledgentry.Reset();
+        custledgentry.SetRange("Customer No.", rec.StudentEnrollmentNo);
+        // recStFees.SetRange(AcademicYear, AcademicYear);
+        custledgentry.SetRange(Batch, Rec.BatchCode);
+        custledgentry.SetRange("Course Code", rec.CourseCode);
+        custledgentry.SetRange("Semester Code", rec.Semester);
+        custledgentry.SetRange("Stream Code", rec.Stream);
+        custledgentry.SetRange(ElementCode, rec.ElementCode);
+        custledgentry.SetRange(Category, rec.CategoryCode);
+        custledgentry.SetRange(Caste, Rec.CasteCode);
+        if custledgentry.FindFirst() then begin
+            Rec.DebitCreated := true;
+            rec.Modify(true);
+        end;
     end;
 
     trigger OnAfterGetCurrRecord()

@@ -312,31 +312,32 @@ page 50135 StudentMaster
                         Caption = 'Hostel';
 
                     }
-                    field(RoomType; rec.RoomType)
-                    {
-
-                        ApplicationArea = All;
-                        Caption = 'Room Type';
-                        // Enabled = editHostel;
-
-                    }
-                    field(BedType; rec.BedType)
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Bed Type';
-                        // Enabled = editHostel;
-                    }
                     field(HostelCode; Rec.HostelCode)
                     {
                         ApplicationArea = All;
                         Caption = 'Hostel Code';
                         // Enabled = editHostel;
                     }
+                    field(HostelName; rec.HostelName)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Hostel Name';
+                    }
                     field(RoomNo; Rec.RoomNo)
                     {
                         ApplicationArea = All;
                         Caption = 'Room No';
                         // Enabled = editHostel;
+                    }
+                    field(RoomDesc; rec.RoomDesc)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Room Desc';
+                    }
+                    field(RoomType; rec.RoomType)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Room Type';
                     }
                 }
                 group(Transport)
@@ -437,6 +438,21 @@ page 50135 StudentMaster
                 end;
 
             }
+            action("Ledger E&ntries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Ledger E&ntries';
+                Image = CustomerLedger;
+                Promoted = true;
+                PromotedCategory = Process;
+                // PromotedIsBig = true;
+                RunObject = Page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = FIELD("No.");
+                RunPageView = SORTING("Customer No.")
+                                  ORDER(Descending);
+                ShortCutKey = 'Ctrl+F7';
+                ToolTip = 'View the history of transactions that have been posted for the selected record.';
+            }
         }
     }
 
@@ -456,52 +472,6 @@ page 50135 StudentMaster
     begin
         rec.Type := rec.Type::Student;
     end;
-
-    // trigger OnOpenPage()
-    // begin
-    //     recHostel.Reset();
-    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
-    //     if recHostel.FindFirst() then begin
-    //         HostelCode1 := recHostel.HostelCode;
-    //         RoomCode1 := recHostel.RoomNo;
-    //         // rec.Init();
-    //         // rec.HostelCode := HostelCode1;
-    //         // rec.RoomNo := RoomCode1;
-    //         // rec.Modify(true);
-    //         // CurrPage.Update(true);
-    //     end;
-    // end;
-
-    // trigger OnModifyRecord(): Boolean
-    // begin
-
-    // end;
-
-    // trigger OnAfterGetCurrRecord()
-    // begin
-    //     recHostel.Reset();
-    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
-    //     if recHostel.FindFirst() then begin
-    //         recStudent.Init();
-    //         rec.HostelCode := recHostel.HostelCode;
-    //         rec.RoomNo := recHostel.RoomNo;
-    //         rec.Modify(true);
-    //         // CurrPage.Update(true);
-    //     end;
-    // end;
-
-    // trigger OnAfterGetRecord()
-    // begin
-    //     recHostel.Reset();
-    //     recHostel.SetRange(StudentEnrollmentNo, Rec."No.");
-    //     if recHostel.FindFirst() then begin
-    //         recStudent.Init();
-    //         rec.HostelCode := recHostel.HostelCode;
-    //         rec.RoomNo := recHostel.RoomNo;
-    //         rec.Modify(true);
-    //         // CurrPage.Update(true);
-    //     end;
-    // end;
 
     local procedure OnBeforeChangeCategory(recStFees: Record StudentFeeStructure; RecStudent: Record Customer)
     var

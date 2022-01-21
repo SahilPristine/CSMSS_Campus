@@ -34,6 +34,14 @@ pageextension 50127 CustLedgEntry extends 25
             {
                 ApplicationArea = All;
             }
+            field(Category; rec.Category)
+            {
+                ApplicationArea = All;
+            }
+            field(Caste; rec.Caste)
+            {
+                ApplicationArea = All;
+            }
             field(StudentCode; rec.StudentCode)
             {
                 ApplicationArea = All;

@@ -72,6 +72,18 @@ tableextension 50124 SalesSetup extends 311
             Description = 'SL-V.01';
             TableRelation = "G/L Account";
         }
+        field(50012; HostelFeesDebitAcc; code[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
+            TableRelation = "G/L Account";
+        }
+        field(50013; HostelFeesCreditAcc; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Description = 'SL-V.01';
+            TableRelation = "G/L Account";
+        }
     }
 
     var

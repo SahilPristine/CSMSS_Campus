@@ -45,6 +45,20 @@ tableextension 50127 GLEntry extends 17
             TableRelation = BatchMasterTable.CODE;
             Description = 'SL-V.01';
         }
+        field(50009; StudentCode; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Customer."No." where(Type = filter('Student'));
+        }
+        field(50011; Category; Code[20])
+        {
+            DataClassification = ToBeClassified;
+
+        }
+        field(50012; Caste; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
         // Add changes to table fields here
     }
 

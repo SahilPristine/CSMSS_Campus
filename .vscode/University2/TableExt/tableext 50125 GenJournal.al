@@ -54,7 +54,15 @@ tableextension 50125 GenJournal extends 81
             DataClassification = ToBeClassified;
             Description = 'SL-V.01';
         }
+        field(50010; Category; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
 
+        field(50011; Caste; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

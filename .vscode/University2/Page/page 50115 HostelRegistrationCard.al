@@ -130,6 +130,16 @@ page 50115 HostelRegistration
                     end;
 
                 }
+                field(RoomDesc; rec.RoomDesc)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Room Desc';
+                }
+                field(RoomType; rec.RoomType)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Room Type';
+                }
                 field(HostelFees; Rec.HostelFees)
                 {
                     ApplicationArea = All;
@@ -187,7 +197,7 @@ page 50115 HostelRegistration
                 trigger OnAction()
                 begin
                     if rec.RegType = rec.RegType::Student then
-                        CreateHostelFees(recRoom, recStFees, recStudent)
+                        CreateHostelFees(recRoom, recStFees, recStudent, recFees)
                     else
                         CreateVisitorHostelFees(recRoom, recStFees, recStudent);
 
@@ -204,6 +214,7 @@ page 50115 HostelRegistration
             }
             action(Left)
             {
+
                 ApplicationArea = All;
                 Caption = 'Left Hostel';
                 Promoted = true;
@@ -247,7 +258,8 @@ page 50115 HostelRegistration
                     GJL.Validate(Amount, Rec.Balance);
                     GJL.validate("Account Type", GJL."Account Type"::Customer);
                     GJL.Validate("Account No.", Rec.StudentEnrollmentNo);
-                    GJl.Validate("Bal. Account No.", 'HOSTEL');
+                    SalesSetup.Get();
+                    GJl.Validate("Bal. Account No.", SalesSetup.HostelFeesCreditAcc);
                     GJL.Validate(ElementCode, SalesSetup.DefaultHostelElement);
                     // gjl.Validate(ElementDesc, RecPostedLine.ElementDesc);
                     GJL.Modify(true);
@@ -287,16 +299,15 @@ page 50115 HostelRegistration
     end;
 
 
-    procedure CreateHostelFees(recRoom: Record RoomMaster; recStFees: Record StudentFeeStructure; recStudent: record Customer)
+    procedure CreateHostelFees(recRoom: Record RoomMaster; recStFees: Record StudentFeeStructure; recStudent: record Customer; recFees: record CourseWiseFeeStructure)
     begin
 
         recRoom.Reset();
         recRoom.SetRange(RoomCode, Rec.RoomNo);
         if recRoom.FindFirst() then begin
             recStudent.SetRange("No.", Rec.StudentEnrollmentNo);
-            // recStudent.SetFilter(HostelCode, ' ');
+            recStudent.SetFilter(HostelCode, '');
             if recStudent.FindFirst() then begin
-                // Message('Hello');
                 recStFees.Init();
                 recStFees.StudentEnrollmentNo := Rec.StudentEnrollmentNo;
                 recStFees.StudentName := Rec.Name;
@@ -312,29 +323,19 @@ page 50115 HostelRegistration
                 recStFees.ElementCode := SalesSetup.DefaultHostelElement;
                 recStFees.AmountByStudent := rec.HostelFees;
                 recStFees.TotalAmount := recStFees.AmountByStudent;
+                recStFees.DebitAcc := SalesSetup.HostelFeesDebitAcc;
+                recStFees.CreditAcc := SalesSetup.HostelFeesCreditAcc;
                 recStFees.Insert(true);
                 recStudent.HostelCode := rec.HostelCode;
+                recStudent.HostelName := rec.HostelName;
                 recStudent.RoomNo := rec.RoomNo;
+                recStudent.RoomDesc := rec.RoomDesc;
+                recStudent.RoomType := rec.RoomType;
                 recStudent.Modify(true);
                 Message('Student registered in Hostel %1 and fees structure created', rec.HostelCode);
             end
             else
                 Error('Student already registered in Hostel');
-
-            // Company := Rec.CurrentCompany();
-            // Message('%1', Company);
-            // HostelCode.
-            // recStudent.Reset();
-            // recStudent.SetRange("No.", rec.StudentEnrollmentNo);
-            // if recStudent.FindFirst() then begin
-            //     Message('Hi');
-            //     // recStudent.Init();
-            //     recStudent.Validate(HostelCode, rec.HostelCode);
-            //     recStudent.Validate(RoomNo, rec.RoomNo);
-            //     Message('Hello');
-            //     recStudent.Modify(true);
-            //     // CurrPage.Update(true);
-            // end;
         end;
 
         recRoom.Reset();

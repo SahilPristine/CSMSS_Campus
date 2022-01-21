@@ -50,6 +50,9 @@ page 50136 StudentMasterList
             {
                 ApplicationArea = All;
                 Caption = 'StudentFeesProcessing';
+                Image = Process;
+                Promoted = true;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 begin
@@ -58,6 +61,21 @@ page 50136 StudentMasterList
                     FeesReport.Run();
 
                 end;
+            }
+            action("Ledger E&ntries")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Ledger E&ntries';
+                Image = CustomerLedger;
+                Promoted = true;
+                PromotedCategory = Process;
+                // PromotedIsBig = true;
+                RunObject = Page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = FIELD("No.");
+                RunPageView = SORTING("Customer No.")
+                                  ORDER(Descending);
+                ShortCutKey = 'Ctrl+F7';
+                ToolTip = 'View the history of transactions that have been posted for the selected record.';
             }
         }
     }

@@ -46,6 +46,16 @@ pageextension 50125 GenLedgerSetup extends 459
                     ApplicationArea = All;
                     Caption = 'Transport Slip No';
                 }
+                field(HostelFeesDebitAcc; rec.HostelFeesDebitAcc)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Hostel Debit Acc';
+                }
+                field(HostelFeesCreditAcc; rec.HostelFeesCreditAcc)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Hostel Credit Acc';
+                }
                 field(DefaultHostelElement; rec.DefaultHostelElement)
                 {
                     ApplicationArea = All;

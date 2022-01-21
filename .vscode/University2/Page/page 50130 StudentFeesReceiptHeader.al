@@ -198,26 +198,7 @@ page 50130 StudentFeeReceiptHeader
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
 
                     rec.Status := rec.Status::Closed;
-                    // editable := false;
 
-                    // CurrPage.Update(true);
-
-
-                    // Message('Hi');
-
-                    // RecCustLedgEntry.Reset();
-                    // RecCustLedgEntry.SetRange("Customer No.", rec.CustomerNo);
-                    // RecCustLedgEntry.SetRange(ElementCode, RecPostedLine.ElementCode);
-                    // if RecCustLedgEntry.FindFirst() then begin
-                    //     Message('Hello');
-                    //     repeat
-                    //         Message('Hello2');
-                    //         RecCustLedgEntry.CalcFields("Remaining Amount");
-                    //         RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
-                    //         RecPostedLine.Modify(true)
-                    //     until RecCustLedgEntry.Next() = 0;
-                    //     // CurrPage.Update(true);
-                    // end;
                 end;
 
 
@@ -295,14 +276,8 @@ page 50130 StudentFeeReceiptHeader
             RecCustomer.CalcFields("Balance (LCY)");
             rec."Total Remaining Amount" := RecCustomer."Balance (LCY)" + rec.LateFees;
             Rec.Modify();
-            CurrPage.Update(true);
-        end;
 
-        // if rec.Status = Rec.Status::Closed then
-        //     editable := false
-        // else
-        //     editable := true;
-        // CurrPage.Update(true);
+        end;
 
     end;
 
@@ -319,11 +294,5 @@ page 50130 StudentFeeReceiptHeader
         else
             recBank := false;
 
-        // if rec.Status = Rec.Status::Closed then
-        //     editable := false
-        // else
-        //     editable := true;
-
-        CurrPage.Update(true);
     end;
 }

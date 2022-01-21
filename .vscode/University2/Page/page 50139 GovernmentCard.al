@@ -4,7 +4,7 @@ page 50139 GovernmentCard
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = Customer;
-    SourceTableView = where(Type = filter(Others));
+    // SourceTableView = where(Type = filter(Others));
 
     layout
     {
@@ -19,6 +19,10 @@ page 50139 GovernmentCard
                     Importance = Standard;
                     ToolTip = 'Specifies the number of the customer. The field is either filled automatically from a defined number series, or you enter the number manually because you have enabled manual number entry in the number-series setup.';
                     // Visible = NoFieldVisible;
+                    // trigger OnValidate()
+                    // begin
+                    //     rec.Type := Rec.Type::Others;
+                    // end;
 
                     trigger OnAssistEdit()
                     begin
@@ -29,6 +33,7 @@ page 50139 GovernmentCard
                 field(Type; rec.Type)
                 {
                     ApplicationArea = All;
+
                     Editable = false;
 
                 }
@@ -40,10 +45,10 @@ page 50139 GovernmentCard
                     ShowMandatory = true;
                     ToolTip = 'Specifies the customer''s name. This name will appear on all sales documents for the customer.';
 
-                    trigger OnValidate()
-                    begin
-                        CurrPage.Update(true);
-                    end;
+                    // trigger OnValidate()
+                    // begin
+                    //     CurrPage.Update(true);
+                    // end;
                 }
                 field("Name 2"; rec."Name 2")
                 {
@@ -147,21 +152,21 @@ page 50139 GovernmentCard
                 Caption = 'Posting Details';
                 field("Gen. Bus. Posting Group"; rec."Gen. Bus. Posting Group")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Importance = Promoted;
+                    ApplicationArea = All;
+                    // Importance = Promoted;
                     ShowMandatory = true;
                     ToolTip = 'Specifies the customer''s trade type to link transactions made for this customer with the appropriate general ledger account according to the general posting setup.';
                 }
                 field("VAT Bus. Posting Group"; rec."VAT Bus. Posting Group")
                 {
-                    ApplicationArea = Basic, Suite;
+                    ApplicationArea = All;
                     Importance = Additional;
                     ToolTip = 'Specifies the customer''s VAT specification to link transactions made for this customer to.';
                 }
                 field("Customer Posting Group"; rec."Customer Posting Group")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Importance = Promoted;
+                    ApplicationArea = All;
+                    // Importance = Promoted;
                     ShowMandatory = true;
                     ToolTip = 'Specifies the customer''s market type to link business transactions to.';
                 }
@@ -216,11 +221,17 @@ page 50139 GovernmentCard
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
-    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    begin
-        rec.Type := rec.Type::Others;
-        // CurrPage.Update(true);
-    end;
+    // trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    // begin
+    //     rec.Type := rec.Type::Others;
+    //     // CurrPage.Update(true);
+    // end;
+
+    // trigger OnModifyRecord(): Boolean
+    // begin
+    //     rec.Type := rec.Type::Others;
+
+    // end;
 
 
     local procedure AssistEditCustom(OldCust: Record Customer): Boolean

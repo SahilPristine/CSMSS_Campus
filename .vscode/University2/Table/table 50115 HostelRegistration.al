@@ -106,6 +106,8 @@ table 50115 HostelRegistration
                 recRoom.Reset();
                 recRoom.SetRange(RoomCode, Rec.RoomNo);
                 if recRoom.FindFirst() then begin
+                    RoomDesc := recRoom.RoomDesc;
+                    RoomType := recRoom.RoomType;
                     HostelFees := recRoom.PerBedFees;
                     DepositFees := recRoom.DepositFees;
                     PerMonthFees := HostelFees / 12;
@@ -190,6 +192,14 @@ table 50115 HostelRegistration
             DataClassification = ToBeClassified;
         }
         field(23; TotalBalance; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(24; RoomDesc; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(25; RoomType; Text[50])
         {
             DataClassification = ToBeClassified;
         }

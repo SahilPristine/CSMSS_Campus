@@ -93,12 +93,14 @@ report 50100 GenJournalReport
                             recGnJnl.Validate("Course Code", recStFees.CourseCode);
                             recGnJnl.Validate("Semester Code", recStFees.Semester);
                             recGnJnl.Validate("Stream Code", recStFees.Stream);
+                            recGnJnl.Validate(Category, recStFees.CategoryCode);
+                            recGnJnl.Validate(Caste, recStFees.CasteCode);
                             recGnJnl.validate(Amount, recStFees.GovtAmount);
                             recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
                             recGnJnl.Modify(true);
                         end;
                         runlines += 1;
-                        recStFees.DebitCreated := true;
+                        // recStFees.DebitCreated := true;
                         recStFees.Modify();
                     until recStFees.Next = 0;
                 end;

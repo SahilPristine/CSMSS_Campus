@@ -4,6 +4,7 @@ page 50144 PostedFeesReceiptList
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = 50130;
+    SourceTableView = where(Status = filter(Closed));
     CardPageId = 50143;
 
     layout

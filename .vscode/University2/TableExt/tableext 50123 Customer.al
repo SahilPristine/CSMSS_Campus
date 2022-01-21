@@ -144,7 +144,6 @@ tableextension 50123 CustomerExtension extends Customer
         field(50167; RoomType; Text[50])
         {
             DataClassification = ToBeClassified;
-            TableRelation = RoomMaster.RoomType;
         }
 
         field(50168; BedType; Code[20])
@@ -247,7 +246,14 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             OptionMembers = " ","Student","Others";
         }
-
+        field(50190; HostelName; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50200; RoomDesc; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

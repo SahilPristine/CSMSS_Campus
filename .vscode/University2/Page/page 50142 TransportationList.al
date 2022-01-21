@@ -53,23 +53,6 @@ page 50142 TransportationList
                 trigger OnAction()
                 begin
 
-                    // recBatch.reset;
-                    // recBatch.SetRange("Journal Template Name", template);
-                    // recBatch.SetRange(Name, Batch);
-                    // recBatch.FindFirst();
-                    // DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
-
-
-                    // LineNo := LineNo + 10000;
-
-                    // RecStudentFees.Init();
-                    // RecStudentFees.StudentEnrollmentNo := rec."StudentEnrollmennt No";
-                    // RecStudentFees.StudentName := rec."Student Name";
-                    // RecStudentFees.ElementCode := SalesSetup.DefaultHostelElement;
-                    // RecStudentFees.AmountByStudent := rec.RouteCharges;
-                    // RecStudentFees.CreditAcc := rec."StudentEnrollmennt No";
-                    // RecStudentFees.
-
                     Clear(lineno);
                     GJL.Reset();
                     GJL.SetRange("Journal Template Name", 'GENERAL1');
@@ -100,6 +83,7 @@ page 50142 TransportationList
                     RecGenJoun."Account No." := rec."StudentEnrollmennt No";
                     RecGenJoun.Amount := rec.RouteCharges;
                     RecGenJoun.Insert(true);
+                    Message('Transport fees debit created for student %1', rec."StudentEnrollmennt No");
                     // RecGenJoun.validate("Bal. Account No.", recStFees.CreditAcc);
                     // Codeunit.Run(Codeunit::"Gen. Jnl.-Post", RecGenJoun);
 
