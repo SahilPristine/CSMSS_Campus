@@ -109,8 +109,13 @@ page 50128 CourseWiseFeeStructure
                 field(AmountByGovt; rec.AmountByGovt)
                 {
                     ApplicationArea = All;
-                    Enabled = Enable;
+                    // Enabled = Enable;
                     Caption = 'Amount By Govt';
+                    trigger OnValidate()
+                    begin
+                        rec.TestField("Govt Code");
+                    end;
+
                 }
 
                 field(DebitAcc; rec.DebitAcc)
@@ -156,23 +161,24 @@ page 50128 CourseWiseFeeStructure
         }
     }
     var
+        [InDataSet]
         Enable: Boolean;
 
-    trigger OnAfterGetRecord()
-    begin
-        If rec."Govt Code" <> '' then
-            Enable := true
-        else
-            Enable := false;
-    end;
+    // trigger OnAfterGetRecord()
+    // begin
+    //     If rec."Govt Code" <> '' then
+    //         Enable := true
+    //     else
+    //         Enable := false;
+    // end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        If rec."Govt Code" <> '' then
-            Enable := true
-        else
-            Enable := false;
+    // trigger OnAfterGetCurrRecord()
+    // begin
+    //     If rec."Govt Code" <> '' then
+    //         Enable := true
+    //     else
+    //         Enable := false;
 
-        // CurrPage.Update(true);
-    end;
+    //     CurrPage.Update(true);
+    // end;
 }

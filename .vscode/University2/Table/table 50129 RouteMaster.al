@@ -45,7 +45,7 @@ table 50129 RouteMaster
         if CompanyName <> 'mithilesh' then begin
             recRoute.ChangeCompany('mithilesh');
             recRoute.TransferFields(Rec);
-            recRoute.Insert();
+            recRoute.Modify();
         end;
 
     end;

@@ -105,12 +105,20 @@ page 50115 HostelRegistration
                     ApplicationArea = All;
                     Caption = 'Hostel Code';
                     LookupPageId = HostelList;
+                    trigger OnValidate()
+                    begin
+                        rec.TestField(Rec.StudentEnrollmentNo);
+                    end;
 
                 }
                 field(HostelName; Rec.HostelName)
                 {
                     ApplicationArea = All;
                     Caption = 'Hostel Name';
+                    trigger OnValidate()
+                    begin
+                        rec.TestField(Rec.StudentEnrollmentNo);
+                    end;
                 }
                 field(RoomNo; Rec.RoomNo)
                 {
@@ -127,6 +135,9 @@ page 50115 HostelRegistration
                             rec.HostelFees := recRoom.PerBedFees;
                         end;
 
+                        rec.TestField(Rec.StudentEnrollmentNo);
+
+
                     end;
 
                 }
@@ -134,6 +145,7 @@ page 50115 HostelRegistration
                 {
                     ApplicationArea = All;
                     Caption = 'Room Desc';
+
                 }
                 field(RoomType; rec.RoomType)
                 {
@@ -201,16 +213,73 @@ page 50115 HostelRegistration
                     else
                         CreateVisitorHostelFees(recRoom, recStFees, recStudent);
 
-                    // CurrentCompany;
-                    // recStudent.Reset();
-                    // recStudent.SetRange("No.", rec.StudentEnrollmentNo);
-                    // if recStudent.FindFirst() then
-                    //     // recStudent.Init();
-                    // recStudent.HostelCode := Rec.HostelCode;
-                    // recStudent.RoomNo := Rec.RoomNo;
-                    // recStudent.Modify(true);
-                end;
+                    Clear(lineno);
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
+                    RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
+                    RecGenJoun.DeleteAll();
 
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
+                    RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
+                    if RecGenJoun.FindLast() then
+                        lineno := RecGenJoun."Line No."
+                    else
+                        lineno := 10000;
+
+                    recStFees.Reset();
+                    recStFees.SetRange(StudentEnrollmentNo, Rec.StudentEnrollmentNo);
+                    recStFees.SetRange(DebitCreated, false);
+                    recStFees.SetRange(Blocked, false);
+                    if recStFees.FindSet() then begin
+                        // runlines := 0;
+                        repeat
+                            LineNo := LineNo + 10000;
+                            recGnJnl.Init();
+
+                            recGnJnl."Journal Template Name" := 'GENERAL1';
+                            recGnJnl."Journal Batch Name" := 'HOSTELFEE';
+                            recGnJnl."Line No." := LineNo;
+                            recGnJnl.Insert(true);
+                            recGnJnl.Validate("Posting Date", rec.RegistrationDate);
+                            recGnJnl.Validate("Document Type", recGnJnl."Document Type"::" ");
+                            recGnJnl.Validate("Document No.", rec.RegistrationNo);
+                            recGnJnl.Validate("Account Type", recGnJnl."Account Type"::Customer);
+                            recGnJnl.validate("Account No.", recStFees.StudentEnrollmentNo);
+                            recGnJnl.validate(ElementCode, recStFees.ElementCode);
+                            // recGnJnl.validate(ElementDesc, recStFees.ElementDesc);
+                            recGnJnl.Validate(Batch, recStFees.BatchCode);
+                            recGnJnl.Validate(AcademicYear, recStFees.AcademicYear);
+                            recGnJnl.Validate(Class, recStFees.Class);
+                            recGnJnl.Validate("Course Code", recStFees.CourseCode);
+                            // recGnJnl.Validate("Semester Code", recStFees.Semester);
+                            // recGnJnl.Validate("Stream Code", recStFees.Stream);
+                            recGnJnl.validate(Amount, recStFees.AmountByStudent);
+                            recGnJnl.validate("Bal. Account No.", recStFees.CreditAcc);
+                            recGnJnl.Modify(true);
+                        until recStFees.Next() = 0;
+
+                    end;
+                end;
+            }
+            action(EditJournal)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Edit Journal';
+                Image = OpenJournal;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ShortCutKey = 'Return';
+                ToolTip = 'Open a journal based on the journal batch.';
+
+                trigger OnAction()
+                begin
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
+                    RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
+                    Page.Run(39);
+                end;
             }
             action(Left)
             {
@@ -243,7 +312,7 @@ page 50115 HostelRegistration
                     GJL.Validate("Journal Batch Name", 'HOSTElFEE');
                     GJL."Line No." := lineno + 10000;
                     GJL.Insert(true);
-                    GJL.Validate("Posting Date", today);
+                    GJL.Validate("Posting Date", Rec.LeftDate);
                     GJL.validate("Document No.", Rec.RegistrationNo);
                     GJL.validate("Document Type", GJL."Document Type"::" ");
                     // IF Rec."Mode Of Payment" = Rec."Mode Of Payment"::Cash then begin
@@ -284,6 +353,9 @@ page 50115 HostelRegistration
         Company: Text;
         HostelCode: Code[20];
         RoomCode: Code[20];
+        recGnJnl: Record "Gen. Journal Line";
+        GenJnlManagement: Codeunit GenJnlManagement;
+        GenJnlBatch: Record "Gen. Journal Batch";
 
 
     trigger OnAfterGetRecord()
@@ -355,13 +427,14 @@ page 50115 HostelRegistration
                 recStFees.CasteCode := recStudent.Cast;
                 SalesSetup.Get();
                 recStFees.ElementCode := SalesSetup.DefaultDepositElement;
+                recStFees.DebitAcc := SalesSetup.HostelFeesDebitAcc;
+                recStFees.CreditAcc := SalesSetup.HostelFeesCreditAcc;
                 recStFees.StudentName := Rec.Name;
                 recStFees.AmountByStudent := rec.DepositFees;
                 recStFees.TotalAmount := recStFees.AmountByStudent;
                 recStFees.Insert(true);
             end;
         end;
-
 
     end;
 
@@ -417,5 +490,7 @@ page 50115 HostelRegistration
             end;
         end;
     end;
+
+
 
 }

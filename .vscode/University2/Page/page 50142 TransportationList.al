@@ -73,6 +73,7 @@ page 50142 TransportationList
                     RecGenJoun."Journal Template Name" := 'GENERAL1';
                     RecGenJoun."Journal Batch Name" := 'DEFAULT';
                     RecGenJoun."Line No." := LineNo + 10000;
+                    SalesSetup.Get();
                     RecGenJoun."Bal. Account No." := SalesSetup.TransportBalAccType;
                     RecGenJoun.ElementCode := SalesSetup.DefaultTransportElement;
                     // RecGenJoun.Insert(true);

@@ -148,6 +148,8 @@ page 50130 StudentFeeReceiptHeader
                 ApplicationArea = All;
                 Image = Post;
                 Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
 
                 trigger OnAction()
                 begin
@@ -202,6 +204,25 @@ page 50130 StudentFeeReceiptHeader
                 end;
 
 
+            }
+            action(EditJournal)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Edit Journal';
+                Image = OpenJournal;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ShortCutKey = 'Return';
+                ToolTip = 'Open a journal based on the journal batch.';
+
+                trigger OnAction()
+                begin
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", GJL."Journal Template Name");
+                    RecGenJoun.SetRange("Journal Batch Name", GJL."Journal Batch Name");
+                    Page.Run(39);
+                end;
             }
         }
     }

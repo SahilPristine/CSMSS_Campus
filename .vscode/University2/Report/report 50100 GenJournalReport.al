@@ -16,6 +16,22 @@ report 50100 GenJournalReport
             trigger OnAfterGetRecord()
             begin
 
+                // pendingLinestoberun := 0;
+                // recStFees2.Reset();
+                // recStFees2.SetRange(StudentEnrollmentNo, "No.");
+                //                 recStFees2.SetRange(CourseCode, "Course Code");
+                //                 recStFees2.SetRange(Stream, "Stream Code");
+                //                 recStFees2.SetRange(DebitCreated, false);
+                //                 recStFees2.SetRange(ElementCode, salessetup.DefaultHostelElement);
+                //                 recStFees2.SetRange(Blocked, false);
+                //                 pendingLinestoberun := recStFees2.Count;
+
+                //                 recBatch.reset;
+                //                 recBatch.SetRange("Journal Template Name", template);
+                //                 recBatch.SetRange(Name, Batch);
+                //                 recBatch.FindFirst();
+                //                 DocNum := noseriesmgmt.GetNextNo(recBatch."No. Series", today, false);
+
                 pendingLinestoberun := 0;
                 recStFees2.Reset();
                 recStFees2.SetRange(StudentEnrollmentNo, "No.");
@@ -178,5 +194,6 @@ report 50100 GenJournalReport
         recStFees2: Record StudentFeeStructure;
         pendingLinestoberun: Integer;
         runlines: Integer;
+        salessetup: Record "Sales & Receivables Setup";
 
 }
