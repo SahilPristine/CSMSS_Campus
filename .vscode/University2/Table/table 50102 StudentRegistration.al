@@ -57,7 +57,7 @@ table 50102 StudentRegistration
         {
             DataClassification = ToBeClassified;
             TableRelation = CasteMaster;
-            NotBlank = true;
+            // NotBlank = true;
         }
         field(50008; Religion; Option)
         {
@@ -155,15 +155,15 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             TableRelation = SemesterMasterTable.SemesterCode;
             Description = 'SL-V.01';
-            ValidateTableRelation = true;
-            NotBlank = true;
+            // ValidateTableRelation = true;
+            // NotBlank = true;
         }
         field(50027; "Stream Code"; Text[50])
         {
             DataClassification = ToBeClassified;
             TableRelation = StreamMasterTable.StreamCode where(CourseCode = field("Course Code"));
             Description = 'SL-V.01';
-            NotBlank = true;
+            // NotBlank = true;
         }
         field(50028; Class; Code[20])
         {

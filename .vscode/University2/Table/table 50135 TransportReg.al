@@ -14,6 +14,11 @@ table 50135 TransportReg
                 if "StudentEnrollmennt No" <> '' then
                     if recStudent.get("StudentEnrollmennt No") then
                         "Student Name" := recStudent.Name + ' ' + recStudent."Name 2";
+                Class := recStudent.Class;
+                Course := recStudent."Course Code";
+                BatchCode := recStudent."Batch Code";
+                PhoneNo := recStudent."Phone No.";
+
             end;
         }
         field(2; "Student Name"; Text[50])
@@ -54,6 +59,36 @@ table 50135 TransportReg
             DataClassification = ToBeClassified;
 
         }
+        field(7; Course; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(8; BatchCode; code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(9; PhoneNo; Text[10])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(10; Class; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(11; Status; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = "Open","Closed";
+            // trigger OnValidate()
+            // begin
+            //     recCLE.Reset();
+            //     recCLE.SetRange("Document No.", Rec.SlipNo);
+            //     if recCLE.FindFirst() then
+            //         rec.Status := rec.Status::closed
+            //     else
+            //         Rec.Status := rec.Status::open;
+            // end;
+        }
     }
 
     keys
@@ -69,6 +104,7 @@ table 50135 TransportReg
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
         recRoute: Record RouteMaster;
+        recCLE: Record "Cust. Ledger Entry";
 
     trigger OnInsert()
     begin

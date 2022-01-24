@@ -129,6 +129,10 @@ pageextension 50124 RoleCenterExt extends 9006
                         RunObject = page TransportationList;
                         Image = AddAction;
                     }
+                    action("Posted Transport Slip")
+                    {
+                        RunObject = page PostedTransportSlip;
+                    }
                 }
                 group(Fees)
                 {

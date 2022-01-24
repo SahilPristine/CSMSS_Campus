@@ -4,7 +4,8 @@ page 50130 StudentFeeReceiptHeader
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = StudentFeeReceiptHeader;
-    RefreshOnActivate = true;
+    SourceTableView = where(Status = filter(Open));
+    // RefreshOnActivate = true;
     Caption = 'Student Fees Receipt';
     // Editable = editable;
 
@@ -12,8 +13,31 @@ page 50130 StudentFeeReceiptHeader
     {
         area(Content)
         {
+            group(Filter)
+            {
+                ShowCaption = false;
+                field(Hostel; rec.Hostel)
+                {
+                    // ApplicationArea = All;
+                    // trigger OnValidate()
+                    // begin
+                    //     if rec.Hostel = false then
+                    //         RecPostedLine.DeleteAll();
+                    // end;
+                }
+                field(Transport; rec.Transport)
+                {
+                    // ApplicationArea = All;
+                    // trigger OnValidate()
+                    // begin
+                    //     if rec.Transport = false then
+                    //         RecPostedLine.DeleteAll();
+                    // end;
+                }
+            }
             group(GroupName)
             {
+
                 field(DocumentNo; rec.DocumentNo)
                 {
                     ApplicationArea = All;

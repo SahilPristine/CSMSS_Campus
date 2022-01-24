@@ -17,8 +17,17 @@ pageextension 50126 GenJournalLine extends 39
     {
         modify(Post)
         {
-            trigger OnAfterAction()
+            trigger OnBeforeAction()
             begin
+                recTransport.Reset();
+                recTransport.SetRange(SlipNo, rec."Document No.");
+                if recTransport.FindFirst() then begin
+                    Message('Hello');
+                    recTransport.Status := recTransport.Status::Closed;
+                    recTransport.Modify();
+                    // else
+                    // recTransport.Status := recTransport.Status::Open;
+                end;
 
             end;
 
@@ -32,5 +41,6 @@ pageextension 50126 GenJournalLine extends 39
         recCLE: Record "Cust. Ledger Entry";
         recStFees: Record StudentFeeStructure;
         recGJL: Record "Gen. Journal Line";
+        recTransport: Record TransportReg;
 
 }

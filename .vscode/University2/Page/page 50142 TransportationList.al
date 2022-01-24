@@ -4,6 +4,7 @@ page 50142 TransportationList
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = TransportReg;
+    SourceTableView = where(Status = filter(Open));
 
     layout
     {
@@ -25,12 +26,32 @@ page 50142 TransportationList
                 {
                     ApplicationArea = All;
                 }
+                field(Class; rec.Class)
+                {
+                    ApplicationArea = All;
+                }
+                field(Course; rec.Course)
+                {
+                    ApplicationArea = All;
+                }
+                field(BatchCode; rec.BatchCode)
+                {
+                    ApplicationArea = All;
+                }
+                field(PhoneNo; rec.PhoneNo)
+                {
+                    ApplicationArea = All;
+                }
                 field(RouteNo; rec.RouteNo)
                 {
                     ApplicationArea = All;
                     LookupPageId = RouteMaster;
                 }
                 field(RouteCharges; rec.RouteCharges)
+                {
+                    ApplicationArea = All;
+                }
+                field(Status; rec.Status)
                 {
                     ApplicationArea = All;
                 }
@@ -106,4 +127,16 @@ page 50142 TransportationList
         noseriesmgmt: Codeunit NoSeriesManagement;
         PostingDate: Date;
         RecStudentFees: Record StudentFeeStructure;
+        recCLE: Record "Cust. Ledger Entry";
+
+    // trigger OnAfterGetRecord()
+    // begin
+    //     recCLE.reset();
+    //     recCLE.SetRange("Document No.", rec.SlipNo);
+    //     if recCLE.FindFirst() then
+    //         rec.Status := rec.Status::Closed
+    //     else
+    //         rec.Status := Rec.Status::Open;
+    // end;
+
 }

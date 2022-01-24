@@ -19,34 +19,114 @@ table 50130 StudentFeeReceiptHeader
                     end;
 
                 if RecCustLedgEntry.Open = false then begin
+                    if rec.Hostel = true then begin
+                        RecCustLedgEntry.Reset();
+                        RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
+                        RecSalesSetup.Get();
+                        RecCustLedgEntry.SetRange(ElementCode, RecSalesSetup.DefaultHostelElement);
+                        RecCustLedgEntry.SetRange(Open, true);
+                        if RecCustLedgEntry.FindSet() then begin
+                            repeat
+                                RecPostedLine.Reset();
+                                RecPostedLine.SetRange(DocumentNo, DocumentNo);
+                                If RecPostedLine.FindLast() then
+                                    LineNo := RecPostedLine.LineNo + 10000
+                                else
+                                    LineNo := 10000;
 
-                    RecCustLedgEntry.Reset();
-                    RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
-                    RecCustLedgEntry.SetRange(Open, true);
-                    if RecCustLedgEntry.FindSet() then begin
-                        repeat
-                            RecPostedLine.Reset();
-                            RecPostedLine.SetRange(DocumentNo, DocumentNo);
-                            If RecPostedLine.FindLast() then
-                                LineNo := RecPostedLine.LineNo + 10000
-                            else
-                                LineNo := 10000;
-
-                            RecPostedLine.init();
-                            RecPostedLine.LineNo := LineNo;
-                            RecPostedLine.DocumentNo := DocumentNo;
-                            RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
-                            RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
-                            RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
-                            // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
-                            RecCustLedgEntry.CalcFields(Amount);
-                            RecPostedLine.Amount := RecCustLedgEntry.Amount;
-                            RecCustLedgEntry.CalcFields("Remaining Amount");
-                            RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
-                            RecPostedLine.Insert();
-                        until
-                        RecCustLedgEntry.Next() = 0;
+                                RecPostedLine.init();
+                                RecPostedLine.LineNo := LineNo;
+                                RecPostedLine.DocumentNo := DocumentNo;
+                                RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
+                                RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
+                                RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
+                                // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                                RecCustLedgEntry.CalcFields(Amount);
+                                RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                                RecCustLedgEntry.CalcFields("Remaining Amount");
+                                RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
+                                RecPostedLine.Insert();
+                            until
+                            RecCustLedgEntry.Next() = 0;
+                        end;
                     end;
+
+                    if rec.Hostel = true then begin
+                        RecCustLedgEntry.Reset();
+                        RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
+                        RecSalesSetup.Get();
+                        RecCustLedgEntry.SetRange(ElementCode, RecSalesSetup.DefaultDepositElement);
+                        RecCustLedgEntry.SetRange(Open, true);
+                        if RecCustLedgEntry.FindSet() then begin
+                            repeat
+                                RecPostedLine.Reset();
+                                RecPostedLine.SetRange(DocumentNo, DocumentNo);
+                                If RecPostedLine.FindLast() then
+                                    LineNo := RecPostedLine.LineNo + 10000
+                                else
+                                    LineNo := 10000;
+
+                                RecPostedLine.init();
+                                RecPostedLine.LineNo := LineNo;
+                                RecPostedLine.DocumentNo := DocumentNo;
+                                RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
+                                RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
+                                RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
+                                // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                                RecCustLedgEntry.CalcFields(Amount);
+                                RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                                RecCustLedgEntry.CalcFields("Remaining Amount");
+                                RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
+                                RecPostedLine.Insert();
+                            until
+                            RecCustLedgEntry.Next() = 0;
+                        end;
+                    end;
+
+                    // if Hostel = false then begin
+                    //     RecPostedLine.DeleteAll();
+                    //     RecPostedLine.Modify();
+                    // end;
+
+
+                    if rec.Transport = true then begin
+                        RecCustLedgEntry.Reset();
+                        RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
+                        RecSalesSetup.Get();
+                        RecCustLedgEntry.SetRange(ElementCode, RecSalesSetup.DefaultTransportElement);
+                        RecCustLedgEntry.SetRange(Open, true);
+                        if RecCustLedgEntry.FindSet() then begin
+                            repeat
+                                RecPostedLine.Reset();
+                                RecPostedLine.SetRange(DocumentNo, DocumentNo);
+                                If RecPostedLine.FindLast() then
+                                    LineNo := RecPostedLine.LineNo + 10000
+                                else
+                                    LineNo := 10000;
+
+                                RecPostedLine.init();
+                                RecPostedLine.LineNo := LineNo;
+                                RecPostedLine.DocumentNo := DocumentNo;
+                                RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
+                                RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
+                                RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
+                                // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                                RecCustLedgEntry.CalcFields(Amount);
+                                RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                                RecCustLedgEntry.CalcFields("Remaining Amount");
+                                RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
+                                RecPostedLine.Insert();
+                            until
+                            RecCustLedgEntry.Next() = 0;
+                        end;
+                    end;
+
+                    // if Transport = false then begin
+                    //     RecPostedLine.DeleteAll();
+                    //     RecPostedLine.Modify();
+                    // end;
+
+
                 end;
 
 
@@ -114,6 +194,14 @@ table 50130 StudentFeeReceiptHeader
         {
             DataClassification = ToBeClassified;
             OptionMembers = "Open","Closed";
+        }
+        field(12; Hostel; boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(13; Transport; Boolean)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

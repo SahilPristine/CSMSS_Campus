@@ -96,7 +96,7 @@ tableextension 50123 CustomerExtension extends Customer
             DataClassification = ToBeClassified;
             TableRelation = SemesterMasterTable.SemesterCode;
             Description = 'SL-V.01';
-            ValidateTableRelation = true;
+            // ValidateTableRelation = true;
         }
         field(50146; "Stream Code"; Text[50])
         {
