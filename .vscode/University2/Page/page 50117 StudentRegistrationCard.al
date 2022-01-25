@@ -282,7 +282,6 @@ page 50117 StudentRegistration
 
             }
 
-
             group(BankDetails)
             {
                 Caption = 'Bank Details';
@@ -389,6 +388,19 @@ page 50117 StudentRegistration
         }
         area(FactBoxes)
         {
+            part(Picture; "Customer Picture")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "No." = FIELD("Registration No");
+                Caption = 'Student Image';
+            }
+            part("Attached Documents"; "Document Attachment Factbox")
+            {
+                ApplicationArea = All;
+                Caption = 'Attachments';
+                SubPageLink = "Table ID" = CONST(50102),
+                              "No." = FIELD("Registration No");
+            }
 
         }
 
@@ -426,6 +438,7 @@ page 50117 StudentRegistration
 
             }
         }
+
     }
 
     var
