@@ -4,8 +4,6 @@ table 50102 StudentRegistration
 
     fields
     {
-
-
         field(50000; "Registration No"; code[20])
         {
             DataClassification = ToBeClassified;
