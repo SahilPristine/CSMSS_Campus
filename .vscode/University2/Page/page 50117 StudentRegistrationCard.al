@@ -631,7 +631,10 @@ page 50117 StudentRegistration
                 CustRec."Branch Name" := rec."Branch Name";
                 CustRec."IFSC Code" := rec."IFSC Code";
                 CustRec."Bank Account No" := rec."Bank Account No";
+                // if CompanyName <> 'mithilesh' then
                 CustRec."Application Method" := rec."Application Method"::"Apply to Oldest";
+                // else
+                //     CustRec."Application Method" := rec."Application Method"::Manual;
                 CustRec.Type := rec.Type::Student;
                 CustRec.Hostel := rec.Hostel;
                 CustRec.RoomType := rec.RoomType;

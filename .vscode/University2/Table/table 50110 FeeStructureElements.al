@@ -42,7 +42,7 @@ table 50110 FeeStructureElements
         if CompanyName <> 'mithilesh' then begin
             recElement.ChangeCompany('mithilesh');
             recElement.TransferFields(Rec);
-            recElement.Insert();
+            recElement.Modify();
         end;
 
     end;

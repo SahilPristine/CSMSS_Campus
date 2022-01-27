@@ -111,6 +111,27 @@ page 50142 TransportationList
 
                 end;
             }
+
+            action(EditJournal)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Edit Journal';
+                Image = OpenJournal;
+                Promoted = true;
+                PromotedCategory = Process;
+                ShortCutKey = 'Return';
+                ToolTip = 'Open a journal based on the journal batch.';
+
+                trigger OnAction()
+                begin
+                    RecGenJoun.Reset();
+                    RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
+                    RecGenJoun.SetRange("Journal Batch Name", 'DEFAULT');
+                    RecGenJoun.SetRange("Document No.", rec.SlipNo);
+                    if RecGenJoun.FindFirst() then
+                        Page.Run(39, RecGenJoun);
+                end;
+            }
         }
     }
 

@@ -269,7 +269,6 @@ page 50115 HostelRegistration
                 Image = OpenJournal;
                 Promoted = true;
                 PromotedCategory = Process;
-                PromotedIsBig = true;
                 ShortCutKey = 'Return';
                 ToolTip = 'Open a journal based on the journal batch.';
 
@@ -278,7 +277,9 @@ page 50115 HostelRegistration
                     RecGenJoun.Reset();
                     RecGenJoun.SetRange("Journal Template Name", 'GENERAL1');
                     RecGenJoun.SetRange("Journal Batch Name", 'HOSTELFEE');
-                    Page.Run(39);
+                    RecGenJoun.SetRange("Document No.", rec.RegistrationNo);
+                    if RecGenJoun.FindFirst() then
+                        Page.Run(39, RecGenJoun);
                 end;
             }
             action(Left)

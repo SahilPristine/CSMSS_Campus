@@ -58,7 +58,6 @@ tableextension 50125 GenJournal extends 81
         {
             DataClassification = ToBeClassified;
         }
-
         field(50011; Caste; Code[20])
         {
             DataClassification = ToBeClassified;

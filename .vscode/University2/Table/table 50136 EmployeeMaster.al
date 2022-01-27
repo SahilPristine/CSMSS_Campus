@@ -94,12 +94,12 @@ table 50136 EmployeeMaster
         field(20; "Total Hours"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Daily Attendance Details"."Total Hours" WHERE(EmpID = FIELD(EmpID), Date = FIELD(DateFilter)));
+            // CalcFormula = Sum("Daily Attendance Details"."Total Hours" WHERE(EmpID = FIELD(EmpID), Date = FIELD(DateFilter)));
         }
         field(21; "Total Days"; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), Paid = CONST(Yes), Date = FIELD(DateFilter)));
+            // CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), Paid = CONST(Yes), Date = FIELD(DateFilter)));
         }
         field(22; Block; Boolean)
         {
@@ -108,7 +108,7 @@ table 50136 EmployeeMaster
         field(23; "Half Days"; Integer)
         {
             FieldClass = FlowField;
-            CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), "Half Paid" = CONST(Yes), Date = FIELD(DateFilter)));
+            // CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), "Half Paid" = CONST(Yes), Date = FIELD(DateFilter)));
         }
         field(24; "Joining Date"; Date)
         {
@@ -315,22 +315,22 @@ table 50136 EmployeeMaster
         field(74; "Grade"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Grade.Code;
+            // TableRelation = Grade.Code;
         }
         field(75; "OT Hours"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Daily Attendance Details"."OT Hours" where(EmpID = field(EmpID), Date = field(DateFilter)));
+            // CalcFormula = Sum("Daily Attendance Details"."OT Hours" where(EmpID = field(EmpID), Date = field(DateFilter)));
         }
         field(76; "Late Hours"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Daily Attendance Details"."Late Hours" WHERE(EmpID = FIELD(EmpID), Date = FIELD(DateFilter)));
+            // CalcFormula = Sum("Daily Attendance Details"."Late Hours" WHERE(EmpID = FIELD(EmpID), Date = FIELD(DateFilter)));
         }
         field(77; "80CCE Amount"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80CCE)));
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80CCE)));
         }
         field(78; "Last Pay Revision Date"; Date)
         {
@@ -339,15 +339,204 @@ table 50136 EmployeeMaster
         field(79; "Net Change"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), "Posting Date" = FIELD(DateFilter)));
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), "Posting Date" = FIELD(DateFilter)));
         }
         field(80; Imprest; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), "Element Type" = CONST(Imprest), "Posting Date" = FIELD(DateFilter)));
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), "Element Type" = CONST(Imprest), "Posting Date" = FIELD(DateFilter)));
 
         }
+        field(81; Advance; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), "Element Type" = CONST(Advance), "Posting Date" = FIELD(DateFilter)));
+        }
+        field(82; "80D Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER("80D Amount"), 80D=FILTER(Normal)));
+        }
+        field(83; "80D Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormlua = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID=FIELD(EmpID),"Section Type"=FILTER("80D Amount (Spl.)"),80D=FILTER(Special)));
+        }
+        field(84; "80DD Amount"; Decimal)
+        {
+            FieldClass = flowfield;
+            // CalcFormla = Sum("Emp. DeductionsUnderChapter-VI"."Deducible Amount" where (EmpID = Field(EmpID), "Section Type"= FILTER(80DD),80D=FILTER(Normal)));
+        }
+        field(85; "80DD Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID = FIELD(EmpID), Section Type=FILTER(80DD),80D=FILTER(Special)));
+        }
+        field(86; "80DDB Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE (EmpID=FIELD(EmpID),Section Type=FILTER(80DDB),80D=FILTER(Normal)));
+        }
+        field(87; "80DDB Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80DDB),80D=FILTER(Special)));
 
+        }
+        field(88; "Form 16 80CCE Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80CCE)));
+        }
+        field(89; "Form 16 80D Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80D),80D=FILTER(Normal)));
+        }
+        field(90; "Form 16 80D Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE (EmpID=FIELD(EmpID),"Section Type"=FILTER(80D),80D=FILTER(Special)));
+        }
+        field(91; "Form 16 80DD Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE (EmpID=FIELD(EmpID),"Section Type"=FILTER(80DD),80D=FILTER(Normal)));
+        }
+        field(92; "Form 16 80DD Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE(EmpID = FIELD(EmpID), Section Type=FILTER(80DD),80D=FILTER(Special)));
+        }
+        field(93; "Form 16 80DDB Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE(EmpID = FIELD(EmpID), Section Type=FILTER(80DDB),80D=FILTER(Normal)));
+        }
+        field(94; "Form 16 80DDB Amount (Spl.)"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. DeductionsUnderChapter-VI"."Form 16 Deductible Amount" WHERE(EmpID = FIELD(EmpID), "Section Type" = FILTER(80DDB),80D=FILTER(Special)));
+        }
+        field(95; "Single Shift"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            // TableRelation = "Shift Master"."Shift Code";
+        }
+        field(96; "Search Name"; Code[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(97; "Salary Payment A/C Type"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ","G/L Account","Bank Account";
+        }
+        field(98; "Salary Payment A/C No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            // TableRelation=IF ("Salary Payment A/C Type"=CONST("G/L Account")) "G/L Account".No.
+            //                                                      ELSE IF (Salary Payment A/C Type=CONST(Bank Account)) "Bank Account".No.
+        }
+        field(99; Picture; Blob)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(100; "Standard Offdays"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(101; "Holidays Applicable"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(102; "Overlook PF Salary Limit"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(103; "Overlook ESI Salary Limit"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(104; "Earning Element Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Gen. Journal Line".Amount WHERE("Emp ID" = FIELD(EmpID), "Pay Element" = FIELD(Element Filter),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type2=CONST(Earning)));
+        }
+        field(105; "Salary Period"; text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(106; "Salary Days"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(107; "Actual Salary Days"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(108; "Element Filter"; code[20])
+        {
+            FieldClass = FlowFilter;
+        }
+        field(109; "Deduction Element Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = - Sum("Gen. Journal Line".Amount WHERE(Emp ID=FIELD(EmpID),Pay Element=FIELD(Element Filter),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type2=CONST(Deduction)));
+
+        }
+        field(110; "Total Earning"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Payroll Journal Line".Amount WHERE(Emp ID=FIELD(EmpID),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=CONST(Earning),Arrear Pay Element=FIELD(Arrear Type)));
+        }
+        field(111; "Total Deduction"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = - Sum("Payroll Journal Line".Amount WHERE(Emp ID=FIELD(EmpID),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=CONST(Deduction),Pay Element=FILTER(<>LOAN),Arrear Pay Element=FIELD(Arrear Type)));
+        }
+        field(112; "Net Salary"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. Ledger Entry".Amount WHERE (EmpID=FIELD(EmpID),Posting Date=FIELD(Date Filter),Salary Entry=FILTER(Yes)));
+            Editable = false;
+        }
+        field(113; "Dispensary(ESI)"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(114; "Anniversary Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(115; "Loan Deduction"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = - Sum("Gen. Journal Line".Amount WHERE(Journal Template Name=CONST(PAYROLL),Loan=FILTER(<>'')));
+        }
+        field(116; "Notice Period"; DateFormula)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(117; "Resignation Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(118; "Final Settlement"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(119; "PF Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. PF Entry"."Total PF Amount" WHERE (EmpID=FIELD(EmpID),Posting Date=FIELD(Date Filter)));
+            Editable = false;
+        }
+        field(120; "No. of Off/Holidays"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), Date = FIELD(Date Filter),Type=FILTER(Offday|Holiday)));
+        }
     }
 
     keys
