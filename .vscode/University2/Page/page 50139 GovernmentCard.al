@@ -233,6 +233,11 @@ page 50139 GovernmentCard
 
     // end;
 
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        rec.Type := rec.Type::Others;
+        // CurrPage.Update(true);
+    end;
 
     local procedure AssistEditCustom(OldCust: Record Customer): Boolean
     var

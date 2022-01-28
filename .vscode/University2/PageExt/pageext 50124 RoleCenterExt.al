@@ -108,6 +108,14 @@ pageextension 50124 RoleCenterExt extends 9006
                         RunObject = page 50129;
                         Image = Route;
                     }
+                    action("Govt Master")
+                    {
+                        RunObject = page 50138;
+                    }
+                    action("Visior Registration")
+                    {
+                        RunObject = page 50146;
+                    }
                 }
                 group(Hostels)
                 {
@@ -176,6 +184,7 @@ pageextension 50124 RoleCenterExt extends 9006
                         Image = Report2;
                     }
                 }
+
             }
         }
     }

@@ -25,7 +25,11 @@ page 50140 VisitorRegistration
                 {
                     ApplicationArea = All;
                     Caption = 'First Name';
-
+                }
+                field("Name 2"; rec."Name 2")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Second Name';
                 }
                 field("Phone No."; rec."Phone No.")
                 {
@@ -41,12 +45,7 @@ page 50140 VisitorRegistration
                 {
                     ApplicationArea = All;
                 }
-                field("Name 2"; rec."Name 2")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Second Name';
 
-                }
                 field("Permanent Address 1"; rec.Address)
                 {
                     ApplicationArea = All;
@@ -74,6 +73,14 @@ page 50140 VisitorRegistration
                     ApplicationArea = All;
                     Caption = 'Country Code';
                 }
+                field("Customer Posting Group"; rec."Customer Posting Group")
+                {
+                    ApplicationArea = All;
+                }
+                field("Gen. Bus. Posting Group"; rec."Gen. Bus. Posting Group")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }
@@ -100,7 +107,7 @@ page 50140 VisitorRegistration
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
-        rec.Type := rec.Type::Others;
+        rec.Type := rec.Type::Visitor;
         // CurrPage.Update(true);
     end;
 

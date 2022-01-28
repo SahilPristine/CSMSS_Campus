@@ -244,7 +244,7 @@ tableextension 50123 CustomerExtension extends Customer
         field(50189; Type; Option)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ","Student","Others";
+            OptionMembers = " ","Student","Visitor","Others";
         }
         field(50190; HostelName; Text[50])
         {

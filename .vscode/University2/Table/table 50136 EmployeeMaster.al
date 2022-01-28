@@ -537,14 +537,458 @@ table 50136 EmployeeMaster
             FieldClass = FlowField;
             // CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), Date = FIELD(Date Filter),Type=FILTER(Offday|Holiday)));
         }
-    }
+        field(121; "Final Settlement Processed"; Boolean)
+        {
+            Editable = false;
+        }
+        field(122; "Final Settlement Posted"; Boolean)
+        {
+            Editable = false;
+        }
+        field(123; Type; option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ","Employee","Contract","Retainer","Consultant";
+        }
+        field(124; "Vendor Code"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Vendor;
+        }
+        field(125; "Current Instance"; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(126; "Rate per Manday"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(127; "Calender Code"; Code[10])
+        {
+            // TableRelation = Calender.Code;
+            DataClassification = ToBeClassified;
+        }
+        field(128; "Comp. Off Balance"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), "Comp Off" = CONST(Yes), Comp Off Assigned=CONST(No)));
+            Editable = false;
+        }
+        field(129; "Half Comp. Off Balance"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Count("Daily Attendance Details" WHERE (EmpID=FIELD(EmpID),"Comp Off" (Half)=CONST(Yes),Comp Off Assigned=CONST(No)));
+            Editable = false;
+        }
+        field(130; "Leave Filter"; code[20])
+        {
+            FieldClass = FlowFilter;
+        }
+        field(131; "Availed Leaves in Current Year"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Daily Attendance Details"."Leave Weight" WHERE (EmpID=FIELD(EmpID),Leave Code=FIELD(Leave Filter),Leave Closed=CONST(No),Date=FIELD(Date Filter)));
+        }
+        field(132; "Comp. Off Availed in Curr. Yr"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Daily Attendance Details"."Leave Weight" WHERE (EmpID=FIELD(EmpID),Leave Code=CONST(COMPOFF),Leave Closed=CONST(No)));
+            Editable = false;
+        }
+        field(133; "Card No."; Code[10])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(134; "Employer PF"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Payroll Journal Line".Amount WHERE (Emp ID=FIELD(EmpID),Element Type=FILTER(Employer PF|Employer CMPF),Arrear Pay Element=FIELD(Arrear Type)));
+        }
+        field(135; "Employer ESI "; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Payroll Journal Line".Amount WHERE (Emp ID=FIELD(EmpID),Element Type=FILTER(Employer ESI),Arrear Pay Element=FIELD(Arrear Type)));
+            DecimalPlaces = 2 : 5;
+        }
+        field(136; "Working (Full Days)"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Count("Daily Attendance Details" WHERE(EmpID = FIELD(EmpID), Date = FIELD(Date Filter),Type=FILTER(Working),Paid=FILTER(Yes),Leave Code=FILTER('')));
+            Editable = false;
+        }
+        field(137; "Off Days"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Count("Daily Attendance Details" WHERE (EmpID=FIELD(EmpID),Date=FIELD(Date Filter),Type=FILTER(Offday),Paid=FILTER(Yes)));
+            Editable = false;
+        }
+        field(138; Holidays; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Count("Daily Attendance Details" WHERE (EmpID=FIELD(EmpID),Date=FIELD(Date Filter),Type=FILTER(Holiday)));
+            Editable = false;
+        }
+        field(139; "Working (Half Days)"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Count("Daily Attendance Details" WHERE (EmpID=FIELD(EmpID),Date=FIELD(Date Filter),Type=FILTER(Working),Half Paid=FILTER(Yes),Leave Code=FILTER('')));
+            Editable = false;
+        }
+        field(140; "Earned Element Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. Ledger Entry".Amount WHERE (EmpID=FIELD(EmpID),Pay Element=FIELD(Element Filter),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=FILTER(Earning),Posting Date=FIELD(Date Filter)));
+        }
+        field(141; "Deducted Element Amount"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = - Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), Pay Element=FIELD(Element Filter),Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=FILTER(Deduction),Posting Date=FIELD(Date Filter)));
+            Editable = false;
+        }
+        field(142; "Posted Employer PF"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. PF Entry"."Total PF Amount" WHERE (EmpID=FIELD(EmpID),Element Type=FILTER(Employer PF),Posting Date=FIELD(Date Filter)));
+            Editable = false;
+        }
+        field(143; "Posted Employer ESI"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Emp. ESI Entry"."Total ESI Amount" WHERE (EmpID=FIELD(EmpID),Element Type=FILTER(Employer ESI),Posting Date=FIELD(Date Filter)));
+            DecimalPlaces = 2 : 5;
+        }
+        field(144; "Posted Total Earning"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=CONST(Earning), Posting Date=FIELD(Date Filter)));
+        }
+        field(145; "Posted Total Deduction"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = - Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), Element Type=FILTER(<>Employer PF&<>Employer ESI&<>Employer CMPF),Type=CONST(Deduction),Posting Date=FIELD(Date Filter)));
+        }
+        field(146; "Posted Loan Deduction"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = -Sum("Emp. Ledger Entry".Amount WHERE (EmpID=FIELD(EmpID), Loan=FILTER(<>''),Posting Date=FIELD(Date Filter),Type=FILTER(Deduction)));
+        }
+        field(147; "Working(Half Leave)"; Integer)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Count("Daily Attendance Details" WHERE (EmpID=FIELD(EmpID),Date=FIELD(Date Filter),Type=FILTER(Working),Status=FILTER(Half Leave),Leave Code=FILTER(<>'')));
+            Editable = False;
+        }
+        field(148; "Bank Account No."; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(149; "Payment Type"; Option)
+        {
+            DataClassification = ToBeClassified;
+            OptionMembers = " ","Bank Transfer","Cheque","Cash","NEFT";
+        }
+        field(150; "Arrear Type"; Boolean)
+        {
+            FieldClass = FlowFilter;
+        }
+        field(151; "Hold for Payment"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(152; "Permanent Address 1"; text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(153; "Permanent Address 2"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(154; "Loan Eligible Date"; Date)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(155; "Approval Authoirty"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = EmployeeMaster;
+        }
+        field(156; "PT Calculation Mandatory"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(157; "IFSC Code"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(158; "Bank Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(159; "Base Earning"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Sum("Employee Pay Element"."Calculation Value" WHERE (EmpID=FIELD(EmpID),Pay Element=FIELD(Element Filter),Type=FILTER(Earning)));
+        }
+        field(160; "Base Deduction"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Employee Pay Element".Structure WHERE(EmpID = FIELD(EmpID), Pay Element=FIELD(Element Filter),Type=FILTER(Deduction)));
+        }
+        field(161; "Approval Authoirty2"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = EmployeeMaster;
 
+        }
+        field(162; "Approval Authoirty2mail"; Text[80])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(163; "Aadhar Card No"; Code[12])
+        {
+            // DataClassification = ToBeClassified;
+        }
+        field(164; "UAN No"; Code[112])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(165; "App Password"; Text[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(166; "Location 1"; Code[50])
+        {
+            TableRelation = Location.Code;
+        }
+        field(167; "Location 2"; Code[50])
+        {
+            TableRelation = Location.Code;
+        }
+        field(168; "Location 3"; Code[50])
+        {
+            TableRelation = Location.Code;
+        }
+        field(169; "Location 4"; Code[50])
+        {
+            TableRelation = Location.Code;
+        }
+        field(170; "District Code"; Code[20])
+        {
+            // TableRelation = "Geographical Setup".District WHERE (Zone=FIELD(Zone),State=FIELD(State Code),Region=FIELD(Region Code));
+            // ValidateTableRelation = false;
+            DataClassification = ToBeClassified;
+        }
+        field(171; "Reion Code"; Code[20])
+        {
+            // TableRelation="Geographical Setup".Region WHERE (Zone=FIELD(Zone),State=FIELD(State Code));
+            // ValidateTableRelation=No;
+            DataClassification = ToBeClassified;
+        }
+        field(172; Taluka; Text[30])
+        {
+            // TableRelation = TableRelation="Geographical Setup".Taluka WHERE (Zone=FIELD(Zone),State=FIELD(State Code),Region=FIELD(Region Code),District=FIELD(District Code));
+            // ValidateTableRelation = false;
+            DataClassification = ToBeClassified;
+        }
+        field(173; Zone; Code[20])
+        {
+            // TableRelation="Geographical Setup".Zone;
+            // ValidateTableRelation = false;
+            DataClassification = ToBeClassified;
+        }
+        field(174; Village; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(175; "Zone Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Lookup("Zone Master".Description WHERE(Code = FIELD(Zone)));
+            Editable = false;
+        }
+        field(176; "State Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Lookup(State.Description WHERE (Code=FIELD(State Code)));
+            Editable = false;
+        }
+        field(177; "District Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("District Master".Name WHERE (Code=FIELD(District Code)));
+            Editable = false;
+        }
+        field(178; "Region Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Region Master".Name WHERE (Code=FIELD(Region Code)));
+            Editable = false;
+        }
+        field(179; "Taluka Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Taluka Master".Description WHERE (Code=FIELD(Taluka)));
+            Editable = false;
+        }
+        field(180; "Perm Taluka"; Text[30])
+        {
+            // TableRelation = "Geographical Setup".Taluka WHERE (Zone=FIELD(Perm Zone),State=FIELD(Perm State Code),Region=FIELD(Perm Region Code),District=FIELD(Perm District Code));
+            DataClassification = ToBeClassified;
+        }
+        field(181; "Perm Zone"; Code[20])
+        {
+            // TableRelation="Geographical Setup".Zone;
+            // ValidateTableRelation = false;
+            DataClassification = ToBeClassified;
+        }
+        field(182; "Perm Village"; Text[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(183; "Perm Zone Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Zone Master".Description WHERE (Code=FIELD(Perm Zone)));
+            Editable = false;
+        }
+        field(184; "Perm State Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup(State.Description WHERE (Code=FIELD(Perm State Code)));
+            // ValidateTableRelation=No;
+            Editable = false;
+        }
+        field(185; "Perm District Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("District Master".Name WHERE (Code=FIELD(Perm District Code)));
+            Editable = false;
+        }
+        field(186; "Perm Region Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Region Master".Name WHERE (Code=FIELD(Perm Region Code)));
+            Editable = false;
+        }
+        field(187; "Perm Taluka Name"; Text[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Taluka Master".Description WHERE (Code=FIELD(Perm Taluka)));
+            Editable = false;
+        }
+        field(188; "Perm District Code"; Code[20])
+        {
+            // TableRelation = "Geographical Setup".District WHERE (Zone=FIELD(Perm Zone),State=FIELD(Perm State Code),Region=FIELD(Perm Region Code));
+            DataClassification = ToBeClassified;
+        }
+        field(189; "Perm Region Code"; Code[20])
+        {
+            // TableRelation="Geographical Setup".Region WHERE (Zone=FIELD(Perm Zone),State=FIELD(Perm State Code));
+            DataClassification = ToBeClassified;
+        }
+        field(190; "Perm State Code"; Code[20])
+        {
+            TableRelation = State;
+            DataClassification = ToBeClassified;
+        }
+        field(191; "Perm Post Code"; Code[20])
+        {
+            TableRelation = "Post Code";
+            DataClassification = ToBeClassified;
+        }
+        field(192; "Company Mobile No"; Code[10])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(193; "Department Name"; Text[50])
+        {
+            DataClassification = ToBeClassified;
+            // TableRelation = "Dimension Value".Name WHERE (Dimension Code=FILTER(DEPARTMENT),Blocked=CONST(No),Dimension Value Type=CONST(Begin-Total));
+            // ValidateTableRelation = false;
+        }
+        field(194; "Sub Department Code"; Code[10])
+        {
+            // TableRelation = "Dimension Value".Code WHERE (Dimension Code=FILTER(DEPARTMENT),Blocked=CONST(No),Dimension Value Type=CONST(Standard));
+            DataClassification = ToBeClassified;
+        }
+        field(195; "Loan Net Change"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE(EmpID = FIELD(EmpID), Posting Date=FIELD(Date Filter),Loan=FILTER(<>'')));
+        }
+        field(196; "Without Loan Net Change"; Decimal)
+        {
+            FieldClass = FlowField;
+            // CalcFormula = Sum("Emp. Ledger Entry".Amount WHERE (EmpID=FIELD(EmpID),Posting Date=FIELD(Date Filter),Pay Element=FILTER(ADV|DED|IMPREST)));
+            Editable = false;
+        }
+        field(197; "Full Name"; Text[100])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(198; HO; Code[30])
+        {
+            // TableRelation="Employee HO Master".HO;
+            DataClassification = ToBeClassified;
+        }
+        field(199; Branch; Code[20])
+        {
+            // TableRelation="Employee Branch Master";
+            DataClassification = ToBeClassified;
+        }
+        field(200; "Branch Name"; Text[30])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Employee Branch Master".Description WHERE (Branch=FIELD(Branch)));
+        }
+        field(201; "Sub Dep Name"; Code[100])
+        {
+            FieldClass = FlowField;
+            // CalcFormula=Lookup("Dimension Value".Name WHERE (Code=FIELD(Sub Department Code),Dimension Code=FILTER(DEPARTMENT)));
+        }
+        field(202; "Incoming Document Entry No."; Integer)
+        {
+            DataClassification = ToBeClassified;
+        }
+    }
     keys
     {
         key(Key1; EmpID)
         {
             Clustered = true;
         }
+        key(Key2; Block, "Final Settlement Processed")
+        { }
+        key(Key3; Type, "Vendor Code")
+        { }
+        key(Key4; Block, "Global Dimension 2 Code")
+        { }
+        key(Key5; FirstName)
+        { }
+        key(Key6; "Full Name")
+        { }
+        key(Key7; "Department Name")
+        { }
+        key(Key8; "Card No.")
+        { }
+        key(Key9; "PF / CMPF No.")
+        { }
+        key(Key10; "Global Dimension 1 Code", Grade)
+        { }
+        key(Key11; "Global Dimension 1 Code", "Terminating Date", "Joining Date")
+        { }
+        key(Key12; "Global Dimension 1 Code", "Terminating Date")
+        { }
+        key(Key13; "Global Dimension 1 Code", "Joining Date")
+        { }
+        key(Key14; "Joining Date")
+        { }
+        key(Key15; BrithDate)
+        { }
+        key(Key16; Block, "E-Mail", EmpID)
+        { }
+
+
     }
 
     var
