@@ -33,18 +33,18 @@ page 50111 StudentFeeStructure
                     Caption = 'Course Code';
 
                 }
-                field(Stream; Rec.Stream)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Stream';
+                // field(Stream; Rec.Stream)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Stream';
 
-                }
-                field(Semester; Rec.Semester)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Semester';
+                // }
+                // field(Semester; Rec.Semester)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Semester';
 
-                }
+                // }
                 field(BatchCode; rec.BatchCode)
                 {
                     ApplicationArea = All;
@@ -55,11 +55,11 @@ page 50111 StudentFeeStructure
                     ApplicationArea = All;
                     Caption = 'Academic Year';
                 }
-                field(Class; rec.Class)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Class';
-                }
+                // field(Class; rec.Class)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Class';
+                // }
                 field(CategoryCode; rec.CategoryCode)
                 {
                     ApplicationArea = All;
@@ -192,11 +192,11 @@ page 50111 StudentFeeStructure
 
         custledgentry.Reset();
         custledgentry.SetRange("Customer No.", rec.StudentEnrollmentNo);
-        // recStFees.SetRange(AcademicYear, AcademicYear);
+        custledgentry.SetRange(AcademicYear, rec.AcademicYear);
         custledgentry.SetRange(Batch, Rec.BatchCode);
         custledgentry.SetRange("Course Code", rec.CourseCode);
-        custledgentry.SetRange("Semester Code", rec.Semester);
-        custledgentry.SetRange("Stream Code", rec.Stream);
+        // custledgentry.SetRange("Semester Code", rec.Semester);
+        // custledgentry.SetRange("Stream Code", rec.Stream);
         custledgentry.SetRange(ElementCode, rec.ElementCode);
         custledgentry.SetRange(Category, rec.CategoryCode);
         custledgentry.SetRange(Caste, Rec.CasteCode);

@@ -112,6 +112,7 @@ page 50130 StudentFeeReceiptHeader
                 field("Amount Received"; rec."Amount Received")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Mode Of Payment"; rec."Mode Of Payment")
                 {
@@ -224,6 +225,8 @@ page 50130 StudentFeeReceiptHeader
                     CODEUNIT.RUN(CODEUNIT::"Gen. Jnl.-Post", GJL);
 
                     rec.Status := rec.Status::Closed;
+
+                    CurrPage.Close();
 
                 end;
 

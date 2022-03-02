@@ -63,11 +63,11 @@ pageextension 50124 RoleCenterExt extends 9006
                         RunObject = page 50124;
                         Image = CodesList;
                     }
-                    action("Branch Master")
-                    {
-                        RunObject = page 50133;
-                        Image = NewBranch;
-                    }
+                    // action("Branch Master")
+                    // {
+                    //     RunObject = page 50133;
+                    //     Image = NewBranch;
+                    // }
                     action("Hostel Master")
                     {
                         RunObject = page 50112;
@@ -77,6 +77,7 @@ pageextension 50124 RoleCenterExt extends 9006
                     {
                         RunObject = page 50108;
                         Image = SalesCreditMemo;
+                        Caption = 'Branch Master';
                     }
                     action("Semester Master")
                     {

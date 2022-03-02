@@ -10,6 +10,7 @@ pageextension 50126 GenJournalLine extends 39
                 Caption = 'Element Code';
             }
         }
+
         // Add changes to page layout here
     }
 

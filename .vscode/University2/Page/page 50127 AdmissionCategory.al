@@ -24,21 +24,33 @@ page 50127 AdmissionCategory
                     ApplicationArea = All;
 
                 }
-                field(Caste; rec.Caste)
-                {
-                    ApplicationArea = All;
-                    LookupPageId = 50134;
-                }
+                // field(Caste; rec.Caste)
+                // {
+                //     ApplicationArea = All;
+                //     LookupPageId = 50134;
+                // }
 
-                field(Batch; rec.Batch)
-                {
-                    ApplicationArea = All;
+                // field(Batch; rec.Batch)
+                // {
+                //     ApplicationArea = All;
 
-                }
+                // }
                 field(Course; rec.Course)
                 {
                     ApplicationArea = All;
 
+                }
+                field(Element; rec.Element)
+                {
+                    ApplicationArea = All;
+                }
+                field("Student Fees %"; rec."Student Fees %")
+                {
+                    ApplicationArea = All;
+                }
+                field("Govt Fees %"; rec."Govt Fees %")
+                {
+                    ApplicationArea = All;
                 }
                 field(GovtCode; rec.GovtCode)
                 {

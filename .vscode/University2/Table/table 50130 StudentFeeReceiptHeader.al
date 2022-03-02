@@ -18,7 +18,39 @@ table 50130 StudentFeeReceiptHeader
 
                     end;
 
-                if RecCustLedgEntry.Open = false then begin
+                if (rec.Hostel = false) and (Rec.Transport = false) then begin
+
+                    RecCustLedgEntry.Reset();
+                    RecCustLedgEntry.SetRange("Customer No.", rec.CustomerNo);
+                    RecCustLedgEntry.SetRange(Open, true);
+                    if RecCustLedgEntry.FindFirst() then begin
+                        repeat
+                            RecPostedLine.Reset();
+                            RecPostedLine.SetRange(DocumentNo, DocumentNo);
+                            If RecPostedLine.FindLast() then
+                                LineNo := RecPostedLine.LineNo + 10000
+                            else
+                                LineNo := 10000;
+
+                            RecPostedLine.init();
+                            RecPostedLine.LineNo := LineNo;
+                            RecPostedLine.DocumentNo := DocumentNo;
+                            RecPostedLine.PostingDate := RecCustLedgEntry."Posting Date";
+                            RecPostedLine.EntryDocNo := RecCustLedgEntry."Document No.";
+                            RecPostedLine.ElementCode := RecCustLedgEntry.ElementCode;
+                            // RecPostedLine.ElementDesc := RecCustLedgEntry.ElementDesc;
+                            RecCustLedgEntry.CalcFields(Amount);
+                            RecPostedLine.Amount := RecCustLedgEntry.Amount;
+                            RecCustLedgEntry.CalcFields("Remaining Amount");
+                            RecPostedLine."Remaining Amount" := RecCustLedgEntry."Remaining Amount";
+                            RecPostedLine.Insert();
+                        until
+                        RecCustLedgEntry.Next() = 0;
+
+                    end;
+                end
+                else begin
+
                     if rec.Hostel = true then begin
                         RecCustLedgEntry.Reset();
                         RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
@@ -83,12 +115,6 @@ table 50130 StudentFeeReceiptHeader
                         end;
                     end;
 
-                    // if Hostel = false then begin
-                    //     RecPostedLine.DeleteAll();
-                    //     RecPostedLine.Modify();
-                    // end;
-
-
                     if rec.Transport = true then begin
                         RecCustLedgEntry.Reset();
                         RecCustLedgEntry.SetRange("Customer No.", CustomerNo);
@@ -121,15 +147,7 @@ table 50130 StudentFeeReceiptHeader
                         end;
                     end;
 
-                    // if Transport = false then begin
-                    //     RecPostedLine.DeleteAll();
-                    //     RecPostedLine.Modify();
-                    // end;
-
-
                 end;
-
-
             end;
 
         }

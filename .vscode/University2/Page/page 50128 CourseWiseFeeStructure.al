@@ -20,39 +20,43 @@ page 50128 CourseWiseFeeStructure
                     Caption = 'Batch Code';
                     LookupPageId = BatchList;
                 }
-                field(AcademicYear; rec.AcademicYear)
+                // field(AcademicYear; rec.AcademicYear)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Academic Year';
+                //     LookupPageId = AcademicYearList;
+                // }
+                field(AdmissionQuota; rec.AdmissionQuota)
                 {
                     ApplicationArea = All;
-                    Caption = 'Academic Year';
-                    LookupPageId = AcademicYearList;
+                    Caption = 'Admission Quota';
                 }
                 field(CourseCode; rec.CourseCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Course Code';
                     LookupPageId = CourseList;
-
                 }
-                field(Class; rec.Class)
+                field(Class; rec.ClassCode)
                 {
                     ApplicationArea = All;
                     Caption = 'Class';
                     LookupPageId = ClassMasterList;
                 }
-                field(StreamCode; rec.StreamCode)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Stream Code';
-                    LookupPageId = StreamList;
+                // field(StreamCode; rec.StreamCode)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Stream Code';
+                //     LookupPageId = StreamList;
 
-                }
-                field(SemesterCode; rec.SemesterCode)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Semester Code';
-                    LookupPageId = SemesterList;
+                // }
+                // field(SemesterCode; rec.SemesterCode)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Semester Code';
+                //     LookupPageId = SemesterList;
 
-                }
+                // }
                 field(ElementCode; rec.ElementCode)
                 {
                     ApplicationArea = All;
@@ -65,58 +69,63 @@ page 50128 CourseWiseFeeStructure
                     ApplicationArea = All;
                     Caption = 'Element Desc';
                 }
-
-                field(Period; rec.Period)
+                field(Amount; rec.Amount)
                 {
                     ApplicationArea = All;
-
+                    Caption = 'Amount';
                 }
 
-                field(CategoryCode; rec.CategoryCode)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Category Code';
-                    LookupPageId = AdmissionCategory;
-                }
-                field("Caste Code"; rec."Caste Code")
-                {
-                    ApplicationArea = All;
-                    LookupPageId = CasteMaster;
-                }
-                field("Govt Code"; rec."Govt Code")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Govt Code';
-                    trigger OnValidate()
-                    begin
-                        If rec."Govt Code" <> '' then
-                            Enable := false
-                        else
-                            Enable := true;
-                        CurrPage.Update(true);
-                    end;
-                }
-                field(TotalAmount; rec.TotalAmount)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Total Amount';
-                }
-                field(AmountByStudent; rec.AmountByStudent)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Amount By Student';
-                }
-                field(AmountByGovt; rec.AmountByGovt)
-                {
-                    ApplicationArea = All;
-                    // Enabled = Enable;
-                    Caption = 'Amount By Govt';
-                    trigger OnValidate()
-                    begin
-                        rec.TestField("Govt Code");
-                    end;
+                // field(Period; rec.Period)
+                // {
+                //     ApplicationArea = All;
 
-                }
+                // }
+
+                // field(CategoryCode; rec.CategoryCode)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Category Code';
+                //     LookupPageId = AdmissionCategory;
+                // }
+                // field("Caste Code"; rec."Caste Code")
+                // {
+                //     ApplicationArea = All;
+                //     LookupPageId = CasteMaster;
+                // }
+                // field("Govt Code"; rec."Govt Code")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Govt Code';
+                //     trigger OnValidate()
+                //     begin
+                //         If rec."Govt Code" <> '' then
+                //             Enable := false
+                //         else
+                //             Enable := true;
+                //         CurrPage.Update(true);
+                //     end;
+                // }
+                // field(TotalAmount; rec.TotalAmount)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Total Amount';
+                // }
+                // field(AmountByStudent; rec.AmountByStudent)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Amount By Student';
+                // }
+                // field(AmountByGovt; rec.AmountByGovt)
+                // {
+                //     ApplicationArea = All;
+                //     // Enabled = Enable;
+                //     Caption = 'Amount By Govt';
+                //     trigger OnValidate()
+                //     begin
+                //         rec.TestField("Govt Code");
+                //     end;
+
+                // }
 
                 field(DebitAcc; rec.DebitAcc)
                 {
@@ -132,11 +141,11 @@ page 50128 CourseWiseFeeStructure
                     LookupPageId = "Chart of Accounts";
 
                 }
-                field(DueDate; rec.DueDate)
-                {
-                    ApplicationArea = All;
-                    Caption = 'Due Date';
-                }
+                // field(DueDate; rec.DueDate)
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Due Date';
+                // }
             }
         }
         area(Factboxes)

@@ -49,6 +49,11 @@ page 50135 StudentMaster
                     Caption = 'First Name';
 
                 }
+                field(MiddleName; rec.MiddleName)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Middle Name';
+                }
                 field(LastName; rec."Name 2")
                 {
                     Caption = 'Last Name';
@@ -267,6 +272,11 @@ page 50135 StudentMaster
                     ApplicationArea = All;
                     LookupPageId = 50124;
                     Editable = false;
+                }
+                field(StudentEnrollmentNo; rec.StudentEnrollmentNo)
+                {
+                    ApplicationArea = All;
+
                 }
 
 

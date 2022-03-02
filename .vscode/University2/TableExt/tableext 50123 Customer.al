@@ -254,6 +254,14 @@ tableextension 50123 CustomerExtension extends Customer
         {
             DataClassification = ToBeClassified;
         }
+        field(50201; MiddleName; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50202; StudentEnrollmentNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
     }
     keys
     {

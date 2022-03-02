@@ -23,9 +23,9 @@ codeunit 50100 GenJnlPostCustom
         recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
         recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
         recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
-        recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
-        recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
-        recStFees.SetRange(Class, CustLedgerEntry.Class);
+        // recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
+        // recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
+        // recStFees.SetRange(Class, CustLedgerEntry.Class);
         recStFees.SetRange(CategoryCode, CustLedgerEntry.Category);
         recStFees.SetRange(CasteCode, CustLedgerEntry.Caste);
         if recStFees.FindFirst() then begin
@@ -39,9 +39,9 @@ codeunit 50100 GenJnlPostCustom
         recStFees.SetRange(ElementCode, CustLedgerEntry.ElementCode);
         recStFees.SetRange(AcademicYear, CustLedgerEntry.AcademicYear);
         recStFees.SetRange(CourseCode, CustLedgerEntry."Course Code");
-        recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
-        recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
-        recStFees.SetRange(Class, CustLedgerEntry.Class);
+        // recStFees.SetRange(Semester, CustLedgerEntry."Semester Code");
+        // recStFees.SetRange(Stream, CustLedgerEntry."Stream Code");
+        // recStFees.SetRange(Class, CustLedgerEntry.Class);
         recStFees.SetRange(CategoryCode, CustLedgerEntry.Category);
         recStFees.SetRange(CasteCode, CustLedgerEntry.Caste);
         if recStFees.FindFirst() then begin

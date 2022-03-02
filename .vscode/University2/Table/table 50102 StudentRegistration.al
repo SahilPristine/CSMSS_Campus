@@ -342,6 +342,14 @@ table 50102 StudentRegistration
             DataClassification = ToBeClassified;
             Editable = true;
         }
+        field(50060; MiddleName; Text[50])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(50061; StudentEnrollmentNo; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
 
     }
 

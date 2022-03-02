@@ -9,10 +9,10 @@ table 50128 CourseWiseFeeStructure
             DataClassification = ToBeClassified;
             TableRelation = BatchMasterTable.CODE;
         }
-        field(2; AcademicYear; Code[20])
+        field(2; AdmissionQuota; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = AcademicYearMasterTable.CODE;
+            // TableRelation = AcademicYearMasterTable.CODE;
         }
         field(3; CourseCode; code[20])
         {
@@ -20,17 +20,22 @@ table 50128 CourseWiseFeeStructure
             TableRelation = CourseMasterTable.CODE;
 
         }
-        field(4; StreamCode; code[20])
+        // field(4; StreamCode; code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = StreamMasterTable.StreamCode;
+
+        // }
+        // field(5; SemesterCode; code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = SemesterMasterTable.SemesterCode;
+
+        // }
+        field(4; ClassCode; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = StreamMasterTable.StreamCode;
-
-        }
-        field(5; SemesterCode; code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = SemesterMasterTable.SemesterCode;
-
+            TableRelation = ClassMaster;
         }
         field(6; ElementCode; code[20])
         {
@@ -49,10 +54,9 @@ table 50128 CourseWiseFeeStructure
         {
             DataClassification = ToBeClassified;
         }
-        field(8; Period; Option)
+        field(8; Amount; Decimal)
         {
             DataClassification = ToBeClassified;
-            OptionMembers = Monthly,Quarterly,Yearly;
 
         }
         field(9; DebitAcc; code[20])
@@ -67,78 +71,72 @@ table 50128 CourseWiseFeeStructure
             TableRelation = "G/L Account";
         }
 
-        field(11; CategoryCode; text[50])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = AdmissionCategory;
-        }
-        field(12; "Caste Code"; code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = CasteMaster;
-            trigger OnValidate()
-            begin
-                recCategory.Reset();
-                recCategory.SetRange(CategCode, CategoryCode);
-                recCategory.SetRange(Caste, "Caste Code");
-                recCategory.SetRange(Batch, BatchCode);
-                recCategory.SetRange(Course, CourseCode);
-                if recCategory.FindFirst() then begin
-                    "Govt Code" := recCategory.GovtCode;
-                end;
-            end;
-        }
-        field(13; "Govt Code"; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = Customer;
-            Editable = false;
-            trigger OnValidate()
-            begin
+        // field(11; CategoryCode; text[50])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = AdmissionCategory;
+        // }
+        // field(12; "Caste Code"; code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = CasteMaster;
+        //     trigger OnValidate()
+        //     begin
+        //         recCategory.Reset();
+        //         recCategory.SetRange(CategCode, CategoryCode);
+        //         // recCategory.SetRange(Caste, "Caste Code");
+        //         // recCategory.SetRange(Batch, BatchCode);
+        //         recCategory.SetRange(Course, CourseCode);
+        //         if recCategory.FindFirst() then begin
+        //             "Govt Code" := recCategory.GovtCode;
+        //         end;
+        //     end;
+        // }
+        //
 
-            end;
-        }
-        field(16; TotalAmount; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            trigger OnValidate()
-            begin
-                // TotalAmount := AmountByGovt + AmountByStudent;
-            end;
-        }
-        field(14; AmountByStudent; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            trigger OnValidate()
-            begin
+        // field(14; AmountByStudent; Decimal)
+        // {
+        //     DataClassification = ToBeClassified;
+        //     trigger OnValidate()
+        //     begin
 
-            end;
+        //     end;
 
-        }
-        field(15; AmountByGovt; Decimal)
-        {
-            DataClassification = ToBeClassified;
-            trigger OnValidate()
-            begin
-            end;
+        // }
+        // field(15; AmountByGovt; Decimal)
+        // {
+        //     DataClassification = ToBeClassified;
+        //     trigger OnValidate()
+        //     begin
+        //     end;
 
-        }
+        // }
+        // field(13; "Govt Code"; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = Customer;
+        //     Editable = false;
+        //     trigger OnValidate()
+        //     begin
 
-        field(17; DueDate; Date)
-        {
-            DataClassification = ToBeClassified;
+        //     end;
+        // }
 
-        }
-        field(18; Class; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = ClassMaster.CODE;
-        }
+        // field(17; DueDate; Date)
+        // {
+        //     DataClassification = ToBeClassified;
+
+        // }
+        // field(18; Class; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        //     TableRelation = ClassMaster.CODE;
+        // }
     }
 
     keys
     {
-        key(Key1; BatchCode, CourseCode, StreamCode, SemesterCode, ElementCode, CategoryCode, "Caste Code")
+        key(Key1; BatchCode, CourseCode, ElementCode)
         {
             Clustered = true;
         }

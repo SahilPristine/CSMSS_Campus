@@ -14,11 +14,11 @@ table 50111 StudentFeeStructure
                     if recStudent.get(StudentEnrollmentNo) then
                         StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                 CourseCode := recStudent."Course Code";
-                Stream := recStudent."Stream Code";
-                Semester := recStudent."Semester Code";
+                // Stream := recStudent."Stream Code";
+                // Semester := recStudent."Semester Code";
                 BatchCode := recStudent."Batch Code";
                 AcademicYear := recStudent.AcademicYear;
-                Class := recStudent.Class;
+                // Class := recStudent.Class;
                 CategoryCode := recStudent.Category;
                 CasteCode := recStudent.Cast;
             end;
@@ -32,15 +32,15 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
-        field(3; Stream; Code[20])
-        {
-            DataClassification = ToBeClassified;
+        // field(3; Stream; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
 
-        }
-        field(4; Semester; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // }
+        // field(4; Semester; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
         field(17; BatchCode; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -49,10 +49,10 @@ table 50111 StudentFeeStructure
         {
             DataClassification = ToBeClassified;
         }
-        field(23; Class; Code[20])
-        {
-            DataClassification = ToBeClassified;
-        }
+        // field(23; Class; Code[20])
+        // {
+        //     DataClassification = ToBeClassified;
+        // }
         field(18; CategoryCode; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -69,19 +69,19 @@ table 50111 StudentFeeStructure
             begin
                 recFees.reset;
                 recFees.SetRange(CourseCode, Rec.CourseCode);
-                recFees.SetRange(StreamCode, Rec.Stream);
-                recFees.SetRange(SemesterCode, rec.Semester);
+                // recFees.SetRange(StreamCode, Rec.Stream);
+                // recFees.SetRange(SemesterCode, rec.Semester);
                 recFees.SetRange(BatchCode, rec.BatchCode);
-                recFees.SetRange(AcademicYear, rec.AcademicYear);
-                recFees.SetRange(Class, rec.Class);
-                recFees.setrange(CategoryCode, Rec.CategoryCode);
-                recFees.SetRange("Caste Code", Rec.CasteCode);
+                // recFees.SetRange(AcademicYear, rec.AcademicYear);
+                // recFees.SetRange(Class, rec.Class);
+                // recFees.setrange(CategoryCode, Rec.CategoryCode);
+                // recFees.SetRange("Caste Code", Rec.CasteCode);
                 recFees.SetRange(ElementCode, Rec.ElementCode);
                 if recFees.FindFirst() then begin
                     ElementDesc := recFees.Description;
-                    GovtCode := recFees."Govt Code";
-                    AmountByStudent := recFees.AmountByStudent;
-                    GovtAmount := recFees.AmountByGovt;
+                    // GovtCode := recFees."Govt Code";
+                    // AmountByStudent := recFees.AmountByStudent;
+                    // GovtAmount := recFees.AmountByGovt;
                     DebitAcc := recFees.DebitAcc;
                     CreditAcc := recFees.CreditAcc;
                 end;
@@ -164,7 +164,7 @@ table 50111 StudentFeeStructure
 
     keys
     {
-        key(Key1; StudentEnrollmentNo, Stream, Semester, ElementCode, CategoryCode, CasteCode, LineNo)
+        key(Key1; StudentEnrollmentNo, ElementCode, CategoryCode, CasteCode, LineNo)
         {
             Clustered = true;
         }

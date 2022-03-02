@@ -5,7 +5,7 @@ page 50108 StreamList
     UsageCategory = Administration;
     SourceTable = StreamMasterTable;
     AccessByPermission = page StreamList = X;
-    Caption = 'Stream Master';
+    Caption = 'Branch Master';
 
     layout
     {
@@ -13,7 +13,7 @@ page 50108 StreamList
         {
             repeater(StreamList)
             {
-                Caption = 'Stream Master';
+                Caption = 'Branch Master';
                 field(CourseCode; Rec.CourseCode)
                 {
                     Caption = 'Course Code';
@@ -26,7 +26,7 @@ page 50108 StreamList
                 }
                 field(StreamCode; Rec.StreamCode)
                 {
-                    Caption = 'Stream Code';
+                    Caption = 'Branch Code';
                     ApplicationArea = All;
                     Editable = streameditable;
                 }

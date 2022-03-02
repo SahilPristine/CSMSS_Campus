@@ -10,46 +10,52 @@ table 50127 AdmissionCategory
             DataClassification = ToBeClassified;
 
         }
-        field(6; Description; Text[30])
+        field(2; Description; Text[30])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(7; Caste; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = CasteMaster;
-        }
-        field(3; Batch; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = BatchMasterTable.CODE;
-
-        }
-        field(4; Course; Text[20])
+        field(3; Course; Text[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = CourseMasterTable.CODE;
 
         }
-        field(5; GovtCode; Code[20])
+        field(4; Element; Code[20])
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(5; "Student Fees %"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                IF "Student Fees %" <> 0 THEN begin
+                    "Govt Fees %" := 100 - "Student Fees %";
+                end;
+
+            end;
+        }
+        field(6; "Govt Fees %"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if "Govt Fees %" <> 0 then begin
+                    "Student Fees %" := 100 - "Govt Fees %";
+                end;
+            end;
+        }
+        field(7; GovtCode; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = Customer where(Type = const(Others));
-        }
-        field(8; GovtPercent; Decimal)
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(9; StudentPercent; Decimal)
-        {
-            DataClassification = ToBeClassified;
         }
     }
 
     keys
     {
-        key(Key1; CategCode, Course, Batch, Caste)
+        key(Key1; CategCode, Course)
         {
             Clustered = true;
         }

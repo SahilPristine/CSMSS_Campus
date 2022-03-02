@@ -95,40 +95,40 @@ page 50118 StudentRegistrationList
                         // Message('Hi');
                         recFees.Reset();
                         recFees.Setrange(BatchCode, recStudent."Batch Code");
-                        recFees.SetRange(AcademicYear, recStudent.AcademicYear);
+                        // recFees.SetRange(AcademicYear, recStudent.AcademicYear);
                         recFees.SetRange(CourseCode, recStudent."Course Code");
-                        recFees.SetRange(StreamCode, recStudent."Stream Code");
-                        recFees.SetRange(SemesterCode, recStudent."Semester Code");
-                        recFees.SetRange(CategoryCode, recStudent.Category);
-                        recFees.SetRange("Caste Code", recStudent.Cast);
+                        // recFees.SetRange(StreamCode, recStudent."Stream Code");
+                        // recFees.SetRange(SemesterCode, recStudent."Semester Code");
+                        // recFees.SetRange(CategoryCode, recStudent.Category);
+                        // recFees.SetRange("Caste Code", recStudent.Cast);
                         if recFees.FindFirst() then begin
                             repeat
                                 recStFees.Init();
                                 recStFees.StudentEnrollmentNo := recStudent."No.";
                                 recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                                 recStFees.CourseCode := recStudent."Course Code";
-                                recStFees.Stream := recStudent."Stream Code";
-                                recStFees.Semester := recStudent."Semester Code";
+                                // recStFees.Stream := recStudent."Stream Code";
+                                // recStFees.Semester := recStudent."Semester Code";
                                 recStFees.BatchCode := recStudent."Batch Code";
                                 recStFees.AcademicYear := recStudent.AcademicYear;
-                                recStFees.Class := recStudent.Class;
-                                recStFees.CategoryCode := recStudent.Category;
+                                // recStFees.Class := recStudent.Class;
+                                // recStFees.CategoryCode := recStudent.Category;
                                 recStFees.CasteCode := recStudent.Cast;
                                 recStFees.ElementCode := recFees.ElementCode;
-                                recStFees.GovtCode := recFees."Govt Code";
-                                recStFees.AmountByStudent := recFees.AmountByStudent;
-                                recStFees.GovtAmount := recFees.AmountByGovt;
-                                recStFees.TotalAmount := recFees.TotalAmount;
+                                // recStFees.GovtCode := recFees."Govt Code";
+                                // recStFees.AmountByStudent := recFees.AmountByStudent;
+                                // recStFees.GovtAmount := recFees.AmountByGovt;
+                                // recStFees.TotalAmount := recFees.TotalAmount;
                                 recStFees.DebitAcc := recFees.DebitAcc;
                                 recStFees.CreditAcc := recFees.CreditAcc;
                                 recStFees.Insert(true);
                             until
                             recFees.Next() = 0;
                         end;
-                        Message('Fees Structure Created');
                     until recStudent.Next() = 0;
                 end;
             until Rec.Next() = 0;
+            Message('Fees Structure Created');
         end;
     end;
 
@@ -145,12 +145,12 @@ page 50118 StudentRegistrationList
                 // Message('Hello');
                 recFees.Reset();
                 recFees.Setrange(BatchCode, Rec."Batch Code");
-                recFees.SetRange(AcademicYear, Rec.AcademicYear);
+                // recFees.SetRange(AcademicYear, Rec.AcademicYear);
                 recFees.SetRange(CourseCode, Rec."Course Code");
-                recFees.SetRange(StreamCode, Rec."Stream Code");
-                recFees.SetRange(SemesterCode, Rec."Semester Code");
-                recFees.SetRange(CategoryCode, Rec.Category);
-                recFees.SetRange("Caste Code", Rec.Cast);
+                // recFees.SetRange(StreamCode, Rec."Stream Code");
+                // recFees.SetRange(SemesterCode, Rec."Semester Code");
+                // recFees.SetRange(CategoryCode, Rec.Category);
+                // recFees.SetRange("Caste Code", Rec.Cast);
                 if recFees.FindFirst() then begin
                     Question := Text000;
                     Answer := Dialog.Confirm(Question, true);

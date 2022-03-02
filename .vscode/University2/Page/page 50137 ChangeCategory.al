@@ -78,8 +78,8 @@ page 50137 ChangeCategory
                     if recStudent.FindFirst() then begin
                         Message('Student found');
                         recFees.Reset();
-                        recFees.SetRange(CategoryCode, rec.NewCategory);
-                        recFees.SetRange("Caste Code", rec.NewCast);
+                        // recFees.SetRange(CategoryCode, rec.NewCategory);
+                        // recFees.SetRange("Caste Code", rec.NewCast);
                         if recFees.FindFirst() then begin
                             recStudent.Category := rec.NewCategory;
                             recStudent.Cast := rec.NewCast;
@@ -128,12 +128,12 @@ page 50137 ChangeCategory
         if recStudent.FindFirst() then begin
             recFees.Reset();
             recFees.Setrange(BatchCode, recStudent."Batch Code");
-            recFees.SetRange(AcademicYear, recStudent.AcademicYear);
+            // recFees.SetRange(AcademicYear, recStudent.AcademicYear);
             recFees.SetRange(CourseCode, recStudent."Course Code");
-            recFees.SetRange(StreamCode, recStudent."Stream Code");
-            recFees.SetRange(SemesterCode, recStudent."Semester Code");
-            recFees.SetRange(CategoryCode, recStudent.Category);
-            recFees.SetRange("Caste Code", recStudent.Cast);
+            // recFees.SetRange(StreamCode, recStudent."Stream Code");
+            // recFees.SetRange(SemesterCode, recStudent."Semester Code");
+            // recFees.SetRange(CategoryCode, recStudent.Category);
+            // recFees.SetRange("Caste Code", recStudent.Cast);
 
 
             if recFees.FindFirst() then begin
@@ -142,24 +142,26 @@ page 50137 ChangeCategory
                     recStFees.StudentEnrollmentNo := recStudent."No.";
                     recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                     recStFees.CourseCode := recStudent."Course Code";
-                    recStFees.Stream := recStudent."Stream Code";
-                    recStFees.Semester := recStudent."Semester Code";
+                    // recStFees.Stream := recStudent."Stream Code";
+                    // recStFees.Semester := recStudent."Semester Code";
                     recStFees.BatchCode := recStudent."Batch Code";
                     recStFees.AcademicYear := recStudent.AcademicYear;
-                    recStFees.Class := recStudent.Class;
+                    // recStFees.Class := recStudent.Class;
                     recStFees.CategoryCode := recStudent.Category;
                     recStFees.CasteCode := recStudent.Cast;
                     recStFees.ElementCode := recFees.ElementCode;
-                    recStFees.GovtCode := recFees."Govt Code";
-                    recStFees.AmountByStudent := recFees.AmountByStudent;
-                    recStFees.GovtAmount := recFees.AmountByGovt;
-                    recStFees.TotalAmount := recFees.TotalAmount;
+                    // recStFees.GovtCode := recFees."Govt Code";
+                    // recStFees.AmountByStudent := recFees.AmountByStudent;
+                    // recStFees.GovtAmount := recFees.AmountByGovt;
+                    // recStFees.TotalAmount := recFees.TotalAmount;
                     recStFees.DebitAcc := recFees.DebitAcc;
                     recStFees.CreditAcc := recFees.CreditAcc;
                     recStFees.Insert(true);
                 until
                 recFees.Next() = 0;
-            end;
+            end
+            else
+                Error('Create fees structure for new category %1', recStudent.Category);
         end;
     end;
 

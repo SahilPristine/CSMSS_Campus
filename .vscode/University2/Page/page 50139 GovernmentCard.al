@@ -205,14 +205,20 @@ page 50139 GovernmentCard
     {
         area(Processing)
         {
-            action(ActionName)
+            action("Ledger E&ntries")
             {
-                ApplicationArea = All;
-
-                trigger OnAction()
-                begin
-
-                end;
+                ApplicationArea = Basic, Suite;
+                Caption = 'Ledger E&ntries';
+                Image = CustomerLedger;
+                Promoted = true;
+                PromotedCategory = Process;
+                // PromotedIsBig = true;
+                RunObject = Page "Customer Ledger Entries";
+                RunPageLink = "Customer No." = FIELD("No.");
+                RunPageView = SORTING("Customer No.")
+                                  ORDER(Descending);
+                ShortCutKey = 'Ctrl+F7';
+                ToolTip = 'View the history of transactions that have been posted for the selected record.';
             }
         }
     }

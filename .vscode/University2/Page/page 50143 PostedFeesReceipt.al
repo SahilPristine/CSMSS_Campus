@@ -6,7 +6,7 @@ page 50143 PostedFeesReceipt
     SourceTable = StudentFeeReceiptHeader;
     SourceTableView = where(Status = filter(Closed));
     Caption = 'Student Fees Receipt';
-    Editable = false;
+    Editable = true;
 
     layout
     {

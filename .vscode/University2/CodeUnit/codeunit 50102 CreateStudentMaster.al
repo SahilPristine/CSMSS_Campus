@@ -16,28 +16,28 @@ codeunit 50102 CreateStudentMaster
         if recStudent.FindFirst() then begin
             recFees.Reset();
             recFees.Setrange(BatchCode, recStudent."Batch Code");
-            recFees.SetRange(AcademicYear, recStudent.AcademicYear);
+            // recFees.SetRange(AcademicYear, recStudent.AcademicYear);
             recFees.SetRange(CourseCode, recStudent."Course Code");
-            recFees.SetRange(StreamCode, recStudent."Stream Code");
-            recFees.SetRange(SemesterCode, recStudent."Semester Code");
-            recFees.SetRange(CategoryCode, recStudent.Category);
-            recFees.SetRange("Caste Code", recStudent.Cast);
+            // recFees.SetRange(StreamCode, recStudent."Stream Code");
+            // recFees.SetRange(SemesterCode, recStudent."Semester Code");
+            // recFees.SetRange(CategoryCode, recStudent.Category);
+            // recFees.SetRange("Caste Code", recStudent.Cast);
             if recFees.FindFirst() then begin
                 repeat
                     recStFees.Init();
                     recStFees.StudentEnrollmentNo := recStudent."No.";
                     recStFees.StudentName := recStudent.Name + ' ' + recStudent."Name 2";
                     recStFees.CourseCode := recStudent."Course Code";
-                    recStFees.Stream := recStudent."Stream Code";
-                    recStFees.Semester := recStudent."Semester Code";
+                    // recStFees.Stream := recStudent."Stream Code";
+                    // recStFees.Semester := recStudent."Semester Code";
                     recStFees.BatchCode := recStudent."Batch Code";
                     recStFees.CategoryCode := recStudent.Category;
                     recStFees.CasteCode := recStudent.Cast;
                     recStFees.ElementCode := recFees.ElementCode;
-                    recStFees.GovtCode := recFees."Govt Code";
-                    recStFees.AmountByStudent := recFees.AmountByStudent;
-                    recStFees.GovtAmount := recFees.AmountByGovt;
-                    recStFees.TotalAmount := recFees.TotalAmount;
+                    // recStFees.GovtCode := recFees."Govt Code";
+                    // recStFees.AmountByStudent := recFees.AmountByStudent;
+                    // recStFees.GovtAmount := recFees.AmountByGovt;
+                    // recStFees.TotalAmount := recFees.TotalAmount;
                     recStFees.DebitAcc := recFees.DebitAcc;
                     recStFees.CreditAcc := recFees.CreditAcc;
                     recStFees.Insert(true);
@@ -57,12 +57,12 @@ codeunit 50102 CreateStudentMaster
     begin
         recFees.Reset();
         recFees.Setrange(BatchCode, RecReg."Batch Code");
-        recFees.SetRange(AcademicYear, RecReg.AcademicYear);
+        // recFees.SetRange(AcademicYear, RecReg.AcademicYear);
         recFees.SetRange(CourseCode, RecReg."Course Code");
-        recFees.SetRange(StreamCode, RecReg."Stream Code");
-        recFees.SetRange(SemesterCode, RecReg."Semester Code");
-        recFees.SetRange(CategoryCode, RecReg.Category);
-        recFees.SetRange("Caste Code", RecReg.Cast);
+        // recFees.SetRange(StreamCode, RecReg."Stream Code");
+        // recFees.SetRange(SemesterCode, RecReg."Semester Code");
+        // recFees.SetRange(CategoryCode, RecReg.Category);
+        // recFees.SetRange("Caste Code", RecReg.Cast);
         if recFees.FindFirst() then begin
             Message('hello');
             Question := Text000;
